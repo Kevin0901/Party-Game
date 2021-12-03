@@ -1,0 +1,77 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!78 &1
+TagManager:
+  serializedVersion: 2
+  tags:
+  - range
+  - background
+  - sun
+  - moon
+  - arrow
+  - pick
+  - Wave
+  - ball
+  - monster
+  - wall
+  - territory
+  - red
+  - blue
+  layers:
+  - Default
+  - TransparentFX
+  - Ignore Raycast
+  - 
+  - Water
+  - UI
+  - 
+  - 
+  - background
+  - monster
+  - player
+  - bulid
+  - throwitem
+  - arenaMonster
+  - Castle
+  - shop
+  - item
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  m_SortingLayers:
+  - name: Default
+    uniqueID: 0
+    locked: 0
+  - name: Player
+    uniqueID: 2649478095
+    locked: 0
+  - name: RedMonster
+    uniqueID: 1356649547
+    locked: 0
+  - name: Tower
+    uniqueID: 567531287
+    locked: 0
+  - name: BlueMonster
+    uniqueID: 4079072067
+    locked: 0
+  - name: Healthbar
+    uniqueID: 3337878221
+    locked: 0
+  - name: item
+    uniqueID: 558310625
+    locked: 0
+  - name: UI
+    uniqueID: 3105228139
+    locked: 0
