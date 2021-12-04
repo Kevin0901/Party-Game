@@ -14,59 +14,30 @@ public class GameMenu : MonoBehaviour
         GameAnimator = this.GetComponent<Animator>();
         CanvasGroup = this.GetComponent<CanvasGroup>();
     }
-
-    // Update is called once per frame
     void Update()
     {
         if (inGameMenu)
         {
-            GameAnimator.SetBool("fadein", true);
             StartCoroutine(fadein());
             inGameMenu = false;
         }
     }
-    private IEnumerator fadein()
+    private IEnumerator fadein() //淡入畫面
     {
-        yield return new WaitForSeconds(0.5f);
+        GameAnimator.SetBool("fadein", true);
+        yield return null;
         GameAnimator.SetBool("fadein", false);
         GameObject.Find("LoadingCircle").transform.Find("Image").gameObject.SetActive(false);
-        yield return new WaitForSeconds(0.5f);
         GameObject.Find("TranPageAnimation").transform.Find("Image").gameObject.SetActive(false);
         CanvasGroup.blocksRaycasts = true;
     }
-    public void Setting()
-    {
-        GameObject.Find("SettingMenu").transform.Find("Settings").gameObject.SetActive(true);
-    }
-    public void JoinGame()
-    {
-        StartCoroutine(fadeout("ChoosePlayer"));
-        // "ChoosePlayer"
-    }
-    public void Noviceteaching()
-    {
-        StartCoroutine(fadeout("Noviceteaching"));
-    }
-
-    public void IllustratedBook()
-    {
-        StartCoroutine(fadeout("IllustratedBook"));
-    }
-
-    public void back()
-    {
-        StartCoroutine(fadeout("StartMenu"));
-    }
-
-    private IEnumerator fadeout(string canvas)
+    private IEnumerator fadeout(string canvas) //淡出畫面
     {
         CanvasGroup.blocksRaycasts = false;
         GameAnimator.SetBool("fadeout", true);
-        yield return new WaitForSeconds(0.2f);
+        yield return null;
         GameObject.Find("LoadingCircle").transform.Find("Image").gameObject.SetActive(true);
         GameObject.Find("TranPageAnimation").transform.Find("Image").gameObject.SetActive(true);
-
-        yield return new WaitForSeconds(0.5f);
         GameAnimator.SetBool("fadeout", false);
 
         if (canvas.Equals("ChoosePlayer"))
@@ -77,13 +48,33 @@ public class GameMenu : MonoBehaviour
         {
             GameObject.Find(canvas).GetComponent<Noviceteaching>().inTeachingMenu = true;
         }
-        else if(canvas.Equals("StartMenu"))
+        else if (canvas.Equals("StartMenu"))
         {
             GameObject.Find(canvas).GetComponent<MainMenu>().inMainMenu = true;
         }
-        else if(canvas.Equals("IllustratedBook"))
+        else if (canvas.Equals("IllustratedBook"))
         {
             GameObject.Find(canvas).GetComponent<IllustratedBook>().inIllustratedBookMenu = true;
         }
+    }
+    public void Setting()//點擊事件
+    {
+        GameObject.Find("SettingMenu").transform.Find("Settings").gameObject.SetActive(true);
+    }
+    public void JoinGame()//點擊事件
+    {
+        StartCoroutine(fadeout("ChoosePlayer"));
+    }
+    public void Noviceteaching()//點擊事件
+    {
+        StartCoroutine(fadeout("Noviceteaching"));
+    }
+    public void IllustratedBook()//點擊事件
+    {
+        StartCoroutine(fadeout("IllustratedBook"));
+    }
+    public void back()//點擊事件
+    {
+        StartCoroutine(fadeout("StartMenu"));
     }
 }

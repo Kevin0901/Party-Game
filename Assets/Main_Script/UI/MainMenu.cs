@@ -14,53 +14,45 @@ public class MainMenu : MonoBehaviour
         MainAnimator = this.GetComponent<Animator>();
         CanvasGroup = this.GetComponent<CanvasGroup>();
         GameObject.Find("LoadingCircle").transform.Find("Image").gameObject.SetActive(true);
-        MainAnimator.SetBool("fadein", true);
         StartCoroutine(fadein());
     }
     void Update()
     {
         if (inMainMenu)
         {
-            MainAnimator.SetBool("fadein", true);
             StartCoroutine(fadein());
             inMainMenu = false;
         }
         if (Input.GetKeyDown(KeyCode.Space) && CanvasGroup.blocksRaycasts)
         {
-            StartCoroutine(waitonesec());
+            StartCoroutine(GoGameMenu());
         }
     }
-    public void PlayGame()
+    private IEnumerator fadein() //淡入畫面
     {
-        StartCoroutine(waitonesec());
-    }
-    public void QuitGame()
-    {
-        Application.Quit();
-    }
-
-    private IEnumerator fadein()
-    {
-        yield return new WaitForSeconds(0.5f);
+        MainAnimator.SetBool("fadein", true);
+        yield return null;
         MainAnimator.SetBool("fadein", false);
         GameObject.Find("LoadingCircle").transform.Find("Image").gameObject.SetActive(false);
-        yield return new WaitForSeconds(0.5f);
-        GameObject.Find("TranPageAnimation").transform.Find("Image").gameObject.SetActive(false);
+        GameObject.Find("TranPageAnimation").transform.Find("Image").gameObject.SetActive(false);//關閉換頁動畫
         CanvasGroup.blocksRaycasts = true;
     }
-
-    private IEnumerator waitonesec()
+    private IEnumerator GoGameMenu() //前往主選單       
     {
         CanvasGroup.blocksRaycasts = false;
         MainAnimator.SetBool("exit", true);
-        yield return new WaitForSeconds(0.2f);
         GameObject.Find("LoadingCircle").transform.Find("Image").gameObject.SetActive(true);
-        GameObject.Find("TranPageAnimation").transform.Find("Image").gameObject.SetActive(true);
-
-        yield return new WaitForSeconds(0.5f);
+        GameObject.Find("TranPageAnimation").transform.Find("Image").gameObject.SetActive(true); //開啟換頁動畫
+        yield return null;
         MainAnimator.SetBool("exit", false);
-
-        GameObject.Find("GameMenu").GetComponent<GameMenu>().inGameMenu = true;
-
+        GameObject.Find("GameMenu").GetComponent<GameMenu>().inGameMenu = true; 
+    }
+    public void PlayGame() //點擊事件
+    {
+        StartCoroutine(GoGameMenu());
+    }
+    public void QuitGame() //點擊事件
+    {
+        Application.Quit();
     }
 }
