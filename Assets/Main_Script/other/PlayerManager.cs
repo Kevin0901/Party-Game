@@ -5,7 +5,6 @@ using UnityEngine.SceneManagement;
 
 public class PlayerManager : MonoBehaviour
 {
-    public playerSet[] plist;
     [System.Serializable]
     public class playerSet
     {
@@ -19,9 +18,10 @@ public class PlayerManager : MonoBehaviour
             this.sort = 0;
         }
     }
-    [Header("prefab")]
+    public playerSet[] plist;
+    [Header("玩家生成prefabs")]
     [SerializeField] private GameObject player, fightplayer;
-    public GameObject RedCastel,BlueCastel,red,blue;
+    public GameObject RedCastel, BlueCastel, red, blue;
     public bool isSpawn;
     private float h, w, proportion_W, proportion_H, factor;
     public string EventGame;
@@ -44,7 +44,6 @@ public class PlayerManager : MonoBehaviour
             StartCoroutine(FightPlayerSpawn());
             // this.gameObject.SetActive(false);
         }
-
     }
     private IEnumerator playerSpawn()  //生成玩家
     {
@@ -98,10 +97,10 @@ public class PlayerManager : MonoBehaviour
                 }
             }
         }
-        red = Instantiate(RedCastel,new Vector3(-20,-43.7f,0),RedCastel.transform.rotation);
-        red.transform.localScale = new Vector3(4,4,4);
-        blue = Instantiate(BlueCastel,new Vector3(-20,45,0),BlueCastel.transform.rotation);
-        blue.transform.localScale = new Vector3(4,4,4);
+        red = Instantiate(RedCastel, new Vector3(-20, -43.7f, 0), RedCastel.transform.rotation);
+        red.transform.localScale = new Vector3(4, 4, 4);
+        blue = Instantiate(BlueCastel, new Vector3(-20, 45, 0), BlueCastel.transform.rotation);
+        blue.transform.localScale = new Vector3(4, 4, 4);
     }
     void ScreenSet()
     {
@@ -183,35 +182,4 @@ public class PlayerManager : MonoBehaviour
             return a;
         }
     }
-    // private void FightPlayerSpawn()
-    // {
-    //     List<GameObject> pl = GameObject.Find("playerManager").GetComponent<playerlist>().player;
-    //     for (int i = 0; i < plist.Length; i++)
-    //     {
-    //         GameObject p = Instantiate(fightplayer, this.transform.position, player.transform.rotation);
-    //         p.GetComponent<arenaPlayer>().joynum = plist[i].joynum;
-    //         p.GetComponent<arenaPlayer>().order = plist[i].sort;
-    //         pl.Add(p);
-    //         switch (plist[i].sort)
-    //         {
-    //             case 1:
-    //                 p.GetComponent<arenaPlayer>().SpawnPoint(new Vector3(-34, 0, 0));
-    //                 break;
-    //             case 2:
-    //                 p.GetComponent<arenaPlayer>().SpawnPoint(new Vector3(0, 34, 0));
-    //                 break;
-    //             case 3:
-    //                 p.GetComponent<arenaPlayer>().SpawnPoint(new Vector3(34, 0, 0));
-    //                 break;
-    //             case 4:
-    //                 p.GetComponent<arenaPlayer>().SpawnPoint(new Vector3(0, -34, 0));
-    //                 break;
-    //         }
-    //     }
-    //     // List<string> game = new List<string> { "Zeus", "Cupid", "Medusa", "SunMoon", "sword" };
-    //     // int randomgame = Random.Range(0, game.Count);
-    //     // GameObject.Find("UI").transform.Find("Medusa").gameObject.SetActive(true);
-    //     GameObject.Find("UI").transform.Find("SelectUI").gameObject.SetActive(true);
-    //     // GameObject.Find(game[randomgame]+"UI").gameObject.SetActive(true);
-    // }
 }

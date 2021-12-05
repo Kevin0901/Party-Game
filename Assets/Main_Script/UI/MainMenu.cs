@@ -50,7 +50,10 @@ public class MainMenu : MonoBehaviour
     }
     public void PlayGame() //點擊事件
     {
-        StartCoroutine(fadeout());
+        if (CanvasGroup.blocksRaycasts)
+        {
+            StartCoroutine(fadeout());
+        }
     }
     public void QuitGame() //點擊事件
     {

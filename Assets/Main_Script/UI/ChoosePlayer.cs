@@ -18,7 +18,7 @@ public class ChoosePlayer : MonoBehaviour
         ChoosePlayerAnimator = this.GetComponent<Animator>();
         CanvasGroup = this.GetComponent<CanvasGroup>();
         UIplayerlist.Add("first"); //初始化
-        playerCount = 0;           //初始化
+        playerCount = 0;
     }
     // Update is called once per frame
     void Update()
@@ -35,11 +35,11 @@ public class ChoosePlayer : MonoBehaviour
             {
                 Joycheck("0");
             }
-            else if (Input.GetKeyDown(KeyCode.B))//KeyCode.Joystick1Button2
+            else if (Input.GetKeyDown(KeyCode.B) || Input.GetKeyDown(KeyCode.Joystick1Button2))
             {
                 Joycheck("1");
             }
-            else if (Input.GetKeyDown(KeyCode.N))//KeyCode.Joystick2Button2
+            else if (Input.GetKeyDown(KeyCode.N) || Input.GetKeyDown(KeyCode.Joystick2Button2))
             {
                 Joycheck("2");
             }
@@ -96,7 +96,7 @@ public class ChoosePlayer : MonoBehaviour
                 Transform pNoRE = transform.Find("P" + i);     //P2  
                 UIplayerManager UIpRE = pRE.GetComponent<UIplayerManager>();     //P1
                 UIplayerManager UIpNoRE = pNoRE.GetComponent<UIplayerManager>(); //P2
-
+                //將P1換成P2的
                 UIpRE.playersort = UIpNoRE.playersort - 1;
                 UIpRE.Joysticknum = UIpNoRE.Joysticknum;
                 UIpRE.red = UIpNoRE.red;
@@ -104,7 +104,7 @@ public class ChoosePlayer : MonoBehaviour
                 UIpRE.iconjudge = UIpNoRE.iconjudge;
                 UIpRE.isChooseTeam = UIpNoRE.isChooseTeam;
                 UIpRE.TeamChoose();
-
+                //P2初始化
                 UIpNoRE.playersort = 0;
                 UIpNoRE.Joysticknum = null;
                 UIpNoRE.red = false;
@@ -154,7 +154,7 @@ public class ChoosePlayer : MonoBehaviour
         yield return null;
         ChoosePlayerAnimator.SetBool("fadeout", false);
 
-        ClearAllPlayer();
+        ClearAllPlayer();//清除所有清單
         GameObject.Find("GameMenu").GetComponent<GameMenu>().inGameMenu = true;
     }
 
@@ -164,13 +164,10 @@ public class ChoosePlayer : MonoBehaviour
         {
             string playershow = "P" + i;
             Transform p = transform.Find(playershow);
-            p.transform.Find("RedPlayer").gameObject.SetActive(false);
-            p.transform.Find("red").gameObject.SetActive(false);
-            p.transform.Find("blue").gameObject.SetActive(false);
-            p.transform.Find("leftArrow").gameObject.SetActive(false);
-            p.transform.Find("rightArrow").gameObject.SetActive(false);
-            p.transform.Find("L1").gameObject.SetActive(false);
-            p.transform.Find("R1").gameObject.SetActive(false);
+            for (int j = 0; j < p.transform.childCount; j++)
+            {
+                p.transform.GetChild(j).gameObject.SetActive(false);
+            }
 
             UIplayerManager UIp = p.gameObject.GetComponent<UIplayerManager>();
             UIp.playersort = 0;
@@ -180,51 +177,50 @@ public class ChoosePlayer : MonoBehaviour
             UIp.iconjudge = false;
             UIp.isChooseTeam = false;
         }
-        playerCount = 0;
-        UIplayerlist.Clear();
+
+        playerCount = 0;          
+        UIplayerlist.Clear();     
         UIplayerlist.Add("first");
     }
-
-    public void back()
+    public void back() //點擊事件
     {
         StartCoroutine(fadeout());
     }
-    public void Setting()
+    public void Setting()//點擊事件
     {
         GameObject.Find("SettingMenu").transform.Find("Settings").gameObject.SetActive(true);
     }
-
-    public void StartGame()
+    public void StartGame() //點擊事件  
     {
         if (playerCount > 1)
         {
-            int redonline = 0;
-            int blueonline = 0;
+            int redCnt = 0;
+            int blueCnt = 0;
             for (int i = 1; i <= playerCount; i++)
             {
                 string playershow = "P" + i;
                 Transform p = transform.Find(playershow);
-                if (p.transform.Find("red").gameObject.activeSelf)
+                if (p.transform.Find("red").gameObject.activeSelf) //如果啟用紅隊
                 {
-                    redonline += 1;
+                    redCnt += 1;
                 }
-                else if (p.transform.Find("blue").gameObject.activeSelf)
+                else if (p.transform.Find("blue").gameObject.activeSelf)//如果啟用藍隊
                 {
-                    blueonline += 1;
+                    blueCnt += 1;
                 }
             }
-            if (redonline > 0 && blueonline > 0)
+            if (redCnt > 0 && blueCnt > 0)  //如果都大於0的話
             {
                 StartCoroutine(fadeoutToMainGame());
             }
             else
             {
-                StartCoroutine(Warning(1));
+                StartCoroutine(Warning());
             }
         }
         else
         {
-            StartCoroutine(Warning(1));
+            StartCoroutine(Warning());
         }
     }
 
@@ -232,19 +228,17 @@ public class ChoosePlayer : MonoBehaviour
     {
         CanvasGroup.blocksRaycasts = false;
         ChoosePlayerAnimator.SetBool("fadeout", true);
-        yield return new WaitForSeconds(0.2f);
         GameObject.Find("LoadingCircle").transform.Find("Image").gameObject.SetActive(true);
         GameObject.Find("TranPageAnimation").transform.Find("Image").gameObject.SetActive(true);
-
-        yield return new WaitForSeconds(0.5f);
+        yield return null;
         ChoosePlayerAnimator.SetBool("fadeout", false);
-
         yield return new WaitForSeconds(1.25f);
         GameObject.Find("LoadingCircle").transform.Find("Image").gameObject.SetActive(false);
-        PlayerManager PM = transform.Find("GameManager").GetComponent<PlayerManager>();
-        PM.initializations(playerCount);
 
-        for (int i = 1; i <= playerCount; i++)
+        PlayerManager PM = transform.Find("PlayerManager").GetComponent<PlayerManager>(); //找到GameManager
+        PM.initializations(playerCount); //建構子初始化陣列
+
+        for (int i = 1; i <= playerCount; i++) //將值輸入進陣列裡
         {
             string playershow = "P" + i;
             Transform p = transform.Find(playershow);
@@ -261,20 +255,14 @@ public class ChoosePlayer : MonoBehaviour
             PM.plist[i - 1].sort = UIp.playersort;
 
         }
-        transform.Find("GameManager").gameObject.transform.SetParent(null);
-        DontDestroyOnLoad(GameObject.Find("GameManager"));
-        SceneManager.LoadSceneAsync("MainScene");
+        transform.Find("PlayerManager").SetParent(null);
+        DontDestroyOnLoad(GameObject.Find("PlayerManager")); //別摧毀物件
+        SceneManager.LoadSceneAsync("MainScene");          //載入場景
     }
-
-    private IEnumerator Warning(int Warningnum)
+    private IEnumerator Warning()
     {
-        string Warning = "";
-        if (Warningnum == 1)
-        {
-            Warning = "PlayerWaring";
-        }
-        transform.Find(Warning).gameObject.SetActive(true);
-        yield return new WaitForSeconds(2f);
-        transform.Find(Warning).gameObject.SetActive(false);
+        transform.Find("PlayerWaring").gameObject.SetActive(true);
+        yield return new WaitForSeconds(1.5f);
+        transform.Find("PlayerWaring").gameObject.SetActive(false);
     }
 }
