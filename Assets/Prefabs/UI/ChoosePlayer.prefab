@@ -1307,7 +1307,7 @@ CanvasGroup:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2060107841247128589}
   m_Enabled: 1
-  m_Alpha: 0
+  m_Alpha: 1
   m_Interactable: 1
   m_BlocksRaycasts: 0
   m_IgnoreParentGroups: 1
@@ -4989,6 +4989,8 @@ MonoBehaviour:
     type: 3}
   BlueCastel: {fileID: 4430006006634354294, guid: 1d72796d476bf134eb4b04ebb9608451,
     type: 3}
+  red: {fileID: 0}
+  blue: {fileID: 0}
   isSpawn: 0
   EventGame: 
 --- !u!1 &6358567305799966250

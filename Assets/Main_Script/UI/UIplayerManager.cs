@@ -120,7 +120,6 @@ public class UIplayerManager : MonoBehaviour
                 transform.Find("L1").gameObject.SetActive(true);
                 transform.Find("R1").gameObject.SetActive(true);
             }
-            // iconjudge = false;
         }
     }
 }

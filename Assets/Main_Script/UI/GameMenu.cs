@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class GameMenu : MonoBehaviour
 {
-    // Start is called before the first frame update
     public bool inGameMenu;
     private Animator GameAnimator;
     private CanvasGroup CanvasGroup;
@@ -28,7 +27,8 @@ public class GameMenu : MonoBehaviour
         yield return null;
         GameAnimator.SetBool("fadein", false);
         GameObject.Find("LoadingCircle").transform.Find("Image").gameObject.SetActive(false);
-        GameObject.Find("TranPageAnimation").transform.Find("Image").gameObject.SetActive(false);
+        yield return new WaitForSeconds(1f);
+        GameObject.Find("TranPageAnimation").transform.Find("Image").gameObject.SetActive(false);//關閉換頁動畫
         CanvasGroup.blocksRaycasts = true;
     }
     private IEnumerator fadeout(string canvas) //淡出畫面
@@ -48,18 +48,10 @@ public class GameMenu : MonoBehaviour
         {
             GameObject.Find(canvas).GetComponent<Noviceteaching>().inTeachingMenu = true;
         }
-        else if (canvas.Equals("StartMenu"))
-        {
-            GameObject.Find(canvas).GetComponent<MainMenu>().inMainMenu = true;
-        }
         else if (canvas.Equals("IllustratedBook"))
         {
             GameObject.Find(canvas).GetComponent<IllustratedBook>().inIllustratedBookMenu = true;
         }
-    }
-    public void Setting()//點擊事件
-    {
-        GameObject.Find("SettingMenu").transform.Find("Settings").gameObject.SetActive(true);
     }
     public void JoinGame()//點擊事件
     {
@@ -75,6 +67,10 @@ public class GameMenu : MonoBehaviour
     }
     public void back()//點擊事件
     {
-        StartCoroutine(fadeout("StartMenu"));
+        GameObject.Find("StartMenu").GetComponent<MainMenu>().inMainMenu = true;
+    }
+    public void Setting()//點擊事件
+    {
+        GameObject.Find("SettingMenu").transform.Find("Settings").gameObject.SetActive(true);
     }
 }

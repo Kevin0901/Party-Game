@@ -25,7 +25,7 @@ public class MainMenu : MonoBehaviour
         }
         if (Input.GetKeyDown(KeyCode.Space) && CanvasGroup.blocksRaycasts)
         {
-            StartCoroutine(GoGameMenu());
+            StartCoroutine(fadeout());
         }
     }
     private IEnumerator fadein() //淡入畫面
@@ -34,22 +34,23 @@ public class MainMenu : MonoBehaviour
         yield return null;
         MainAnimator.SetBool("fadein", false);
         GameObject.Find("LoadingCircle").transform.Find("Image").gameObject.SetActive(false);
+        yield return new WaitForSeconds(1f);
         GameObject.Find("TranPageAnimation").transform.Find("Image").gameObject.SetActive(false);//關閉換頁動畫
         CanvasGroup.blocksRaycasts = true;
     }
-    private IEnumerator GoGameMenu() //前往主選單       
+    private IEnumerator fadeout() //淡出畫面       
     {
         CanvasGroup.blocksRaycasts = false;
-        MainAnimator.SetBool("exit", true);
+        MainAnimator.SetBool("fadeout", true);
         GameObject.Find("LoadingCircle").transform.Find("Image").gameObject.SetActive(true);
         GameObject.Find("TranPageAnimation").transform.Find("Image").gameObject.SetActive(true); //開啟換頁動畫
         yield return null;
-        MainAnimator.SetBool("exit", false);
-        GameObject.Find("GameMenu").GetComponent<GameMenu>().inGameMenu = true; 
+        MainAnimator.SetBool("fadeout", false);
+        GameObject.Find("GameMenu").GetComponent<GameMenu>().inGameMenu = true;
     }
     public void PlayGame() //點擊事件
     {
-        StartCoroutine(GoGameMenu());
+        StartCoroutine(fadeout());
     }
     public void QuitGame() //點擊事件
     {

@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Noviceteaching : MonoBehaviour
+public class Noviceteaching : MonoBehaviour //新手教學
 {
     // Start is called before the first frame update
     public bool inTeachingMenu;
@@ -18,39 +18,34 @@ public class Noviceteaching : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(inTeachingMenu)
+        if (inTeachingMenu)
         {
-            TeachingAnimator.SetBool("fadein",true);
             StartCoroutine(fadein());
             inTeachingMenu = false;
-            // this.transform.Find("Image").gameObject.SetActive(true);
         }
     }
-    private IEnumerator fadein()
+    private IEnumerator fadein()//淡入畫面
     {
-        yield return new WaitForSeconds(0.5f);
-        TeachingAnimator.SetBool("fadein",false);
+        TeachingAnimator.SetBool("fadein", true);
+        yield return null;
+        TeachingAnimator.SetBool("fadein", false);
         GameObject.Find("LoadingCircle").transform.Find("Image").gameObject.SetActive(false);
-        yield return new WaitForSeconds(0.5f);
+        yield return new WaitForSeconds(1f);
         GameObject.Find("TranPageAnimation").transform.Find("Image").gameObject.SetActive(false);
         CanvasGroup.blocksRaycasts = true;
     }
 
-    private IEnumerator fadeout()
+    private IEnumerator fadeout()//淡出畫面  
     {
         CanvasGroup.blocksRaycasts = false;
         TeachingAnimator.SetBool("fadeout", true);
-        yield return new WaitForSeconds(0.2f);
         GameObject.Find("LoadingCircle").transform.Find("Image").gameObject.SetActive(true);
         GameObject.Find("TranPageAnimation").transform.Find("Image").gameObject.SetActive(true);
-
-        yield return new WaitForSeconds(0.5f);
+        yield return null;
         TeachingAnimator.SetBool("fadeout", false);
-
         GameObject.Find("GameMenu").GetComponent<GameMenu>().inGameMenu = true;
     }
-
-    public void back()
+    public void back() //點擊事件
     {
         StartCoroutine(fadeout());
     }

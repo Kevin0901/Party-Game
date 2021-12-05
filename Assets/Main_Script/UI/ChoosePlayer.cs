@@ -9,7 +9,7 @@ public class ChoosePlayer : MonoBehaviour
     public bool inChoosePlayer;
     private Animator ChoosePlayerAnimator;
     public CanvasGroup CanvasGroup;
-    public int playerCount;
+    public int playerCount; //計算玩家數量
     [Header("玩家清單")]
     [SerializeField] private List<string> UIplayerlist = new List<string>();
     void Start()
@@ -17,31 +17,29 @@ public class ChoosePlayer : MonoBehaviour
         inChoosePlayer = false;
         ChoosePlayerAnimator = this.GetComponent<Animator>();
         CanvasGroup = this.GetComponent<CanvasGroup>();
-        UIplayerlist.Add("first");
-        playerCount = 0;
+        UIplayerlist.Add("first"); //初始化
+        playerCount = 0;           //初始化
     }
-
     // Update is called once per frame
     void Update()
     {
         if (inChoosePlayer)
         {
-            ChoosePlayerAnimator.SetBool("fadein", true);
             StartCoroutine(fadein());
             inChoosePlayer = false;
         }
 
-        if (playerCount < 4 && CanvasGroup.blocksRaycasts)
+        if (playerCount < 4 && CanvasGroup.blocksRaycasts) //按鍵加入
         {
             if (Input.GetKeyDown(KeyCode.Space))
             {
                 Joycheck("0");
             }
-            else if (Input.GetKeyDown(KeyCode.Joystick1Button2))
+            else if (Input.GetKeyDown(KeyCode.B))//KeyCode.Joystick1Button2
             {
                 Joycheck("1");
             }
-            else if (Input.GetKeyDown(KeyCode.Joystick2Button2))
+            else if (Input.GetKeyDown(KeyCode.N))//KeyCode.Joystick2Button2
             {
                 Joycheck("2");
             }
@@ -61,75 +59,67 @@ public class ChoosePlayer : MonoBehaviour
         bool newP = false;
         for (int i = 0; i < UIplayerlist.Count; i++)
         {
-            if (num.Equals(UIplayerlist[i]))
+            if (num.Equals(UIplayerlist[i])) //如果控制器存在
             {
                 newP = true;
             }
         }
-        if (newP)
+        if (newP)//刪除
         {
             playerCount--;
-            int playpos = UIplayerlist.FindIndex(x => x.Equals(num));
+            int playpos = UIplayerlist.FindIndex(x => x.Equals(num)); //找加入遊戲的排序
             string playerhide = "P" + playpos;
-            Transform p = transform.Find(playerhide); //刪除的物件
+            Transform p = transform.Find(playerhide); //移除物件
             UIplayerManager UIphide = p.gameObject.GetComponent<UIplayerManager>();
+            //全部初始化
             UIphide.playersort = 0;
             UIphide.Joysticknum = null;
             UIphide.red = false;
             UIphide.blue = false;
             UIphide.iconjudge = false;
             UIphide.isChooseTeam = false;
-
+            //關閉所有物件
             for (int i = 0; i < p.transform.childCount; i++)
             {
                 p.transform.GetChild(i).gameObject.SetActive(false);
             }
+            //移除索引
             UIplayerlist.Remove(num);
 
             for (int i = 2; i <= 4; i++) //往前替補
             {
-                if (playpos == UIplayerlist.Count)
+                if (playpos == UIplayerlist.Count) //如果移除的目標是最後一個
                 {
                     break;
                 }
-                Transform pNoRE = transform.Find("P" + i);  //P2  
-                Transform pRE = transform.Find("P" + (i - 1));//P1
-                if (pNoRE.transform.Find("RedPlayer").gameObject.activeSelf || pNoRE.transform.Find("BluePlayer").gameObject.activeSelf)
-                {
-                    UIplayerManager UIpNoRE = pNoRE.gameObject.GetComponent<UIplayerManager>();//P2
-                    UIplayerManager UIpRE = pRE.gameObject.GetComponent<UIplayerManager>(); //P1
+                Transform pRE = transform.Find("P" + (i - 1)); //P1
+                Transform pNoRE = transform.Find("P" + i);     //P2  
+                UIplayerManager UIpRE = pRE.GetComponent<UIplayerManager>();     //P1
+                UIplayerManager UIpNoRE = pNoRE.GetComponent<UIplayerManager>(); //P2
 
-                    UIpRE.playersort = UIpNoRE.playersort - 1;
-                    UIpRE.Joysticknum = UIpNoRE.Joysticknum;
-                    UIpRE.red = UIpNoRE.red;
-                    UIpRE.blue = UIpNoRE.blue;
-                    UIpRE.iconjudge = UIpNoRE.iconjudge;
-                    UIpRE.isChooseTeam = UIpNoRE.isChooseTeam;
-                    UIpRE.TeamChoose();
-                    if (UIpRE.red)
-                    {
-                        pRE.transform.Find("RedPlayer").gameObject.SetActive(true);
-                    }
-                    else
-                    {
-                        pRE.transform.Find("BluePlayer").gameObject.SetActive(true);
-                    }
-                    UIpNoRE.playersort = 0;
-                    UIpNoRE.Joysticknum = null;
-                    UIpNoRE.red = false;
-                    UIpNoRE.blue = false;
-                    UIpNoRE.iconjudge = false;
-                    UIpNoRE.isChooseTeam = false;
-                    UIpNoRE.TeamChoose();
-                    for (int j = 0; j < pNoRE.transform.childCount; j++)
-                    {
-                        pNoRE.transform.GetChild(j).gameObject.SetActive(false);
-                    }
+                UIpRE.playersort = UIpNoRE.playersort - 1;
+                UIpRE.Joysticknum = UIpNoRE.Joysticknum;
+                UIpRE.red = UIpNoRE.red;
+                UIpRE.blue = UIpNoRE.blue;
+                UIpRE.iconjudge = UIpNoRE.iconjudge;
+                UIpRE.isChooseTeam = UIpNoRE.isChooseTeam;
+                UIpRE.TeamChoose();
+
+                UIpNoRE.playersort = 0;
+                UIpNoRE.Joysticknum = null;
+                UIpNoRE.red = false;
+                UIpNoRE.blue = false;
+                UIpNoRE.iconjudge = false;
+                UIpNoRE.isChooseTeam = false;
+                for (int j = 0; j < pNoRE.transform.childCount; j++)
+                {
+                    pNoRE.transform.GetChild(j).gameObject.SetActive(false);
                 }
             }
         }
         else
         {
+            //加入清單
             playerCount++;
             UIplayerlist.Add(num);
             string playershow = "P" + playerCount;
@@ -146,10 +136,11 @@ public class ChoosePlayer : MonoBehaviour
 
     private IEnumerator fadein()
     {
-        yield return new WaitForSeconds(0.5f);
+        ChoosePlayerAnimator.SetBool("fadein", true);
+        yield return null;
         ChoosePlayerAnimator.SetBool("fadein", false);
         GameObject.Find("LoadingCircle").transform.Find("Image").gameObject.SetActive(false);
-        yield return new WaitForSeconds(0.5f);
+        yield return new WaitForSeconds(1f);
         GameObject.Find("TranPageAnimation").transform.Find("Image").gameObject.SetActive(false);
         CanvasGroup.blocksRaycasts = true;
     }
@@ -158,11 +149,9 @@ public class ChoosePlayer : MonoBehaviour
     {
         CanvasGroup.blocksRaycasts = false;
         ChoosePlayerAnimator.SetBool("fadeout", true);
-        yield return new WaitForSeconds(0.2f);
         GameObject.Find("LoadingCircle").transform.Find("Image").gameObject.SetActive(true);
         GameObject.Find("TranPageAnimation").transform.Find("Image").gameObject.SetActive(true);
-
-        yield return new WaitForSeconds(0.5f);
+        yield return null;
         ChoosePlayerAnimator.SetBool("fadeout", false);
 
         ClearAllPlayer();

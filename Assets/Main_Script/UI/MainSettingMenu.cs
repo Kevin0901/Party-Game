@@ -43,10 +43,10 @@ public class MainSettingMenu : MonoBehaviour
                     SetTeachingPagePos += -1920;
                     break;
                 case 2:
-                    SetTeachingPagePos += -(1920*2);
+                    SetTeachingPagePos += -(1920 * 2);
                     break;
                 case 0:
-                    SetTeachingPagePos += (-1920)*3;
+                    SetTeachingPagePos += (-1920) * 3;
                     break;
             }
             SetTeachingPag(SetTeachingPagePos);
@@ -57,7 +57,7 @@ public class MainSettingMenu : MonoBehaviour
         GameObject page = transform.Find("Panel").transform.Find("Scroll snap").transform.Find("Container").gameObject;
         RectTransform RTpage = page.GetComponent<RectTransform>();
         RTpage.offsetMin = new Vector2(pos, RTpage.offsetMin.y);
-        RTpage.offsetMax = new Vector2(-(-5760+(-pos)), RTpage.offsetMax.y);
+        RTpage.offsetMax = new Vector2(-(-5760 + (-pos)), RTpage.offsetMax.y);
     }
     private void showSettingUI()
     {
@@ -68,6 +68,7 @@ public class MainSettingMenu : MonoBehaviour
             {
                 transform.GetChild(i).gameObject.SetActive(true);
             }
+            Time.timeScale = 0;
         }
         else
         {
@@ -76,6 +77,7 @@ public class MainSettingMenu : MonoBehaviour
             {
                 transform.GetChild(i).gameObject.SetActive(false);
             }
+            Time.timeScale = 1;
         }
     }
     public void updateVolume(float musicvolume)

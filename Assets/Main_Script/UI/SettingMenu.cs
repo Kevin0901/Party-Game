@@ -1,14 +1,17 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class SettingMenu : MonoBehaviour
 {
     public AudioSource audios;
-    private float volume  = 1f;
+    private float volume;
     // Start is called before the first frame update
     void Start()
     {
+        volume = 0.3f;
+        this.transform.GetChild(0).Find("Volume").GetComponent<Slider>().value = volume;
         audios.Play();
     }
 
@@ -18,7 +21,7 @@ public class SettingMenu : MonoBehaviour
         audios.volume = volume;
     }
 
-    public void updateVolume( float musicvolume)
+    public void updateVolume(float musicvolume)
     {
         volume = musicvolume;
     }
