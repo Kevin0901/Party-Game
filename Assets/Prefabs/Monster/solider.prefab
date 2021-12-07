@@ -208,7 +208,7 @@ GameObject:
   - component: {fileID: 8181099626777161877}
   m_Layer: 9
   m_Name: solider
-  m_TagString: red
+  m_TagString: blue
   m_Icon: {fileID: 7148428337604731935, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

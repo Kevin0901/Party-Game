@@ -15,6 +15,10 @@ public class health : MonoBehaviour
     private int burnstack = 0;
     public bool iswudi;//無敵
 
+    private void Awake()
+    {
+        ResourceTypeListSO resourceTypeList = Resources.Load<ResourceTypeListSO>(typeof(ResourceTypeListSO).Name);
+    }
     void Start()
     {
         iswudi = false;
@@ -29,6 +33,22 @@ public class health : MonoBehaviour
     }
     private void Update()
     {
+        if (curH <= 0)
+        {
+            ResourceTypeListSO resourceTypeList = Resources.Load<ResourceTypeListSO>(typeof(ResourceTypeListSO).Name);
+            if (parentSet.tag == "red")
+            {
+                ResourceManager.Instance.BlueAddResource(resourceTypeList.list[0], 3);
+                ResourceManager.Instance.BlueAddResource(resourceTypeList.list[1], 3);
+                ResourceManager.Instance.BlueAddResource(resourceTypeList.list[2], 3);
+            }
+            else if (parentSet.tag == "blue")
+            {
+                ResourceManager.Instance.RedAddResource(resourceTypeList.list[0], 3);
+                ResourceManager.Instance.RedAddResource(resourceTypeList.list[1], 3);
+                ResourceManager.Instance.RedAddResource(resourceTypeList.list[2], 3);
+            }
+        }
         if (curH <= 0 && parentSet.layer != 10 && parentSet.layer != 14)
         {
             Destroy(parentSet);
