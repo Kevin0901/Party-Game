@@ -32,11 +32,11 @@ public class TimeManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (GameObject.Find("GameManager").GetComponent<PlayerManager>().blue != null && GameObject.Find("GameManager").GetComponent<PlayerManager>().red != null)
-        {
-            redcastle = GameObject.Find("GameManager").GetComponent<PlayerManager>().red;
-            bluecastle = GameObject.Find("GameManager").GetComponent<PlayerManager>().blue;
-        }
+        // if (GameObject.Find("GameManager").GetComponent<PlayerManager>().blue != null && GameObject.Find("GameManager").GetComponent<PlayerManager>().red != null)
+        // {
+        //     redcastle = GameObject.Find("GameManager").GetComponent<PlayerManager>().red;
+        //     bluecastle = GameObject.Find("GameManager").GetComponent<PlayerManager>().blue;
+        // }
         float lastTime = (randomTime - ((int)currentTime));
         if (lastTime == 15)
         {

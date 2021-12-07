@@ -2,25 +2,28 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 public class MainSettingMenu : MonoBehaviour
 {
     public AudioSource audios;
-    private float volume = 0.3f;
+    private float volume;
     private bool showUI;
-    private int Btn6Cnt;
+    private int cntChange;
     // Start is called before the first frame update
     void Start()
     {
-        audios.Play();
+        volume = 0.1f;
+        this.transform.Find("Settings").Find("Volume").GetComponent<Slider>().value = volume;
         showUI = false;
-        Btn6Cnt = 0;
+        cntChange = 0;
+        audios.Play();
     }
 
     // Update is called once per frame
     void Update()
     {
         audios.volume = volume;
-        if (Input.GetKeyDown(KeyCode.Escape) || Input.GetKeyDown(KeyCode.JoystickButton7))
+        if (Input.GetKeyDown(KeyCode.Escape) || Input.GetKeyDown(KeyCode.JoystickButton7)) //開啟UI
         {
             if (showUI)
             {
@@ -33,20 +36,20 @@ public class MainSettingMenu : MonoBehaviour
             showSettingUI();
         }
 
-        if (Input.GetKeyDown(KeyCode.JoystickButton6) && showUI)
+        if (Input.GetKeyDown(KeyCode.JoystickButton6) && showUI) //切換新手教學頁面
         {
             float SetTeachingPagePos = 0;
-            Btn6Cnt += 1;
-            switch (Btn6Cnt % 3)
+            cntChange += 1;
+            switch (cntChange % 3)
             {
+                case 0:
+                    SetTeachingPagePos += (-1920) * 3;
+                    break;
                 case 1:
                     SetTeachingPagePos += -1920;
                     break;
                 case 2:
                     SetTeachingPagePos += -(1920 * 2);
-                    break;
-                case 0:
-                    SetTeachingPagePos += (-1920) * 3;
                     break;
             }
             SetTeachingPag(SetTeachingPagePos);
@@ -59,7 +62,7 @@ public class MainSettingMenu : MonoBehaviour
         RTpage.offsetMin = new Vector2(pos, RTpage.offsetMin.y);
         RTpage.offsetMax = new Vector2(-(-5760 + (-pos)), RTpage.offsetMax.y);
     }
-    private void showSettingUI()
+    private void showSettingUI() //開啟UI
     {
         if (showUI)
         {
@@ -80,16 +83,16 @@ public class MainSettingMenu : MonoBehaviour
             Time.timeScale = 1;
         }
     }
-    public void updateVolume(float musicvolume)
+    public void updateVolume(float musicvolume) //點擊事件
     {
         volume = musicvolume;
     }
 
-    public void ExitGameToUI()
+    public void ExitGameToUI()   //點擊事件   
     {
         SceneManager.LoadScene("UI");
     }
-    public void Back()
+    public void Back() //點擊事件
     {
         for (int i = 0; i < this.transform.childCount; i++)
         {

@@ -34,7 +34,7 @@ public class MainMenu : MonoBehaviour
         yield return null;
         MainAnimator.SetBool("fadein", false);
         GameObject.Find("LoadingCircle").transform.Find("Image").gameObject.SetActive(false);
-        yield return new WaitForSeconds(1f);
+        yield return new WaitForSeconds(0.65f);
         GameObject.Find("TranPageAnimation").transform.Find("Image").gameObject.SetActive(false);//關閉換頁動畫
         CanvasGroup.blocksRaycasts = true;
     }
@@ -42,9 +42,9 @@ public class MainMenu : MonoBehaviour
     {
         CanvasGroup.blocksRaycasts = false;
         MainAnimator.SetBool("fadeout", true);
+        yield return null;
         GameObject.Find("LoadingCircle").transform.Find("Image").gameObject.SetActive(true);
         GameObject.Find("TranPageAnimation").transform.Find("Image").gameObject.SetActive(true); //開啟換頁動畫
-        yield return null;
         MainAnimator.SetBool("fadeout", false);
         GameObject.Find("GameMenu").GetComponent<GameMenu>().inGameMenu = true;
     }

@@ -1307,7 +1307,7 @@ CanvasGroup:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2060107841247128589}
   m_Enabled: 1
-  m_Alpha: 1
+  m_Alpha: 0
   m_Interactable: 1
   m_BlocksRaycasts: 0
   m_IgnoreParentGroups: 1
@@ -4767,7 +4767,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 488}
+  m_AnchoredPosition: {x: 0, y: 491}
   m_SizeDelta: {x: 1000, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &5214924971354318465
@@ -4949,7 +4949,7 @@ GameObject:
   - component: {fileID: 8879985897396429103}
   - component: {fileID: 3606528115032309399}
   m_Layer: 0
-  m_Name: GameManager
+  m_Name: PlayerManager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4982,7 +4982,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   plist: []
-  player: {fileID: 8151292538965709607, guid: c8647925584db0d4cbe9c418389bfe8f, type: 3}
+  player: {fileID: 4733032340008112295, guid: 39e21d00039060149bc52201b908a616, type: 3}
   fightplayer: {fileID: 2028814211212845501, guid: c775dd2b651076e4695745b131227a23,
     type: 3}
   RedCastel: {fileID: 8961850176589369621, guid: 4b8afc096df32454d988c9220a000752,
@@ -4991,7 +4991,6 @@ MonoBehaviour:
     type: 3}
   red: {fileID: 0}
   blue: {fileID: 0}
-  isSpawn: 0
   EventGame: 
 --- !u!1 &6358567305799966250
 GameObject:

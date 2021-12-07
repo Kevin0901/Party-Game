@@ -10,7 +10,7 @@ public class Team : MonoBehaviour
         blue
     }
     // Start is called before the first frame update
-    [HideInInspector] public string Enemyteam; //敵人
+    public string Enemyteam; //敵人
     private void Awake()
     {
         if (this.gameObject.tag == "red")
@@ -21,5 +21,9 @@ public class Team : MonoBehaviour
         {
             Enemyteam = "red";
         }
+    }
+    private void Start()
+    {
+
     }
 }

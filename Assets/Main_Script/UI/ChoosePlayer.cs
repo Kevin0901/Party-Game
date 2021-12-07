@@ -158,7 +158,7 @@ public class ChoosePlayer : MonoBehaviour
         GameObject.Find("GameMenu").GetComponent<GameMenu>().inGameMenu = true;
     }
 
-    private void ClearAllPlayer()
+    private void ClearAllPlayer() //清除玩家
     {
         for (int i = 1; i <= playerCount; i++)
         {
@@ -178,8 +178,8 @@ public class ChoosePlayer : MonoBehaviour
             UIp.isChooseTeam = false;
         }
 
-        playerCount = 0;          
-        UIplayerlist.Clear();     
+        playerCount = 0;
+        UIplayerlist.Clear();
         UIplayerlist.Add("first");
     }
     public void back() //點擊事件
@@ -224,15 +224,16 @@ public class ChoosePlayer : MonoBehaviour
         }
     }
 
-    private IEnumerator fadeoutToMainGame()
+    private IEnumerator fadeoutToMainGame() //去主遊戲
     {
         CanvasGroup.blocksRaycasts = false;
         ChoosePlayerAnimator.SetBool("fadeout", true);
-        GameObject.Find("LoadingCircle").transform.Find("Image").gameObject.SetActive(true);
-        GameObject.Find("TranPageAnimation").transform.Find("Image").gameObject.SetActive(true);
         yield return null;
         ChoosePlayerAnimator.SetBool("fadeout", false);
-        yield return new WaitForSeconds(1.25f);
+        GameObject.Find("LoadingCircle").transform.Find("Image").gameObject.SetActive(true);
+        GameObject.Find("TranPageAnimation").transform.Find("Image").gameObject.SetActive(true);
+        yield return new WaitForSeconds(1.5f);
+        GameObject.Find("TranPageAnimation").transform.Find("Image").gameObject.SetActive(false);
         GameObject.Find("LoadingCircle").transform.Find("Image").gameObject.SetActive(false);
 
         PlayerManager PM = transform.Find("PlayerManager").GetComponent<PlayerManager>(); //找到GameManager
@@ -257,9 +258,10 @@ public class ChoosePlayer : MonoBehaviour
         }
         transform.Find("PlayerManager").SetParent(null);
         DontDestroyOnLoad(GameObject.Find("PlayerManager")); //別摧毀物件
-        SceneManager.LoadSceneAsync("MainScene");          //載入場景
+        SceneManager.LoadSceneAsync("MainScene");           //載入場景
+        StartCoroutine(GameObject.Find("PlayerManager").GetComponent<PlayerManager>().waitSceneLoad("MainScene"));//生成玩家
     }
-    private IEnumerator Warning()
+    private IEnumerator Warning() //配置不符警告
     {
         transform.Find("PlayerWaring").gameObject.SetActive(true);
         yield return new WaitForSeconds(1.5f);
