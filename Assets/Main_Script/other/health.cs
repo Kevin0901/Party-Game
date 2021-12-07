@@ -7,14 +7,13 @@ using UnityEngine.UI;
 public class health : MonoBehaviour
 {
     // Start is called before the first frame update
-    public int maxH = 30, curH;
+    public int maxH, curH;
     private GameObject parentSet;
     private RectTransform proportion;
     private float newScale, baseScale;
     private Slider bar;
     private int burnstack = 0;
     public bool iswudi;//無敵
-
     private void Awake()
     {
         ResourceTypeListSO resourceTypeList = Resources.Load<ResourceTypeListSO>(typeof(ResourceTypeListSO).Name);
@@ -22,20 +21,17 @@ public class health : MonoBehaviour
     void Start()
     {
         iswudi = false;
-        if (this.gameObject.transform.parent.gameObject.layer != 14)
-        {
-            healthBarSet();
-        }
+        healthBarSet();
         curH = maxH;
-        bar = this.gameObject.GetComponentInChildren<Slider>();
         parentSet = this.transform.parent.gameObject;
+        bar = this.gameObject.GetComponentInChildren<Slider>();
         bar.maxValue = maxH;
     }
     private void Update()
     {
         if (curH <= 0)
         {
-            ResourceTypeListSO resourceTypeList = Resources.Load<ResourceTypeListSO>(typeof(ResourceTypeListSO).Name);
+            ResourceTypeListSO resourceTypeList = Resources.Load<ResourceTypeListSO>(typeof(ResourceTypeListSO).Name); //死掉加對方資源
             if (parentSet.tag == "red")
             {
                 ResourceManager.Instance.BlueAddResource(resourceTypeList.list[0], 3);
@@ -59,13 +55,12 @@ public class health : MonoBehaviour
     {
         if (parentSet.layer == 10 && curH - damageToGive <= 0 && parentSet.GetComponent<PlayerMovement>().phfeather == 1)
         {
-            StartCoroutine(phoenix());
+            StartCoroutine(phoenix(3));
         }
         else if (!iswudi)
         {
             curH -= damageToGive;
         }
-
     }
     public void burnhurt(int sec, int secdamage)
     {
@@ -74,24 +69,19 @@ public class health : MonoBehaviour
             burnstack = 1;
             StartCoroutine(burn(sec, secdamage));
         }
-
     }
-    private IEnumerator phoenix()
+    private IEnumerator phoenix(int t) //無敵
     {
         parentSet.GetComponent<PlayerMovement>().phfeatheruse = 1;
-        for (int i = 0; i < 3; i++)
-        {
-            yield return new WaitForSeconds(1);
-        }
+        yield return new WaitForSeconds(t);
         parentSet.GetComponent<PlayerMovement>().phfeather -= 1;
-
     }
     private IEnumerator burn(int sec, int secdamage)
     {
         for (int i = 0; i < sec; i++)
         {
             Hurt(secdamage);
-            yield return new WaitForSeconds(1);
+            yield return new WaitForSeconds(0.5f);
         }
         burnstack = 0;
     }
@@ -101,27 +91,30 @@ public class health : MonoBehaviour
         // newTop = baseTop / 1.3f;
         // proportion.anchoredPosition3D = new Vector3(0, newTop, 0);
         //大小設定
-        proportion = this.gameObject.GetComponent<RectTransform>();
-        baseScale = 0.01f;
-        newScale = baseScale / gameObject.transform.parent.localScale.x;
-        if (newScale != baseScale)
+        if (this.transform.parent.gameObject.layer != 14)
         {
-            proportion.localScale = new Vector3(newScale, newScale, newScale);
+            proportion = this.gameObject.GetComponent<RectTransform>();
+            baseScale = 0.01f;
+            newScale = baseScale / gameObject.transform.parent.localScale.x;
+            if (newScale != baseScale)
+            {
+                proportion.localScale = new Vector3(newScale, newScale, newScale);
+            }
         }
-        if (this.gameObject.transform.parent.tag == "blue")
+        if (this.transform.parent.tag == "blue")
         {
-            this.gameObject.transform.GetChild(0).GetChild(1).gameObject.GetComponent<Image>().color = new Color32(44, 43, 178, 255);
-        }
-    }
-    public bool lowHpToDie(int damege)
-    {
-        if (curH - damege < 0)
-        {
-            return true;
-        }
-        else
-        {
-            return false;
+            this.transform.GetChild(0).Find("Fill").GetComponent<Image>().color = new Color32(44, 43, 178, 255);
         }
     }
+    // public bool lowHpToDie(int damege)
+    // {
+    //     if (curH - damege < 0)
+    //     {
+    //         return true;
+    //     }
+    //     else
+    //     {
+    //         return false;
+    //     }
+    // }
 }

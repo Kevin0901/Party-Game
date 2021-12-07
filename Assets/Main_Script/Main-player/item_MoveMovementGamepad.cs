@@ -7,15 +7,15 @@ public class item_MoveMovementGamepad : MonoBehaviour
     [Header("投擲物參數")]
     private float speed = 10f, dis = 15f;
     private float rotate;
-    private Vector3 worldPosition, startPos, dir;
-    private Camera cam;
-    private int sort;
+    private Vector3 startPos, dir;
+    // private Camera cam;
+    private GameObject mouse;
     public string team;
     void Awake()
     {
-        sort = this.GetComponentInParent<PlayerMovement>().order;
         team = this.GetComponentInParent<Team>().Enemyteam;
-        cam = this.transform.parent.transform.Find("Camera").GetComponent<Camera>();
+        mouse = this.GetComponentInParent<PlayerMovement>().mouse;
+        // cam = this.GetComponentInParent<PlayerMovement>().playercamera;
         setPos();
     }
 
@@ -31,7 +31,7 @@ public class item_MoveMovementGamepad : MonoBehaviour
     }
     public void setPos()
     {
-        RectTransform mPos = GameObject.Find("UIManager").transform.Find("Mouse").GetChild(sort - 1).GetChild(0).GetComponent<RectTransform>();
+        RectTransform mPos = mouse.transform.GetChild(0).GetComponent<RectTransform>();
         this.transform.SetParent(null);
         startPos = this.transform.position;
         dir = mPos.position - startPos;

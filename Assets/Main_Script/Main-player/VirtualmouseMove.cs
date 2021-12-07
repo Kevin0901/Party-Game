@@ -15,10 +15,10 @@ public class VirtualmouseMove : MonoBehaviour
     private Canvas canvasRect;
     void Start()
     {
-        t = this.gameObject.transform.GetChild(0).GetComponent<RectTransform>();
+        t = this.transform.GetChild(0).GetComponent<RectTransform>();
         canvasRect = this.gameObject.GetComponent<Canvas>();
-        w = Screen.currentResolution.width;
-        h = Screen.currentResolution.height;
+        w = Screen.width;
+        h = Screen.height;
         if (totalplayer == 2)
         {
             spwanPoint = new Vector2(w / 2, h);

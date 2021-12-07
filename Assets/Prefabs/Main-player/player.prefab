@@ -321,7 +321,7 @@ GameObject:
   - component: {fileID: 6393788232031153227}
   m_Layer: 10
   m_Name: player
-  m_TagString: blue
+  m_TagString: red
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -476,13 +476,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   currentState: 0
   speed: 7
-  attackDamage: 10
   MaxHealth: 100
   CurHealth: 0
   dir: 1
+  attackDamage: 10
   attackRate: 0.4
-  RedspawnPoint: {x: -20, y: -34, z: 0}
-  BluespawnPoint: {x: -20, y: 34, z: 0}
+  fireRate: 0.5
+  RedspawnPoint: {x: -20, y: -35, z: 0}
+  BluespawnPoint: {x: -20, y: 35, z: 0}
+  playercamera: {fileID: 0}
   joynum: 0
   order: 0
   v: {fileID: 8344371661837139790, guid: ac999708c9895b64483fe0cc451df562, type: 3}
@@ -498,7 +500,6 @@ MonoBehaviour:
   - {fileID: 7258149825885479278, guid: cf68aa13379745645b470e4683213317, type: 3}
   - {fileID: 1659687574304320354, guid: b56b9ed30df4b3542aa2c332aaff54f7, type: 3}
   - {fileID: 2511315091185149846, guid: 8d611272d749fa94cbb0d5dc57f98bea, type: 3}
-  playercamera: {fileID: 0}
   towerlist:
   - {fileID: 6822871495253970992, guid: f6d4a44ac74b6c643a9732db4d161589, type: 3}
   - {fileID: 3823723413707741532, guid: 508fd07ffdc9d464ba5fa9e48bf104e8, type: 3}
@@ -515,12 +516,12 @@ MonoBehaviour:
   - {fileID: 1309625769643247225, guid: 9ccd62d5747be9a4e8483326604a64ec, type: 3}
   intower: 0
   interritory: 0
-  allplayercount: 0
-  deadscreen: {fileID: 0}
   canthrowitem:
   - {fileID: 4376272004297627844, guid: 31ad4971c7098f0448394d0e9d96e116, type: 3}
   - {fileID: 6590782013300049561, guid: 037f6ef8933acf644b474ce5137aa935, type: 3}
   - {fileID: 4376272004297627844, guid: 181b1d626e3a46545b9b464988cb89fb, type: 3}
+  allplayercount: 0
+  deadscreen: {fileID: 0}
 --- !u!114 &6393788232031153227
 MonoBehaviour:
   m_ObjectHideFlags: 0

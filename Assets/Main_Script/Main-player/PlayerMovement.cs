@@ -14,15 +14,15 @@ public class PlayerMovement : MonoBehaviour
     [Header("玩家參數")]
     public PlayerState currentState;
     public float speed;
-    public int attackDamage;
     [SerializeField] private int MaxHealth, CurHealth;
     [SerializeField] private float dir;
-
-    [Header("每幾秒攻擊一次")]
+    public int attackDamage;
     [SerializeField] private float attackRate; //攻擊間隔
-
-    [Header("玩家復活點")]
-    [SerializeField] private Vector3 RedspawnPoint, BluespawnPoint;
+    [SerializeField] private float fireRate;
+    [Header("紅隊復活點")]
+    [SerializeField] private Vector3 RedspawnPoint;
+    [Header("藍隊復活點")]
+    [SerializeField] private Vector3 BluespawnPoint;
     private Animator animator;
     private Rigidbody2D mrigibody;
     private Vector3 change;
@@ -31,8 +31,10 @@ public class PlayerMovement : MonoBehaviour
     public string joynum;//控制器
     [Header("玩家登入排序")]
     public int order;//P1 P2
+    [Header("玩家攝影機")]
+    public Camera playercamera;
     [Header("虛擬滑鼠")]
-    [SerializeField] private GameObject v;
+    public GameObject mouse;
     [Header("計時器")]
     [SerializeField] private GameObject timer;
     [Header("物品欄")]
@@ -42,69 +44,59 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private GameObject inventorysign;
     public Inventory inventory;
     [SerializeField] private GameObject[] generateUI;
-    public Camera playercamera;
     [SerializeField] private GameObject[] towerlist;
     [SerializeField] private GameObject[] monsterlist;
-    public int intower;
-    public int interritory;
+    [HideInInspector] public int intower;
+    [HideInInspector] public int interritory;
+    [SerializeField] private GameObject[] canthrowitem;
     [Header("總玩家數")]
     public int allplayercount;
-    private float fireRate, nextfire;
     public GameObject deadscreen;
     private UIState UI;
-    [SerializeField] private GameObject[] canthrowitem;
     private int getallinv = 0;
-    private Animation anim;
-    private static int spriteNum;
-    private float orginspeed;
-
+    private static int spriteNum = 0;
+    private float orginspeed, nextfire;
     // Start is called before the first frame update
     private void Awake()
     {
-        health = this.GetComponentInChildren<health>();
-        animator = this.GetComponent<Animator>();
         spriteRenderer = this.GetComponent<SpriteRenderer>();
+        health = this.GetComponentInChildren<health>();
         health.maxH = MaxHealth;
-        orginspeed = speed;
     }
     void Start()
     {
-        spriteNum = 0;
-        fireRate = 0.45f;
+        mouse = this.transform.parent.Find("mouseUI").gameObject;
         nextfire = 0;
+        orginspeed = speed;
         mrigibody = this.GetComponent<Rigidbody2D>();
-        animator.SetFloat("attackSpeed", 1 / attackRate);
-        currentState = PlayerState.walk;
-        playercamera = this.transform.GetChild(0).gameObject.GetComponent<Camera>();
+        animator = this.GetComponent<Animator>();
         spawnUI();
-        animator.SetFloat("moveY", dir);
     }
     private void OnEnable()
     {
-        health.iswudi = true;
-        StartCoroutine(WudiSet());
-        if (deadscreen != null)
-        {
-            deadscreen.SetActive(false);
-        }
+        StartCoroutine(WudiSet(2.5f));
+        // if (deadscreen != null)
+        // {
+        //     deadscreen.SetActive(false);
+        // }
         animator.enabled = true;
         animator.SetFloat("attackSpeed", 1 / attackRate);
-        currentState = PlayerState.walk;
         animator.SetFloat("moveY", dir);
+        currentState = PlayerState.walk;
         this.GetComponent<SpriteRenderer>().color = new Color32(255, 255, 255, 255);
         speed = orginspeed;
     }
     private void OnDisable()
     {
-        if (deadscreen != null)
-        {
-            deadscreen.SetActive(true);
-        }
+        // if (deadscreen != null)
+        // {
+        //     deadscreen.SetActive(true);
+        // }
     }
-
-    IEnumerator WudiSet()
+    IEnumerator WudiSet(float t)
     {
-        yield return new WaitForSeconds(2f);
+        health.iswudi = true;
+        yield return new WaitForSeconds(t);
         health.iswudi = false;
     }
     // Update is called once per frame
@@ -118,29 +110,42 @@ public class PlayerMovement : MonoBehaviour
             transform.Find("right hitnox").gameObject.SetActive(false);
             transform.Find("up hitnox").gameObject.SetActive(false);
             transform.Find("left hitnox").gameObject.SetActive(false);
-            this.transform.SetParent(GameObject.Find("PAPA").transform);
+            // this.transform.SetParent(GameObject.Find("PAPA").transform);
             Invoke("spawn", 2);
             this.gameObject.SetActive(false);
         }
-        PlayerEffect();
+        PlayerMove();
         Playerthrow();
         PlayerItemUse();
         PlayerBulid();
-
         if (Input.GetKeyDown(KeyCode.E))
         {
             inventory.AddItem(new Item { itemType = Item.ItemType.Medusaeye, amount = 1 });
         }
-
+    }
+    private void spawn()
+    {
+        health.curH = health.maxH;
+        if (this.tag == "red")
+        {
+            this.transform.position = RedspawnPoint;
+        }
+        else
+        {
+            this.transform.position = BluespawnPoint;
+        }
+        Scene scene = SceneManager.GetActiveScene();
+        if (scene.name == "MainScene")
+        {
+            this.gameObject.SetActive(true);
+            // this.transform.SetParent(null);
+        }
     }
     private IEnumerator HermisEffect()
     {
         inventory.RemoveItem(new Item { itemType = Item.ItemType.Hermisboots, amount = 1 });
         speed = orginspeed * 2;
-        for (int i = 0; i < 10; i++)
-        {
-            yield return new WaitForSeconds(1);
-        }
+        yield return new WaitForSeconds(10);
         speed = orginspeed;
     }
 
@@ -148,10 +153,7 @@ public class PlayerMovement : MonoBehaviour
     {
         inventory.RemoveItem(new Item { itemType = Item.ItemType.PowerPotion, amount = 1 });
         attackDamage *= 2;
-        for (int i = 0; i < 10; i++)
-        {
-            yield return new WaitForSeconds(1);
-        }
+        yield return new WaitForSeconds(10);
         attackDamage /= 2;
     }
     private IEnumerator WineEffect()
@@ -178,32 +180,26 @@ public class PlayerMovement : MonoBehaviour
     }
     public IEnumerator StoneEffect()
     {
-        StartCoroutine(StoneEffect(orginspeed));
-        yield return null;
-    }
-    public IEnumerator StoneEffect(float speeds)
-    {
         speed = 0;
         this.GetComponent<SpriteRenderer>().color = new Color32(89, 89, 89, 255);
         yield return new WaitForSeconds(5);
         this.GetComponent<SpriteRenderer>().color = new Color32(255, 255, 255, 255);
-        speed = speeds;
+        speed = orginspeed;
     }
-    void PlayerEffect()
+    void PlayerMove()
     {
         if (Input.GetButton("attack" + joynum) && currentState != PlayerState.attack) //如果按下攻擊鍵且玩家不在攻擊動作
         {
-            if (this.gameObject.activeSelf)
-            {
-                StartCoroutine(AttackCo());
-            }
+            // if (this.gameObject.activeSelf)
+            // {
+            StartCoroutine(AttackCo());
+            // }
         }
         else if (currentState == PlayerState.walk) //如果玩家動作在走路
         {
             UpdateAnimationAndMove();
         }
-
-        foreach (Item checkph in inventory.GetItemList())
+        foreach (Item checkph in inventory.GetItemList())   //背包有沒有羽毛
         {
             if (checkph.itemType.ToString() == "Phoneixfeather")
             {
@@ -343,31 +339,29 @@ public class PlayerMovement : MonoBehaviour
     }
     void PlayerItemUse()
     {
-        if (int.Parse(joynum) == 0)
+        if (int.Parse(joynum) == 0 && Input.GetKeyDown(KeyCode.Q) && Time.time > nextfire)
         {
-            if (Input.GetKeyDown(KeyCode.Q))
+            nextfire = Time.time + fireRate;
+            switch (inventorysign.GetComponent<InventorySign>().signitemname())
             {
-                switch (inventorysign.GetComponent<InventorySign>().signitemname())
-                {
-                    case "Hermisboots":
-                        if (inventorysign.GetComponent<InventorySign>().signitemamount() != 0)
-                        {
-                            StartCoroutine(HermisEffect());
-                        }
-                        break;
-                    case "Wine":
-                        if (inventorysign.GetComponent<InventorySign>().signitemamount() != 0)
-                        {
-                            StartCoroutine(WineEffect());
-                        }
-                        break;
-                    case "PowerPotion":
-                        if (inventorysign.GetComponent<InventorySign>().signitemamount() != 0)
-                        {
-                            StartCoroutine(PowerEffect());
-                        }
-                        break;
-                }
+                case "Hermisboots":
+                    if (inventorysign.GetComponent<InventorySign>().signitemamount() != 0)
+                    {
+                        StartCoroutine(HermisEffect());
+                    }
+                    break;
+                case "Wine":
+                    if (inventorysign.GetComponent<InventorySign>().signitemamount() != 0)
+                    {
+                        StartCoroutine(WineEffect());
+                    }
+                    break;
+                case "PowerPotion":
+                    if (inventorysign.GetComponent<InventorySign>().signitemamount() != 0)
+                    {
+                        StartCoroutine(PowerEffect());
+                    }
+                    break;
             }
         }
         else if (int.Parse(joynum) != 0 && Input.GetAxisRaw("R2-" + joynum) > 0 && Time.time > nextfire)
@@ -424,7 +418,6 @@ public class PlayerMovement : MonoBehaviour
     {
         return inventorysign;
     }
-
     void spawnUI()
     {
         switch (order)
@@ -515,34 +508,15 @@ public class PlayerMovement : MonoBehaviour
             animator.SetBool("moving", false);
         }
     }
-    private void spawn()
-    {
-        health.curH = health.maxH;
-        if (this.tag == "red")
-        {
-            this.transform.position = RedspawnPoint;
-        }
-        else
-        {
-            this.transform.position = BluespawnPoint;
-        }
-        Scene scene = SceneManager.GetActiveScene();
-        if (scene.name == "MainScene")
-        {
-            this.gameObject.SetActive(true);
-            this.transform.SetParent(null);
-        }
-
-    }
     public void bornSet()
     {
         GameObject time = Instantiate(timer, timer.transform.position, timer.transform.rotation);
         time.transform.Find("Num").transform.Find("P" + order).gameObject.SetActive(true);
-        Canvas timecanvas = time.GetComponent<Canvas>();
-        timecanvas.renderMode = RenderMode.ScreenSpaceCamera;
-        timecanvas.worldCamera = this.transform.GetChild(0).gameObject.GetComponent<Camera>();
-        timecanvas.sortingLayerName = "UI";
-        timecanvas.sortingOrder = 1;
+        // Canvas timecanvas = time.GetComponent<Canvas>();
+        // timecanvas.renderMode = RenderMode.ScreenSpaceCamera;
+        // timecanvas.worldCamera = this.transform.GetChild(0).gameObject.GetComponent<Camera>();
+        // timecanvas.sortingLayerName = "UI";
+        // timecanvas.sortingOrder = 1;
         spriteNum++;
         if (this.gameObject.tag == "red")
         {
@@ -556,8 +530,8 @@ public class PlayerMovement : MonoBehaviour
             spriteRenderer.sortingOrder = spriteNum;
             dir = -1f;
         }
+        // GameObject mouse = Instantiate(v, v.transform.position, v.transform.rotation);
 
-        GameObject mouse = Instantiate(v, v.transform.position, v.transform.rotation);
         if (int.Parse(joynum) == 0)
         {
             mouse.AddComponent<mouseMove>();
@@ -569,11 +543,11 @@ public class PlayerMovement : MonoBehaviour
             mouse.GetComponent<VirtualmouseMove>().num = joynum;
             mouse.GetComponent<VirtualmouseMove>().totalplayer = allplayercount;
         }
-        Canvas canvas = mouse.GetComponent<Canvas>();
-        canvas.renderMode = RenderMode.ScreenSpaceCamera;
-        canvas.worldCamera = this.transform.GetChild(0).gameObject.GetComponent<Camera>();
-        canvas.sortingLayerName = "UI";
-        canvas.sortingOrder = 2;
-        mouse.transform.SetParent(GameObject.Find("UIManager").transform.Find("Mouse").transform);
+        // Canvas canvas = mouse.GetComponent<Canvas>();
+        // canvas.renderMode = RenderMode.ScreenSpaceCamera;
+        // canvas.worldCamera = this.transform.GetChild(0).gameObject.GetComponent<Camera>();
+        // canvas.sortingLayerName = "UI";
+        // canvas.sortingOrder = 2;
+        // mouse.transform.SetParent(GameObject.Find("UIManager").transform.Find("Mouse").transform);
     }
 }

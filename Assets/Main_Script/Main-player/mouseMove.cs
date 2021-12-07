@@ -11,10 +11,10 @@ public class mouseMove : MonoBehaviour
     private Canvas canvasRect;
     void Start()
     {
-        t = this.gameObject.transform.GetChild(0).GetComponent<RectTransform>();
+        t = this.transform.GetChild(0).GetComponent<RectTransform>();
         canvasRect = this.gameObject.GetComponent<Canvas>();
-        w = Screen.currentResolution.width;
-        h = Screen.currentResolution.height;
+        w = Screen.width;
+        h = Screen.height;
         Cursor.visible = false;
     }
 

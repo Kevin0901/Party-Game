@@ -43,7 +43,7 @@ public class ChoosePlayer : MonoBehaviour
             {
                 Joycheck("2");
             }
-            else if (Input.GetKeyDown(KeyCode.Joystick3Button2))
+            else if (Input.GetKeyDown(KeyCode.M) || Input.GetKeyDown(KeyCode.Joystick3Button2))
             {
                 Joycheck("3");
             }
