@@ -24,7 +24,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5089350066063027884}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -260.19092, y: 275.9348, z: -171.24274}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
@@ -51,4 +51,8 @@ MonoBehaviour:
   Hermisboots: {fileID: 4724864687551380524, guid: 6ab5cb4352fb7264aba684e7aa11358d,
     type: 3}
   Phoneixfeather: {fileID: 2451069246392572101, guid: 60067f4b0a0ede644a6453a0181e7f49,
+    type: 3}
+  Medusaeye: {fileID: 4376272004297627844, guid: 181b1d626e3a46545b9b464988cb89fb,
+    type: 3}
+  PowerPotion: {fileID: 6590782013300049561, guid: 165963de02a44e1448dca437567dcaff,
     type: 3}

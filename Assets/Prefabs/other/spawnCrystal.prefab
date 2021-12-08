@@ -45,7 +45,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   spawnPrefabs: {fileID: 8017277022069749896, guid: 472eb70e64822ef4ea7d2df1e972f91e,
     type: 3}
-  startdelay: 30
+  startdelay: 5
   again: 30
   x1: -3
   x2: -37

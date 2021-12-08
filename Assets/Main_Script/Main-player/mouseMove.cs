@@ -13,8 +13,8 @@ public class mouseMove : MonoBehaviour
     {
         t = this.transform.GetChild(0).GetComponent<RectTransform>();
         canvasRect = this.gameObject.GetComponent<Canvas>();
-        w = Screen.width;
-        h = Screen.height;
+        w = this.GetComponent<RectTransform>().rect.width;
+        h = this.GetComponent<RectTransform>().rect.height;
         Cursor.visible = false;
     }
 

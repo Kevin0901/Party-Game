@@ -17,14 +17,14 @@ public class TimeManager : MonoBehaviour
     // Start is called before the first frame update
     void Awake()
     {
-        randomTime = Random.Range(120, 121);
-        currentTime = 0;
+        // randomTime = Random.Range(120, 121);
     }
     void Start()
     {
+        currentTime = 0;
         isChange = false;
         isEnd = false;
-        events = this.transform.GetChild(1).gameObject;
+        events = this.transform.Find("Event").gameObject;
         // redcastle = GameObject.Find("background(Clone)").transform.Find("RedCastle").gameObject;
         // bluecastle = GameObject.Find("background(Clone)").transform.Find("BlueCastle").gameObject;
     }
@@ -38,7 +38,7 @@ public class TimeManager : MonoBehaviour
         //     bluecastle = GameObject.Find("GameManager").GetComponent<PlayerManager>().blue;
         // }
         float lastTime = (randomTime - ((int)currentTime));
-        if (lastTime == 15)
+        if (lastTime == 15)  //如果剩15秒的話
         {
             StartCoroutine(EventNotice());
         }
@@ -122,9 +122,8 @@ public class TimeManager : MonoBehaviour
     }
     private IEnumerator EventNotice()
     {
-        // int randomEvent = Random.Range(4, 5);
         test += 1;
-        if(test == 5)
+        if (test == 5)
         {
             test = 1;
         }

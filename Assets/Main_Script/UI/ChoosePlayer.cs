@@ -232,7 +232,7 @@ public class ChoosePlayer : MonoBehaviour
         ChoosePlayerAnimator.SetBool("fadeout", false);
         GameObject.Find("LoadingCircle").transform.Find("Image").gameObject.SetActive(true);
         GameObject.Find("TranPageAnimation").transform.Find("Image").gameObject.SetActive(true);
-        yield return new WaitForSeconds(1.5f);
+        yield return new WaitForSeconds(1.75f);
         GameObject.Find("TranPageAnimation").transform.Find("Image").gameObject.SetActive(false);
         GameObject.Find("LoadingCircle").transform.Find("Image").gameObject.SetActive(false);
 

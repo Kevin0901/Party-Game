@@ -12,8 +12,8 @@ public class PlayerMovement : MonoBehaviour
 {
     private SpriteRenderer spriteRenderer;
     [Header("玩家參數")]
-    public PlayerState currentState;
-    public float speed;
+    [SerializeField] private PlayerState currentState;
+    [SerializeField] private float speed;
     [SerializeField] private int MaxHealth, CurHealth;
     [SerializeField] private float dir;
     public int attackDamage;
@@ -51,7 +51,7 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private GameObject[] canthrowitem;
     [Header("總玩家數")]
     public int allplayercount;
-    public GameObject deadscreen;
+    // public GameObject deadscreen;
     private UIState UI;
     private int getallinv = 0;
     private static int spriteNum = 0;
@@ -61,16 +61,16 @@ public class PlayerMovement : MonoBehaviour
     {
         spriteRenderer = this.GetComponent<SpriteRenderer>();
         health = this.GetComponentInChildren<health>();
+        animator = this.GetComponent<Animator>();
         health.maxH = MaxHealth;
+        orginspeed = speed;
     }
     void Start()
     {
         mouse = this.transform.parent.Find("mouseUI").gameObject;
         nextfire = 0;
-        orginspeed = speed;
         mrigibody = this.GetComponent<Rigidbody2D>();
-        animator = this.GetComponent<Animator>();
-        spawnUI();
+        // spawnUI();
     }
     private void OnEnable()
     {
@@ -418,65 +418,64 @@ public class PlayerMovement : MonoBehaviour
     {
         return inventorysign;
     }
-    void spawnUI()
-    {
-        switch (order)
-        {
-            case 1:
-                for (int i = 0; i < generateUI.Length; i++)
-                {
-                    GameObject resource = Instantiate(generateUI[i]);
-                    resource.transform.parent = GameObject.Find("P" + order + "UI").gameObject.transform;
-                    Canvas canvas = resource.GetComponent<Canvas>();
-                    canvas.renderMode = RenderMode.ScreenSpaceCamera;
-                    canvas.worldCamera = this.transform.GetChild(0).gameObject.GetComponent<Camera>();
-                    canvas.sortingLayerName = "UI";
-                    canvas.sortingOrder = 1;
-                }
-                UiandInventoryGet();
-                break;
-            case 2:
-                for (int i = 0; i < generateUI.Length; i++)
-                {
-                    GameObject resource = Instantiate(generateUI[i]);
-                    resource.transform.parent = GameObject.Find("P" + order + "UI").gameObject.transform;
-                    Canvas canvas = resource.GetComponent<Canvas>();
-                    canvas.renderMode = RenderMode.ScreenSpaceCamera;
-                    canvas.worldCamera = this.transform.GetChild(0).gameObject.GetComponent<Camera>();
-                    canvas.sortingLayerName = "UI";
-                    canvas.sortingOrder = 1;
-                }
-                UiandInventoryGet();
-                break;
-            case 3:
-                for (int i = 0; i < generateUI.Length; i++)
-                {
-                    GameObject resource = Instantiate(generateUI[i]);
-                    resource.transform.parent = GameObject.Find("P" + order + "UI").gameObject.transform;
-                    Canvas canvas = resource.GetComponent<Canvas>();
-                    canvas.renderMode = RenderMode.ScreenSpaceCamera;
-                    canvas.worldCamera = this.transform.GetChild(0).gameObject.GetComponent<Camera>();
-                    canvas.sortingLayerName = "UI";
-                    canvas.sortingOrder = 1;
-                }
-                UiandInventoryGet();
-                break;
-            case 4:
-                for (int i = 0; i < generateUI.Length; i++)
-                {
-                    GameObject resource = Instantiate(generateUI[i]);
-                    resource.transform.parent = GameObject.Find("P" + order + "UI").gameObject.transform;
-                    Canvas canvas = resource.GetComponent<Canvas>();
-                    canvas.renderMode = RenderMode.ScreenSpaceCamera;
-                    canvas.worldCamera = this.transform.GetChild(0).gameObject.GetComponent<Camera>();
-                    canvas.sortingLayerName = "UI";
-                    canvas.sortingOrder = 1;
-                }
-                UiandInventoryGet();
-                break;
-        }
-
-    }
+    // void spawnUI()
+    // {
+    //     switch (order)
+    //     {
+    //         case 1:
+    //             for (int i = 0; i < generateUI.Length; i++)
+    //             {
+    //                 GameObject resource = Instantiate(generateUI[i]);
+    //                 resource.transform.parent = GameObject.Find("P" + order + "UI").gameObject.transform;
+    //                 Canvas canvas = resource.GetComponent<Canvas>();
+    //                 canvas.renderMode = RenderMode.ScreenSpaceCamera;
+    //                 canvas.worldCamera = this.transform.GetChild(0).gameObject.GetComponent<Camera>();
+    //                 canvas.sortingLayerName = "UI";
+    //                 canvas.sortingOrder = 1;
+    //             }
+    //             UiandInventoryGet();
+    //             break;
+    //         case 2:
+    //             for (int i = 0; i < generateUI.Length; i++)
+    //             {
+    //                 GameObject resource = Instantiate(generateUI[i]);
+    //                 resource.transform.parent = GameObject.Find("P" + order + "UI").gameObject.transform;
+    //                 Canvas canvas = resource.GetComponent<Canvas>();
+    //                 canvas.renderMode = RenderMode.ScreenSpaceCamera;
+    //                 canvas.worldCamera = this.transform.GetChild(0).gameObject.GetComponent<Camera>();
+    //                 canvas.sortingLayerName = "UI";
+    //                 canvas.sortingOrder = 1;
+    //             }
+    //             UiandInventoryGet();
+    //             break;
+    //         case 3:
+    //             for (int i = 0; i < generateUI.Length; i++)
+    //             {
+    //                 GameObject resource = Instantiate(generateUI[i]);
+    //                 resource.transform.parent = GameObject.Find("P" + order + "UI").gameObject.transform;
+    //                 Canvas canvas = resource.GetComponent<Canvas>();
+    //                 canvas.renderMode = RenderMode.ScreenSpaceCamera;
+    //                 canvas.worldCamera = this.transform.GetChild(0).gameObject.GetComponent<Camera>();
+    //                 canvas.sortingLayerName = "UI";
+    //                 canvas.sortingOrder = 1;
+    //             }
+    //             UiandInventoryGet();
+    //             break;
+    //         case 4:
+    //             for (int i = 0; i < generateUI.Length; i++)
+    //             {
+    //                 GameObject resource = Instantiate(generateUI[i]);
+    //                 resource.transform.parent = GameObject.Find("P" + order + "UI").gameObject.transform;
+    //                 Canvas canvas = resource.GetComponent<Canvas>();
+    //                 canvas.renderMode = RenderMode.ScreenSpaceCamera;
+    //                 canvas.worldCamera = this.transform.GetChild(0).gameObject.GetComponent<Camera>();
+    //                 canvas.sortingLayerName = "UI";
+    //                 canvas.sortingOrder = 1;
+    //             }
+    //             UiandInventoryGet();
+    //             break;
+    //     }
+    // }
     void UiandInventoryGet()
     {
         UI = GameObject.Find("P" + order + "UI").GetComponent<UIState>();
@@ -510,8 +509,8 @@ public class PlayerMovement : MonoBehaviour
     }
     public void bornSet()
     {
-        GameObject time = Instantiate(timer, timer.transform.position, timer.transform.rotation);
-        time.transform.Find("Num").transform.Find("P" + order).gameObject.SetActive(true);
+        // GameObject time = Instantiate(timer, timer.transform.position, timer.transform.rotation);
+        timer.transform.Find("Num").Find("P" + order).gameObject.SetActive(true);
         // Canvas timecanvas = time.GetComponent<Canvas>();
         // timecanvas.renderMode = RenderMode.ScreenSpaceCamera;
         // timecanvas.worldCamera = this.transform.GetChild(0).gameObject.GetComponent<Camera>();
@@ -531,7 +530,6 @@ public class PlayerMovement : MonoBehaviour
             dir = -1f;
         }
         // GameObject mouse = Instantiate(v, v.transform.position, v.transform.rotation);
-
         if (int.Parse(joynum) == 0)
         {
             mouse.AddComponent<mouseMove>();
