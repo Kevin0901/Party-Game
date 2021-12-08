@@ -6,14 +6,16 @@ using UnityEngine.UI;
 using TMPro;
 public class TimeManager : MonoBehaviour
 {
-    public float currentTime, randomTime;
+    public float currentTime;
+    public int randomTime;
     public bool isChange;
     public TextMeshProUGUI countdownDisplay;
     private string game;
     private GameObject events;
     public GameObject redcastle, bluecastle;
-    private bool winplay = false, isEnd;
-    private int test = 0;
+    private bool winplay, isEnd;
+    private float oneSec;
+    private int test = 0, lastTime;
     // Start is called before the first frame update
     void Awake()
     {
@@ -24,11 +26,9 @@ public class TimeManager : MonoBehaviour
         currentTime = 0;
         isChange = false;
         isEnd = false;
+        winplay = false;
         events = this.transform.Find("Event").gameObject;
-        // redcastle = GameObject.Find("background(Clone)").transform.Find("RedCastle").gameObject;
-        // bluecastle = GameObject.Find("background(Clone)").transform.Find("BlueCastle").gameObject;
     }
-
     // Update is called once per frame
     void Update()
     {
@@ -37,22 +37,27 @@ public class TimeManager : MonoBehaviour
         //     redcastle = GameObject.Find("GameManager").GetComponent<PlayerManager>().red;
         //     bluecastle = GameObject.Find("GameManager").GetComponent<PlayerManager>().blue;
         // }
-        float lastTime = (randomTime - ((int)currentTime));
-        if (lastTime == 15)  //如果剩15秒的話
-        {
-            StartCoroutine(EventNotice());
-        }
-        else if (lastTime <= 5 && lastTime > 0)//倒數計時
-        {
-            transform.GetChild(0).gameObject.SetActive(true);
-            startgame(lastTime);
-        }
-        else if (((int)currentTime) == randomTime && !isChange && !isEnd)//如果時間到了
-        {
-            StartCoroutine(setPAPA());
-            isChange = true;
-        }
         currentTime += Time.deltaTime;
+        oneSec += Time.deltaTime;
+        if (oneSec >= 1f)
+        {
+            lastTime = randomTime - (int)oneSec;
+            if (lastTime == 15)  //如果剩15秒的話
+            {
+                StartCoroutine(EventNotice());
+            }
+            else if (lastTime <= 5 && lastTime > 0)//剩五秒的話，倒數計時
+            {
+                transform.Find("CountDown").gameObject.SetActive(true);
+                startArenaGame(lastTime);
+            }
+            else if (((int)currentTime) == randomTime && !isChange && !isEnd)//如果時間到了
+            {
+                StartCoroutine(setPAPA());
+                isChange = true;
+            }
+            oneSec = 0;
+        }
 
         if (redcastle != null && bluecastle != null)
         {
@@ -86,41 +91,7 @@ public class TimeManager : MonoBehaviour
         }
 
     }
-    public void ExitGameToUI()
-    {
-        Destroy(GameObject.Find("GameManager"));
-        SceneManager.LoadScene("UI");
-    }
-    public void ExitGame()
-    {
-        Application.Quit();
-    }
-    private void startgame(float time)//倒數計時
-    {
-        countdownDisplay.text = ((int)time).ToString();
-    }
-
-    private IEnumerator bluewin()
-    {
-        Animator animator = events.transform.Find("Win").GetComponent<Animator>();
-        animator.SetBool("BlueWin", true);
-        yield return new WaitForSeconds(0.1f);
-        animator.SetBool("BlueWin", false);
-        winplay = true;
-        // yield return new WaitForSeconds(0.9f);
-        // events.SetActive(false);
-    }
-    private IEnumerator redwin()
-    {
-        Animator animator = events.transform.Find("Win").GetComponent<Animator>();
-        animator.SetBool("RedWin", true);
-        yield return new WaitForSeconds(0.1f);
-        animator.SetBool("RedWin", false);
-        winplay = true;
-        // yield return new WaitForSeconds(0.9f);
-        // events.SetActive(false);
-    }
-    private IEnumerator EventNotice()
+    private IEnumerator EventNotice()//如果剩15秒的話
     {
         test += 1;
         if (test == 5)
@@ -136,7 +107,35 @@ public class TimeManager : MonoBehaviour
             events.transform.GetChild(test).gameObject.SetActive(false);
         }
     }
-
+    private void startArenaGame(int time)//剩五秒的話，倒數計時
+    {
+        countdownDisplay.text = time.ToString();
+    }
+    public void ExitGameToUI()
+    {
+        Destroy(GameObject.Find("GameManager"));
+        SceneManager.LoadScene("UI");
+    }
+    public void ExitGame()
+    {
+        Application.Quit();
+    }
+    private IEnumerator bluewin()
+    {
+        Animator animator = events.transform.Find("Win").GetComponent<Animator>();
+        animator.SetBool("BlueWin", true);
+        yield return null;
+        animator.SetBool("BlueWin", false);
+        winplay = true;
+    }
+    private IEnumerator redwin()
+    {
+        Animator animator = events.transform.Find("Win").GetComponent<Animator>();
+        animator.SetBool("RedWin", true);
+        yield return null;
+        animator.SetBool("RedWin", false);
+        winplay = true;
+    }
     private IEnumerator setPAPA()//開始加入子物件
     {
         events.SetActive(false);
@@ -171,6 +170,4 @@ public class TimeManager : MonoBehaviour
         SceneManager.SetActiveScene(SceneManager.GetSceneByName("FightScene"));
         this.gameObject.SetActive(false);
     }
-
-
 }
