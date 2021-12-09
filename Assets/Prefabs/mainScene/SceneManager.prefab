@@ -521,7 +521,7 @@ MonoBehaviour:
     m_SelectedTrigger: Selected
     m_DisabledTrigger: Disabled
   m_Interactable: 1
-  m_TargetGraphic: {fileID: 4200571721626355946}
+  m_TargetGraphic: {fileID: 0}
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
@@ -964,13 +964,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 4200571722442102564}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 70ad327664a4ad94aae79dbd0b9a1cf2, type: 3}
+  m_Script: {fileID: 11500000, guid: a2658dd8a5b5f1b438698237a99b40e1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   currentTime: 0
   randomTime: 20
   isChange: 0
-  countdownDisplay: {fileID: 4047607362522522338}
+  countdownDisplay: {fileID: 0}
   redcastle: {fileID: 0}
   bluecastle: {fileID: 0}
 --- !u!1 &4200571722507233548

@@ -3322,8 +3322,15 @@ MonoBehaviour:
   randomTime: 0
   isChange: 0
   countdownDisplay: {fileID: 0}
+  game: 
+  events: {fileID: 0}
   redcastle: {fileID: 0}
   bluecastle: {fileID: 0}
+  winplay: 0
+  isEnd: 0
+  oneSec: 0
+  test: 0
+  lastTime: 0
 --- !u!1 &1581304090262430929
 GameObject:
   m_ObjectHideFlags: 0

@@ -51,8 +51,8 @@ public class REsetGameObject : MonoBehaviour
             c.SetActive(true);
             if (c.name == "MainGameManager2")
             {
-                c.GetComponent<TimeManager>().randomTime += Random.Range(90, 91);
-                c.GetComponent<TimeManager>().isChange = false;
+                c.GetComponent<GameControl>().randomTime += Random.Range(90, 91);
+                c.GetComponent<GameControl>().isChange = false;
             }
             if (c.layer == 9)
             {

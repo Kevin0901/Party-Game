@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using TMPro;
-public class TimeManager : MonoBehaviour
+public class GameControl : MonoBehaviour
 {
     public float currentTime;
     public int randomTime;
@@ -17,10 +17,6 @@ public class TimeManager : MonoBehaviour
     private float oneSec;
     private int test = 0, lastTime;
     // Start is called before the first frame update
-    void Awake()
-    {
-        // randomTime = Random.Range(120, 121);
-    }
     void Start()
     {
         currentTime = 0;
@@ -140,7 +136,7 @@ public class TimeManager : MonoBehaviour
     {
         events.SetActive(false);
         GameObject.Find("MainBlackScreen").GetComponent<Animator>().SetBool("fadein", true);
-        yield return new WaitForSeconds(0.1f);
+        yield return null;
         GameObject.Find("MainBlackScreen").GetComponent<Animator>().SetBool("fadein", false);
         yield return new WaitForSeconds(1f);
         GameObject[] allObjects = UnityEngine.Object.FindObjectsOfType<GameObject>();

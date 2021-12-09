@@ -7,12 +7,12 @@ using TMPro;
 
 public class Timer : MonoBehaviour
 {
-    private TimeManager t;
+    private GameControl t;
     public Text currenttimeText;
     // Start is called before the first frame update
     void Start()
     {
-        t = GameObject.Find("SceneManager").GetComponent<TimeManager>();
+        t = GameObject.Find("SceneManager").GetComponent<GameControl>();
     }
 
     // Update is called once per frame
