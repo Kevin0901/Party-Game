@@ -26,6 +26,7 @@ public class PlayerManager : MonoBehaviour
     public GameObject RedCastel, BlueCastel, red, blue;
     private float h, w, proportion_W, proportion_H, factor;
     public string EventGame;
+    public string test2;
     void Update()
     {
         // Scene scene = SceneManager.GetActiveScene();
