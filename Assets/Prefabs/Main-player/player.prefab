@@ -319,6 +319,7 @@ GameObject:
   - component: {fileID: 8151292538965709613}
   - component: {fileID: 5157922667542157581}
   - component: {fileID: 6393788232031153227}
+  - component: {fileID: 1880484670933552159}
   m_Layer: 10
   m_Name: player
   m_TagString: red
@@ -484,11 +485,11 @@ MonoBehaviour:
   fireRate: 0.5
   RedspawnPoint: {x: -20, y: -35, z: 0}
   BluespawnPoint: {x: -20, y: 35, z: 0}
-  playercamera: {fileID: 0}
   joynum: 0
   order: 0
-  v: {fileID: 8344371661837139790, guid: ac999708c9895b64483fe0cc451df562, type: 3}
-  timer: {fileID: 3526286321342744895, guid: 5194d746700a82a40b720e2945d2fb87, type: 3}
+  playercamera: {fileID: 0}
+  mouse: {fileID: 0}
+  timer: {fileID: 0}
   phfeather: 0
   phfeatheruse: 0
   uiInventory: {fileID: 0}
@@ -521,7 +522,6 @@ MonoBehaviour:
   - {fileID: 6590782013300049561, guid: 037f6ef8933acf644b474ce5137aa935, type: 3}
   - {fileID: 4376272004297627844, guid: 181b1d626e3a46545b9b464988cb89fb, type: 3}
   allplayercount: 0
-  deadscreen: {fileID: 0}
 --- !u!114 &6393788232031153227
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -535,6 +535,32 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Enemyteam: 
+--- !u!114 &1880484670933552159
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8151292538965709607}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f9f7fc7253bf1424f838c7c5c2d1226f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ResourceUI: {fileID: 0}
+  BuildUI: {fileID: 0}
+  MonsterUI: {fileID: 0}
+  InventoryUI: {fileID: 0}
+  NoticeUI: {fileID: 0}
+  bcount: 0
+  mcount: 0
+  player: {fileID: 8151292538965709607}
+  playercamera: {fileID: 0}
+  getall: 0
+  b: 0
+  m: 0
+  bx: 0
+  mx: 0
 --- !u!1001 &3266831988797644657
 PrefabInstance:
   m_ObjectHideFlags: 0
