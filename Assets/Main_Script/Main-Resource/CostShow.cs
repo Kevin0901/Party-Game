@@ -15,8 +15,7 @@ public class CostShow : MonoBehaviour
     }
     void Start()
     {
-        parentobject = this.transform.parent.transform.parent.transform.parent.transform.parent.transform.parent.gameObject;
-
+        parentobject = this.transform.parent.parent.parent.parent.parent.GetChild(0).gameObject;
         if (parentobject.GetComponent<UIState>().b == 1)
         {
             costarray = gameObject.transform.parent.GetComponent<TowerBtn>().ObjectPrefab.GetComponent<TowerData>().CostArray;

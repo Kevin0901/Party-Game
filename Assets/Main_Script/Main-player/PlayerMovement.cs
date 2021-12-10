@@ -70,6 +70,7 @@ public class PlayerMovement : MonoBehaviour
         mouse = this.transform.parent.Find("mouseUI").gameObject;
         nextfire = 0;
         mrigibody = this.GetComponent<Rigidbody2D>();
+        UiandInventoryGet();
         // spawnUI();
     }
     private void OnEnable()
@@ -216,48 +217,62 @@ public class PlayerMovement : MonoBehaviour
     {
         if (getallinv == 1)
         {
-            if (inventorysign.GetComponent<InventorySign>().signitemname() == canthrowitem[0].name)
+            for (int i = 0; i < canthrowitem.Length; i++)
             {
-                int shoottimes = inventorysign.GetComponent<InventorySign>().signitemamount();
-                if (Input.GetAxisRaw("R2-" + joynum) > 0 && Time.time > nextfire)
+                if (inventorysign.GetComponent<InventorySign>().signitemname() == canthrowitem[i].name)
                 {
-                    if (shoottimes > 0)
+                    int shoottimes = inventorysign.GetComponent<InventorySign>().signitemamount();
+                    if (int.Parse(joynum) != 0)
                     {
-                        GameObject throwI = Instantiate(canthrowitem[0], transform.position, canthrowitem[0].transform.rotation);
-                        throwI.transform.SetParent(this.transform);
-                        throwI.AddComponent<item_MoveMovementGamepad>();
-                        nextfire = Time.time + fireRate;
-                        inventory.RemoveItem(new Item { itemType = Item.ItemType.Firehell, amount = 1 });
+                        if ((Input.GetAxisRaw("R2-" + joynum) > 0) && Time.time > nextfire)
+                        {
+                            if (shoottimes > 0)
+                            {
+                                GameObject throwI = Instantiate(canthrowitem[i], transform.position, canthrowitem[i].transform.rotation);
+                                throwI.transform.SetParent(this.transform);
+                                throwI.AddComponent<item_MoveMovementGamepad>();
+                                nextfire = Time.time + fireRate;
+                                switch (i)
+                                {
+                                    case 0:
+                                        inventory.RemoveItem(new Item { itemType = Item.ItemType.Firehell, amount = 1 });
+                                        break;
+                                    case 1:
+                                        inventory.RemoveItem(new Item { itemType = Item.ItemType.TransPotion, amount = 1 });
+                                        break;
+                                    case 2:
+                                        inventory.RemoveItem(new Item { itemType = Item.ItemType.Medusaeye, amount = 1 });
+                                        break;
+                                }
+
+                            }
+                        }
                     }
-                }
-            }
-            else if (inventorysign.GetComponent<InventorySign>().signitemname() == canthrowitem[1].name)
-            {
-                int shoottimes = inventorysign.GetComponent<InventorySign>().signitemamount();
-                if (Input.GetAxisRaw("R2-" + joynum) > 0 && Time.time > nextfire)
-                {
-                    if (shoottimes > 0)
+                    else
                     {
-                        GameObject throwI = Instantiate(canthrowitem[1], transform.position, canthrowitem[1].transform.rotation);
-                        throwI.transform.SetParent(this.transform);
-                        throwI.AddComponent<item_MoveMovementGamepad>();
-                        nextfire = Time.time + fireRate;
-                        inventory.RemoveItem(new Item { itemType = Item.ItemType.TransPotion, amount = 1 });
-                    }
-                }
-            }
-            else if (inventorysign.GetComponent<InventorySign>().signitemname() == canthrowitem[2].name)
-            {
-                int shoottimes = inventorysign.GetComponent<InventorySign>().signitemamount();
-                if (Input.GetAxisRaw("R2-" + joynum) > 0 && Time.time > nextfire)
-                {
-                    if (shoottimes > 0)
-                    {
-                        GameObject throwI = Instantiate(canthrowitem[2], transform.position, canthrowitem[2].transform.rotation);
-                        throwI.transform.SetParent(this.transform);
-                        throwI.AddComponent<item_MoveMovementGamepad>();
-                        nextfire = Time.time + fireRate;
-                        inventory.RemoveItem(new Item { itemType = Item.ItemType.Medusaeye, amount = 1 });
+                        if (Input.GetMouseButton(0) && Time.time > nextfire)
+                        {
+                            if (shoottimes > 0)
+                            {
+                                GameObject throwI = Instantiate(canthrowitem[i], transform.position, canthrowitem[i].transform.rotation);
+                                throwI.transform.SetParent(this.transform);
+                                throwI.AddComponent<item_MoveMovementGamepad>();
+                                nextfire = Time.time + fireRate;
+                                switch (i)
+                                {
+                                    case 0:
+                                        inventory.RemoveItem(new Item { itemType = Item.ItemType.Firehell, amount = 1 });
+                                        break;
+                                    case 1:
+                                        inventory.RemoveItem(new Item { itemType = Item.ItemType.TransPotion, amount = 1 });
+                                        break;
+                                    case 2:
+                                        inventory.RemoveItem(new Item { itemType = Item.ItemType.Medusaeye, amount = 1 });
+                                        break;
+                                }
+
+                            }
+                        }
                     }
                 }
             }
@@ -265,77 +280,155 @@ public class PlayerMovement : MonoBehaviour
     }
     void PlayerBulid()
     {
-        if (int.Parse(joynum) != 0 && Input.GetAxisRaw("L2-" + joynum) > 0)
+        if (int.Parse(joynum) != 0)
         {
-            if (UI.b != 0 && interritory == 1 && intower == 0)
+            if (Input.GetAxisRaw("L2-" + joynum) > 0)
             {
-                if (Time.time > nextfire && this.tag == "red")
+                if (UI.b != 0 && interritory == 1 && intower == 0)
                 {
-                    if (ResourceManager.Instance.RedCanAfford(towerlist[UI.bx].GetComponent<TowerData>().CostArray) != false)
+                    if (Time.time > nextfire && this.tag == "red")
                     {
-                        ResourceManager.Instance.RedSpendResources(towerlist[UI.bx].GetComponent<TowerData>().CostArray);
-                        towerlist[UI.bx].gameObject.tag = this.tag;
-                        Instantiate(towerlist[UI.bx], this.transform.position, Quaternion.identity);
-                        nextfire = Time.time + fireRate;
+                        if (ResourceManager.Instance.RedCanAfford(towerlist[UI.bx].GetComponent<TowerData>().CostArray) != false)
+                        {
+                            ResourceManager.Instance.RedSpendResources(towerlist[UI.bx].GetComponent<TowerData>().CostArray);
+                            towerlist[UI.bx].gameObject.tag = this.tag;
+                            Instantiate(towerlist[UI.bx], this.transform.position, Quaternion.identity);
+                            nextfire = Time.time + fireRate;
+                        }
+                        else
+                        {
+                            StartCoroutine(ResuorceNotEnoughShow());
+                        }
                     }
-                    else
+                    else if (Time.time > nextfire && this.tag == "blue")
                     {
-                        StartCoroutine(ResuorceNotEnoughShow());
+                        if (ResourceManager.Instance.BlueCanAfford(towerlist[UI.bx].GetComponent<TowerData>().CostArray) != false)
+                        {
+                            ResourceManager.Instance.BlueSpendResources(towerlist[UI.bx].GetComponent<TowerData>().CostArray);
+                            towerlist[UI.bx].gameObject.tag = this.tag;
+                            Instantiate(towerlist[UI.bx], this.transform.position, Quaternion.identity);
+                            nextfire = Time.time + fireRate;
+                        }
+                        else
+                        {
+                            StartCoroutine(ResuorceNotEnoughShow());
+                        }
                     }
                 }
-                else if (Time.time > nextfire && this.tag == "blue")
+                else if (UI.m != 0 && interritory == 1)
                 {
-                    if (ResourceManager.Instance.BlueCanAfford(towerlist[UI.bx].GetComponent<TowerData>().CostArray) != false)
+                    if (Time.time > nextfire && this.tag == "red")
                     {
-                        ResourceManager.Instance.BlueSpendResources(towerlist[UI.bx].GetComponent<TowerData>().CostArray);
-                        towerlist[UI.bx].gameObject.tag = this.tag;
-                        Instantiate(towerlist[UI.bx], this.transform.position, Quaternion.identity);
-                        nextfire = Time.time + fireRate;
+                        if (ResourceManager.Instance.RedCanAfford(monsterlist[UI.mx].GetComponent<monsterMove>().CostArray) != false)
+                        {
+                            ResourceManager.Instance.RedSpendResources(monsterlist[UI.mx].GetComponent<monsterMove>().CostArray);
+                            monsterlist[UI.mx].gameObject.tag = this.tag;
+                            GameObject monster = Instantiate(monsterlist[UI.mx], this.transform.position, Quaternion.identity);
+                            monster.transform.position += new Vector3(0, 2, 0);
+                            nextfire = Time.time + fireRate;
+                        }
+                        else
+                        {
+                            StartCoroutine(ResuorceNotEnoughShow());
+                        }
                     }
-                    else
+                    else if (Time.time > nextfire && this.tag == "blue")
                     {
-                        StartCoroutine(ResuorceNotEnoughShow());
+                        if (ResourceManager.Instance.BlueCanAfford(monsterlist[UI.mx].GetComponent<monsterMove>().CostArray) != false)
+                        {
+                            ResourceManager.Instance.BlueSpendResources(monsterlist[UI.mx].GetComponent<monsterMove>().CostArray);
+                            monsterlist[UI.mx].gameObject.tag = this.tag;
+                            GameObject monster = Instantiate(monsterlist[UI.mx], this.transform.position, Quaternion.identity);
+                            monster.transform.position += new Vector3(0, -2, 0);
+                            nextfire = Time.time + fireRate;
+                        }
+                        else
+                        {
+                            StartCoroutine(ResuorceNotEnoughShow());
+                        }
                     }
                 }
-            }
-            else if (UI.m != 0 && interritory == 1)
-            {
-                if (Time.time > nextfire && this.tag == "red")
+                else
                 {
-                    if (ResourceManager.Instance.RedCanAfford(monsterlist[UI.mx].GetComponent<monsterMove>().CostArray) != false)
-                    {
-                        ResourceManager.Instance.RedSpendResources(monsterlist[UI.mx].GetComponent<monsterMove>().CostArray);
-                        monsterlist[UI.mx].gameObject.tag = this.tag;
-                        GameObject monster = Instantiate(monsterlist[UI.mx], this.transform.position, Quaternion.identity);
-                        monster.transform.position += new Vector3(0, 2, 0);
-                        nextfire = Time.time + fireRate;
-                    }
-                    else
-                    {
-                        StartCoroutine(ResuorceNotEnoughShow());
-                    }
+                    StartCoroutine(Cantbuildshow());
                 }
-                else if (Time.time > nextfire && this.tag == "blue")
-                {
-                    if (ResourceManager.Instance.BlueCanAfford(monsterlist[UI.mx].GetComponent<monsterMove>().CostArray) != false)
-                    {
-                        ResourceManager.Instance.BlueSpendResources(monsterlist[UI.mx].GetComponent<monsterMove>().CostArray);
-                        monsterlist[UI.mx].gameObject.tag = this.tag;
-                        GameObject monster = Instantiate(monsterlist[UI.mx], this.transform.position, Quaternion.identity);
-                        monster.transform.position += new Vector3(0, -2, 0);
-                        nextfire = Time.time + fireRate;
-                    }
-                    else
-                    {
-                        StartCoroutine(ResuorceNotEnoughShow());
-                    }
-                }
-            }
-            else
-            {
-                StartCoroutine(Cantbuildshow());
             }
         }
+        else
+        {
+            if (Input.GetKey(KeyCode.Return))
+            {
+                if (UI.b != 0 && interritory == 1 && intower == 0)
+                {
+                    if (Time.time > nextfire && this.tag == "red")
+                    {
+                        if (ResourceManager.Instance.RedCanAfford(towerlist[UI.bx].GetComponent<TowerData>().CostArray) != false)
+                        {
+                            ResourceManager.Instance.RedSpendResources(towerlist[UI.bx].GetComponent<TowerData>().CostArray);
+                            towerlist[UI.bx].gameObject.tag = this.tag;
+                            Instantiate(towerlist[UI.bx], this.transform.position, Quaternion.identity);
+                            nextfire = Time.time + fireRate;
+                        }
+                        else
+                        {
+                            StartCoroutine(ResuorceNotEnoughShow());
+                        }
+                    }
+                    else if (Time.time > nextfire && this.tag == "blue")
+                    {
+                        if (ResourceManager.Instance.BlueCanAfford(towerlist[UI.bx].GetComponent<TowerData>().CostArray) != false)
+                        {
+                            ResourceManager.Instance.BlueSpendResources(towerlist[UI.bx].GetComponent<TowerData>().CostArray);
+                            towerlist[UI.bx].gameObject.tag = this.tag;
+                            Instantiate(towerlist[UI.bx], this.transform.position, Quaternion.identity);
+                            nextfire = Time.time + fireRate;
+                        }
+                        else
+                        {
+                            StartCoroutine(ResuorceNotEnoughShow());
+                        }
+                    }
+                }
+                else if (UI.m != 0 && interritory == 1)
+                {
+                    if (Time.time > nextfire && this.tag == "red")
+                    {
+                        if (ResourceManager.Instance.RedCanAfford(monsterlist[UI.mx].GetComponent<monsterMove>().CostArray) != false)
+                        {
+                            ResourceManager.Instance.RedSpendResources(monsterlist[UI.mx].GetComponent<monsterMove>().CostArray);
+                            monsterlist[UI.mx].gameObject.tag = this.tag;
+                            GameObject monster = Instantiate(monsterlist[UI.mx], this.transform.position, Quaternion.identity);
+                            monster.transform.position += new Vector3(0, 2, 0);
+                            nextfire = Time.time + fireRate;
+                        }
+                        else
+                        {
+                            StartCoroutine(ResuorceNotEnoughShow());
+                        }
+                    }
+                    else if (Time.time > nextfire && this.tag == "blue")
+                    {
+                        if (ResourceManager.Instance.BlueCanAfford(monsterlist[UI.mx].GetComponent<monsterMove>().CostArray) != false)
+                        {
+                            ResourceManager.Instance.BlueSpendResources(monsterlist[UI.mx].GetComponent<monsterMove>().CostArray);
+                            monsterlist[UI.mx].gameObject.tag = this.tag;
+                            GameObject monster = Instantiate(monsterlist[UI.mx], this.transform.position, Quaternion.identity);
+                            monster.transform.position += new Vector3(0, -2, 0);
+                            nextfire = Time.time + fireRate;
+                        }
+                        else
+                        {
+                            StartCoroutine(ResuorceNotEnoughShow());
+                        }
+                    }
+                }
+                else
+                {
+                    StartCoroutine(Cantbuildshow());
+                }
+            }
+        }
+
     }
     void PlayerItemUse()
     {
@@ -393,16 +486,16 @@ public class PlayerMovement : MonoBehaviour
 
     private IEnumerator Cantbuildshow()
     {
-        GameObject.Find("P" + order + "UI").transform.GetChild(5).transform.GetChild(1).gameObject.SetActive(true);
+        this.GetComponent<UIState>().NoticeUI.transform.GetChild(1).gameObject.SetActive(true);
         yield return new WaitForSeconds(2);
-        GameObject.Find("P" + order + "UI").transform.GetChild(5).transform.GetChild(1).gameObject.SetActive(false);
+        this.GetComponent<UIState>().NoticeUI.transform.GetChild(1).gameObject.SetActive(false);
     }
 
     private IEnumerator ResuorceNotEnoughShow()
     {
-        GameObject.Find("P" + order + "UI").transform.GetChild(5).transform.GetChild(0).gameObject.SetActive(true);
+        this.GetComponent<UIState>().NoticeUI.transform.GetChild(0).gameObject.SetActive(true);
         yield return new WaitForSeconds(2);
-        GameObject.Find("P" + order + "UI").transform.GetChild(5).transform.GetChild(0).gameObject.SetActive(false);
+        this.GetComponent<UIState>().NoticeUI.transform.GetChild(0).gameObject.SetActive(false);
     }
 
     private IEnumerator AttackCo()
@@ -478,10 +571,7 @@ public class PlayerMovement : MonoBehaviour
     // }
     void UiandInventoryGet()
     {
-        UI = GameObject.Find("P" + order + "UI").GetComponent<UIState>();
-        UI.enabled = true;
-        UI.player = this.gameObject;
-        UI.playercamera = this.transform.GetChild(0).gameObject.GetComponent<Camera>();
+        UI = this.GetComponent<UIState>();
         UI.GetGameobject();
         inventory = new Inventory();
         uiInventory = UI.GetInventory();

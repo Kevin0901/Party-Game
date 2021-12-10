@@ -756,66 +756,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1660b27440bf7ea4fb00cfbb96decc83, type: 3}
---- !u!1 &659454801
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 659454802}
-  - component: {fileID: 659454803}
-  m_Layer: 0
-  m_Name: P1UI
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &659454802
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 659454801}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 16.244617, y: -1.7720287, z: -5.5048304}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 22
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &659454803
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 659454801}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f9f7fc7253bf1424f838c7c5c2d1226f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  hover: {fileID: 0}
-  ResourceUI: {fileID: 0}
-  BuildUI: {fileID: 0}
-  MonsterUI: {fileID: 0}
-  InventoryUI: {fileID: 0}
-  gamemanager: {fileID: 6140933853557219216, guid: 23c74b1f96595874493f143ba095f122,
-    type: 3}
-  NoticeUI: {fileID: 0}
-  bcount: 0
-  mcount: 0
-  player: {fileID: 0}
-  playercamera: {fileID: 0}
-  getall: 0
-  b: 0
-  m: 0
-  bx: 0
-  mx: 0
 --- !u!1001 &707586703
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1231,7 +1171,7 @@ RectTransform:
   - {fileID: 1038282694}
   - {fileID: 2084757387}
   m_Father: {fileID: 0}
-  m_RootOrder: 27
+  m_RootOrder: 23
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -1910,66 +1850,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!1 &1428070618
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1428070619}
-  - component: {fileID: 1428070620}
-  m_Layer: 0
-  m_Name: P4UI
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1428070619
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1428070618}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 16.244617, y: -1.7720287, z: -5.5048304}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 25
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1428070620
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1428070618}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f9f7fc7253bf1424f838c7c5c2d1226f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  hover: {fileID: 0}
-  ResourceUI: {fileID: 0}
-  BuildUI: {fileID: 0}
-  MonsterUI: {fileID: 0}
-  InventoryUI: {fileID: 0}
-  gamemanager: {fileID: 6140933853557219216, guid: 23c74b1f96595874493f143ba095f122,
-    type: 3}
-  NoticeUI: {fileID: 0}
-  bcount: 0
-  mcount: 0
-  player: {fileID: 0}
-  playercamera: {fileID: 0}
-  getall: 0
-  b: 0
-  m: 0
-  bx: 0
-  mx: 0
 --- !u!1 &1448359485
 GameObject:
   m_ObjectHideFlags: 0
@@ -2565,66 +2445,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!1 &1840543611
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1840543612}
-  - component: {fileID: 1840543613}
-  m_Layer: 0
-  m_Name: P3UI
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1840543612
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1840543611}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 16.244617, y: -1.7720287, z: -5.5048304}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 24
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1840543613
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1840543611}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f9f7fc7253bf1424f838c7c5c2d1226f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  hover: {fileID: 0}
-  ResourceUI: {fileID: 0}
-  BuildUI: {fileID: 0}
-  MonsterUI: {fileID: 0}
-  InventoryUI: {fileID: 0}
-  gamemanager: {fileID: 6140933853557219216, guid: 23c74b1f96595874493f143ba095f122,
-    type: 3}
-  NoticeUI: {fileID: 0}
-  bcount: 0
-  mcount: 0
-  player: {fileID: 0}
-  playercamera: {fileID: 0}
-  getall: 0
-  b: 0
-  m: 0
-  bx: 0
-  mx: 0
 --- !u!1001 &1972723850
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2694,66 +2514,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f7bd484b7397f8a4299aa8cf14f9364b, type: 3}
---- !u!1 &2004653265
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 2004653266}
-  - component: {fileID: 2004653267}
-  m_Layer: 0
-  m_Name: P2UI
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &2004653266
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2004653265}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 16.244617, y: -1.7720287, z: -5.5048304}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 23
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &2004653267
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2004653265}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f9f7fc7253bf1424f838c7c5c2d1226f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  hover: {fileID: 0}
-  ResourceUI: {fileID: 0}
-  BuildUI: {fileID: 0}
-  MonsterUI: {fileID: 0}
-  InventoryUI: {fileID: 0}
-  gamemanager: {fileID: 6140933853557219216, guid: 23c74b1f96595874493f143ba095f122,
-    type: 3}
-  NoticeUI: {fileID: 0}
-  bcount: 0
-  mcount: 0
-  player: {fileID: 0}
-  playercamera: {fileID: 0}
-  getall: 0
-  b: 0
-  m: 0
-  bx: 0
-  mx: 0
 --- !u!1001 &2032669441
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3015,7 +2775,7 @@ Transform:
   m_Children:
   - {fileID: 1535520642}
   m_Father: {fileID: 0}
-  m_RootOrder: 26
+  m_RootOrder: 22
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2084757386
 GameObject:
@@ -3947,7 +3707,7 @@ PrefabInstance:
     - target: {fileID: 4200571722442102560, guid: 86497503d8e98ee45bcda3451ce6fb7e,
         type: 3}
       propertyPath: m_RootOrder
-      value: 28
+      value: 24
       objectReference: {fileID: 0}
     - target: {fileID: 4200571722442102560, guid: 86497503d8e98ee45bcda3451ce6fb7e,
         type: 3}
@@ -4037,6 +3797,11 @@ PrefabInstance:
     - target: {fileID: 4200571722442102560, guid: 86497503d8e98ee45bcda3451ce6fb7e,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4200571722442102561, guid: 86497503d8e98ee45bcda3451ce6fb7e,
+        type: 3}
+      propertyPath: m_Enabled
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4200571722442102564, guid: 86497503d8e98ee45bcda3451ce6fb7e,

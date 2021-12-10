@@ -5,12 +5,12 @@ using UnityEngine;
 public class UIState : MonoBehaviour
 {
     public static UIState Instance;
-    [SerializeField] private GameObject hover;
+    // [SerializeField] private GameObject hover;
     [SerializeField] private GameObject ResourceUI;
     [SerializeField] private GameObject BuildUI;
     [SerializeField] private GameObject MonsterUI;
     [SerializeField] private GameObject InventoryUI;
-    [SerializeField] private GameObject gamemanager;
+    // [SerializeField] private GameObject gamemanager;
 
     public GameObject NoticeUI;
     public int bcount;
@@ -50,16 +50,16 @@ public class UIState : MonoBehaviour
                     {
                         MonsterUI.SetActive(false);
                         BuildUI.SetActive(true);
-                        hover.SetActive(false);
-                        Hover.mhover = 0;
+                        // hover.SetActive(false);
+                        // Hover.mhover = 0;
                         m = 0;
                         b = 1;
                     }
                     else
                     {
                         BuildUI.SetActive(false);
-                        hover.SetActive(false);
-                        Hover.bhover = 0;
+                        // hover.SetActive(false);
+                        // Hover.bhover = 0;
                         b = 0;
                         escc = 0;
                     }
@@ -70,16 +70,16 @@ public class UIState : MonoBehaviour
                     {
                         MonsterUI.SetActive(true);
                         BuildUI.SetActive(false);
-                        hover.SetActive(false);
-                        Hover.bhover = 0;
+                        // hover.SetActive(false);
+                        // Hover.bhover = 0;
                         m = 1;
                         b = 0;
                     }
                     else
                     {
                         MonsterUI.SetActive(false);
-                        hover.SetActive(false);
-                        Hover.mhover = 0;
+                        // hover.SetActive(false);
+                        // Hover.mhover = 0;
                         m = 0;
                         escc = 0;
                     }
@@ -98,16 +98,16 @@ public class UIState : MonoBehaviour
                             MonsterUI.SetActive(false);
                             BuildUI.SetActive(true);
                             BuildUI.transform.Find("SelectSlot").gameObject.SetActive(true);
-                            hover.SetActive(false);
-                            Hover.mhover = 0;
+                            // hover.SetActive(false);
+                            // Hover.mhover = 0;
                             m = 0;
                             b = 1;
                         }
                         else
                         {
                             BuildUI.SetActive(false);
-                            hover.SetActive(false);
-                            Hover.bhover = 0;
+                            // hover.SetActive(false);
+                            // Hover.bhover = 0;
                             b = 0;
                             escc = 0;
                         }
@@ -127,16 +127,16 @@ public class UIState : MonoBehaviour
                             MonsterUI.SetActive(true);
                             MonsterUI.transform.Find("SelectSlot").gameObject.SetActive(true);
                             BuildUI.SetActive(false);
-                            hover.SetActive(false);
-                            Hover.bhover = 0;
+                            // hover.SetActive(false);
+                            // Hover.bhover = 0;
                             b = 0;
                             m = 1;
                         }
                         else
                         {
                             MonsterUI.SetActive(false);
-                            hover.SetActive(false);
-                            Hover.mhover = 0;
+                            // hover.SetActive(false);
+                            // Hover.mhover = 0;
                             m = 0;
                             escc = 0;
                         }
@@ -177,46 +177,48 @@ public class UIState : MonoBehaviour
                             mx = 0;
                         }
                     }
-                }else if (Input.GetButtonDown("leftchoose" + joynum)){
+                }
+                else if (Input.GetButtonDown("leftchoose" + joynum))
+                {
                     if (b == 1)
                     {
                         bx--;
-                        if (bx < 5&&bx >= 0)
+                        if (bx < 5 && bx >= 0)
                         {
                             selectbpos.anchoredPosition = new Vector2(orginbpos.x + (bx * 300), orginbpos.y);
                         }
                         else
                         {
                             bx = 4;
-                            selectbpos.anchoredPosition = new Vector2(orginbpos.x + (bx * 300), orginbpos.y);        
+                            selectbpos.anchoredPosition = new Vector2(orginbpos.x + (bx * 300), orginbpos.y);
                         }
                         Debug.Log(bx);
 
                     }
                     else if (m == 1)
                     {
-                        mx--;                     
-                        if (mx<7&&mx >= 0)
+                        mx--;
+                        if (mx < 7 && mx >= 0)
                         {
                             selectmpos.anchoredPosition = new Vector2(orginmpos.x + (mx * 225), orginmpos.y);
                         }
                         else
                         {
                             mx = 6;
-                            selectmpos.anchoredPosition = new Vector2(orginmpos.x + (mx * 225), orginmpos.y); 
+                            selectmpos.anchoredPosition = new Vector2(orginmpos.x + (mx * 225), orginmpos.y);
                         }
                     }
                 }
             }
             if (Input.GetKeyDown(KeyCode.Escape))
             {
-                if ((Hover.bhover != 0 || Hover.mhover != 0) && escc == 0)
+                if (escc == 0)
                 {
-                    hover.SetActive(false);
+                    // hover.SetActive(false);
                     GameManager.a = 0;
                     escc = 1;
                 }
-                else if ((Hover.bhover != 0 || Hover.mhover != 0) && escc == 1)
+                else if (escc == 1)
                 {
                     BuildUI.SetActive(false);
                     MonsterUI.SetActive(false);
@@ -229,18 +231,18 @@ public class UIState : MonoBehaviour
 
     public void GetGameobject()
     {
-        hover = this.transform.GetChild(0).gameObject;
-        ResourceUI = this.transform.GetChild(1).gameObject;
-        BuildUI = this.transform.GetChild(2).gameObject;
-        MonsterUI = this.transform.GetChild(3).gameObject;
-        InventoryUI = this.transform.GetChild(4).gameObject;
-        NoticeUI = this.transform.GetChild(5).gameObject;
-        Instantiate(gamemanager).transform.parent = this.transform;
-        gamemanager.GetComponent<GameManager>().hover = hover;
+        // hover = this.transform.GetChild(0).gameObject;
+        // ResourceUI = this.transform.GetChild(1).gameObject;
+        // BuildUI = this.transform.GetChild(2).gameObject;
+        // MonsterUI = this.transform.GetChild(3).gameObject;
+        // InventoryUI = this.transform.GetChild(4).gameObject;
+        // NoticeUI = this.transform.GetChild(5).gameObject;
+        // Instantiate(gamemanager).transform.parent = this.transform;
+        // gamemanager.GetComponent<GameManager>().hover = hover;
         BuildUI.SetActive(false);
         MonsterUI.SetActive(false);
-        hover.GetComponent<Hover>().thiscamera = playercamera;
-        this.tag = player.tag;
+        // hover.GetComponent<Hover>().thiscamera = playercamera;
+        // this.tag = player.tag;
         ResourceUI.GetComponentInChildren<ResourceUI>().Playertag = this.tag;
         InventoryUI.transform.Find("UI_Inventory").transform.GetChild(2).GetComponent<InventorySign>().player = player;
         getall = 1;
