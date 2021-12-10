@@ -255,6 +255,16 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2969034955633324770, guid: 45040d8f496ad334ead6174a9b8812f6,
+        type: 3}
+      propertyPath: m_Alpha
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 2969034955633324770, guid: 45040d8f496ad334ead6174a9b8812f6,
+        type: 3}
+      propertyPath: m_BlocksRaycasts
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 2969034955633324793, guid: 45040d8f496ad334ead6174a9b8812f6,
         type: 3}
       propertyPath: m_Name
