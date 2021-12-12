@@ -18,7 +18,7 @@ GameObject:
   - component: {fileID: -9201402252899892804}
   m_Layer: 11
   m_Name: Zeus
-  m_TagString: red
+  m_TagString: blue
   m_Icon: {fileID: 4422084297763085224, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

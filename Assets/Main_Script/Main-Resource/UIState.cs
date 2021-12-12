@@ -85,6 +85,67 @@ public class UIState : MonoBehaviour
                     }
 
                 }
+
+                if (Input.GetKeyDown(KeyCode.Z))
+                {
+                    if (b == 1)
+                    {
+                        bx++;
+                        if (bx < 5)
+                        {
+                            selectbpos.anchoredPosition = new Vector2(orginbpos.x + (bx * 300), orginbpos.y);
+                        }
+                        else
+                        {
+                            selectbpos.anchoredPosition = orginbpos;
+                            bx = 0;
+                        }
+
+                    }
+                    else if (m == 1)
+                    {
+                        mx++;
+                        if (mx < 7)
+                        {
+                            selectmpos.anchoredPosition = new Vector2(orginmpos.x + (mx * 225), orginmpos.y);
+                        }
+                        else
+                        {
+                            selectmpos.anchoredPosition = orginmpos;
+                            mx = 0;
+                        }
+                    }
+                }
+                else if (Input.GetKeyDown(KeyCode.C))
+                {
+                    if (b == 1)
+                    {
+                        bx--;
+                        if (bx < 5 && bx >= 0)
+                        {
+                            selectbpos.anchoredPosition = new Vector2(orginbpos.x + (bx * 300), orginbpos.y);
+                        }
+                        else
+                        {
+                            bx = 4;
+                            selectbpos.anchoredPosition = new Vector2(orginbpos.x + (bx * 300), orginbpos.y);
+                        }
+                    }
+                    else if (m == 1)
+                    {
+                        mx--;
+                        if (mx < 7 && mx >= 0)
+                        {
+                            selectmpos.anchoredPosition = new Vector2(orginmpos.x + (mx * 225), orginmpos.y);
+                        }
+                        else
+                        {
+                            mx = 6;
+                            selectmpos.anchoredPosition = new Vector2(orginmpos.x + (mx * 225), orginmpos.y);
+                        }
+                    }
+                }
+
             }
             else
             {
@@ -192,8 +253,6 @@ public class UIState : MonoBehaviour
                             bx = 4;
                             selectbpos.anchoredPosition = new Vector2(orginbpos.x + (bx * 300), orginbpos.y);
                         }
-                        Debug.Log(bx);
-
                     }
                     else if (m == 1)
                     {
