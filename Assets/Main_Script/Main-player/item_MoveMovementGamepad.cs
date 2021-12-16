@@ -17,6 +17,7 @@ public class item_MoveMovementGamepad : MonoBehaviour
         mouse = this.GetComponentInParent<PlayerMovement>().mouse;
         // cam = this.GetComponentInParent<PlayerMovement>().playercamera;
         setPos();
+
     }
 
     // Update is called once per frame

@@ -30,11 +30,11 @@ public class ResourceManager : MonoBehaviour
             BlueresourceAmountDictionary[resourceType] = 100;
 
             c++;
-            if (c == 4)
-            {
-                RedresourceAmountDictionary[resourceType] = 0;
-                BlueresourceAmountDictionary[resourceType] = 0;
-            }
+            // if (c == 4)
+            // {
+            //     RedresourceAmountDictionary[resourceType] = 0;
+            //     BlueresourceAmountDictionary[resourceType] = 0;
+            // }
 
         }
     }

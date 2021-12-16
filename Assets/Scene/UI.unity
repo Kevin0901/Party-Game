@@ -270,6 +270,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: StartMenu
       objectReference: {fileID: 0}
+    - target: {fileID: 2969034955633324793, guid: 45040d8f496ad334ead6174a9b8812f6,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 2969034955633324797, guid: 45040d8f496ad334ead6174a9b8812f6,
         type: 3}
       propertyPath: m_Pivot.x
@@ -388,6 +393,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Noviceteaching
+      objectReference: {fileID: 0}
+    - target: {fileID: 1725034934814244744, guid: e72c3346a91979446a759ed1ae3b91d4,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1725034934814244788, guid: e72c3346a91979446a759ed1ae3b91d4,
         type: 3}
@@ -791,6 +801,16 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2060107841247128564, guid: ed9b805a4c50c6e458228a4dd58572b0,
+        type: 3}
+      propertyPath: m_Alpha
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2060107841247128564, guid: ed9b805a4c50c6e458228a4dd58572b0,
+        type: 3}
+      propertyPath: m_BlocksRaycasts
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2060107841247128585, guid: ed9b805a4c50c6e458228a4dd58572b0,
         type: 3}
       propertyPath: m_Pivot.x
@@ -1020,6 +1040,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: IllustratedBook
       objectReference: {fileID: 0}
+    - target: {fileID: 8130682740830149149, guid: 0c9834a65e52862438caf5e149357493,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0c9834a65e52862438caf5e149357493, type: 3}
 --- !u!1001 &735440971002918799
@@ -1033,6 +1058,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: GameMenu
+      objectReference: {fileID: 0}
+    - target: {fileID: 735440971677989923, guid: ae030c0ad19ffb747a420d4597db1583,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 735440971677989951, guid: ae030c0ad19ffb747a420d4597db1583,
         type: 3}
@@ -1376,6 +1406,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: LoadingCircle
+      objectReference: {fileID: 0}
+    - target: {fileID: 4990426390887574267, guid: 209d1435dbd8ad04c8296ffb9629f0e0,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 209d1435dbd8ad04c8296ffb9629f0e0, type: 3}

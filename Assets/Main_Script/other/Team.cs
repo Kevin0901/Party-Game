@@ -24,6 +24,13 @@ public class Team : MonoBehaviour
     }
     private void Start()
     {
-
+        if (this.gameObject.tag == "red")
+        {
+            Enemyteam = "blue";
+        }
+        else if (this.gameObject.tag == "blue")
+        {
+            Enemyteam = "red";
+        }
     }
 }
