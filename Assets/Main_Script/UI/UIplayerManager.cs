@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class UIplayerManager : MonoBehaviour
 {
-    public bool isChooseTeam, iconjudge;
+    public bool iconjudge;
     public bool red, blue;
     public int playersort;
     public string Joysticknum;
@@ -13,19 +13,14 @@ public class UIplayerManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        red = false;
-        blue = false;
-        isChooseTeam = false;
-        iconjudge = false;
-        playersort = 0;
-        Joysticknum = "";
+        ResetValue();
         CP = this.transform.parent.GetComponent<ChoosePlayer>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (isChooseTeam && CP.CanvasGroup.blocksRaycasts)
+        if (playersort != 0 && CP.CanvasGroup.blocksRaycasts)
         {
             if (Input.GetButtonDown("leftchoose" + Joysticknum))
             {
@@ -56,9 +51,9 @@ public class UIplayerManager : MonoBehaviour
             TeamChoose();
         }
     }
-    public void Left()
+    public void Left()//按鈕
     {
-        if (isChooseTeam && CP.CanvasGroup.blocksRaycasts)
+        if (CP.CanvasGroup.blocksRaycasts)
         {
             if (red)
             {
@@ -73,9 +68,9 @@ public class UIplayerManager : MonoBehaviour
         }
 
     }
-    public void Right()
+    public void Right()//按鈕
     {
-        if (isChooseTeam && CP.CanvasGroup.blocksRaycasts)
+        if (CP.CanvasGroup.blocksRaycasts)
         {
             if (red)
             {
@@ -121,5 +116,13 @@ public class UIplayerManager : MonoBehaviour
                 transform.Find("R1").gameObject.SetActive(true);
             }
         }
+    }
+    public void ResetValue()
+    {
+        playersort = 0;
+        Joysticknum = null;
+        red = false;
+        blue = false;
+        iconjudge = false;
     }
 }

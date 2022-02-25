@@ -30,9 +30,10 @@ public class MainMenu : MonoBehaviour
     }
     private IEnumerator fadein() //淡入畫面
     {
-        MainAnimator.SetBool("fadein", true);
-        yield return null;
-        MainAnimator.SetBool("fadein", false);
+        MainAnimator.SetTrigger("test");
+        // MainAnimator.SetBool("fadein", true);
+        // yield return null;
+        // MainAnimator.SetBool("fadein", false);
         GameObject.Find("LoadingCircle").transform.Find("Image").gameObject.SetActive(false);
         yield return new WaitForSeconds(0.65f);
         GameObject.Find("TranPageAnimation").transform.Find("Image").gameObject.SetActive(false);//關閉換頁動畫
@@ -41,7 +42,8 @@ public class MainMenu : MonoBehaviour
     private IEnumerator fadeout() //淡出畫面       
     {
         CanvasGroup.blocksRaycasts = false;
-        MainAnimator.SetBool("fadeout", true);
+        MainAnimator.SetTrigger("test");
+        // MainAnimator.SetBool("fadeout", true);
         yield return null;
         GameObject.Find("LoadingCircle").transform.Find("Image").gameObject.SetActive(true);
         GameObject.Find("TranPageAnimation").transform.Find("Image").gameObject.SetActive(true); //開啟換頁動畫

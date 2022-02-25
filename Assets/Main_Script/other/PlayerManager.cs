@@ -5,7 +5,18 @@ using UnityEngine.SceneManagement;
 
 public class PlayerManager : MonoBehaviour
 {
-    [System.Serializable]
+    public static PlayerManager Instance;
+    private void Awake() //好用的靜態成員
+    {
+        if (Instance != null)
+        {
+            Destroy(gameObject);
+            return;
+        }
+        Instance = this;
+        DontDestroyOnLoad(gameObject);
+    }
+    [System.Serializable]   //玩家Class
     public class playerSet
     {
         public string team;
@@ -19,14 +30,13 @@ public class PlayerManager : MonoBehaviour
         }
     }
     public playerSet[] plist;
+
     [Header("主場景玩家")]
     [SerializeField] private GameObject player;
     [Header("競技場玩家")]
     [SerializeField] private GameObject fightplayer;
-    public GameObject RedCastel, BlueCastel, red, blue;
     private float h, w, proportion_W, proportion_H, factor;
     public string EventGame;
-    private bool test;
     void Update()
     {
         // Scene scene = SceneManager.GetActiveScene();
@@ -41,10 +51,10 @@ public class PlayerManager : MonoBehaviour
         //     StartCoroutine(FightPlayerSpawn());
         // }
     }
-    public void initializations(int max) //初始化陣列
+    public void initializations(int num) //初始化陣列
     {
-        plist = new playerSet[max];
-        for (int i = 0; i < max; i++)
+        plist = new playerSet[num];
+        for (int i = 0; i < num; i++)
         {
             plist[i] = new playerSet();
         }
@@ -58,10 +68,10 @@ public class PlayerManager : MonoBehaviour
         }
         else
         {
-            StartCoroutine(playerSpawn());
+            StartCoroutine(playerSpawn());//加載完畢生成玩家
         }
     }
-    public IEnumerator playerSpawn()  //生成玩家
+    public IEnumerator playerSpawn()
     {
         GameObject.Find("MainBlackScreen").GetComponent<Animator>().SetBool("fadeout", true);
         yield return null;
@@ -72,21 +82,21 @@ public class PlayerManager : MonoBehaviour
             GameObject.Find("blackSplit").transform.GetChild(0).gameObject.SetActive(true);
         }
 
-        for (int i = 0; i < plist.Length; i++)
+
+        for (int i = 0; i < plist.Length; i++)//生成玩家
         {
             GameObject p = Instantiate(player, this.transform.position, player.transform.rotation);
             p.transform.Find("player").tag = plist[i].team;
             p.transform.Find("player").GetComponent<PlayerMovement>().joynum = plist[i].joynum;
             p.transform.Find("player").GetComponent<PlayerMovement>().order = plist[i].sort;
-            p.transform.Find("player").GetComponent<PlayerMovement>().allplayercount = plist.Length;
+            // p.transform.Find("player").GetComponent<PlayerMovement>().allplayercount = plist.Length;
             p.transform.Find("player").GetComponent<Team>().enabled = true;
             p.transform.Find("player").GetComponent<PlayerMovement>().bornSet();
 
             Camera cam = p.transform.Find("Camera").GetComponent<Camera>();
             if (plist.Length == 2)
             {
-                // p.GetComponent<PlayerMovement>().deadscreen = GameObject.Find("DeadScreen").transform.Find("Total2").transform.Find("P" + plist[i].sort).gameObject;
-                cam.aspect = proportion_W / 2 / proportion_H;//相機比例
+                cam.aspect = proportion_W / 2 / proportion_H;
                 cam.orthographicSize = 40 / proportion_W * proportion_H;//相機大小  40/w/*h
                 switch (plist[i].sort)
                 {
@@ -100,7 +110,6 @@ public class PlayerManager : MonoBehaviour
             }
             else
             {
-                // p.GetComponent<PlayerMovement>().deadscreen = GameObject.Find("DeadScreen").transform.Find("Total4").transform.Find("P" + plist[i].sort).gameObject;
                 // p.GetComponent<Camera>().aspect = proportion_W / proportion_H;//相機比例
                 cam.orthographicSize = 20 / proportion_W * proportion_H;//相機大小  20/w/*h
                 switch (plist[i].sort)
@@ -120,22 +129,18 @@ public class PlayerManager : MonoBehaviour
                 }
             }
         }
-        // red = Instantiate(RedCastel, new Vector3(-20, -43.7f, 0), RedCastel.transform.rotation);
-        // red.transform.localScale = new Vector3(4, 4, 4);
-        // blue = Instantiate(BlueCastel, new Vector3(-20, 45, 0), BlueCastel.transform.rotation);
-        // blue.transform.localScale = new Vector3(4, 4, 4);
     }
 
-    private IEnumerator FightPlayerSpawn()
+    private void FightPlayerSpawn()
     {
-        yield return new WaitForSeconds(0.1f);
-        List<GameObject> pl = GameObject.Find("playerManager").GetComponent<playerlist>().player;
+        // yield return new WaitForSeconds(0.1f);
+        // List<GameObject> pl = GameObject.Find("playerManager").GetComponent<playerlist>().player;
         for (int i = 0; i < plist.Length; i++)
         {
             GameObject p = Instantiate(fightplayer, this.transform.position, player.transform.rotation);
             p.GetComponent<arenaPlayer>().joynum = plist[i].joynum;
             p.GetComponent<arenaPlayer>().order = plist[i].sort;
-            pl.Add(p);
+            // pl.Add(p);
             switch (plist[i].sort)
             {
                 case 1:
@@ -151,16 +156,14 @@ public class PlayerManager : MonoBehaviour
                     p.GetComponent<arenaPlayer>().SpawnPoint(new Vector3(0, -35, 0));
                     break;
             }
-            p.transform.Find("NumTitle").transform.Find("P" + plist[i].sort).gameObject.SetActive(true);
+            p.transform.Find("NumTitle").Find("P" + plist[i].sort).gameObject.SetActive(true);
         }
         // List<string> game = new List<string> { "Medusa", "SunMoon", "Sword", "Cupid" };
         // int randomgame = Random.Range(0, game.Count);
         // GameObject.Find("UI").transform.Find("Medusa").gameObject.SetActive(true);
         GameObject.Find("UI").transform.Find(EventGame).gameObject.SetActive(true);
-
-        this.gameObject.SetActive(false);
+        // this.gameObject.SetActive(false);
         // GameObject.Find(game[randomgame]+"UI").gameObject.SetActive(true);
-
     }
     void ScreenSet() //螢幕比例
     {
