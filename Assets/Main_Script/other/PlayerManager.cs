@@ -37,20 +37,6 @@ public class PlayerManager : MonoBehaviour
     [SerializeField] private GameObject fightplayer;
     private float h, w, proportion_W, proportion_H, factor;
     public string EventGame;
-    void Update()
-    {
-        // Scene scene = SceneManager.GetActiveScene();
-        // if (scene.name == "MainScene" && isSpawn)//第一進場景才會執行 playerSpawn()
-        // {
-        //     isSpawn = false;
-        //     StartCoroutine(playerSpawn());
-        // }
-        // else if (scene.name == "FightScene" && !isSpawn)
-        // {
-        //     Cursor.visible = true;
-        //     StartCoroutine(FightPlayerSpawn());
-        // }
-    }
     public void initializations(int num) //初始化陣列
     {
         plist = new playerSet[num];
@@ -89,7 +75,6 @@ public class PlayerManager : MonoBehaviour
             p.transform.Find("player").tag = plist[i].team;
             p.transform.Find("player").GetComponent<PlayerMovement>().joynum = plist[i].joynum;
             p.transform.Find("player").GetComponent<PlayerMovement>().order = plist[i].sort;
-            // p.transform.Find("player").GetComponent<PlayerMovement>().allplayercount = plist.Length;
             p.transform.Find("player").GetComponent<Team>().enabled = true;
             p.transform.Find("player").GetComponent<PlayerMovement>().bornSet();
 
@@ -134,13 +119,11 @@ public class PlayerManager : MonoBehaviour
     private void FightPlayerSpawn()
     {
         // yield return new WaitForSeconds(0.1f);
-        // List<GameObject> pl = GameObject.Find("playerManager").GetComponent<playerlist>().player;
         for (int i = 0; i < plist.Length; i++)
         {
             GameObject p = Instantiate(fightplayer, this.transform.position, player.transform.rotation);
             p.GetComponent<arenaPlayer>().joynum = plist[i].joynum;
             p.GetComponent<arenaPlayer>().order = plist[i].sort;
-            // pl.Add(p);
             switch (plist[i].sort)
             {
                 case 1:
@@ -158,12 +141,7 @@ public class PlayerManager : MonoBehaviour
             }
             p.transform.Find("NumTitle").Find("P" + plist[i].sort).gameObject.SetActive(true);
         }
-        // List<string> game = new List<string> { "Medusa", "SunMoon", "Sword", "Cupid" };
-        // int randomgame = Random.Range(0, game.Count);
-        // GameObject.Find("UI").transform.Find("Medusa").gameObject.SetActive(true);
         GameObject.Find("UI").transform.Find(EventGame).gameObject.SetActive(true);
-        // this.gameObject.SetActive(false);
-        // GameObject.Find(game[randomgame]+"UI").gameObject.SetActive(true);
     }
     void ScreenSet() //螢幕比例
     {

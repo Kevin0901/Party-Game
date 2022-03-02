@@ -363,6 +363,16 @@ PrefabInstance:
       propertyPath: playercamera
       value: 
       objectReference: {fileID: 4293077109794005082}
+    - target: {fileID: 5092800191317821217, guid: c8647925584db0d4cbe9c418389bfe8f,
+        type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5092800191317821217, guid: c8647925584db0d4cbe9c418389bfe8f,
+        type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5157922667542157581, guid: c8647925584db0d4cbe9c418389bfe8f,
         type: 3}
       propertyPath: mouse

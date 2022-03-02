@@ -109,7 +109,7 @@ public class ChoosePlayer : MonoBehaviour
             playerlist.Add(num);
             Transform addP = transform.Find("P" + (playerlist.Count - 1));
             UIplayerManager UIShow = addP.gameObject.GetComponent<UIplayerManager>();
-            UIShow.playersort = playerlist.Count;
+            UIShow.playersort = playerlist.Count - 1;
             UIShow.Joysticknum = num;
             UIShow.red = true;
             UIShow.iconjudge = true;
