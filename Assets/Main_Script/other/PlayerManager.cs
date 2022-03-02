@@ -59,9 +59,9 @@ public class PlayerManager : MonoBehaviour
     }
     public IEnumerator playerSpawn()
     {
-        GameObject.Find("MainBlackScreen").GetComponent<Animator>().SetBool("fadeout", true);
+        // GameObject.Find("MainBlackScreen").GetComponent<Animator>().SetBool("fadeout", true);
         yield return null;
-        GameObject.Find("MainBlackScreen").GetComponent<Animator>().SetBool("fadeout", false);
+        // GameObject.Find("MainBlackScreen").GetComponent<Animator>().SetBool("fadeout", false);
         ScreenSet();
         if (plist.Length > 2)//開啟UI黑條
         {

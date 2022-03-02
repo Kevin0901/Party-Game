@@ -12,13 +12,13 @@ public class Timer : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        t = GameObject.Find("SceneManager").GetComponent<GameControl>();
+        // t = GameObject.Find("SceneManager").GetComponent<GameControl>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        TimeSpan time= TimeSpan.FromSeconds(t.currentTime);
-        currenttimeText.text = time.ToString(@"mm\:ss");
+        // TimeSpan time= TimeSpan.FromSeconds(t.currentTime);
+        // currenttimeText.text = time.ToString(@"mm\:ss");
     }
 }
