@@ -6,16 +6,15 @@ public class playerShoot : MonoBehaviour
 {
     [SerializeField] private GameObject item;
     private arenaPlayer player;
-    public bool isCenter;
+    public bool isCenter; //是否在正中心
     [Header("箭矢設定")]
-    private Team t;
     public float power = 50;
     public float speed = 40;
+    [Header("攻擊間隔")]
     [SerializeField] private float fireRate;
-    private float nextfire, delayShoot;
+    private float nextfire;
     private void Start()
     {
-        t = this.gameObject.GetComponent<Team>();
         player = this.gameObject.GetComponent<arenaPlayer>();
         nextfire = 0;
         isCenter = false;
@@ -29,10 +28,9 @@ public class playerShoot : MonoBehaviour
         if (Input.GetAxis("R2-" + player.joynum) != 0 && Time.time > nextfire)
         {
             GameObject a = Instantiate(item, transform.position, item.transform.rotation);
-            a.GetComponent<SunMoonArrowMove>().enemy = t.Enemyteam;
-            if (isCenter)
+            if (isCenter) //如果在正中心發射的話
             {
-                a.GetComponent<SpriteRenderer>().color = new Color32(37, 135, 0, 255);
+                a.GetComponent<SpriteRenderer>().color = new Color32(0, 0, 0, 0);
                 a.GetComponent<SunMoonArrowMove>().power = power + 50;
                 a.GetComponent<SunMoonArrowMove>().speed = speed * 1.5f;
                 a.transform.localScale *= 1.5f;

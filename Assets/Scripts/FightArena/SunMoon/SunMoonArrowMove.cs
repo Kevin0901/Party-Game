@@ -26,23 +26,30 @@ public class SunMoonArrowMove : MonoBehaviour
             transform.position += dir.normalized * Time.deltaTime * speed * 0.15f;
         }
     }
-    private void OnTriggerEnter2D(Collider2D other)
+    private void OnCollisionEnter2D(Collision2D other)
     {
-        if (other.gameObject.layer == 10 && other.gameObject != parent)
-        {
-            other.GetComponent<arenaPlayer>().repeldir = dir;
-            other.GetComponent<arenaPlayer>().repelpower = power;
-            other.GetComponent<arenaPlayer>().currentState = ArenaState.repel;
-            Destroy(this.gameObject);
-        }
-    }
-    private void OnTriggerExit2D(Collider2D other)
-    {
-        if (other.CompareTag("background"))
+        if (other.gameObject.layer == 10)
         {
             Destroy(this.gameObject);
         }
     }
+    // private void OnTriggerEnter2D(Collider2D other)
+    // {
+    //     if (other.gameObject.layer == 10 && other.gameObject != parent)
+    //     {
+    //         other.GetComponent<arenaPlayer>().repeldir = dir;
+    //         other.GetComponent<arenaPlayer>().repelpower = power;
+    //         other.GetComponent<arenaPlayer>().currentState = ArenaState.repel;
+    //         Destroy(this.gameObject);
+    //     }
+    // }
+    // private void OnTriggerExit2D(Collider2D other)
+    // {
+    //     if (other.CompareTag("background"))
+    //     {
+    //         Destroy(this.gameObject);
+    //     }
+    // }
     public void setArrow(GameObject master)
     {
         Quaternion k = Quaternion.AngleAxis(rotate, Vector3.forward);

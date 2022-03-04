@@ -161,7 +161,6 @@ public class GameControl : MonoBehaviour
         }
         this.transform.GetChild(0).gameObject.SetActive(false);
         SceneManager.LoadScene("FightScene", LoadSceneMode.Additive);
-        GameObject.Find("GameManager").GetComponent<PlayerManager>().EventGame = game;
         yield return new WaitForSeconds(0.5f);
         SceneManager.SetActiveScene(SceneManager.GetSceneByName("FightScene"));
         this.gameObject.SetActive(false);

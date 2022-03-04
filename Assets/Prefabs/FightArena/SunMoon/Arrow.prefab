@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 3457853866558598260}
   - component: {fileID: -5180829034133546645}
   m_Layer: 0
-  m_Name: sunMoonArrow
+  m_Name: Arrow
   m_TagString: arrow
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -49,6 +49,7 @@ SpriteRenderer:
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_RayTracingMode: 0
+  m_RayTraceProcedural: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:

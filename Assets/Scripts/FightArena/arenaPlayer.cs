@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -26,7 +26,7 @@ public class arenaPlayer : MonoBehaviour
     private SpriteRenderer spriteRen;
     private Vector3 spawnPos;
     private Rigidbody2D mrigibody;
-    private float rotate, health;
+    private float rotate; 
     private Vector3 worldPosition, mousePos, startPos, line;
     [Header("石頭")]
     [SerializeField] private Sprite stone;
@@ -38,7 +38,6 @@ public class arenaPlayer : MonoBehaviour
         isready = false;
         mrigibody = this.GetComponent<Rigidbody2D>();
         spriteRen = this.GetComponent<SpriteRenderer>();
-        health = 3;
         dizzyT = 0.15f;
         change.z = 0;
         startPos = Vector3.zero;
