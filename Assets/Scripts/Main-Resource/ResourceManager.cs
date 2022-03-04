@@ -9,6 +9,9 @@ public class ResourceManager : MonoBehaviour
 
     public event EventHandler OnResourceAmountChanged;
 
+    public float Rrestimes=1;
+    public float Brestimes=1;
+
     private Dictionary<ResourceTypeSo, int> RedresourceAmountDictionary;
     private Dictionary<ResourceTypeSo, int> BlueresourceAmountDictionary;
 
@@ -47,6 +50,8 @@ public class ResourceManager : MonoBehaviour
             timer += timerMax;
             timeadd();
         }
+
+        
 
         // if (Input.GetKeyDown(KeyCode.T))
         // {
@@ -93,9 +98,10 @@ public class ResourceManager : MonoBehaviour
     private void timeadd()
     {
         ResourceTypeListSO resourceTypeList = Resources.Load<ResourceTypeListSO>(typeof(ResourceTypeListSO).Name);
-        AddResource(resourceTypeList.list[0], 2);
-        AddResource(resourceTypeList.list[1], 2);
-        AddResource(resourceTypeList.list[2], 2);
+        for(int i = 0; i<=2;i++){
+            RedAddResource(resourceTypeList.list[i], (int)(2*Rrestimes));
+            BlueAddResource(resourceTypeList.list[i], (int)(2*Brestimes));
+        }
     }
 
     public int RedGetResourceAmount(ResourceTypeSo resourceType)

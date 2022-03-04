@@ -14,6 +14,7 @@ public class health : MonoBehaviour
     private Slider bar;
     private int burnstack = 0;
     public bool iswudi;//無敵
+    public int playercatchsheeponhit=0;
     private void Awake()
     {
         ResourceTypeListSO resourceTypeList = Resources.Load<ResourceTypeListSO>(typeof(ResourceTypeListSO).Name);
@@ -60,6 +61,10 @@ public class health : MonoBehaviour
         else if (!iswudi)
         {
             curH -= damageToGive;
+        }
+
+        if(parentSet.layer == 10){
+            playercatchsheeponhit = 1;
         }
     }
     public void burnhurt(int sec, int secdamage)

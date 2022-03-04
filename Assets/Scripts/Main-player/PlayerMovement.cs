@@ -26,7 +26,7 @@ public class PlayerMovement : MonoBehaviour
     private Animator animator;
     private Rigidbody2D mrigibody;
     private Vector3 change;
-    private health health;
+    public health health;
     [Header("控制器控制")]
     public string joynum;//控制器
     [Header("玩家登入排序")]
@@ -56,6 +56,8 @@ public class PlayerMovement : MonoBehaviour
     private int getallinv = 0;
     private static int spriteNum = 0;
     private float orginspeed, nextfire;
+
+    public int playcatsheeponhit;
     // Start is called before the first frame update
     private void Awake()
     {
