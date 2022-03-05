@@ -7,13 +7,11 @@ public enum ArenaState
     idle,
     walk,
     dizzy,
-    repel,
     stone
 }
 public class arenaPlayer : MonoBehaviour
 {
-    [HideInInspector] public float dizzyT, repelpower;
-    [HideInInspector] public Vector3 repeldir;
+    [HideInInspector] public float dizzyT;
     public bool isready;
     public ArenaState currentState;
     private Vector3 change;
@@ -84,11 +82,6 @@ public class arenaPlayer : MonoBehaviour
                 spriteRen.color = new Color32(255, 255, 255, 255);
                 currentState = ArenaState.walk;
             }
-        }
-        else if (currentState == ArenaState.repel)
-        {
-            mrigibody.AddForce(repeldir.normalized * repelpower, ForceMode2D.Impulse);
-            currentState = ArenaState.walk;
         }
         else if (currentState == ArenaState.walk)
         {

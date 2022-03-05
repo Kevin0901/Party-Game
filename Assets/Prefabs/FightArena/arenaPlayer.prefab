@@ -100,7 +100,7 @@ Transform:
   m_GameObject: {fileID: 2028814211212845501}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 2, y: 2, z: 2}
+  m_LocalScale: {x: 1.8, y: 1.8, z: 1.8}
   m_Children:
   - {fileID: 4251131724691091629}
   - {fileID: 8390445758523567127}
@@ -228,8 +228,8 @@ CapsuleCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.0059641837, y: -0.10958829}
-  m_Size: {x: 1.8736622, y: 1.578148}
+  m_Offset: {x: 0.015773563, y: -0.12920846}
+  m_Size: {x: 1.8671286, y: 1.565073}
   m_Direction: 1
 --- !u!114 &3454384142202459819
 MonoBehaviour:
@@ -245,8 +245,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   item: {fileID: 3093933777940720112, guid: 7d50319c0e3dc8645b06e73f19760a27, type: 3}
   isCenter: 0
-  power: 70
-  speed: 40
+  speed: 47.5
+  mass: 10
   fireRate: 0.5
 --- !u!1 &5195281706139582395
 GameObject:

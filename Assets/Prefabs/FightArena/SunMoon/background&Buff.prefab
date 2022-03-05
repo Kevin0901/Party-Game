@@ -1829,7 +1829,22 @@ PrefabInstance:
       propertyPath: bg
       value: 
       objectReference: {fileID: 7595207093182290006}
-    m_RemovedComponents: []
+    - target: {fileID: 8499490040193294906, guid: e7da9d4f2899f104ba1cc07e9cf6ee12,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    m_RemovedComponents:
+    - {fileID: 4545983150220479011, guid: e7da9d4f2899f104ba1cc07e9cf6ee12, type: 3}
+    - {fileID: 1709985701427264188, guid: e7da9d4f2899f104ba1cc07e9cf6ee12, type: 3}
+    - {fileID: 1582251903854403034, guid: e7da9d4f2899f104ba1cc07e9cf6ee12, type: 3}
+    - {fileID: 686111501762735031, guid: e7da9d4f2899f104ba1cc07e9cf6ee12, type: 3}
+    - {fileID: 4325534475836463588, guid: e7da9d4f2899f104ba1cc07e9cf6ee12, type: 3}
+    - {fileID: 8438452765338501787, guid: e7da9d4f2899f104ba1cc07e9cf6ee12, type: 3}
+    - {fileID: 7585129627768500292, guid: e7da9d4f2899f104ba1cc07e9cf6ee12, type: 3}
+    - {fileID: 266569613336314775, guid: e7da9d4f2899f104ba1cc07e9cf6ee12, type: 3}
+    - {fileID: 7567414599319708821, guid: e7da9d4f2899f104ba1cc07e9cf6ee12, type: 3}
+    - {fileID: 7228966907006262666, guid: e7da9d4f2899f104ba1cc07e9cf6ee12, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: e7da9d4f2899f104ba1cc07e9cf6ee12, type: 3}
 --- !u!4 &5199531239209919016 stripped
 Transform:

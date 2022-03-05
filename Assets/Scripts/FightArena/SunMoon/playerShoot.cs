@@ -8,8 +8,8 @@ public class playerShoot : MonoBehaviour
     private arenaPlayer player;
     public bool isCenter; //是否在正中心
     [Header("箭矢設定")]
-    public float power = 50;
-    public float speed = 40;
+    public float speed = 47.5f;
+    public float mass = 2000;
     [Header("攻擊間隔")]
     [SerializeField] private float fireRate;
     private float nextfire;
@@ -19,30 +19,25 @@ public class playerShoot : MonoBehaviour
         nextfire = 0;
         isCenter = false;
     }
-    void Update()
+    private void Update()
     {
-        // if (Input.GetAxis("R2-" + player.joynum) != 0)
-        // {
-        //     delayShoot = Time.time;
-        // }
-        if (Input.GetAxis("R2-" + player.joynum) != 0 && Time.time > nextfire)
+        if (Input.GetAxis("R2-0") != 0 && Time.time > nextfire)
         {
-            GameObject a = Instantiate(item, transform.position, item.transform.rotation);
+            GameObject a = Instantiate(item, transform.position, transform.rotation);
+            Physics2D.IgnoreCollision(a.GetComponent<Collider2D>(), player.GetComponent<Collider2D>()); //忽略自己
+            a.GetComponent<Rigidbody2D>().mass = mass;
             if (isCenter) //如果在正中心發射的話
             {
-                a.GetComponent<SpriteRenderer>().color = new Color32(0, 0, 0, 0);
-                a.GetComponent<SunMoonArrowMove>().power = power + 50;
+                a.GetComponent<SpriteRenderer>().color = new Color32(0, 0, 0, 255);
                 a.GetComponent<SunMoonArrowMove>().speed = speed * 1.5f;
                 a.transform.localScale *= 1.5f;
             }
             else
             {
-                a.GetComponent<SunMoonArrowMove>().power = power;
                 a.GetComponent<SunMoonArrowMove>().speed = speed;
             }
-            a.GetComponent<SunMoonArrowMove>().setRotate(this.transform.rotation.eulerAngles.z);
-            a.GetComponent<SunMoonArrowMove>().setArrow(this.gameObject);
-            nextfire = Time.time + fireRate;
+            a.GetComponent<SunMoonArrowMove>().setArrow();
+            nextfire = Time.time + fireRate; //下次發射的時間
         }
     }
 }

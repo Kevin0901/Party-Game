@@ -12,21 +12,11 @@ public class centerBuff : MonoBehaviour
             other.GetComponent<playerShoot>().isCenter = true;
         }
     }
-    private void OnTriggerEnter2D(Collider2D other)
-    {
-        if (other.CompareTag("arrow"))
-        {
-            other.GetComponent<SunMoonArrowMove>().power += 50;
-        }
-    }
     private void OnTriggerExit2D(Collider2D other)
     {
         if (other.gameObject.layer == 10)
         {
             other.GetComponent<playerShoot>().isCenter = false;
-        }
-        else if (other.CompareTag("arrow")){
-            other.GetComponent<SunMoonArrowMove>().power -= 50;
         }
     }
 }
