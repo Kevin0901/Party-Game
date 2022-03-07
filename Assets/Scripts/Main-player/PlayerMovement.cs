@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -57,7 +57,6 @@ public class PlayerMovement : MonoBehaviour
     private static int spriteNum = 0;
     private float orginspeed, nextfire;
 
-    public int playcatsheeponhit;
     // Start is called before the first frame update
     private void Awake()
     {

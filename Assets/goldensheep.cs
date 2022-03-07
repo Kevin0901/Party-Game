@@ -2,14 +2,21 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+
+
 public class goldensheep : MonoBehaviour
 {
     [SerializeField]
     private string bonusteam;
+    [SerializeField]
+    private float speed;
     private bool nowtstatic = true;
     private GameObject player;
     private int playoncatheal;
-
+    private int mc = 0;
+    private Vector3 targetpos;
+    private int fc = 0;
+    private List<Vector3> playerposlist = new List<Vector3>();
 
     private void Update()
     {
@@ -21,7 +28,7 @@ public class goldensheep : MonoBehaviour
                 Debug.Log("res1");
                 if (bonusteam == "blue")
                 {
-                    ResourceManager.Instance.Brestimes = 1;        
+                    ResourceManager.Instance.Brestimes = 1;
                 }
                 else if (bonusteam == "red")
                 {
@@ -30,15 +37,49 @@ public class goldensheep : MonoBehaviour
                 nowtstatic = true;
                 bonusteam = null;
             }
+                playerposlist.Add(player.transform.position);
+            if(playerposlist.Count > 50){
+                playerposlist.RemoveAt(0);
+                transform.position = playerposlist[0];
+            }   
         }
+
+        if (nowtstatic == true)
+        {           
+            if (mc == 0)
+            {
+                if (fc == 0)
+                {
+                    fc = 1;
+                    float x = Random.Range(-40, -0.75f);
+                    float y = Random.Range(-11, 11);
+                    targetpos = new Vector3(x, y, 0);
+                    Debug.Log(targetpos);
+                }
+                Debug.Log("moving");
+                transform.position = Vector3.MoveTowards(transform.position, targetpos, Time.deltaTime * speed);
+                if (transform.position == targetpos)
+                {
+                    Debug.Log("=");
+                    mc = 1;
+                    StartCoroutine(movecolddown());
+                }
+            }
+        }
+    }
+
+    IEnumerator movecolddown()
+    {
+        Debug.Log("inie");
+        yield return new WaitForSeconds(3);
+        fc = 0;
+        mc = 0;
     }
 
     private void OnTriggerStay2D(Collider2D other)
     {
-        Debug.Log("in");
         if (other.gameObject.layer == 10 && Input.GetKeyDown(KeyCode.P) && nowtstatic == true)
         {
-            Debug.Log("Pin");
             nowtstatic = false;
             player = other.gameObject;
             bonusteam = player.tag;
@@ -52,24 +93,6 @@ public class goldensheep : MonoBehaviour
             {
                 ResourceManager.Instance.Rrestimes = 2;
             }
-            // if (m.EnemyList.Count == 0)
-            // {
-            //     m.EnemyList.Add(other.gameObject);
-
-            // }
-            // else if (other.gameObject == m.EnemyList[0])
-            // {
-            //     dis = Vector3.Distance(parent.transform.position, other.transform.position); //兩座標之間的距離長度
-            //     if (dis <= m.attackRange)
-            //     {
-            //         m.currentState = MonsterState.attack;
-            //     }
-            //     else if (m.currentState != MonsterState.attack)
-            //     {
-            //         m.currentState = MonsterState.track;
-            //     }
-            //     m.enemyPos = other.transform.position;
-            // }
         }
     }
 
