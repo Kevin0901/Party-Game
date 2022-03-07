@@ -44,6 +44,8 @@ public class goldensheep : MonoBehaviour
             }   
         }
 
+        
+
         if (nowtstatic == true)
         {           
             if (mc == 0)
@@ -56,24 +58,29 @@ public class goldensheep : MonoBehaviour
                     targetpos = new Vector3(x, y, 0);
                     Debug.Log(targetpos);
                 }
-                Debug.Log("moving");
                 transform.position = Vector3.MoveTowards(transform.position, targetpos, Time.deltaTime * speed);
+                
                 if (transform.position == targetpos)
                 {
-                    Debug.Log("=");
                     mc = 1;
                     StartCoroutine(movecolddown());
                 }
+
+                
             }
         }
     }
 
     IEnumerator movecolddown()
     {
-        Debug.Log("inie");
         yield return new WaitForSeconds(3);
         fc = 0;
         mc = 0;
+    }
+
+    IEnumerator gobackcolddown()
+    {
+        yield return new WaitForSeconds(10);
     }
 
     private void OnTriggerStay2D(Collider2D other)
