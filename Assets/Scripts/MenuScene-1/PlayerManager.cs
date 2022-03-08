@@ -18,8 +18,6 @@ public class PlayerManager : MonoBehaviour
     }
     [Header("主場景玩家")]
     [SerializeField] private GameObject player;
-    [Header("競技場玩家")]
-    [SerializeField] private GameObject fightplayer;
     private float h, w, proportion_W, proportion_H, factor;
     public IEnumerator waitSceneLoad(string level) //等場景載入完
     {

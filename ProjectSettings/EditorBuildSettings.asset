@@ -15,7 +15,7 @@ EditorBuildSettings:
     path: Assets/Scene/FightScene.unity
     guid: 4c56268dee4edcd49b616d628f8952bd
   - enabled: 1
-    path: Assets/Scene/FirstMenu.unity
+    path: Assets/Scene/MainUI.unity
     guid: 6b5f750b7b2ae8b4582dd2b789cb5a83
   - enabled: 1
     path: Assets/Scene/testSceneUI.unity

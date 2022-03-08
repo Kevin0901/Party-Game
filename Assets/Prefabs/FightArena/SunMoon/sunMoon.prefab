@@ -12,7 +12,6 @@ GameObject:
   - component: {fileID: 1121713160137810869}
   - component: {fileID: 1121713160137810868}
   - component: {fileID: 1121713160137810866}
-  - component: {fileID: 1709985701427264188}
   m_Layer: 0
   m_Name: Sun (4)
   m_TagString: sun
@@ -97,45 +96,6 @@ PolygonCollider2D:
       - {x: -0.96789765, y: 0.84817326}
       - {x: -0.116007805, y: -1.5983104}
       - {x: 0.66638094, y: 0.81194395}
---- !u!66 &1709985701427264188
-CompositeCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1121713160137810864}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
-  m_GeometryType: 0
-  m_GenerationType: 0
-  m_EdgeRadius: 0
-  m_ColliderPaths:
-  - m_Collider: {fileID: 1121713160137810866}
-    m_ColliderPaths:
-    - - X: 9595569
-        Y: 51104592
-      - X: -32727678
-        Y: 51023320
-      - X: -77431816
-        Y: 67853856
-      - X: -9280613
-        Y: -127864832
-      - X: 53310472
-        Y: 64955520
-  m_CompositePaths:
-    m_Paths:
-    - - {x: -0.92809844, y: -12.786377}
-      - {x: 5.3309836, y: 6.495532}
-      - {x: 0.9595527, y: 5.1104593}
-      - {x: -3.272772, y: 5.1023335}
-      - {x: -7.743157, y: 6.7853155}
-  m_VertexDistance: 0.0005
-  m_OffsetDistance: 0.00005
 --- !u!1 &1121713160355523425
 GameObject:
   m_ObjectHideFlags: 0
@@ -148,7 +108,6 @@ GameObject:
   - component: {fileID: 1121713160355523430}
   - component: {fileID: 1121713160355523429}
   - component: {fileID: 1121713160355523428}
-  - component: {fileID: 4325534475836463588}
   m_Layer: 0
   m_Name: Sun (1)
   m_TagString: sun
@@ -233,45 +192,6 @@ PolygonCollider2D:
       - {x: -0.96789765, y: 0.84817326}
       - {x: -0.116007805, y: -1.5983104}
       - {x: 0.66638094, y: 0.81194395}
---- !u!66 &4325534475836463588
-CompositeCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1121713160355523425}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
-  m_GeometryType: 0
-  m_GenerationType: 0
-  m_EdgeRadius: 0
-  m_ColliderPaths:
-  - m_Collider: {fileID: 1121713160355523428}
-    m_ColliderPaths:
-    - - X: 9595574
-        Y: 51104592
-      - X: -32727674
-        Y: 51023324
-      - X: -77431816
-        Y: 67853864
-      - X: -9280624
-        Y: -127864832
-      - X: 53310476
-        Y: 64955516
-  m_CompositePaths:
-    m_Paths:
-    - - {x: -0.9280995, y: -12.786377}
-      - {x: 5.330984, y: 6.4955316}
-      - {x: 0.9595532, y: 5.1104593}
-      - {x: -3.2727716, y: 5.102334}
-      - {x: -7.743157, y: 6.7853155}
-  m_VertexDistance: 0.0005
-  m_OffsetDistance: 0.00005
 --- !u!1 &1121713160621218286
 GameObject:
   m_ObjectHideFlags: 0
@@ -284,7 +204,6 @@ GameObject:
   - component: {fileID: 1121713160621218275}
   - component: {fileID: 1121713160621218274}
   - component: {fileID: 1121713160621218273}
-  - component: {fileID: 1582251903854403034}
   m_Layer: 0
   m_Name: Sun (3)
   m_TagString: sun
@@ -369,45 +288,6 @@ PolygonCollider2D:
       - {x: -0.96789765, y: 0.84817326}
       - {x: -0.12879932, y: -1.6750599}
       - {x: 0.66638094, y: 0.81194395}
---- !u!66 &1582251903854403034
-CompositeCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1121713160621218286}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
-  m_GeometryType: 0
-  m_GenerationType: 0
-  m_EdgeRadius: 0
-  m_ColliderPaths:
-  - m_Collider: {fileID: 1121713160621218273}
-    m_ColliderPaths:
-    - - X: 9595578
-        Y: 51104592
-      - X: -32727668
-        Y: 51023332
-      - X: -77431808
-        Y: 67853864
-      - X: -10303957
-        Y: -134004792
-      - X: 53310480
-        Y: 64955512
-  m_CompositePaths:
-    m_Paths:
-    - - {x: -1.0304326, y: -13.400368}
-      - {x: 5.330985, y: 6.495531}
-      - {x: 0.9595536, y: 5.1104593}
-      - {x: -3.2727711, y: 5.102335}
-      - {x: -7.743158, y: 6.785317}
-  m_VertexDistance: 0.0005
-  m_OffsetDistance: 0.00005
 --- !u!1 &1121713161228268513
 GameObject:
   m_ObjectHideFlags: 0
@@ -502,7 +382,6 @@ GameObject:
   - component: {fileID: 1121713161315353692}
   - component: {fileID: 1121713161315353691}
   - component: {fileID: 1121713161315353689}
-  - component: {fileID: 4545983150220479011}
   m_Layer: 0
   m_Name: Sun (5)
   m_TagString: sun
@@ -587,45 +466,6 @@ PolygonCollider2D:
       - {x: -0.96789765, y: 0.84817326}
       - {x: -0.116007805, y: -1.5983104}
       - {x: 0.66638094, y: 0.81194395}
---- !u!66 &4545983150220479011
-CompositeCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1121713161315353671}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
-  m_GeometryType: 0
-  m_GenerationType: 0
-  m_EdgeRadius: 0
-  m_ColliderPaths:
-  - m_Collider: {fileID: 1121713161315353689}
-    m_ColliderPaths:
-    - - X: 9595574
-        Y: 51104592
-      - X: -32727674
-        Y: 51023324
-      - X: -77431816
-        Y: 67853864
-      - X: -9280624
-        Y: -127864832
-      - X: 53310476
-        Y: 64955516
-  m_CompositePaths:
-    m_Paths:
-    - - {x: -0.9280995, y: -12.786377}
-      - {x: 5.330984, y: 6.4955316}
-      - {x: 0.9595532, y: 5.1104593}
-      - {x: -3.2727716, y: 5.102334}
-      - {x: -7.743157, y: 6.7853155}
-  m_VertexDistance: 0.0005
-  m_OffsetDistance: 0.00005
 --- !u!1 &1121713161350777139
 GameObject:
   m_ObjectHideFlags: 0
@@ -638,7 +478,6 @@ GameObject:
   - component: {fileID: 1121713161350777142}
   - component: {fileID: 1121713161350777143}
   - component: {fileID: 1121713161350777141}
-  - component: {fileID: 7228966907006262666}
   m_Layer: 0
   m_Name: Moon
   m_TagString: moon
@@ -730,66 +569,6 @@ PolygonCollider2D:
       - {x: 0.2633344, y: -0.21824014}
       - {x: 0.60781187, y: -0.11810851}
       - {x: 1.211399, y: -0.0013911426}
---- !u!66 &7228966907006262666
-CompositeCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1121713161350777139}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
-  m_GeometryType: 0
-  m_GenerationType: 0
-  m_EdgeRadius: 0
-  m_ColliderPaths:
-  - m_Collider: {fileID: 1121713161350777141}
-    m_ColliderPaths:
-    - - X: 43700508
-        Y: 69963752
-      - X: -7466478
-        Y: 103704864
-      - X: -46400080
-        Y: 125553024
-      - X: -106978264
-        Y: 138131952
-      - X: -150551488
-        Y: 137082112
-      - X: -108652448
-        Y: 117238152
-      - X: -67884496
-        Y: 88499696
-      - X: -24746194
-        Y: 48186680
-      - X: 13033895
-        Y: -2967358
-      - X: 21066752
-        Y: -17459212
-      - X: 48624948
-        Y: -9448681
-      - X: 96911920
-        Y: -111291
-  m_CompositePaths:
-    m_Paths:
-    - - {x: 2.1066644, y: -1.7459016}
-      - {x: 4.862495, y: -0.9448682}
-      - {x: 9.69116, y: -0.0110872}
-      - {x: 4.370047, y: 6.9963775}
-      - {x: -0.7466497, y: 10.370487}
-      - {x: -4.6400123, y: 12.555304}
-      - {x: -10.69783, y: 13.813195}
-      - {x: -15.054994, y: 13.7081375}
-      - {x: -10.865244, y: 11.723815}
-      - {x: -6.7884464, y: 8.849967}
-      - {x: -2.474618, y: 4.8186665}
-      - {x: 1.3033907, y: -0.2967379}
-  m_VertexDistance: 0.0005
-  m_OffsetDistance: 0.00005
 --- !u!1 &1121713161391052717
 GameObject:
   m_ObjectHideFlags: 0
@@ -801,7 +580,6 @@ GameObject:
   - component: {fileID: 1121713161391052705}
   - component: {fileID: 1121713161391052704}
   - component: {fileID: 1121713161391052719}
-  - component: {fileID: 8499490040193294906}
   m_Layer: 0
   m_Name: sunMoon
   m_TagString: background
@@ -818,7 +596,7 @@ Transform:
   m_GameObject: {fileID: 1121713161391052717}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 8, y: 8, z: 8}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1121713161228268514}
   - {fileID: 1121713161350777140}
@@ -906,21 +684,6 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
---- !u!114 &8499490040193294906
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1121713161391052717}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d58b057d697fdd64197aa5002c7bde20, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  p: {fileID: 0}
-  bg: {fileID: 0}
-  size: 0.05
 --- !u!1 &1121713161414323100
 GameObject:
   m_ObjectHideFlags: 0
@@ -933,7 +696,6 @@ GameObject:
   - component: {fileID: 1121713161414323089}
   - component: {fileID: 1121713161414323088}
   - component: {fileID: 1121713161414323103}
-  - component: {fileID: 686111501762735031}
   m_Layer: 0
   m_Name: Sun (2)
   m_TagString: sun
@@ -1018,45 +780,6 @@ PolygonCollider2D:
       - {x: -0.96789765, y: 0.84817326}
       - {x: -0.116007805, y: -1.5983104}
       - {x: 0.66638094, y: 0.81194395}
---- !u!66 &686111501762735031
-CompositeCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1121713161414323100}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
-  m_GeometryType: 0
-  m_GenerationType: 0
-  m_EdgeRadius: 0
-  m_ColliderPaths:
-  - m_Collider: {fileID: 1121713161414323103}
-    m_ColliderPaths:
-    - - X: 9595572
-        Y: 51104592
-      - X: -32727676
-        Y: 51023324
-      - X: -77431816
-        Y: 67853864
-      - X: -9280621
-        Y: -127864832
-      - X: 53310476
-        Y: 64955516
-  m_CompositePaths:
-    m_Paths:
-    - - {x: -0.9280992, y: -12.786377}
-      - {x: 5.330984, y: 6.4955316}
-      - {x: 0.959553, y: 5.1104593}
-      - {x: -3.2727718, y: 5.102334}
-      - {x: -7.743157, y: 6.7853155}
-  m_VertexDistance: 0.0005
-  m_OffsetDistance: 0.00005
 --- !u!1 &1121713161475019053
 GameObject:
   m_ObjectHideFlags: 0
@@ -1069,7 +792,6 @@ GameObject:
   - component: {fileID: 1121713161475019041}
   - component: {fileID: 1121713161475019040}
   - component: {fileID: 1121713161475019055}
-  - component: {fileID: 7585129627768500292}
   m_Layer: 0
   m_Name: Moon(3)
   m_TagString: moon
@@ -1162,69 +884,6 @@ PolygonCollider2D:
       - {x: -0.31180096, y: -0.96257144}
       - {x: -0.40643755, y: -1.3780538}
       - {x: -0.30290964, y: -1.4914662}
---- !u!66 &7585129627768500292
-CompositeCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1121713161475019053}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
-  m_GeometryType: 0
-  m_GenerationType: 0
-  m_EdgeRadius: 0
-  m_ColliderPaths:
-  - m_Collider: {fileID: 1121713161475019055}
-    m_ColliderPaths:
-    - - X: 1374870
-        Y: -78499848
-      - X: 16836876
-        Y: -37558052
-      - X: 22632880
-        Y: 16410434
-      - X: 21457620
-        Y: 68420240
-      - X: 10510676
-        Y: 111503432
-      - X: -16755154
-        Y: 174609392
-      - X: -71350928
-        Y: 110904424
-      - X: -52737380
-        Y: 69408112
-      - X: -34822940
-        Y: 9657350
-      - X: -25757020
-        Y: -37943572
-      - X: -24944084
-        Y: -77005712
-      - X: -32515014
-        Y: -110244304
-      - X: -24232780
-        Y: -119317296
-  m_CompositePaths:
-    m_Paths:
-    - - {x: -2.4233055, y: -11.9317}
-      - {x: 0.1374877, y: -7.849983}
-      - {x: 1.683688, y: -3.7558017}
-      - {x: 2.263288, y: 1.6410444}
-      - {x: 2.1457613, y: 6.842027}
-      - {x: 1.0510669, y: 11.150345}
-      - {x: -1.6755494, y: 17.4609}
-      - {x: -7.1350856, y: 11.090426}
-      - {x: -5.2737374, y: 6.9408097}
-      - {x: -3.4822936, y: 0.9657328}
-      - {x: -2.575702, y: -3.7943592}
-      - {x: -2.4944093, y: -7.7005744}
-      - {x: -3.251492, y: -11.024441}
-  m_VertexDistance: 0.0005
-  m_OffsetDistance: 0.00005
 --- !u!1 &1121713161638291078
 GameObject:
   m_ObjectHideFlags: 0
@@ -1237,7 +896,6 @@ GameObject:
   - component: {fileID: 1121713161638291098}
   - component: {fileID: 1121713161638291097}
   - component: {fileID: 1121713161638291096}
-  - component: {fileID: 7567414599319708821}
   m_Layer: 0
   m_Name: Moon(1)
   m_TagString: moon
@@ -1329,66 +987,6 @@ PolygonCollider2D:
       - {x: 0.2633344, y: -0.21824014}
       - {x: 0.60781187, y: -0.11810851}
       - {x: 1.211399, y: -0.0013911426}
---- !u!66 &7567414599319708821
-CompositeCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1121713161638291078}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
-  m_GeometryType: 0
-  m_GenerationType: 0
-  m_EdgeRadius: 0
-  m_ColliderPaths:
-  - m_Collider: {fileID: 1121713161638291096}
-    m_ColliderPaths:
-    - - X: 43700512
-        Y: 69963744
-      - X: -7466469
-        Y: 103704864
-      - X: -46400072
-        Y: 125553024
-      - X: -106978256
-        Y: 138131968
-      - X: -156489936
-        Y: 137860496
-      - X: -108652440
-        Y: 117238160
-      - X: -67884480
-        Y: 88499712
-      - X: -24746190
-        Y: 48186680
-      - X: 13033895
-        Y: -2967359
-      - X: 21066750
-        Y: -17459214
-      - X: 48624948
-        Y: -9448685
-      - X: 96911920
-        Y: -111299
-  m_CompositePaths:
-    m_Paths:
-    - - {x: 2.1066642, y: -1.7459018}
-      - {x: 4.862495, y: -0.9448686}
-      - {x: 9.69116, y: -0.011088}
-      - {x: 4.370048, y: 6.996377}
-      - {x: -0.7466488, y: 10.370487}
-      - {x: -4.6400113, y: 12.555304}
-      - {x: -10.697828, y: 13.813197}
-      - {x: -15.648811, y: 13.785972}
-      - {x: -10.865243, y: 11.723815}
-      - {x: -6.788445, y: 8.849969}
-      - {x: -2.4746177, y: 4.8186665}
-      - {x: 1.3033907, y: -0.296738}
-  m_VertexDistance: 0.0005
-  m_OffsetDistance: 0.00005
 --- !u!1 &1121713161694091457
 GameObject:
   m_ObjectHideFlags: 0
@@ -1401,7 +999,6 @@ GameObject:
   - component: {fileID: 1121713161694091461}
   - component: {fileID: 1121713161694091460}
   - component: {fileID: 1121713161694091459}
-  - component: {fileID: 266569613336314775}
   m_Layer: 0
   m_Name: Moon(2)
   m_TagString: moon
@@ -1494,69 +1091,6 @@ PolygonCollider2D:
       - {x: -0.31180096, y: -0.96257144}
       - {x: -0.3727582, y: -1.3527944}
       - {x: -0.24818082, y: -1.4535772}
---- !u!66 &266569613336314775
-CompositeCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1121713161694091457}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
-  m_GeometryType: 0
-  m_GenerationType: 0
-  m_EdgeRadius: 0
-  m_ColliderPaths:
-  - m_Collider: {fileID: 1121713161694091459}
-    m_ColliderPaths:
-    - - X: 1374877
-        Y: -78499848
-      - X: 16836880
-        Y: -37558048
-      - X: 22632878
-        Y: 16410437
-      - X: 21457612
-        Y: 68420240
-      - X: 10510666
-        Y: 111503432
-      - X: -15744784
-        Y: 174272608
-      - X: -68993368
-        Y: 109220448
-      - X: -52737384
-        Y: 69408104
-      - X: -34822940
-        Y: 9657347
-      - X: -25757018
-        Y: -37943572
-      - X: -24944076
-        Y: -77005712
-      - X: -29820656
-        Y: -108223552
-      - X: -19854466
-        Y: -116286176
-  m_CompositePaths:
-    m_Paths:
-    - - {x: -1.9854748, y: -11.628595}
-      - {x: 0.1374883, y: -7.849983}
-      - {x: 1.6836884, y: -3.7558012}
-      - {x: 2.2632875, y: 1.6410447}
-      - {x: 2.1457605, y: 6.842027}
-      - {x: 1.051066, y: 11.150344}
-      - {x: -1.5745133, y: 17.42722}
-      - {x: -6.899331, y: 10.9220295}
-      - {x: -5.2737384, y: 6.9408107}
-      - {x: -3.4822936, y: 0.9657325}
-      - {x: -2.5757017, y: -3.7943592}
-      - {x: -2.4944081, y: -7.700574}
-      - {x: -2.9820535, y: -10.822365}
-  m_VertexDistance: 0.0005
-  m_OffsetDistance: 0.00005
 --- !u!1 &1121713161741154542
 GameObject:
   m_ObjectHideFlags: 0
@@ -1569,7 +1103,6 @@ GameObject:
   - component: {fileID: 1121713161741154529}
   - component: {fileID: 1121713161741154530}
   - component: {fileID: 1121713161741154531}
-  - component: {fileID: 8438452765338501787}
   m_Layer: 0
   m_Name: Sun
   m_TagString: sun
@@ -1654,42 +1187,3 @@ PolygonCollider2D:
       - {x: -0.96789765, y: 0.84817326}
       - {x: -0.116007805, y: -1.5983104}
       - {x: 0.66638094, y: 0.81194395}
---- !u!66 &8438452765338501787
-CompositeCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1121713161741154542}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
-  m_GeometryType: 0
-  m_GenerationType: 0
-  m_EdgeRadius: 0
-  m_ColliderPaths:
-  - m_Collider: {fileID: 1121713161741154531}
-    m_ColliderPaths:
-    - - X: 9595574
-        Y: 51104592
-      - X: -32727674
-        Y: 51023324
-      - X: -77431816
-        Y: 67853864
-      - X: -9280624
-        Y: -127864832
-      - X: 53310476
-        Y: 64955516
-  m_CompositePaths:
-    m_Paths:
-    - - {x: -0.9280995, y: -12.786377}
-      - {x: 5.330984, y: 6.4955316}
-      - {x: 0.9595532, y: 5.1104593}
-      - {x: -3.2727716, y: 5.102334}
-      - {x: -7.743157, y: 6.7853155}
-  m_VertexDistance: 0.0005
-  m_OffsetDistance: 0.00005

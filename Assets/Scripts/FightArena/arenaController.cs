@@ -17,7 +17,6 @@ public class arenaController : MonoBehaviour
         isget1st = false;
         isover = false;
         isCupidEnd = false;
-        p = GameObject.Find("playerManager").GetComponent<playerlist>();
     }
 
     // Update is called once per frame
@@ -44,7 +43,7 @@ public class arenaController : MonoBehaviour
             }
             else if (p.player.Count == 1)//剩1個玩家，通常都是第一名
             {
-                winplayer = p.player[0].GetComponent<arenaPlayer>().order; //顯示贏家
+                // winplayer = p.player[0].GetComponent<arenaPlayer>().order; //顯示贏家
                 GameObject.Find("FightGameManager").transform.Find("Gameover").transform.Find("Panel").transform.Find("P" + winplayer).gameObject.SetActive(true);
                 StartCoroutine(Exit());
             }
@@ -91,21 +90,21 @@ public class arenaController : MonoBehaviour
             }
         }
 
-        if (cupidwinplayer.Count == 1)
-        {
-            winplayer = cupidwinplayer[0].GetComponent<arenaPlayer>().order; //顯示贏家
-            GameObject.Find("FightGameManager").transform.Find("Gameover").transform.Find("Panel").transform.Find("P" + winplayer).gameObject.SetActive(true);
-            StartCoroutine(Exit());
-        }
-        else if (cupidwinplayer.Count > 1)
-        {
-            for (int i = 0; i < cupidwinplayer.Count; i++)
-            {
-                winplayer = cupidwinplayer[i].GetComponent<arenaPlayer>().order; //顯示贏家
-                GameObject.Find("FightGameManager").transform.Find("Gameover").transform.Find("Panel").transform.Find("P" + winplayer).gameObject.SetActive(true);
-                StartCoroutine(Exit());
-            }
-        }
+        // if (cupidwinplayer.Count == 1)
+        // {
+        //     winplayer = cupidwinplayer[0].GetComponent<arenaPlayer>().order; //顯示贏家
+        //     GameObject.Find("FightGameManager").transform.Find("Gameover").transform.Find("Panel").transform.Find("P" + winplayer).gameObject.SetActive(true);
+        //     StartCoroutine(Exit());
+        // }
+        // else if (cupidwinplayer.Count > 1)
+        // {
+        //     for (int i = 0; i < cupidwinplayer.Count; i++)
+        //     {
+        //         winplayer = cupidwinplayer[i].GetComponent<arenaPlayer>().order; //顯示贏家
+        //         GameObject.Find("FightGameManager").transform.Find("Gameover").transform.Find("Panel").transform.Find("P" + winplayer).gameObject.SetActive(true);
+        //         StartCoroutine(Exit());
+        //     }
+        // }
 
     }
     public IEnumerator Exit() //回去主場景

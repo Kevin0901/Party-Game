@@ -2,16 +2,16 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
-public class inputS_Player : MonoBehaviour
+public class Controlteam : MonoBehaviour
 {
-    private PlayerInput gamePlayer;
-    public bool red;
-    public GameObject ui;
-    void Awake()
+    // Start is called before the first frame update
+    private GameObject ui;
+    PlayerInput controls;
+    private void Awake()
     {
-        red = true;
-        gamePlayer = this.GetComponent<PlayerInput>();
-        ui = GameObject.Find("ChoosePlayer").transform.Find("P" + (gamePlayer.playerIndex + 1)).gameObject;
+        controls = this.GetComponent<PlayerInput>();
+        controls.actionEvents[1].AddListener(choose);
+        ui = GameObject.Find("ChoosePlayer").transform.Find("P" + (controls.playerIndex + 1)).gameObject;
         if (ui.transform.Find("BlueTeam").gameObject.activeSelf)
         {
             ui.transform.Find("RedTeam").gameObject.SetActive(true);
@@ -26,15 +26,16 @@ public class inputS_Player : MonoBehaviour
             {
                 ui.transform.Find("RedTeam").gameObject.SetActive(false);
                 ui.transform.Find("BlueTeam").gameObject.SetActive(true);
-                red = false;
             }
             else
             {
                 ui.transform.Find("RedTeam").gameObject.SetActive(true);
                 ui.transform.Find("BlueTeam").gameObject.SetActive(false);
-                red = true;
             }
         }
     }
-
+    public void removeChoose()
+    {
+        controls.actionEvents[1].RemoveListener(choose);
+    }
 }

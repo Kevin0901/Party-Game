@@ -621,7 +621,7 @@ MonoBehaviour:
       m_Flags: 0
     m_Reference: {fileID: -5762234757655377014, guid: 765bfb3a1e352d041b456d1a4a68a00b,
       type: 3}
-  m_PlayerPrefab: {fileID: 5062027600983921548, guid: e9f16d7642431df438e3f16792e6d57a,
+  m_PlayerPrefab: {fileID: 2028814211212845501, guid: c775dd2b651076e4695745b131227a23,
     type: 3}
   m_SplitScreen: 0
   m_MaintainAspectRatioInSplitScreen: 0
@@ -658,6 +658,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3186408fb5412f9439a6c64a30baaf04, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  fighter: {fileID: 0}
   plist: []
 --- !u!1 &1059266351
 GameObject:

@@ -78,12 +78,12 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2028814211212845497}
-  - component: {fileID: 663338559122863997}
   - component: {fileID: 2028814211212845503}
-  - component: {fileID: 7754934055589320719}
-  - component: {fileID: 3202576201452998826}
+  - component: {fileID: 663338559122863997}
   - component: {fileID: 475883669754376074}
+  - component: {fileID: 7754934055589320719}
   - component: {fileID: 3454384142202459819}
+  - component: {fileID: -3661442191397062175}
   m_Layer: 10
   m_Name: arenaPlayer
   m_TagString: Untagged
@@ -100,7 +100,7 @@ Transform:
   m_GameObject: {fileID: 2028814211212845501}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1.8, y: 1.8, z: 1.8}
+  m_LocalScale: {x: 1.9, y: 1.9, z: 1.9}
   m_Children:
   - {fileID: 4251131724691091629}
   - {fileID: 8390445758523567127}
@@ -108,6 +108,27 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!50 &2028814211212845503
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2028814211212845501}
+  m_BodyType: 0
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 10
+  m_AngularDrag: 10
+  m_GravityScale: 0
+  m_Material: {fileID: 0}
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 0
 --- !u!212 &663338559122863997
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -159,62 +180,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 1
---- !u!50 &2028814211212845503
-Rigidbody2D:
-  serializedVersion: 4
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2028814211212845501}
-  m_BodyType: 0
-  m_Simulated: 1
-  m_UseFullKinematicContacts: 0
-  m_UseAutoMass: 0
-  m_Mass: 1
-  m_LinearDrag: 10
-  m_AngularDrag: 10
-  m_GravityScale: 0
-  m_Material: {fileID: 0}
-  m_Interpolate: 0
-  m_SleepingMode: 1
-  m_CollisionDetection: 0
-  m_Constraints: 0
---- !u!114 &7754934055589320719
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2028814211212845501}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cec4967692dba314cb9226d9ceb2af89, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  dizzyT: 0
-  repelpower: 0
-  repeldir: {x: 0, y: 0, z: 0}
-  isready: 0
-  currentState: 0
-  joynum: 0
-  order: 0
-  speed: 135
-  stone: {fileID: 21300000, guid: ca128af32d9812f45842061512163ecf, type: 3}
-  CupidGamepoint: 0
---- !u!114 &3202576201452998826
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2028814211212845501}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c0993616b4aa21a4cafb117bc50909fc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Enemyteam: 
 --- !u!70 &475883669754376074
 CapsuleCollider2D:
   m_ObjectHideFlags: 0
@@ -231,6 +196,24 @@ CapsuleCollider2D:
   m_Offset: {x: 0.015773563, y: -0.12920846}
   m_Size: {x: 1.8671286, y: 1.565073}
   m_Direction: 1
+--- !u!114 &7754934055589320719
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2028814211212845501}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cec4967692dba314cb9226d9ceb2af89, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  dizzyT: 0
+  isready: 0
+  currentState: 0
+  speed: 135
+  stone: {fileID: 21300000, guid: ca128af32d9812f45842061512163ecf, type: 3}
+  CupidGamepoint: 0
 --- !u!114 &3454384142202459819
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -248,6 +231,49 @@ MonoBehaviour:
   speed: 47.5
   mass: 10
   fireRate: 0.5
+--- !u!114 &-3661442191397062175
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2028814211212845501}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 62899f850307741f2a39c98a8b639597, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Actions: {fileID: -944628639613478452, guid: 765bfb3a1e352d041b456d1a4a68a00b,
+    type: 3}
+  m_NotificationBehavior: 2
+  m_UIInputModule: {fileID: 0}
+  m_DeviceLostEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_DeviceRegainedEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_ControlsChangedEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_ActionEvents:
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: da5efce7-0b41-45bb-9a3c-2c57823845bf
+    m_ActionName: Player/joinGame[/XInputControllerWindows/buttonWest,/XInputControllerWindows1/buttonWest,/Keyboard/space]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: e8cd5603-591e-4aad-8664-5fb31e5e2f9e
+    m_ActionName: Player/chooseTeam[/Keyboard/d,/Keyboard/a,/XInputControllerWindows/rightStick/right,/XInputControllerWindows/rightStick/left]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: b7af6082-d34c-4753-80e6-51ef656cc8da
+    m_ActionName: Player/rotation[/XInputControllerWindows/leftStick]
+  m_NeverAutoSwitchControlSchemes: 0
+  m_DefaultControlScheme: 
+  m_DefaultActionMap: Player
+  m_SplitScreenIndex: -1
+  m_Camera: {fileID: 0}
 --- !u!1 &5195281706139582395
 GameObject:
   m_ObjectHideFlags: 0

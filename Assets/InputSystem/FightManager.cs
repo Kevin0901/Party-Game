@@ -6,7 +6,8 @@ using UnityEngine.SceneManagement;
 public class FightManager : MonoBehaviour
 {
     public static FightManager Instance;
-    public int red, blue;
+    private int game_num;
+    [SerializeField] private GameObject fighter;
     public List<GameObject> plist;
     private PlayerInputManager manager;
     private void Awake()
@@ -56,17 +57,19 @@ public class FightManager : MonoBehaviour
     }
     public void teamChoose()
     {
-        red = 0;
-        blue = 0;
+        int red = 0;
+        int blue = 0;
         for (int i = 0; i < plist.Count; i++)
         {
-            if (plist[i].GetComponent<inputS_Player>().red)
+            if (GameObject.Find("ChoosePlayer").transform.Find("P" + (i + 1)).Find("RedTeam").gameObject.activeSelf)
             {
                 red += 1;
+                plist[i].GetComponent<arenaPlayer>().red = true;
             }
             else
             {
                 blue += 1;
+                plist[i].GetComponent<arenaPlayer>().red = false;
             }
         }
         if (plist.Count >= 2 && (red > 0 && blue > 0))
@@ -75,6 +78,10 @@ public class FightManager : MonoBehaviour
             GameObject.Find("ChoosePlayer").GetComponent<CanvasGroup>().blocksRaycasts = false;
             GameObject.Find("GameChoose").GetComponent<CanvasGroup>().alpha = 1;
             GameObject.Find("GameChoose").GetComponent<CanvasGroup>().blocksRaycasts = true;
+            for (int j = 0; j < plist.Count; j++)
+            {
+                plist[j].GetComponent<arenaPlayer>().removeChoose();
+            }
         }
         else
         {
@@ -83,10 +90,35 @@ public class FightManager : MonoBehaviour
     }
     public void gameNum(int num)
     {
+        SceneManager.sceneLoaded += waitLoad;
+        game_num = num;
         for (int i = 0; i < plist.Count; i++)
         {
             DontDestroyOnLoad(plist[i]);
         }
         SceneManager.LoadSceneAsync("FightScene", LoadSceneMode.Single);
+    }
+    public void waitLoad(Scene scene, LoadSceneMode mode)
+    {
+        SceneManager.sceneLoaded -= waitLoad;
+        GameObject.Find("EventManager").transform.GetChild(game_num).gameObject.SetActive(true);
+        for (int i = 0; i < plist.Count; i++)
+        {
+            switch (i)
+            {
+                case 0:
+                    plist[i].GetComponent<arenaPlayer>().SpawnPoint(new Vector3(-10, 0, 0));
+                    break;
+                case 1:
+                    plist[i].GetComponent<arenaPlayer>().SpawnPoint(new Vector3(0, 10, 0));
+                    break;
+                case 2:
+                    plist[i].GetComponent<arenaPlayer>().SpawnPoint(new Vector3(10, 0, 0));
+                    break;
+                case 3:
+                    plist[i].GetComponent<arenaPlayer>().SpawnPoint(new Vector3(0, -10, 0));
+                    break;
+            }
+        }
     }
 }
