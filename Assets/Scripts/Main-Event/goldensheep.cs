@@ -77,7 +77,6 @@ public class goldensheep : MonoBehaviour
 
     IEnumerator gobackcolddown()
     {
-        Debug.Log("go back");
         float orginspeed = speed;
         speed = 0;
         yield return new WaitForSeconds(10);

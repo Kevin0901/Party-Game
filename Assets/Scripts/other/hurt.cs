@@ -25,5 +25,11 @@ public class hurt : MonoBehaviour
         {
             other.gameObject.GetComponentInChildren<health>().Hurt(damageToGive);
         }
+
+        if (other.CompareTag("monster"))
+        {
+            other.gameObject.GetComponentInChildren<health>().Hurt(damageToGive);
+        }
+
     }
 }

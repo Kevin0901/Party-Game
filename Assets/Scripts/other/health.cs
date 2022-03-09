@@ -14,7 +14,7 @@ public class health : MonoBehaviour
     private Slider bar;
     private int burnstack = 0;
     public bool iswudi;//無敵
-    public int playercatchsheeponhit=0;
+    public int playercatchsheeponhit = 0;
     private void Awake()
     {
         ResourceTypeListSO resourceTypeList = Resources.Load<ResourceTypeListSO>(typeof(ResourceTypeListSO).Name);
@@ -63,7 +63,8 @@ public class health : MonoBehaviour
             curH -= damageToGive;
         }
 
-        if(parentSet.layer == 10){
+        if (parentSet.layer == 10)
+        {
             playercatchsheeponhit = 1;
         }
     }
@@ -111,15 +112,4 @@ public class health : MonoBehaviour
             this.transform.GetChild(0).Find("Fill").GetComponent<Image>().color = new Color32(44, 43, 178, 255);
         }
     }
-    // public bool lowHpToDie(int damege)
-    // {
-    //     if (curH - damege < 0)
-    //     {
-    //         return true;
-    //     }
-    //     else
-    //     {
-    //         return false;
-    //     }
-    // }
 }
