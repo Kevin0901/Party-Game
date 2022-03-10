@@ -5,38 +5,31 @@ using UnityEngine;
 public class ball : MonoBehaviour
 {
     [SerializeField] private float speed;
-    [SerializeField] private float damage;
+    [SerializeField] private float damage = 1;
     private Rigidbody2D rb;
-    private arenaController game;
     private float cnt;
-    // Start is called before the first frame update
     void Awake()
     {
         cnt = 1.5f;
-    }
-    private void Start()
-    {
-        game = GameObject.Find("FightGameManager").GetComponent<arenaController>();
     }
     // Update is called once per frame
     void Update()
     {
         this.transform.Rotate(0, 0, 3f);
+        // if (FightManager.Instance.gamelist.Count == 1)
+        // {
+        //     Destroy(this.gameObject);
+        // }
         if (Vector3.Distance(Vector3.zero, this.transform.position) > 45)
         {
             Destroy(this.gameObject);
         }
-        else if (game.isover)
-        {
-            Destroy(this.gameObject);
-        }
     }
-    public void launch(Vector2 pos)
+    public void move(int num)
     {
-        Vector2 k;
-        rb = this.gameObject.GetComponent<Rigidbody2D>();
-        k = -(new Vector2(this.transform.position.x, this.transform.position.y) - pos).normalized;
-        rb.AddForce(k * speed, ForceMode2D.Force);
+        rb = this.GetComponent<Rigidbody2D>();
+        Vector2 pos = (FightManager.Instance.gamelist[num].transform.position - this.transform.position).normalized;
+        rb.AddForce(pos * speed, ForceMode2D.Force);
     }
     private void OnCollisionEnter2D(Collision2D other)
     {
@@ -44,10 +37,11 @@ public class ball : MonoBehaviour
         {
             other.gameObject.GetComponent<arenaPlayer>().hurt(damage);
         }
-        else if (other.gameObject.tag == "pick")
-        {
-            other.gameObject.SetActive(false);
-        }
+        // else if (other.gameObject.tag == "pick")
+        // {
+        //     other.gameObject.SetActive(false);
+        // }
+        //撞到任何物體都會加速
         rb.velocity = rb.velocity.normalized * speed * cnt;
         if (cnt <= 2.5f)
         {

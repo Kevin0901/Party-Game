@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 9016245958977170165}
   - component: {fileID: 9016245958977170166}
   - component: {fileID: 9016245958977170167}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: arenabg
   m_TagString: Untagged
   m_Icon: {fileID: 0}

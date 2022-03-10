@@ -39,7 +39,7 @@ public class sword : MonoBehaviour
 
     private void Hurt()
     {
-        master.hurt(0.5f);
+        // master.hurt(0.5f);
     }
     private void Update()
     {

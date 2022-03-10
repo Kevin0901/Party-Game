@@ -6,7 +6,7 @@ public class SunMoonArrowMove : MonoBehaviour
 {
     public bool isSun, noEffect;
     public float speed;
-    private Vector3 dir;//worldPosition, mousePos,
+    private Vector3 dir;
     private Rigidbody2D mrigibody2D;
     private void Start()
     {
@@ -21,7 +21,7 @@ public class SunMoonArrowMove : MonoBehaviour
         }
         else if (isSun)
         {
-            mrigibody2D.velocity = dir.normalized * speed * 2.25f;
+            mrigibody2D.velocity = dir.normalized * speed * 2.5f;
         }
         else
         {

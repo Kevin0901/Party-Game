@@ -5,7 +5,7 @@ using UnityEngine;
 public class circleMirror : MonoBehaviour
 {
     // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
         this.transform.Rotate(0, 0, 0.7f);
     }

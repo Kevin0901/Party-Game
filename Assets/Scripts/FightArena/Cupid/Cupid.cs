@@ -10,18 +10,18 @@ public class Cupid : MonoBehaviour
     private int arrow_limit = 70;
     private float angle, rotate, speed, cooldownTime;
     [SerializeField] private List<GameObject> arrow_Store = new List<GameObject>();
-    [HideInInspector] public playerlist p;
-    public arenaController game;
+    // [HideInInspector] public playerlist p;
+    // public arenaController game;
     private Vector3 firstpos, newpos;
     public int countdownTime;
     private int saveTime;
     public Text countdownDisplay;
-    private arenaController ac;
+    // private arenaController ac;
     // [SerializeField] private bool istouch;
     void Awake() //初始化物件池
     {
-        p = GameObject.Find("playerManager").GetComponent<playerlist>();
-        game = GameObject.Find("FightGameManager").GetComponent<arenaController>();
+        // p = GameObject.Find("playerManager").GetComponent<playerlist>();
+        // game = GameObject.Find("FightGameManager").GetComponent<arenaController>();
         for (int i = 0; i < arrow_limit; i++)
         {
             GameObject addArrow = Instantiate(arrow, Vector3.zero, Quaternion.identity);
@@ -42,10 +42,10 @@ public class Cupid : MonoBehaviour
     }
     private void Update()
     {
-        if (game.isover)
-        {
-            Destroy(this.gameObject, 0.1f);
-        }
+        // if (game.isover)
+        // {
+        //     Destroy(this.gameObject, 0.1f);
+        // }
     }
     //箭矢生成
     IEnumerator spawnArrow(float time)
@@ -59,10 +59,10 @@ public class Cupid : MonoBehaviour
         // transform.Find("CupidStage").transform.GetChild(sort - 1).gameObject.SetActive(true);
         yield return new WaitForSeconds(1);
         // transform.Find("CupidStage").transform.GetChild(sort - 1).gameObject.SetActive(false);
-        for (int i = 0; i < p.player.Count; i++)
-        {
-            p.player[i].GetComponent<arenaPlayer>().currentState = ArenaState.walk;
-        }
+        // for (int i = 0; i < p.player.Count; i++)
+        // {
+        //     p.player[i].GetComponent<arenaPlayer>().currentState = ArenaState.walk;
+        // }
         StartCoroutine(spawnArrow(0.5f));
     }
     //攻擊模式
@@ -71,13 +71,13 @@ public class Cupid : MonoBehaviour
         speed = 50f;
         for (int i = 0; i < number; i++)
         {
-            for (int j = 0; j < p.player.Count; j++)
-            {
-                newpos = p.player[j].transform.position.normalized;
-                Vector2 line = Vector3.zero - newpos;
-                rotate = Mathf.Atan2(line.y, line.x) * Mathf.Rad2Deg;
-                GetPoolInstance(this.gameObject.transform);
-            }
+            // for (int j = 0; j < p.player.Count; j++)
+            // {
+            //     newpos = p.player[j].transform.position.normalized;
+            //     Vector2 line = Vector3.zero - newpos;
+            //     rotate = Mathf.Atan2(line.y, line.x) * Mathf.Rad2Deg;
+            //     GetPoolInstance(this.gameObject.transform);
+            // }
             yield return new WaitForSeconds(0.5f);
         }
         StartCoroutine(spawnArrow(cooldownTime));
@@ -203,12 +203,12 @@ public class Cupid : MonoBehaviour
             StopAllCoroutines();
             StartCoroutine(TimeCount());
             other.gameObject.GetComponent<arenaPlayer>().CupidGamepoint += 1;
-            for (int i = 0; i < p.player.Count; i++)
-            {
-                p.player[i].GetComponent<arenaPlayer>().SpawnPoint();
-                p.player[i].GetComponent<arenaPlayer>().currentState = ArenaState.idle;
-                p.player[i].GetComponent<SpriteRenderer>().color = new Color32(255, 255, 255, 255);
-            }
+            // for (int i = 0; i < p.player.Count; i++)
+            // {
+            //     p.player[i].GetComponent<arenaPlayer>().SpawnPoint();
+            //     p.player[i].GetComponent<arenaPlayer>().currentState = ArenaState.idle;
+            //     p.player[i].GetComponent<SpriteRenderer>().color = new Color32(255, 255, 255, 255);
+            // }
             for (int j = 0; j < this.gameObject.transform.childCount; j++)
             {
                 if (this.gameObject.transform.GetChild(j).gameObject.tag == "arrow" && this.gameObject.transform.GetChild(j).gameObject.activeSelf)
@@ -231,8 +231,8 @@ public class Cupid : MonoBehaviour
         if (countdownTime == 0)
         {
             countdownTime = saveTime;
-            ac = GameObject.Find("FightGameManager").GetComponent<arenaController>();
-            ac.isCupidEnd = true;
+            // ac = GameObject.Find("FightGameManager").GetComponent<arenaController>();
+            // ac.isCupidEnd = true;
         }
     }
 }

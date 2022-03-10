@@ -5,33 +5,17 @@ using UnityEngine;
 public class SunMoonEvent : MonoBehaviour
 {
     // Start is called before the first frame update
-    [SerializeField] private float size;
-    void Start()
+    [SerializeField] private float size = 0.05f;
+    [SerializeField] private GameObject UI;
+    public void StartGame()
     {
-
-        // game = GameObject.Find("FightGameManager").GetComponent<arenaController>();
-        // p = GameObject.Find("playerManager").GetComponent<playerlist>();
-        // for (int i = 0; i < p.player.Count; i++)
-        // {
-        //     p.player[i].GetComponent<arenaPlayer>().currentState = ArenaState.walk;
-        //     p.player[i].GetComponent<playerShoot>().enabled = true;
-        // }
-        // bg = GameObject.Find("background");
-        // bg.GetComponent<PolygonCollider2D>().enabled = false;
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        // if (game.isover)
-        // {
-        // bg.transform.localScale = new Vector3(8, 8, 8);
-        // for (int i = 0; i < p.bornplayer.Count; i++)
-        // {
-        //     p.bornplayer[i].GetComponent<playerShoot>().enabled = false;
-        // }
-        // Destroy(this.gameObject, 0.1f);
-        // }
+        StartCoroutine(changeBG());
+        this.GetComponent<SunMoonEvent>().enabled = true;
+        for (int i = 0; i < FightManager.Instance.plist.Count; i++)
+        {
+            FightManager.Instance.plist[i].GetComponent<arenaPlayer>().currentState = ArenaState.walk;
+            FightManager.Instance.plist[i].GetComponent<playerShoot>().enabled = true;
+        }
     }
     private IEnumerator changeBG()
     {
@@ -44,8 +28,35 @@ public class SunMoonEvent : MonoBehaviour
         yield return null;
         StartCoroutine(changeBG());
     }
-    public void StartGame()
+    private void Update()
     {
-        StartCoroutine(changeBG());
+        if (FightManager.Instance.gamelist.Count == 1)
+        {
+            UI.SetActive(true);
+            if (FightManager.Instance.gamelist[0].GetComponent<arenaPlayer>().red)
+            {
+                UI.transform.Find("red").gameObject.SetActive(true);
+            }
+            else
+            {
+                UI.transform.Find("blue").gameObject.SetActive(true);
+            }
+            this.gameObject.SetActive(false);
+        }
+    }
+    private void OnDisable()
+    {
+        for (int i = 0; i < FightManager.Instance.plist.Count; i++)
+        {
+            FightManager.Instance.plist[i].GetComponent<arenaPlayer>().currentState = ArenaState.idle;
+            FightManager.Instance.plist[i].GetComponent<playerShoot>().enabled = false;
+        }
+    }
+    private void OnTriggerExit2D(Collider2D other)
+    {
+        if (other.gameObject.layer == 10)
+        {
+            other.gameObject.SetActive(false);
+        }
     }
 }

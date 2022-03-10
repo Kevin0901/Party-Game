@@ -6,9 +6,8 @@ using UnityEngine.SceneManagement;
 public class FightManager : MonoBehaviour
 {
     public static FightManager Instance;
-    private int game_num;
-    [SerializeField] private GameObject fighter;
-    public List<GameObject> plist;
+    public int game_num;
+    public List<GameObject> plist, gamelist;
     private PlayerInputManager manager;
     private void Awake()
     {
@@ -23,11 +22,13 @@ public class FightManager : MonoBehaviour
     private void Start()
     {
         plist = new List<GameObject>();
+        gamelist = new List<GameObject>();
         manager = this.GetComponent<PlayerInputManager>();
     }
     private void OnPlayerJoined(PlayerInput player)
     {
         plist.Add(player.gameObject);
+        player.gameObject.GetComponent<arenaPlayer>().openP_Num(plist.Count);
         Debug.Log("Joined " + player.playerIndex + " - " + player.devices[0].displayName);
         Debug.Log("Player Count " + manager.playerCount + "/" + manager.maxPlayerCount);
         GameObject.Find("ChoosePlayer").transform.Find("P" + manager.playerCount).gameObject.SetActive(true);
@@ -72,29 +73,42 @@ public class FightManager : MonoBehaviour
                 plist[i].GetComponent<arenaPlayer>().red = false;
             }
         }
-        if (plist.Count >= 2 && (red > 0 && blue > 0))
+        // if (plist.Count >= 2 && (red > 0 && blue > 0))
+        // {
+        GameObject.Find("ChoosePlayer").GetComponent<CanvasGroup>().alpha = 0;
+        GameObject.Find("ChoosePlayer").GetComponent<CanvasGroup>().blocksRaycasts = false;
+        GameObject.Find("GameChoose").GetComponent<CanvasGroup>().alpha = 1;
+        GameObject.Find("GameChoose").GetComponent<CanvasGroup>().blocksRaycasts = true;
+        for (int j = 0; j < plist.Count; j++)
         {
-            GameObject.Find("ChoosePlayer").GetComponent<CanvasGroup>().alpha = 0;
-            GameObject.Find("ChoosePlayer").GetComponent<CanvasGroup>().blocksRaycasts = false;
-            GameObject.Find("GameChoose").GetComponent<CanvasGroup>().alpha = 1;
-            GameObject.Find("GameChoose").GetComponent<CanvasGroup>().blocksRaycasts = true;
-            for (int j = 0; j < plist.Count; j++)
-            {
-                plist[j].GetComponent<arenaPlayer>().removeChoose();
-            }
+            plist[j].GetComponent<arenaPlayer>().removeChoose();
+            DontDestroyOnLoad(plist[j]);
         }
-        else
-        {
-            Debug.Log("配置不對歐");
-        }
+        manager.enabled = false;
+        // }
+        // else
+        // {
+        //     Debug.Log("配置不對歐");
+        // }
     }
     public void gameNum(int num)
     {
         SceneManager.sceneLoaded += waitLoad;
+        gamelist.Clear();
         game_num = num;
         for (int i = 0; i < plist.Count; i++)
         {
-            DontDestroyOnLoad(plist[i]);
+            gamelist.Add(plist[i]);
+        }
+        SceneManager.LoadSceneAsync("FightScene", LoadSceneMode.Single);
+    }
+    public void gameNum()
+    {
+        SceneManager.sceneLoaded += waitLoad;
+        gamelist.Clear();
+        for (int i = 0; i < plist.Count; i++)
+        {
+            gamelist.Add(plist[i]);
         }
         SceneManager.LoadSceneAsync("FightScene", LoadSceneMode.Single);
     }
@@ -119,6 +133,7 @@ public class FightManager : MonoBehaviour
                     plist[i].GetComponent<arenaPlayer>().SpawnPoint(new Vector3(0, -10, 0));
                     break;
             }
+            plist[i].SetActive(true);
         }
     }
 }

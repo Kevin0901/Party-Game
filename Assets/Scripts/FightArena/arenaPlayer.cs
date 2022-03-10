@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+
 public enum ArenaState
 {
     idle,
@@ -15,96 +16,75 @@ public class arenaPlayer : MonoBehaviour
     public bool red;
     public bool isready;
     public ArenaState currentState;
-    private Vector3 change;
     [Header("玩家數值")]
     public float speed = 30f;
+    [SerializeField] private float curH;
+    public int p_index;
     private SpriteRenderer spriteRen;
     private Vector3 spawnPos;
     private Rigidbody2D mrigibody;
-    // private float rotate;
-    private Vector3 worldPosition, mousePos, startPos, line;
     [Header("石頭")]
     [SerializeField] private Sprite stone;
     public int CupidGamepoint;
     private GameObject ui;
-    PlayerInput controls;
+
+    private PlayerInput controls;
+    private Vector2 movement;
     void Awake()
     {
         controls = this.GetComponent<PlayerInput>();
-        controls.actionEvents[1].AddListener(choose);
-        ui = GameObject.Find("ChoosePlayer").transform.Find("P" + (controls.playerIndex + 1)).gameObject;
-        if (ui.transform.Find("BlueTeam").gameObject.activeSelf)
+        controls.actions["choose"].performed += choose;
+        // controls.actionEvents[1].AddListener(choose);
+    }
+    public void choose(InputAction.CallbackContext ctx)
+    {
+        if (ui.transform.Find("RedTeam").gameObject.activeSelf)
+        {
+            ui.transform.Find("RedTeam").gameObject.SetActive(false);
+            ui.transform.Find("BlueTeam").gameObject.SetActive(true);
+        }
+        else
         {
             ui.transform.Find("RedTeam").gameObject.SetActive(true);
             ui.transform.Find("BlueTeam").gameObject.SetActive(false);
         }
-    }
-    public void choose(InputAction.CallbackContext ctx)
-    {
-        if (ctx.performed)
-        {
-            if (ui.transform.Find("RedTeam").gameObject.activeSelf)
-            {
-                ui.transform.Find("RedTeam").gameObject.SetActive(false);
-                ui.transform.Find("BlueTeam").gameObject.SetActive(true);
-            }
-            else
-            {
-                ui.transform.Find("RedTeam").gameObject.SetActive(true);
-                ui.transform.Find("BlueTeam").gameObject.SetActive(false);
-            }
-        }
+
     }
     public void removeChoose()
     {
-        controls.actionEvents[1].RemoveListener(choose);
+        controls.actions["choose"].performed -= choose;
+        // controls.actionEvents[1].RemoveListener(choose);
     }
-    public void rotatePlayer(InputAction.CallbackContext ctx)
+    public void rotate(InputAction.CallbackContext ctx)
     {
         Vector2 input = ctx.ReadValue<Vector2>();
-        Debug.Log(input);
         if (input != Vector2.zero)
         {
             float rotate = Mathf.Atan2(input.y, input.x) * Mathf.Rad2Deg;
             transform.rotation = Quaternion.AngleAxis(rotate - 90, Vector3.forward);
         }
     }
+    public void mou(InputAction.CallbackContext ctx)
+    {
+        Vector3 pos = ctx.ReadValue<Vector2>();
+        pos = Camera.main.ScreenToWorldPoint(pos);
+        Vector2 line = pos - this.transform.position;
+        float rotate = Mathf.Atan2(line.y, line.x) * Mathf.Rad2Deg;
+        transform.rotation = Quaternion.AngleAxis(rotate - 90, Vector3.forward);
+    }
+    public void Move(InputAction.CallbackContext ctx)
+    {
+        movement = ctx.ReadValue<Vector2>();
+    }
     void Start()
     {
         CupidGamepoint = 0;
+        curH = 3f;
         isready = false;
         mrigibody = this.GetComponent<Rigidbody2D>();
         spriteRen = this.GetComponent<SpriteRenderer>();
         dizzyT = 0.15f;
-        change.z = 0;
-        startPos = Vector3.zero;
-        // OpenHealth();
         spawnPos = this.transform.position;
-    }
-    // Update is called once per frame
-    private void Update()
-    {
-        // if (joynum == "0")
-        // {
-        //     mousePos = Input.mousePosition;
-        //     worldPosition = Camera.main.ScreenToWorldPoint(mousePos);
-        //     line = worldPosition - this.transform.position;
-        //     line.z = 0;
-        //     rotate = Mathf.Atan2(line.y, line.x) * Mathf.Rad2Deg;
-        //     transform.rotation = Quaternion.AngleAxis(rotate - 90, Vector3.forward);
-        // }
-        // else
-        // {
-        //     change.x = Input.GetAxis("X-virtualMouse" + joynum);
-        //     change.y = Input.GetAxis("Y-virtualMouse" + joynum);
-        //     if (change != Vector3.zero)
-        //     {
-        //         line = change - startPos;
-        //         line.z = 0;
-        //         rotate = Mathf.Atan2(line.y, line.x) * Mathf.Rad2Deg;
-        //         transform.rotation = Quaternion.AngleAxis(rotate - 90, Vector3.forward);
-        //     }
-        // }
     }
     void FixedUpdate()
     {
@@ -120,22 +100,26 @@ public class arenaPlayer : MonoBehaviour
         }
         else if (currentState == ArenaState.walk)
         {
-            Move();
+            if (movement != Vector2.zero)
+            {
+                mrigibody.AddForce(movement * speed, ForceMode2D.Force);
+            }
         }
         else if (currentState == ArenaState.stone)
         {
             spriteRen.sprite = stone;
         }
     }
-    void Move()
+    public void openP_Num(int num)
     {
-        // change = Vector3.zero;
-        // change.x = Mathf.RoundToInt(Input.GetAxisRaw("Xplayer" + joynum));
-        // change.y = Mathf.RoundToInt(Input.GetAxisRaw("Yplayer" + joynum));
-        // if (change != Vector3.zero)
-        // {
-        //     mrigibody.AddForce(change.normalized * speed, ForceMode2D.Force);
-        // }
+        p_index = num;
+        this.transform.Find("NumTitle").GetChild(p_index).gameObject.SetActive(true);
+        ui = GameObject.Find("ChoosePlayer").transform.Find("P" + p_index).gameObject;
+        if (ui.transform.Find("BlueTeam").gameObject.activeSelf)
+        {
+            ui.transform.Find("RedTeam").gameObject.SetActive(true);
+            ui.transform.Find("BlueTeam").gameObject.SetActive(false);
+        }
     }
     public void SpawnPoint(Vector3 pos)
     {
@@ -146,14 +130,17 @@ public class arenaPlayer : MonoBehaviour
     {
         this.transform.position = spawnPos;
     }
-
+    private void OnDisable()
+    {
+        FightManager.Instance.gamelist.Remove(this.gameObject);
+    }
     public void hurt(float damege)
     {
-        // GameObject.Find("HealthManager").transform.Find("P" + order).GetComponent<heart>().hurt(damege);
+        curH -= damege;
+        GameObject.Find("HealthUI").transform.Find("P" + p_index).GetComponent<heart>().hurt(curH);
+        if (curH <= 0)
+        {
+            this.gameObject.SetActive(false);
+        }
     }
-    // void OpenHealth()
-    // {
-    //     GameObject.Find("HealthManager").transform.Find("P" + order).gameObject.SetActive(true);
-    //     GameObject.Find("HealthManager").transform.Find("P" + order).GetComponent<heart>().SetPlayer(this.gameObject);
-    // }
 }

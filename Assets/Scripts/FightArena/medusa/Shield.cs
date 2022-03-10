@@ -5,19 +5,19 @@ using UnityEngine;
 public class Shield : MonoBehaviour
 {
     [SerializeField] private GameObject shield;
-    private arenaController game;
+    // private arenaController game;
     // Start is called before the first frame update
     private void Start()
     {
-        game = GameObject.Find("FightGameManager").GetComponent<arenaController>();
+        // game = GameObject.Find("FightGameManager").GetComponent<arenaController>();
     }
     // Update is called once per frame
     void Update()
     {
-        if (game.isover)
-        {
-            Destroy(this.gameObject);
-        }
+        // if (game.isover)
+        // {
+        //     Destroy(this.gameObject);
+        // }
     }
     private void OnTriggerStay2D(Collider2D other)
     {

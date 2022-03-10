@@ -15,7 +15,7 @@ public class CupidArrowMove : MonoBehaviour
     {
         if (other.gameObject.layer == 10)
         {
-            other.gameObject.GetComponent<arenaPlayer>().hurt(damage);
+            // other.gameObject.GetComponent<arenaPlayer>().hurt(damage);
             other.gameObject.GetComponent<Rigidbody2D>().velocity = Vector2.zero;
             other.gameObject.GetComponent<arenaPlayer>().currentState = ArenaState.dizzy;
             other.gameObject.GetComponent<arenaPlayer>().dizzyT = 0.15f;
