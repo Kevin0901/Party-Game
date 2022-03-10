@@ -4,8 +4,9 @@ using UnityEngine;
 
 public class CrystalThief : MonoBehaviour
 {
-    [SerializeField]
-    private GameObject[] waypoints;
+
+    [SerializeField] private GameObject[] waypoints;
+    [SerializeField] private GameObject[] genres;
     private int curwaypoint = 0;
     public float speed = 3;
     private int curh, bfhurth;
@@ -39,10 +40,9 @@ public class CrystalThief : MonoBehaviour
 
         if (bfhurth != curh)
         {
-            Debug.Log("hurt");
+            Instantiate(genres[Random.Range(0, 4)], transform.position, genres[Random.Range(0, 4)].transform.rotation);
             if (havespeedupyet == 0)
             {
-                Debug.Log("hurt2");
                 havespeedupyet = 1;
                 StartCoroutine(speedupcolddown());
             }

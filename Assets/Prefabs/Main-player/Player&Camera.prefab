@@ -1116,6 +1116,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 5221701067826062428}
     m_Modifications:
+    - target: {fileID: 2431718856655098410, guid: 8d611272d749fa94cbb0d5dc57f98bea,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2511315091185149834, guid: 8d611272d749fa94cbb0d5dc57f98bea,
         type: 3}
       propertyPath: m_Pivot.x
@@ -1226,30 +1231,10 @@ PrefabInstance:
       propertyPath: m_Camera
       value: 
       objectReference: {fileID: 4293077109794005082}
-    - target: {fileID: 2511315091185149835, guid: 8d611272d749fa94cbb0d5dc57f98bea,
-        type: 3}
-      propertyPath: m_SortingLayerID
-      value: -1189739157
-      objectReference: {fileID: 0}
-    - target: {fileID: 2511315091185149844, guid: 8d611272d749fa94cbb0d5dc57f98bea,
-        type: 3}
-      propertyPath: m_UiScaleMode
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 2511315091185149846, guid: 8d611272d749fa94cbb0d5dc57f98bea,
         type: 3}
       propertyPath: m_Name
       value: NoticeUI
-      objectReference: {fileID: 0}
-    - target: {fileID: 2511315091670987948, guid: 8d611272d749fa94cbb0d5dc57f98bea,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5681670064963295391, guid: 8d611272d749fa94cbb0d5dc57f98bea,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8d611272d749fa94cbb0d5dc57f98bea, type: 3}

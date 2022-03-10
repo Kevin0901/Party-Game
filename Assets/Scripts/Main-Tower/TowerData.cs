@@ -24,6 +24,8 @@ public class TowerData : MonoBehaviour
     public List<TowerLevel> levels;
     private TowerLevel currentLevel;
     private Animator animator;
+    public int setHealth;
+    private int havesethealth = 0;
     private void Awake()
     {
         spriteRenderer = this.gameObject.GetComponent<SpriteRenderer>();
@@ -39,7 +41,6 @@ public class TowerData : MonoBehaviour
             spriteRenderer.sprite = down;
         }
         health = this.GetComponentInChildren<health>();
-
     }
     public TowerLevel CurrentLevel
     {
@@ -73,6 +74,10 @@ public class TowerData : MonoBehaviour
     private void Update()
     {
         CurrentLevel.CurHealth = health.curH;
+        if (setHealth != 0 && havesethealth == 0)
+        {
+            health.curH = setHealth;
+        }
     }
     void OnEnable()
     {

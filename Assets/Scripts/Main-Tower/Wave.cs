@@ -24,7 +24,7 @@ public class Wave : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.CompareTag(t.Enemyteam)&& other.gameObject.layer !=11 )
+        if (other.CompareTag(t.Enemyteam) && other.gameObject.layer != 11)
         {
             int cnt = 0;
             health eheal = other.GetComponentInChildren<health>();

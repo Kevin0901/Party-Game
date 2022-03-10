@@ -27,6 +27,7 @@ public class health : MonoBehaviour
         parentSet = this.transform.parent.gameObject;
         bar = this.gameObject.GetComponentInChildren<Slider>();
         bar.maxValue = maxH;
+        Debug.Log("h");
     }
     private void Update()
     {

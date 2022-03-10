@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 9068194493591204393}
   - component: {fileID: 6572471658183746222}
   m_Layer: 0
-  m_Name: crystal
+  m_Name: Crystal
   m_TagString: pick
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -48,6 +48,7 @@ SpriteRenderer:
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_RayTracingMode: 0
+  m_RayTraceProcedural: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:

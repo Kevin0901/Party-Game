@@ -17,6 +17,7 @@ public class goldensheep : MonoBehaviour
     private int mc = 0; //是否移動到目的
     private Vector3 targetpos; //目的點
     private List<Vector3> playerposlist = new List<Vector3>(); //玩家位置
+    private GameObject bonusUI;
 
     private void Update()
     {
@@ -33,6 +34,7 @@ public class goldensheep : MonoBehaviour
                 {
                     ResourceManager.Instance.Rrestimes = 1;
                 }
+                bonusUI.SetActive(false);
                 StartCoroutine(gobackcolddown());
                 nowtstatic = true;
                 bonusteam = null;
@@ -91,6 +93,8 @@ public class goldensheep : MonoBehaviour
             player = other.gameObject;
             bonusteam = player.tag;
             player.GetComponent<PlayerMovement>().health.playercatchsheeponhit = 0;
+            bonusUI = player.GetComponent<UIState>().NoticeUI.transform.GetChild(2).gameObject;
+            bonusUI.SetActive(true);
             playoncatheal = player.GetComponent<PlayerMovement>().health.playercatchsheeponhit;
             if (bonusteam == "blue")
             {

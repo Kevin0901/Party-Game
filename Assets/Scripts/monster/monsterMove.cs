@@ -46,6 +46,7 @@ public class monsterMove : MonoBehaviour
     [Header("往下的圖")]
     [SerializeField] private Sprite down;
     public int pigeon;
+    public int setHealth;
     //喚醒設定
     private void Awake()
     {
@@ -72,6 +73,10 @@ public class monsterMove : MonoBehaviour
         this.gameObject.GetComponent<LaserDetect>().enabled = false;
         animator = this.gameObject.GetComponent<Animator>();
         animator.enabled = false;
+        if (setHealth != 0)
+        {
+            health.curH = setHealth;
+        }
     }
     //開始設定
     void Start()

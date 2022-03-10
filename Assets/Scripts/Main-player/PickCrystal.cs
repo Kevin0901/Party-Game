@@ -18,13 +18,19 @@ public class PickCrystal : MonoBehaviour
         ResourceTypeListSO resourceTypeList = Resources.Load<ResourceTypeListSO>(typeof(ResourceTypeListSO).Name);
         if (other.CompareTag("pick") && Input.GetButtonDown("pick" + player.joynum))
         {
-            if (player.tag == "red")
+            for (int i = 0; i < resourceTypeList.list.Count; i++)
             {
-                ResourceManager.Instance.RedAddResource(resourceTypeList.list[3], 3);
-            }
-            else if (player.tag == "blue")
-            {
-                ResourceManager.Instance.BlueAddResource(resourceTypeList.list[3], 3);
+                if (other.gameObject.name == resourceTypeList.list[i].name + "(Clone)")
+                {
+                    if (player.tag == "red")
+                    {
+                        ResourceManager.Instance.RedAddResource(resourceTypeList.list[i], 3);
+                    }
+                    else if (player.tag == "blue")
+                    {
+                        ResourceManager.Instance.BlueAddResource(resourceTypeList.list[i], 3);
+                    }
+                }
             }
             Destroy(other.gameObject);
         }
