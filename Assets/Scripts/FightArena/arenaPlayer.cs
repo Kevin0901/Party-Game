@@ -27,7 +27,6 @@ public class arenaPlayer : MonoBehaviour
     [SerializeField] private Sprite stone;
     public int CupidGamepoint;
     private GameObject ui;
-
     private PlayerInput controls;
     private Vector2 movement;
     void Awake()
@@ -114,7 +113,7 @@ public class arenaPlayer : MonoBehaviour
     {
         p_index = num;
         this.transform.Find("NumTitle").GetChild(p_index).gameObject.SetActive(true);
-        ui = GameObject.Find("ChoosePlayer").transform.Find("P" + p_index).gameObject;
+        ui = GameObject.Find("ChoosePlayer").transform.Find("P" + (p_index + 1)).gameObject;
         if (ui.transform.Find("BlueTeam").gameObject.activeSelf)
         {
             ui.transform.Find("RedTeam").gameObject.SetActive(true);
@@ -130,17 +129,29 @@ public class arenaPlayer : MonoBehaviour
     {
         this.transform.position = spawnPos;
     }
-    private void OnDisable()
-    {
-        FightManager.Instance.gamelist.Remove(this.gameObject);
-    }
     public void hurt(float damege)
     {
         curH -= damege;
-        GameObject.Find("HealthUI").transform.Find("P" + p_index).GetComponent<heart>().hurt(curH);
+        GameObject.Find("HealthUI").transform.Find("P" + (p_index + 1)).GetComponent<heart>().hurt(curH);
         if (curH <= 0)
         {
             this.gameObject.SetActive(false);
         }
+    }
+    private void OnDisable()
+    {
+        FightManager.Instance.gamelist.Remove(this.gameObject);
+        this.GetComponent<arenaPlayer>().currentState = ArenaState.idle;
+        curH = 3;
+    }
+    public void changeColor()
+    {
+        StartCoroutine(changeMySelfColor());
+    }
+    private IEnumerator changeMySelfColor()
+    {
+        this.transform.Find("NumTitle").GetChild(p_index).GetComponent<SpriteRenderer>().color = new Color32(34, 179, 229, 255);
+        yield return new WaitForSeconds(transform.Find("sword").GetComponent<sword>().gaveTime);
+        this.transform.Find("NumTitle").GetChild(p_index).GetComponent<SpriteRenderer>().color = Color.white;
     }
 }

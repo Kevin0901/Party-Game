@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 3901241109821605590}
   - component: {fileID: 3901241109821605579}
   - component: {fileID: 3901241109821605589}
-  - component: {fileID: 917201594954517806}
+  - component: {fileID: 6130917707440461337}
   m_Layer: 0
   m_Name: pickShield
   m_TagString: pick
@@ -28,7 +28,7 @@ Transform:
   m_GameObject: {fileID: 3901241109821605591}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 2.2220402, y: 2.2220402, z: 2.2220402}
+  m_LocalScale: {x: 2.2, y: 2.2, z: 2.2}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -48,6 +48,7 @@ SpriteRenderer:
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_RayTracingMode: 0
+  m_RayTraceProcedural: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -96,10 +97,10 @@ CircleCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0.05}
+  m_Offset: {x: 0, y: 0.07066569}
   serializedVersion: 2
-  m_Radius: 1.12
---- !u!114 &917201594954517806
+  m_Radius: 1.0580031
+--- !u!114 &6130917707440461337
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -111,4 +112,3 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 16e5f3f69cd6bdb4a9a034b81995c77b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  shield: {fileID: 3901241109821605591}

@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.InputSystem.Users;
 using UnityEngine.SceneManagement;
 public class FightManager : MonoBehaviour
 {
@@ -28,7 +29,7 @@ public class FightManager : MonoBehaviour
     private void OnPlayerJoined(PlayerInput player)
     {
         plist.Add(player.gameObject);
-        player.gameObject.GetComponent<arenaPlayer>().openP_Num(plist.Count);
+        player.gameObject.GetComponent<arenaPlayer>().openP_Num((plist.Count - 1));
         Debug.Log("Joined " + player.playerIndex + " - " + player.devices[0].displayName);
         Debug.Log("Player Count " + manager.playerCount + "/" + manager.maxPlayerCount);
         GameObject.Find("ChoosePlayer").transform.Find("P" + manager.playerCount).gameObject.SetActive(true);
@@ -73,23 +74,23 @@ public class FightManager : MonoBehaviour
                 plist[i].GetComponent<arenaPlayer>().red = false;
             }
         }
-        // if (plist.Count >= 2 && (red > 0 && blue > 0))
-        // {
-        GameObject.Find("ChoosePlayer").GetComponent<CanvasGroup>().alpha = 0;
-        GameObject.Find("ChoosePlayer").GetComponent<CanvasGroup>().blocksRaycasts = false;
-        GameObject.Find("GameChoose").GetComponent<CanvasGroup>().alpha = 1;
-        GameObject.Find("GameChoose").GetComponent<CanvasGroup>().blocksRaycasts = true;
-        for (int j = 0; j < plist.Count; j++)
+        if (plist.Count >= 2 && (red > 0 && blue > 0))
         {
-            plist[j].GetComponent<arenaPlayer>().removeChoose();
-            DontDestroyOnLoad(plist[j]);
+            GameObject.Find("ChoosePlayer").GetComponent<CanvasGroup>().alpha = 0;
+            GameObject.Find("ChoosePlayer").GetComponent<CanvasGroup>().blocksRaycasts = false;
+            GameObject.Find("GameChoose").GetComponent<CanvasGroup>().alpha = 1;
+            GameObject.Find("GameChoose").GetComponent<CanvasGroup>().blocksRaycasts = true;
+            for (int j = 0; j < plist.Count; j++)
+            {
+                plist[j].GetComponent<arenaPlayer>().removeChoose();
+                DontDestroyOnLoad(plist[j]);
+            }
+            manager.enabled = false;
         }
-        manager.enabled = false;
-        // }
-        // else
-        // {
-        //     Debug.Log("配置不對歐");
-        // }
+        else
+        {
+            Debug.Log("配置不對歐");
+        }
     }
     public void gameNum(int num)
     {
@@ -136,4 +137,5 @@ public class FightManager : MonoBehaviour
             plist[i].SetActive(true);
         }
     }
+
 }

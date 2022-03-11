@@ -2,29 +2,27 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SunMoonEvent : MonoBehaviour
+public class SwordEvent : MonoBehaviour
 {
-    // Start is called before the first frame update
-    [SerializeField] private float size = 0.05f;
     [SerializeField] private GameObject UI;
+    private void OnEnable()
+    {
+        transform.Rotate(0, 0, Random.Range(0, 360));
+    }
     public void StartGame()
     {
-        StartCoroutine(changeBG());
-        this.GetComponent<SunMoonEvent>().enabled = true;
+        this.GetComponent<SwordEvent>().enabled = true;
         for (int i = 0; i < FightManager.Instance.plist.Count; i++)
         {
+            GameObject.Find("HealthUI").transform.GetChild(i).gameObject.SetActive(true);
             FightManager.Instance.plist[i].GetComponent<arenaPlayer>().currentState = ArenaState.walk;
-            FightManager.Instance.plist[i].GetComponent<playerShoot>().enabled = true;
         }
+        StartCoroutine(randomSword());
+        StartCoroutine(changeBG());
     }
     private IEnumerator changeBG()
     {
-        if (this.transform.localScale.x != 0)
-        {
-            this.transform.localScale = new Vector3(this.transform.localScale.x - Time.deltaTime * size,
-                                                            this.transform.localScale.y - Time.deltaTime * size,
-                                                            this.transform.localScale.z - Time.deltaTime * size);
-        }
+        this.transform.Rotate(0, 0, -0.05f);
         yield return null;
         StartCoroutine(changeBG());
     }
@@ -44,17 +42,16 @@ public class SunMoonEvent : MonoBehaviour
 
             for (int i = 0; i < FightManager.Instance.plist.Count; i++)
             {
-                FightManager.Instance.plist[i].GetComponent<playerShoot>().enabled = false;
+                FightManager.Instance.plist[i].transform.Find("sword").gameObject.SetActive(false);
             }
             FightManager.Instance.gamelist[0].SetActive(false);
             this.gameObject.SetActive(false);
         }
     }
-    private void OnTriggerExit2D(Collider2D other)
+    private IEnumerator randomSword()
     {
-        if (other.gameObject.layer == 10)
-        {
-            other.gameObject.SetActive(false);
-        }
+        yield return new WaitForSeconds(2f);
+        int num = Random.Range(0, FightManager.Instance.gamelist.Count);
+        FightManager.Instance.gamelist[num].transform.Find("sword").gameObject.SetActive(true);
     }
 }

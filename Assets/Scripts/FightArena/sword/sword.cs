@@ -4,59 +4,60 @@ using UnityEngine;
 
 public class sword : MonoBehaviour
 {
-    private GameObject lastplayer;
-    private arenaPlayer master;
-    private float hurt;
+    [SerializeField] private GameObject lastplayer;
+    private arenaPlayer player;
+    [SerializeField] private float hurtTime;
+    public float gaveTime = 1;
+    private float nexthurt;
+    private int num;
     // Start is called before the first frame update
     void Awake()
     {
-        lastplayer = this.gameObject;
-        master = this.GetComponentInParent<arenaPlayer>();
+        player = this.GetComponentInParent<arenaPlayer>();
+        num = player.p_index;
+        lastplayer = null;
     }
-
     // Update is called once per frame
     private void OnTriggerStay2D(Collider2D other)
     {
-        if (other.gameObject.layer == 10)
+        if (other.gameObject.layer == 10 && (other.gameObject != player.gameObject) && (lastplayer != other.gameObject))
         {
-            if (other.gameObject != lastplayer && other.gameObject != this.gameObject.transform.parent.gameObject)
-            {
-                other.gameObject.transform.Find("sword").gameObject.SetActive(true);
-                other.gameObject.transform.Find("sword").gameObject.GetComponent<sword>().Savelastplayer(this.transform.parent.gameObject);
-                this.gameObject.SetActive(false);
-            }
+            other.gameObject.transform.Find("sword").gameObject.SetActive(true);
+            other.gameObject.transform.Find("sword").gameObject.GetComponent<sword>().Savelastplayer(player.gameObject);
+            player.changeColor();
+            this.gameObject.SetActive(false);
         }
     }
     private void OnEnable()
     {
-        master.speed *= 1.5f;
-        hurt = Time.time;
+        player.speed *= 1.5f;
+        player.gameObject.transform.Find("NumTitle").GetChild(num).GetComponent<SpriteRenderer>().color = new Color32(255, 28, 28, 255);
+        nexthurt = Time.time;
     }
     private void OnDisable()
     {
-        master.speed /= 1.5f;
+        player.speed /= 1.5f;
     }
-
     private void Hurt()
     {
-        // master.hurt(0.5f);
+        player.hurt(0.5f);
     }
     private void Update()
     {
-        if (Time.time - hurt > 1.75f)
+        if (Time.time - nexthurt > hurtTime)
         {
             Hurt();
-            hurt = Time.time;
+            nexthurt = Time.time + hurtTime;
         }
     }
-    public void Savelastplayer(GameObject player)
+    public void Savelastplayer(GameObject p)
     {
-        lastplayer = player;
-        StartCoroutine(cleanlastplayer());
+        lastplayer = p;
+        StartCoroutine(Savelastplayer());
     }
-    private IEnumerator cleanlastplayer()
+    public IEnumerator Savelastplayer()
     {
-        yield return new WaitForSeconds(1f);
-        lastplayer = this.gameObject;
+        yield return new WaitForSeconds(gaveTime);
+        lastplayer = null;
     }
 }

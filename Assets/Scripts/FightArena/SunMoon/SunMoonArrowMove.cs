@@ -48,19 +48,4 @@ public class SunMoonArrowMove : MonoBehaviour
         dir = k * Vector3.up; //得知射的方向
         noEffect = true;
     }
-    // private void OnTriggerEnter2D(Collider2D other)
-    // {
-    //     if (other.gameObject.layer == 10)
-    //     {
-    //         other.GetComponent<arenaPlayer>().repeldir = dir;
-    //         other.GetComponent<arenaPlayer>().repelpower = power;
-    //         other.GetComponent<arenaPlayer>().currentState = ArenaState.repel;
-    //         Destroy(this.gameObject);
-    //     }
-    // }
-    // mousePos = Input.mousePosition;  //得到螢幕滑鼠位置
-    // worldPosition = Camera.main.ScreenToWorldPoint(mousePos); //遊戲內世界座標滑鼠位置
-    // dir = worldPosition - transform.position;
-    // dir.z = 0;
-    // rotate = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;
 }

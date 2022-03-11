@@ -136,7 +136,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   size: 0
-  bg: {fileID: 0}
   UI: {fileID: 0}
 --- !u!1001 &5168252414624494985
 PrefabInstance:

@@ -36,38 +36,43 @@ public class MedusaEvent : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        // if (FightManager.Instance.gamelist.Count == 1)
-        // {
-        // UI.SetActive(true);
-        // if (FightManager.Instance.gamelist[0].GetComponent<arenaPlayer>().red)
-        // {
-        //     UI.transform.Find("red").gameObject.SetActive(true);
-        // }
-        // else
-        // {
-        //     UI.transform.Find("blue").gameObject.SetActive(true);
-        // }
-        // this.transform.parent.gameObject.SetActive(false);
-        // }
-        // else
-        // {
-        this.transform.position = Vector3.MoveTowards(this.transform.position, FightManager.Instance.gamelist[r].transform.position, Time.deltaTime * speed);
-        Vector2 dir = this.transform.position - FightManager.Instance.gamelist[r].transform.position;
-        rotate = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;
-        this.transform.rotation = Quaternion.AngleAxis(rotate + 90, Vector3.forward);
-        if (Time.time > nextTime)
+        if (FightManager.Instance.gamelist.Count == 1)
         {
-            if (r == FightManager.Instance.gamelist.Count - 1)
+            UI.SetActive(true);
+            if (FightManager.Instance.gamelist[0].GetComponent<arenaPlayer>().red)
             {
-                r = 0;
+                UI.transform.Find("red").gameObject.SetActive(true);
             }
             else
             {
-                r += 1;
+                UI.transform.Find("blue").gameObject.SetActive(true);
             }
-            spawnBall();
-            nextTime = Time.time + changeTime;
-            // }
+            for (int i = 0; i < FightManager.Instance.gamelist.Count; i++)
+            {
+                FightManager.Instance.plist[i].transform.Find("shield").gameObject.SetActive(false);
+            }
+            FightManager.Instance.gamelist[0].SetActive(false);
+            this.transform.parent.gameObject.SetActive(false);
+        }
+        else
+        {
+            this.transform.position = Vector3.MoveTowards(this.transform.position, FightManager.Instance.gamelist[r].transform.position, Time.deltaTime * speed);
+            Vector2 dir = this.transform.position - FightManager.Instance.gamelist[r].transform.position;
+            rotate = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;
+            this.transform.rotation = Quaternion.AngleAxis(rotate + 90, Vector3.forward);
+            if (Time.time > nextTime)
+            {
+                if (r == FightManager.Instance.gamelist.Count - 1)
+                {
+                    r = 0;
+                }
+                else
+                {
+                    r += 1;
+                }
+                spawnBall();
+                nextTime = Time.time + changeTime;
+            }
         }
     }
     IEnumerator speedUP()

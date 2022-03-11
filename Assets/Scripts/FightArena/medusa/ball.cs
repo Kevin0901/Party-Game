@@ -16,11 +16,11 @@ public class ball : MonoBehaviour
     void Update()
     {
         this.transform.Rotate(0, 0, 3f);
-        // if (FightManager.Instance.gamelist.Count == 1)
-        // {
-        //     Destroy(this.gameObject);
-        // }
-        if (Vector3.Distance(Vector3.zero, this.transform.position) > 45)
+        if (FightManager.Instance.gamelist.Count == 1)
+        {
+            Destroy(this.gameObject);
+        }
+        else if (Vector3.Distance(Vector3.zero, this.transform.position) > 45)
         {
             Destroy(this.gameObject);
         }
@@ -37,10 +37,10 @@ public class ball : MonoBehaviour
         {
             other.gameObject.GetComponent<arenaPlayer>().hurt(damage);
         }
-        // else if (other.gameObject.tag == "pick")
-        // {
-        //     other.gameObject.SetActive(false);
-        // }
+        else if (other.gameObject.tag == "pick")
+        {
+            other.gameObject.SetActive(false);
+        }
         //撞到任何物體都會加速
         rb.velocity = rb.velocity.normalized * speed * cnt;
         if (cnt <= 2.5f)
