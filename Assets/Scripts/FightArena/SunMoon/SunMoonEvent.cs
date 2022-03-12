@@ -11,10 +11,10 @@ public class SunMoonEvent : MonoBehaviour
     {
         StartCoroutine(changeBG());
         this.GetComponent<SunMoonEvent>().enabled = true;
-        for (int i = 0; i < FightManager.Instance.plist.Count; i++)
+        for (int i = 0; i < FightManager.Instance.gamelist.Count; i++)
         {
-            FightManager.Instance.plist[i].GetComponent<arenaPlayer>().currentState = ArenaState.walk;
-            FightManager.Instance.plist[i].GetComponent<playerShoot>().enabled = true;
+            FightManager.Instance.gamelist[i].GetComponent<arenaPlayer>().currentState = ArenaState.walk;
+            FightManager.Instance.gamelist[i].GetComponent<playerShoot>().enabled = true;
         }
     }
     private IEnumerator changeBG()

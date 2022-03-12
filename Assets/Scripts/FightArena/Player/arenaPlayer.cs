@@ -7,25 +7,21 @@ public enum ArenaState
 {
     idle,
     walk,
-    dizzy,
-    stone
+    love,
 }
 public class arenaPlayer : MonoBehaviour
 {
-    [HideInInspector] public float dizzyT;
+    [SerializeField] private float loveTime = 2f;
+    private float nextTime;
     public bool red;
-    public bool isready;
     public ArenaState currentState;
     [Header("玩家數值")]
     public float speed = 30f;
     [SerializeField] private float curH;
-    public int p_index;
-    private SpriteRenderer spriteRen;
+    public int p_index, love_index;
+    private SpriteRenderer sprite;
     private Vector3 spawnPos;
     private Rigidbody2D mrigibody;
-    [Header("石頭")]
-    [SerializeField] private Sprite stone;
-    public int CupidGamepoint;
     private GameObject ui;
     private PlayerInput controls;
     private Vector2 movement;
@@ -34,6 +30,44 @@ public class arenaPlayer : MonoBehaviour
         controls = this.GetComponent<PlayerInput>();
         controls.actions["choose"].performed += choose;
         // controls.actionEvents[1].AddListener(choose);
+    }
+    void Start()
+    {
+        mrigibody = this.GetComponent<Rigidbody2D>();
+        sprite = this.GetComponent<SpriteRenderer>();
+        nextTime = loveTime;
+        curH = 3f;
+    }
+    void FixedUpdate()
+    {
+        if (currentState == ArenaState.love)
+        {
+            if (love_index >= FightManager.Instance.gamelist.Count)
+            {
+                love_index = FightManager.Instance.gamelist.Count - 1;
+                if (love_index == p_index)
+                {
+                    love_index = love_index - 1;
+                }
+            }
+            Vector3 pos = FightManager.Instance.gamelist[love_index].transform.position;
+            mrigibody.AddForce((pos - this.transform.position).normalized * speed, ForceMode2D.Force);
+            loveTime -= Time.deltaTime;
+            sprite.color = new Color32(200, 3, 180, 255);
+            if (loveTime < 0)
+            {
+                loveTime = nextTime;
+                sprite.color = new Color32(255, 255, 255, 255);
+                currentState = ArenaState.walk;
+            }
+        }
+        else if (currentState == ArenaState.walk)
+        {
+            if (movement != Vector2.zero)
+            {
+                mrigibody.AddForce(movement * speed, ForceMode2D.Force);
+            }
+        }
     }
     public void choose(InputAction.CallbackContext ctx)
     {
@@ -74,40 +108,6 @@ public class arenaPlayer : MonoBehaviour
     public void Move(InputAction.CallbackContext ctx)
     {
         movement = ctx.ReadValue<Vector2>();
-    }
-    void Start()
-    {
-        CupidGamepoint = 0;
-        curH = 3f;
-        isready = false;
-        mrigibody = this.GetComponent<Rigidbody2D>();
-        spriteRen = this.GetComponent<SpriteRenderer>();
-        dizzyT = 0.15f;
-        spawnPos = this.transform.position;
-    }
-    void FixedUpdate()
-    {
-        if (currentState == ArenaState.dizzy)
-        {
-            dizzyT -= Time.deltaTime;
-            spriteRen.color = new Color32(200, 3, 180, 255);
-            if (dizzyT < 0)
-            {
-                spriteRen.color = new Color32(255, 255, 255, 255);
-                currentState = ArenaState.walk;
-            }
-        }
-        else if (currentState == ArenaState.walk)
-        {
-            if (movement != Vector2.zero)
-            {
-                mrigibody.AddForce(movement * speed, ForceMode2D.Force);
-            }
-        }
-        else if (currentState == ArenaState.stone)
-        {
-            spriteRen.sprite = stone;
-        }
     }
     public void openP_Num(int num)
     {

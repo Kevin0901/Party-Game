@@ -8,8 +8,8 @@ public class playerShoot : MonoBehaviour
     [SerializeField] private GameObject item;
     public bool isCenter; //是否在正中心
     [Header("箭矢設定")]
-    public float speed;
-    public float mass;
+    public float speed = 50;
+    public float mass = 1000;
     [Header("攻擊間隔")]
     [SerializeField] private float fireRate;
     private float nextfire;

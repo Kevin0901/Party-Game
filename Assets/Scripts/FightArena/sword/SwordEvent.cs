@@ -12,10 +12,10 @@ public class SwordEvent : MonoBehaviour
     public void StartGame()
     {
         this.GetComponent<SwordEvent>().enabled = true;
-        for (int i = 0; i < FightManager.Instance.plist.Count; i++)
+        for (int i = 0; i < FightManager.Instance.gamelist.Count; i++)
         {
             GameObject.Find("HealthUI").transform.GetChild(i).gameObject.SetActive(true);
-            FightManager.Instance.plist[i].GetComponent<arenaPlayer>().currentState = ArenaState.walk;
+            FightManager.Instance.gamelist[i].GetComponent<arenaPlayer>().currentState = ArenaState.walk;
         }
         StartCoroutine(randomSword());
         StartCoroutine(changeBG());

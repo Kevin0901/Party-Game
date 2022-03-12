@@ -15,8 +15,8 @@ GameObject:
   - component: {fileID: 9016245958977170167}
   - component: {fileID: 798526610256190920}
   m_Layer: 8
-  m_Name: arenabg
-  m_TagString: Untagged
+  m_Name: rock_BG
+  m_TagString: background
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -843,7 +843,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e5bc8c29b387e4e458911d395a3210f0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  player: {fileID: 0}
+  UI: {fileID: 0}
 --- !u!1001 &30937897109787623
 PrefabInstance:
   m_ObjectHideFlags: 0

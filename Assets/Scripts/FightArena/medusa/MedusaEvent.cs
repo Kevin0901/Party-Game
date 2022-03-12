@@ -12,7 +12,6 @@ public class MedusaEvent : MonoBehaviour
     {
         nextTime = 0;
         hurtRate = 0;
-        // Instantiate(shield, new Vector3(Random.Range(-25, 25), Random.Range(-25, 25), 0), shield.transform.rotation);
     }
     public void StartGame()
     {
@@ -20,8 +19,8 @@ public class MedusaEvent : MonoBehaviour
         for (int i = 0; i < FightManager.Instance.gamelist.Count; i++)
         {
             GameObject.Find("HealthUI").transform.GetChild(i).gameObject.SetActive(true);
-            FightManager.Instance.plist[i].GetComponent<arenaPlayer>().currentState = ArenaState.walk;
-            FightManager.Instance.plist[i].transform.Find("shield").gameObject.SetActive(true);
+            FightManager.Instance.gamelist[i].GetComponent<arenaPlayer>().currentState = ArenaState.walk;
+            FightManager.Instance.gamelist[i].transform.Find("shield").gameObject.SetActive(true);
         }
         StartCoroutine(wait(waitTime));
     }
@@ -56,6 +55,10 @@ public class MedusaEvent : MonoBehaviour
         }
         else
         {
+            if (r >= FightManager.Instance.gamelist.Count)
+            {
+                r = FightManager.Instance.gamelist.Count - 1;
+            }
             this.transform.position = Vector3.MoveTowards(this.transform.position, FightManager.Instance.gamelist[r].transform.position, Time.deltaTime * speed);
             Vector2 dir = this.transform.position - FightManager.Instance.gamelist[r].transform.position;
             rotate = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;
