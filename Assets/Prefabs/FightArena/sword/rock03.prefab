@@ -12,7 +12,6 @@ GameObject:
   - component: {fileID: 2879115918767383439}
   - component: {fileID: 3419608155604969161}
   - component: {fileID: 7732582231313543535}
-  - component: {fileID: 979398456469864544}
   m_Layer: 0
   m_Name: rock03
   m_TagString: Untagged
@@ -93,7 +92,7 @@ Rigidbody2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8095749439565572253}
-  m_BodyType: 1
+  m_BodyType: 2
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
@@ -131,75 +130,15 @@ PolygonCollider2D:
   m_AutoTiling: 0
   m_Points:
     m_Paths:
-    - - {x: 0.31, y: 0.14}
-      - {x: 0.099999994, y: 0.32}
-      - {x: 0.089999996, y: 0.32999998}
-      - {x: -0.16, y: 0.32999998}
-      - {x: -0.32, y: 0.28}
-      - {x: -0.32, y: -0.06}
-      - {x: -0.29999998, y: -0.16}
-      - {x: -0.14, y: -0.28}
-      - {x: 0.16, y: -0.28}
-      - {x: 0.32999998, y: -0.13}
-      - {x: 0.34, y: -0.07}
-      - {x: 0.34, y: 0.089999996}
---- !u!66 &979398456469864544
-CompositeCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8095749439565572253}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
-  m_GeometryType: 0
-  m_GenerationType: 0
-  m_EdgeRadius: 0
-  m_ColliderPaths:
-  - m_Collider: {fileID: 7732582231313543535}
-    m_ColliderPaths:
-    - - X: 18600000
-        Y: 8400000
-      - X: 5999999
-        Y: 19200000
-      - X: 5399999
-        Y: 19799998
-      - X: -9600000
-        Y: 19799998
-      - X: -19200000
-        Y: 16800000
-      - X: -19200000
-        Y: -3599999
-      - X: -18000000
-        Y: -9600000
-      - X: -8400000
-        Y: -16800000
-      - X: 9600000
-        Y: -16800000
-      - X: 19799998
-        Y: -7799999
-      - X: 20400000
-        Y: -4200000
-      - X: 20400000
-        Y: 5399999
-  m_CompositePaths:
-    m_Paths:
-    - - {x: 0.9599901, y: -1.6800001}
-      - {x: 1.9800014, y: -0.77999073}
-      - {x: 2.04, y: -0.4199985}
-      - {x: 2.0399964, y: 0.5400061}
-      - {x: 1.8599973, y: 0.8400024}
-      - {x: 0.6000005, y: 1.9199996}
-      - {x: 0.5399891, y: 1.9799998}
-      - {x: -0.96000403, y: 1.9799988}
-      - {x: -1.9200001, y: 1.6799796}
-      - {x: -1.9199996, y: -0.3600021}
-      - {x: -1.799992, y: -0.9600061}
-      - {x: -0.8399915, y: -1.6800001}
-  m_VertexDistance: 0.0005
-  m_OffsetDistance: 0.00005
+    - - {x: 0.32806185, y: 0.020176554}
+      - {x: 0.27964884, y: 0.14867821}
+      - {x: 0.06828032, y: 0.3039364}
+      - {x: -0.08531472, y: 0.3224424}
+      - {x: -0.2852485, y: 0.23221673}
+      - {x: -0.32003394, y: 0.14547712}
+      - {x: -0.31192324, y: 0.02608769}
+      - {x: -0.24689907, y: -0.14103538}
+      - {x: -0.10778087, y: -0.23751609}
+      - {x: 0.02842029, y: -0.27252525}
+      - {x: 0.16452864, y: -0.24647054}
+      - {x: 0.31344956, y: -0.071896456}

@@ -30,6 +30,12 @@ public class EndGame : MonoBehaviour
     //換遊戲
     public void changeGame()
     {
+        for (int i = 0; i < FightManager.Instance.plist.Count; i++)
+        {
+            FightManager.Instance.plist[i].SetActive(true);
+            FightManager.Instance.plist[i].GetComponent<arenaPlayer>().SpawnPoint();
+            FightManager.Instance.gamelist.Add(FightManager.Instance.plist[i]);
+        }
         GameObject.Find("GameChoose").GetComponent<CanvasGroup>().alpha = 1;
         GameObject.Find("GameChoose").GetComponent<CanvasGroup>().blocksRaycasts = true;
         this.GetComponent<CanvasGroup>().alpha = 0;

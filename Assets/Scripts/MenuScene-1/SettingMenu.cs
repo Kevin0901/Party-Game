@@ -19,9 +19,9 @@ public class SettingMenu : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    void Update() 
     {
-        if (Input.GetKeyDown(KeyCode.Escape))
+        if (Input.GetKeyDown(KeyCode.Escape)) //ese叫設定出來
         {
             if (transform.Find("Settings").gameObject.activeSelf)
             {
@@ -35,12 +35,12 @@ public class SettingMenu : MonoBehaviour
         audios.volume = volume;
     }
 
-    public void updateVolume(float musicVolume)
+    public void updateVolume(float musicVolume) //音量調節
     {
         volume = musicVolume;
     }
 
-    public void ExitGame()
+    public void ExitGame() //離開遊戲
     {
 #if UNITY_EDITOR
         EditorApplication.ExitPlaymode();
@@ -48,7 +48,7 @@ public class SettingMenu : MonoBehaviour
             Application.Quit();
 #endif
     }
-    public void Back()
+    public void Back() //關閉設定
     {
         transform.Find("Settings").gameObject.SetActive(false);
     }

@@ -15,7 +15,7 @@ public class GameMenu : MonoBehaviour
     }
     void Update()
     {
-        if (inGameMenu)
+        if (inGameMenu) //判斷是否切換畫面
         {
             fadein();
         }

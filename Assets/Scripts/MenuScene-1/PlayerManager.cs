@@ -6,7 +6,7 @@ using UnityEngine.SceneManagement;
 public class PlayerManager : MonoBehaviour
 {
     public static PlayerManager Instance;
-    private void Awake() //好用的靜態成員
+    private void Awake() //靜態實例宣告
     {
         if (Instance != null)
         {

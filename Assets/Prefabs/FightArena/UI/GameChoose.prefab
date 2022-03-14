@@ -275,7 +275,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 8693309853996476145, guid: 50d34f9cae4f1fc4992e63a7e517e3e7,
+          type: 3}
         m_TargetAssemblyTypeName: FightManager, Assembly-CSharp
         m_MethodName: gameNum
         m_Mode: 3
@@ -764,7 +765,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 8693309853996476145, guid: 50d34f9cae4f1fc4992e63a7e517e3e7,
+          type: 3}
         m_TargetAssemblyTypeName: FightManager, Assembly-CSharp
         m_MethodName: gameNum
         m_Mode: 3
@@ -897,7 +899,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 8693309853996476145, guid: 50d34f9cae4f1fc4992e63a7e517e3e7,
+          type: 3}
         m_TargetAssemblyTypeName: FightManager, Assembly-CSharp
         m_MethodName: gameNum
         m_Mode: 3

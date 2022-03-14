@@ -32,7 +32,7 @@ public class SunMoonEvent : MonoBehaviour
     }
     private void Update()
     {
-        if (FightManager.Instance.gamelist.Count == 1)
+        if (FightManager.Instance.gamelist.Count <= 1)
         {
             UI.SetActive(true);
             if (FightManager.Instance.gamelist[0].GetComponent<arenaPlayer>().red)

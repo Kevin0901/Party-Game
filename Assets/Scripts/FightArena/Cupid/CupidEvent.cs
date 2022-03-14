@@ -47,7 +47,7 @@ public class CupidEvent : MonoBehaviour
     }
     private void Update()
     {
-        if (FightManager.Instance.gamelist.Count == 1)
+        if (FightManager.Instance.gamelist.Count <= 1)
         {
             UI.SetActive(true);
             if (FightManager.Instance.gamelist[0].GetComponent<arenaPlayer>().red)
@@ -61,7 +61,7 @@ public class CupidEvent : MonoBehaviour
             FightManager.Instance.gamelist[0].SetActive(false);
             for (int i = 0; i < FightManager.Instance.plist.Count; i++)
             {
-                FightManager.Instance.plist[i].GetComponent<SpriteRenderer>().color = new Color32(255, 255, 255, 255);
+                FightManager.Instance.plist[i].transform.Find("NumTitle").GetChild(i).GetComponent<SpriteRenderer>().color = Color.white;
             }
             this.gameObject.SetActive(false);
         }
@@ -111,7 +111,7 @@ public class CupidEvent : MonoBehaviour
     {
         for (int i = 0; i < number; i++)
         {
-            speed = 12.5f;
+            speed = 25f;
             firstpos = new Vector2(Random.Range(0f, 1f), Random.Range(0f, 1f));
             Vector2 line = Vector3.zero - firstpos;
             rotate = Mathf.Atan2(line.y, line.x) * Mathf.Rad2Deg;
@@ -127,7 +127,7 @@ public class CupidEvent : MonoBehaviour
 
             yield return new WaitForSeconds(0.5f);
             k2 = Quaternion.AngleAxis(angle * 0.5f, Vector3.forward);
-            speed = 25;
+            speed = 35;
             rotate += angle * 0.5f;
             newpos = k2 * firstpos;
             for (int j = 0; j < 10; j++)
@@ -144,7 +144,7 @@ public class CupidEvent : MonoBehaviour
     //攻擊模式_3
     IEnumerator FireType_3(int number)
     {
-        speed = 22.5f;
+        speed = 30f;
         for (int i = 0; i < number; i++)  //發射波數
         {
             firstpos = new Vector2(Random.Range(0f, 1f), Random.Range(0f, 1f));
@@ -152,12 +152,12 @@ public class CupidEvent : MonoBehaviour
             Vector2 line2 = Vector3.zero + firstpos;
             rotate = Mathf.Atan2(line.y, line.x) * Mathf.Rad2Deg;
             newpos = firstpos;
-            angle = 15f;
+            angle = 12f;
             k = Quaternion.AngleAxis(angle, Vector3.forward);
             float angle2 = 90f;
             k2 = Quaternion.AngleAxis(angle2, Vector3.forward);
 
-            for (int j = 0; j < 12; j++)
+            for (int j = 0; j < 30; j++)
             {
                 GetPoolInstance();
                 rotate += angle;
@@ -173,14 +173,14 @@ public class CupidEvent : MonoBehaviour
                 GetPoolInstance();
                 rotate += angle2;
                 newpos = k2 * newpos;
-                yield return new WaitForSeconds(0.3f);
+                yield return new WaitForSeconds(0.25f);
             }
 
             yield return new WaitForSeconds(cooldownTime);
             k3 = Quaternion.AngleAxis(-angle, Vector3.forward);
             k4 = Quaternion.AngleAxis(-angle2, Vector3.forward);
 
-            for (int j = 0; j < 12; j++)
+            for (int j = 0; j < 30; j++)
             {
                 GetPoolInstance();
                 rotate -= angle;
@@ -196,9 +196,9 @@ public class CupidEvent : MonoBehaviour
                 GetPoolInstance();
                 rotate -= angle2;
                 newpos = k4 * newpos;
-                yield return new WaitForSeconds(0.3f);
+                yield return new WaitForSeconds(0.25f);
             }
-            yield return new WaitForSeconds(1.2f); //下一波發射時間
+            yield return new WaitForSeconds(1); //下一波發射時間
         }
         StartCoroutine(spawnArrow(cooldownTime, 1));
         yield return null;

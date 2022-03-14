@@ -210,7 +210,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cec4967692dba314cb9226d9ceb2af89, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  loveTime: 1.2
+  loveTime: 1
   love_index: 0
   red: 0
   currentState: 0

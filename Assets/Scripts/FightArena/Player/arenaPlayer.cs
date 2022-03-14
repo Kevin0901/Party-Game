@@ -14,12 +14,13 @@ public class arenaPlayer : MonoBehaviour
     [SerializeField] private float loveTime = 2f;
     private float nextTime;
     public int love_index;
-    public bool red;
     public ArenaState currentState;
     [Header("玩家基礎數值")]
     public float speed = 30f;
     [SerializeField] private float curH;
+    public bool red;
     public int p_index;
+    public Vector3 spawnPos;
     private SpriteRenderer sprite;
     private Rigidbody2D mrigibody;
     private Animator mAnimator;
@@ -54,13 +55,12 @@ public class arenaPlayer : MonoBehaviour
                 }
             }
             Vector3 pos = FightManager.Instance.gamelist[love_index].transform.position;
-            mrigibody.AddForce((pos - this.transform.position).normalized * speed, ForceMode2D.Force);
+            mrigibody.AddForce((pos - this.transform.position).normalized * speed * 0.9f, ForceMode2D.Force);
             loveTime -= Time.deltaTime;
-            mAnimator.SetTrigger("love");
             if (loveTime < 0)
             {
                 loveTime = nextTime;
-                mAnimator.SetTrigger("love");
+                this.transform.Find("NumTitle").GetChild(p_index).GetComponent<SpriteRenderer>().color = Color.white;
                 currentState = ArenaState.walk;
             }
         }
@@ -133,7 +133,13 @@ public class arenaPlayer : MonoBehaviour
     public void SpawnPoint(Vector3 pos)
     {
         this.transform.position = pos;
+        spawnPos = pos;
     }
+    public void SpawnPoint()
+    {
+        this.transform.position = spawnPos;
+    }
+
     //玩家受到傷害
     public void hurt(float damege)
     {
@@ -155,10 +161,10 @@ public class arenaPlayer : MonoBehaviour
     //改變顏色
     public void changeColor()
     {
-        StartCoroutine(changeMySelfColor());
+        StartCoroutine(changeColorTitle_Sword());
     }
     //改變Title顏色
-    public IEnumerator changeMySelfColor()
+    private IEnumerator changeColorTitle_Sword()
     {
         this.transform.Find("NumTitle").GetChild(p_index).GetComponent<SpriteRenderer>().color = new Color32(34, 179, 229, 255);
         yield return new WaitForSeconds(transform.Find("sword").GetComponent<sword>().gaveTime);

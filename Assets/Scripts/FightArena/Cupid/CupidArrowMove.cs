@@ -22,10 +22,11 @@ public class CupidArrowMove : MonoBehaviour
     {
         if (other.gameObject.layer == 10 && other.GetComponent<arenaPlayer>().currentState == ArenaState.walk)
         {
+            arenaPlayer curPlayer = other.GetComponent<arenaPlayer>();
             //隨機追蹤玩家
             int r = Random.Range(0, FightManager.Instance.gamelist.Count);
             //如果等於自己或是玩家剩一位的話
-            while (r == other.GetComponent<arenaPlayer>().p_index)
+            while (r == curPlayer.p_index)
             {
                 if (FightManager.Instance.gamelist.Count == 1)
                 {
@@ -34,8 +35,9 @@ public class CupidArrowMove : MonoBehaviour
                 r = Random.Range(0, FightManager.Instance.gamelist.Count);
             }
             //給玩家設定
-            other.GetComponent<arenaPlayer>().love_index = r;
-            other.gameObject.GetComponent<arenaPlayer>().currentState = ArenaState.love;
+            curPlayer.love_index = r;
+            curPlayer.transform.Find("NumTitle").GetChild(curPlayer.p_index).GetComponent<SpriteRenderer>().color = new Color32(255, 0, 255, 255);
+            curPlayer.currentState = ArenaState.love;
             //回去物件池
             parent.GetComponent<CupidEvent>().BackToPool(this.gameObject);
         }

@@ -16,7 +16,7 @@ public class Noviceteaching : MonoBehaviour //新手教學
     }
 
     // Update is called once per frame
-    void Update()
+    void Update() //判斷是否切換畫面
     {
         if (inTeachingMenu)
         {

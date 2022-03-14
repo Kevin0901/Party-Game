@@ -20,7 +20,7 @@ public class StartMenu : MonoBehaviour
     }
     void Update()
     {
-        if (inMainMenu)
+        if (inMainMenu) //判斷是否切換畫面
         {
             StartCoroutine(fadein());
         }

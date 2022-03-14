@@ -36,8 +36,9 @@ public class MedusaEvent : MonoBehaviour
     }
     void Update()
     {
-        if (FightManager.Instance.gamelist.Count == 1)
+        if (FightManager.Instance.gamelist.Count <= 1)
         {
+
             UI.SetActive(true);
             if (FightManager.Instance.gamelist[0].GetComponent<arenaPlayer>().red)
             {
@@ -47,7 +48,7 @@ public class MedusaEvent : MonoBehaviour
             {
                 UI.transform.Find("blue").gameObject.SetActive(true);
             }
-            for (int i = 0; i < FightManager.Instance.gamelist.Count; i++)
+            for (int i = 0; i < FightManager.Instance.plist.Count; i++)
             {
                 FightManager.Instance.plist[i].transform.Find("shield").gameObject.SetActive(false);
             }

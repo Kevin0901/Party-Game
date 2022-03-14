@@ -11,8 +11,7 @@ GameObject:
   - component: {fileID: 7255013595825875287}
   - component: {fileID: 1089295928403751926}
   - component: {fileID: 3501036847597266722}
-  - component: {fileID: 5678191287111508360}
-  - component: {fileID: 3142280260908716761}
+  - component: {fileID: -3148940763876623747}
   m_Layer: 0
   m_Name: rock01
   m_TagString: Untagged
@@ -93,7 +92,7 @@ Rigidbody2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 236148065684270858}
-  m_BodyType: 1
+  m_BodyType: 2
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
@@ -106,46 +105,8 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 1
   m_Constraints: 0
---- !u!60 &5678191287111508360
+--- !u!60 &-3148940763876623747
 PolygonCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 236148065684270858}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_UsedByEffector: 0
-  m_UsedByComposite: 1
-  m_Offset: {x: 0, y: 0}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 1, y: 1}
-    newSize: {x: 1, y: 1}
-    adaptiveTilingThreshold: 0.5
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
-  m_Points:
-    m_Paths:
-    - - {x: 0.01, y: 0.39999998}
-      - {x: -0.14999999, y: 0.39999998}
-      - {x: -0.17, y: 0.35}
-      - {x: -0.22, y: 0.24}
-      - {x: -0.25, y: 0.17999999}
-      - {x: -0.25, y: 0.01}
-      - {x: -0.17, y: -0.22}
-      - {x: -0.08, y: -0.32}
-      - {x: 0.01, y: -0.37}
-      - {x: 0.19, y: -0.37}
-      - {x: 0.26, y: -0.19}
-      - {x: 0.26, y: 0.099999994}
-      - {x: 0.17999999, y: 0.31}
---- !u!66 &3142280260908716761
-CompositeCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -158,52 +119,27 @@ CompositeCollider2D:
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
-  m_GeometryType: 0
-  m_GenerationType: 0
-  m_EdgeRadius: 0
-  m_ColliderPaths:
-  - m_Collider: {fileID: 5678191287111508360}
-    m_ColliderPaths:
-    - - X: 600000
-        Y: 23999998
-      - X: -9000000
-        Y: 23999998
-      - X: -10200000
-        Y: 21000000
-      - X: -13199999
-        Y: 14399999
-      - X: -15000000
-        Y: 10799999
-      - X: -15000000
-        Y: 600000
-      - X: -10200000
-        Y: -13199999
-      - X: -4800000
-        Y: -19200000
-      - X: 600000
-        Y: -22200000
-      - X: 11400000
-        Y: -22200000
-      - X: 15599999
-        Y: -11400000
-      - X: 15599999
-        Y: 5999999
-      - X: 10799999
-        Y: 18600000
-  m_CompositePaths:
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 1, y: 1}
+    newSize: {x: 1, y: 1}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  m_Points:
     m_Paths:
-    - - {x: -1.4999973, y: 1.0800054}
-      - {x: -1.4999986, y: 0.0599958}
-      - {x: -1.0199968, y: -1.3200036}
-      - {x: -0.4799963, y: -1.920002}
-      - {x: 0.0600066, y: -2.22}
-      - {x: 1.1400068, y: -2.2199824}
-      - {x: 1.56, y: -1.1399953}
-      - {x: 1.5599983, y: 0.6000042}
-      - {x: 1.0799915, y: 1.8600044}
-      - {x: 0.0599937, y: 2.3999999}
-      - {x: -0.9000069, y: 2.3999827}
-      - {x: -1.0200005, y: 2.099999}
-      - {x: -1.3199995, y: 1.4400008}
-  m_VertexDistance: 0.0005
-  m_OffsetDistance: 0.00005
+    - - {x: -0.012513768, y: 0.3864917}
+      - {x: -0.13649172, y: 0.38198894}
+      - {x: -0.17, y: 0.35}
+      - {x: -0.22, y: 0.24}
+      - {x: -0.2184807, y: 0.18450274}
+      - {x: -0.21397798, y: 0.019005505}
+      - {x: -0.13848074, y: -0.21099451}
+      - {x: -0.07099449, y: -0.301989}
+      - {x: 0.005497247, y: -0.34298345}
+      - {x: 0.14046969, y: -0.33397794}
+      - {x: 0.24649173, y: -0.19}
+      - {x: 0.20596696, y: 0.08649174}
+      - {x: 0.11245867, y: 0.273978}

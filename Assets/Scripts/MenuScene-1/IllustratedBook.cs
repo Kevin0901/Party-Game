@@ -18,7 +18,7 @@ public class IllustratedBook : MonoBehaviour  //圖鑑
     // Update is called once per frame
     void Update()
     {
-        if (inIllustratedBookMenu)
+        if (inIllustratedBookMenu) //判斷是否切換畫面
         {
             fadein();
         }
@@ -50,19 +50,19 @@ public class IllustratedBook : MonoBehaviour  //圖鑑
     {
         StartCoroutine(fadeout());
     }
-    private void fadein()
+    private void fadein() //淡入畫面
     {
         CanvasGroup.blocksRaycasts = true;
         CanvasGroup.alpha = 1;
         inIllustratedBookMenu = false;
     }
-    private IEnumerator fadeout()
+    private IEnumerator fadeout() //淡出畫面
     {
         bool button1 = transform.Find("biology").gameObject.activeSelf;
         bool button2 = transform.Find("item").gameObject.activeSelf;
         bool button3 = transform.Find("god").gameObject.activeSelf;
 
-        if (button1 && button2 && button3)
+        if (button1 && button2 && button3) //如果按鈕開著
         {
             CanvasGroup.blocksRaycasts = false;
             GameObject.Find("TranPageAnimation").GetComponent<Animator>().SetTrigger("change");

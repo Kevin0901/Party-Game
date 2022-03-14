@@ -18,7 +18,7 @@ public class ChoosePlayer : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (inChoosePlayer)
+        if (inChoosePlayer) //判斷是否切換畫面
         {
             fadein();
         }
@@ -30,7 +30,7 @@ public class ChoosePlayer : MonoBehaviour
         inChoosePlayer = false;
     }
 
-    private IEnumerator fadeout()
+    private IEnumerator fadeout() //淡出畫面
     {
         CanvasGroup.blocksRaycasts = false;
         GameObject.Find("TranPageAnimation").GetComponent<Animator>().SetTrigger("change");
@@ -52,14 +52,4 @@ public class ChoosePlayer : MonoBehaviour
         yield return new WaitForSeconds(1.5f);
         transform.Find("PlayerWaring").gameObject.SetActive(false);
     }
-    // private IEnumerator fadeoutToMainGame() //去主遊戲
-    // {
-    //     CanvasGroup.blocksRaycasts = false;
-    //     GameObject.Find("TranPageAnimation").GetComponent<Animator>().SetTrigger("change");
-    //     yield return new WaitForSeconds(0.5f);
-    //     CanvasGroup.alpha = 0;
-
-    //     SceneManager.LoadSceneAsync("MainScene");           //載入場景
-    //     StartCoroutine(PlayerManager.Instance.waitSceneLoad("MainScene"));//生成玩家
-    // }
 }
