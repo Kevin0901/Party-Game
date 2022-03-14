@@ -84,6 +84,7 @@ GameObject:
   - component: {fileID: 7754934055589320719}
   - component: {fileID: -3661442191397062175}
   - component: {fileID: 6216084490904171514}
+  - component: {fileID: 7452416004739487910}
   m_Layer: 10
   m_Name: arenaPlayer
   m_TagString: Untagged
@@ -209,13 +210,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cec4967692dba314cb9226d9ceb2af89, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  loveTime: 1
+  loveTime: 1.2
+  love_index: 0
   red: 0
   currentState: 0
   speed: 135
   curH: 0
   p_index: 0
-  love_index: 0
 --- !u!114 &-3661442191397062175
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -419,6 +420,25 @@ PolygonCollider2D:
       - {x: 0.175, y: -0.92499995}
       - {x: 0.275, y: -0.905}
       - {x: 0.32999998, y: -0.89}
+--- !u!95 &7452416004739487910
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2028814211212845501}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: d750de1114604ae4a86d42b15cf6513c, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &5195281706139582395
 GameObject:
   m_ObjectHideFlags: 0

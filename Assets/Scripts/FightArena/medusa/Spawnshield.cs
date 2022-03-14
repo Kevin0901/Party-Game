@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class Spawnshield : MonoBehaviour
 {
+    //如果盾牌被打掉就生成盾牌
     [SerializeField] private GameObject shield;
     private void OnDisable()
     {

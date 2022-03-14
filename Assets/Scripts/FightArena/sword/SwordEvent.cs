@@ -5,6 +5,7 @@ using UnityEngine;
 public class SwordEvent : MonoBehaviour
 {
     [SerializeField] private GameObject UI;
+    //旋轉地圖
     private void OnEnable()
     {
         transform.Rotate(0, 0, Random.Range(0, 360));
@@ -17,9 +18,10 @@ public class SwordEvent : MonoBehaviour
             GameObject.Find("HealthUI").transform.GetChild(i).gameObject.SetActive(true);
             FightManager.Instance.gamelist[i].GetComponent<arenaPlayer>().currentState = ArenaState.walk;
         }
-        StartCoroutine(randomSword());
+        StartCoroutine(randomSword(1.5f));
         StartCoroutine(changeBG());
     }
+    //地圖懸轉
     private IEnumerator changeBG()
     {
         this.transform.Rotate(0, 0, -0.05f);
@@ -48,9 +50,10 @@ public class SwordEvent : MonoBehaviour
             this.gameObject.SetActive(false);
         }
     }
-    private IEnumerator randomSword()
+    //隨機給一個玩家劍
+    private IEnumerator randomSword(float time)
     {
-        yield return new WaitForSeconds(2f);
+        yield return new WaitForSeconds(time);
         int num = Random.Range(0, FightManager.Instance.gamelist.Count);
         FightManager.Instance.gamelist[num].transform.Find("sword").gameObject.SetActive(true);
     }

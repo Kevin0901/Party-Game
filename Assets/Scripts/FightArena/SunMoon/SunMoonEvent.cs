@@ -7,6 +7,7 @@ public class SunMoonEvent : MonoBehaviour
     // Start is called before the first frame update
     [SerializeField] private float size = 0.05f;
     [SerializeField] private GameObject UI;
+    //開始遊戲
     public void StartGame()
     {
         StartCoroutine(changeBG());
@@ -17,6 +18,7 @@ public class SunMoonEvent : MonoBehaviour
             FightManager.Instance.gamelist[i].GetComponent<playerShoot>().enabled = true;
         }
     }
+    //改變背景大小
     private IEnumerator changeBG()
     {
         if (this.transform.localScale.x != 0)
@@ -50,6 +52,7 @@ public class SunMoonEvent : MonoBehaviour
             this.gameObject.SetActive(false);
         }
     }
+    //玩家離開地圖判定
     private void OnTriggerExit2D(Collider2D other)
     {
         if (other.gameObject.layer == 10)

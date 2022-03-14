@@ -12,7 +12,7 @@ public class SunMoonArrowMove : MonoBehaviour
     {
         mrigibody2D = this.GetComponent<Rigidbody2D>();
     }
-    // Update is called once per frame
+    //箭矢速度
     void FixedUpdate()
     {
         if (noEffect)
@@ -28,6 +28,7 @@ public class SunMoonArrowMove : MonoBehaviour
             mrigibody2D.velocity = dir.normalized * speed * 0.35f;
         }
     }
+    //箭矢摧毀
     private void OnCollisionEnter2D(Collision2D other)
     {
         if (other.gameObject.layer == 10)
@@ -35,6 +36,7 @@ public class SunMoonArrowMove : MonoBehaviour
             Destroy(this.gameObject);
         }
     }
+    //箭矢摧毀
     private void OnTriggerExit2D(Collider2D other)
     {
         if (other.CompareTag("background"))
@@ -42,6 +44,7 @@ public class SunMoonArrowMove : MonoBehaviour
             Destroy(this.gameObject);
         }
     }
+    //射擊方向
     public void setArrow()
     {
         Quaternion k = Quaternion.AngleAxis(transform.rotation.eulerAngles.z, Vector3.forward);

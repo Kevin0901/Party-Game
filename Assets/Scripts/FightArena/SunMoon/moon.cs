@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class moon : MonoBehaviour
 {
+    //在月亮上
     private void OnTriggerStay2D(Collider2D other)
     {
         if (other.CompareTag("arrow"))
@@ -12,6 +13,7 @@ public class moon : MonoBehaviour
             other.GetComponent<SunMoonArrowMove>().noEffect = false;
         }
     }
+    //離開月亮
     private void OnTriggerExit2D(Collider2D other)
     {
         if (other.CompareTag("arrow"))

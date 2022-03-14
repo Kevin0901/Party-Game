@@ -13,6 +13,7 @@ public class MedusaEvent : MonoBehaviour
         nextTime = 0;
         hurtRate = 0;
     }
+    //開始遊戲
     public void StartGame()
     {
         r = Random.Range(0, FightManager.Instance.gamelist.Count);
@@ -24,6 +25,7 @@ public class MedusaEvent : MonoBehaviour
         }
         StartCoroutine(wait(waitTime));
     }
+    //等待時間
     IEnumerator wait(float t)
     {
         yield return new WaitForSeconds(t);
@@ -32,7 +34,6 @@ public class MedusaEvent : MonoBehaviour
         mirror.GetComponent<circleMirror>().enabled = true;
         StartCoroutine(speedUP());
     }
-    // Update is called once per frame
     void Update()
     {
         if (FightManager.Instance.gamelist.Count == 1)
@@ -55,6 +56,7 @@ public class MedusaEvent : MonoBehaviour
         }
         else
         {
+            //追蹤玩家的位置
             if (r >= FightManager.Instance.gamelist.Count)
             {
                 r = FightManager.Instance.gamelist.Count - 1;
@@ -73,22 +75,26 @@ public class MedusaEvent : MonoBehaviour
                 {
                     r += 1;
                 }
+                //生成球
                 spawnBall();
                 nextTime = Time.time + changeTime;
             }
         }
     }
+    //梅杜莎速度加快
     IEnumerator speedUP()
     {
         yield return new WaitForSeconds(1f);
         speed += 0.35f;
         StartCoroutine(speedUP());
     }
+    //生成球
     public void spawnBall()
     {
         GameObject eye = Instantiate(ball, this.transform.position, this.transform.rotation);
         eye.GetComponent<ball>().move(r);
     }
+    //碰到玩家給傷害
     private void OnCollisionStay2D(Collision2D other)
     {
         if (other.gameObject.layer == 10 && Time.time - hurtRate > 0.5f)

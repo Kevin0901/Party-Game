@@ -7,6 +7,7 @@ using System;
 public class heart : MonoBehaviour
 {
     [SerializeField] private List<Sprite> sprites;
+    //玩家受到傷害，改變UI顯示
     public void hurt(float hp)
     {
         switch (hp)

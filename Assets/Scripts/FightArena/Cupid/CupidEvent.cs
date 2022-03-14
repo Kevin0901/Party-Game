@@ -15,12 +15,13 @@ public class CupidEvent : MonoBehaviour
     private Rigidbody2D mrigibody;
     private Vector3 firstpos, newpos;
     private Vector2 cupidpos;
-    void Awake() //初始化物件池
+    void Awake()
     {
         mrigibody = this.GetComponent<Rigidbody2D>();
         arrow_Store = new List<GameObject>();
         arrow_limit = 45;
-        cooldownTime = 2;
+        cooldownTime = 1.5f;
+        //初始化物件池
         for (int i = 0; i < arrow_limit; i++)
         {
             GameObject addArrow = Instantiate(arrow, this.transform.position, Quaternion.identity);
@@ -34,15 +35,15 @@ public class CupidEvent : MonoBehaviour
         }
         cupidpos = new Vector2(Random.Range(-1.0f, 1.0f), Random.Range(-1.0f, 1.0f)).normalized;
     }
+    //開始遊戲
     public void StartGame()
     {
         for (int i = 0; i < FightManager.Instance.gamelist.Count; i++)
         {
-            GameObject.Find("HealthUI").transform.GetChild(i).gameObject.SetActive(true);
             FightManager.Instance.gamelist[i].GetComponent<arenaPlayer>().currentState = ArenaState.walk;
         }
-        StartCoroutine(spawnArrow(cooldownTime));
-        StartCoroutine(Move(cooldownTime));
+        StartCoroutine(spawnArrow(cooldownTime, Random.Range(1, 4)));//隨機一種模式
+        StartCoroutine(Move(cooldownTime));  //給邱比特移動
     }
     private void Update()
     {
@@ -58,15 +59,21 @@ public class CupidEvent : MonoBehaviour
                 UI.transform.Find("blue").gameObject.SetActive(true);
             }
             FightManager.Instance.gamelist[0].SetActive(false);
+            for (int i = 0; i < FightManager.Instance.plist.Count; i++)
+            {
+                FightManager.Instance.plist[i].GetComponent<SpriteRenderer>().color = new Color32(255, 255, 255, 255);
+            }
             this.gameObject.SetActive(false);
         }
     }
+    //移動
     public IEnumerator Move()
     {
         mrigibody.velocity = cupidpos * Cupid_Speed;
         yield return null;
         StartCoroutine(Move());
     }
+    //移動
     public IEnumerator Move(float time)
     {
         yield return new WaitForSeconds(time);
@@ -75,13 +82,13 @@ public class CupidEvent : MonoBehaviour
         StartCoroutine(Move());
     }
     //箭矢生成
-    IEnumerator spawnArrow(float time)
+    IEnumerator spawnArrow(float time, int type)
     {
         yield return new WaitForSeconds(time);
-        string FunName = "FireType_" + 1;
+        string FunName = "FireType_" + type;
         StartCoroutine(FunName, 2); //總共幾波攻擊
     }
-    //攻擊模式
+    //攻擊模式_1
     IEnumerator FireType_1(int number)
     {
         speed = 50f;
@@ -94,12 +101,12 @@ public class CupidEvent : MonoBehaviour
                 rotate = (Mathf.Atan2(newpos.y, newpos.x) * Mathf.Rad2Deg) - 180;
                 GetPoolInstance();
             }
-            yield return new WaitForSeconds(0.5f);
+            yield return new WaitForSeconds(0.5f); //下一波發射時間
         }
-        StartCoroutine(Move());
-        StartCoroutine(spawnArrow(cooldownTime));
+        StartCoroutine(spawnArrow(cooldownTime, 2));
         yield return null;
     }
+    //攻擊模式_2
     IEnumerator FireType_2(int number)//發射波數
     {
         for (int i = 0; i < number; i++)
@@ -129,12 +136,12 @@ public class CupidEvent : MonoBehaviour
                 rotate += angle;
                 newpos = k * newpos;
             }
-            yield return new WaitForSeconds(1f); //延遲進行下一波發射
+            yield return new WaitForSeconds(1f); //下一波發射時間
         }
-        StartCoroutine(spawnArrow(cooldownTime));
+        StartCoroutine(spawnArrow(cooldownTime, 3));
         yield return null;
     }
-
+    //攻擊模式_3
     IEnumerator FireType_3(int number)
     {
         speed = 22.5f;
@@ -191,9 +198,9 @@ public class CupidEvent : MonoBehaviour
                 newpos = k4 * newpos;
                 yield return new WaitForSeconds(0.3f);
             }
-            yield return new WaitForSeconds(1.2f); //延遲進行下一波發射
+            yield return new WaitForSeconds(1.2f); //下一波發射時間
         }
-        StartCoroutine(spawnArrow(cooldownTime));
+        StartCoroutine(spawnArrow(cooldownTime, 1));
         yield return null;
     }
     //物件池
@@ -218,6 +225,7 @@ public class CupidEvent : MonoBehaviour
         arr.transform.SetParent(this.transform);
         arr.SetActive(false);
     }
+    //碰撞設定,如果碰到背景，亂數移動邱比特位置
     private void OnCollisionStay2D(Collision2D other)
     {
         if (other.gameObject.CompareTag("background"))

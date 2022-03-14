@@ -6,11 +6,10 @@ using UnityEngine.InputSystem;
 public class playerShoot : MonoBehaviour
 {
     [SerializeField] private GameObject item;
-    public bool isCenter; //是否在正中心
-    [Header("箭矢設定")]
-    public float speed = 50;
-    public float mass = 1000;
-    [Header("攻擊間隔")]
+    public bool isCenter; //玩家是否在正中心
+    [Header("射擊設定")]
+    [SerializeField] private float speed = 50;
+    [SerializeField] private float mass = 1000;
     [SerializeField] private float fireRate;
     private float nextfire;
     private PlayerInput controls;
@@ -23,10 +22,12 @@ public class playerShoot : MonoBehaviour
         nextfire = 0;
         isCenter = false;
     }
+    //InputSystem設定(可刪)
     private void OnEnable()
     {
         controls.actions["shoot"].performed += shoot;
     }
+    //InputSystem設定(可刪)
     private void OnDisable()
     {
         controls.actions["shoot"].performed -= shoot;
@@ -36,7 +37,7 @@ public class playerShoot : MonoBehaviour
         if (ctx.ReadValueAsButton() && Time.time > nextfire)
         {
             GameObject a = Instantiate(item, transform.position, transform.rotation);
-            Physics2D.IgnoreCollision(a.GetComponent<Collider2D>(), this.GetComponent<Collider2D>()); //忽略自己
+            Physics2D.IgnoreCollision(a.GetComponent<Collider2D>(), this.GetComponent<Collider2D>()); //忽略自己讓箭矢不會射到自己
 
             if (isCenter) //如果在正中心發射的話
             {

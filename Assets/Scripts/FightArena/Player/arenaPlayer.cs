@@ -13,15 +13,16 @@ public class arenaPlayer : MonoBehaviour
 {
     [SerializeField] private float loveTime = 2f;
     private float nextTime;
+    public int love_index;
     public bool red;
     public ArenaState currentState;
-    [Header("玩家數值")]
+    [Header("玩家基礎數值")]
     public float speed = 30f;
     [SerializeField] private float curH;
-    public int p_index, love_index;
+    public int p_index;
     private SpriteRenderer sprite;
-    private Vector3 spawnPos;
     private Rigidbody2D mrigibody;
+    private Animator mAnimator;
     private GameObject ui;
     private PlayerInput controls;
     private Vector2 movement;
@@ -34,10 +35,12 @@ public class arenaPlayer : MonoBehaviour
     void Start()
     {
         mrigibody = this.GetComponent<Rigidbody2D>();
+        mAnimator = this.GetComponent<Animator>();
         sprite = this.GetComponent<SpriteRenderer>();
         nextTime = loveTime;
         curH = 3f;
     }
+    //玩家狀態更新
     void FixedUpdate()
     {
         if (currentState == ArenaState.love)
@@ -45,7 +48,7 @@ public class arenaPlayer : MonoBehaviour
             if (love_index >= FightManager.Instance.gamelist.Count)
             {
                 love_index = FightManager.Instance.gamelist.Count - 1;
-                if (love_index == p_index)
+                if (love_index == p_index && p_index != 0)
                 {
                     love_index = love_index - 1;
                 }
@@ -53,11 +56,11 @@ public class arenaPlayer : MonoBehaviour
             Vector3 pos = FightManager.Instance.gamelist[love_index].transform.position;
             mrigibody.AddForce((pos - this.transform.position).normalized * speed, ForceMode2D.Force);
             loveTime -= Time.deltaTime;
-            sprite.color = new Color32(200, 3, 180, 255);
+            mAnimator.SetTrigger("love");
             if (loveTime < 0)
             {
                 loveTime = nextTime;
-                sprite.color = new Color32(255, 255, 255, 255);
+                mAnimator.SetTrigger("love");
                 currentState = ArenaState.walk;
             }
         }
@@ -69,6 +72,7 @@ public class arenaPlayer : MonoBehaviour
             }
         }
     }
+    //選隊
     public void choose(InputAction.CallbackContext ctx)
     {
         if (ui.transform.Find("RedTeam").gameObject.activeSelf)
@@ -83,11 +87,13 @@ public class arenaPlayer : MonoBehaviour
         }
 
     }
+    //移除inputSystem設定
     public void removeChoose()
     {
         controls.actions["choose"].performed -= choose;
         // controls.actionEvents[1].RemoveListener(choose);
     }
+    //搖桿旋轉玩家
     public void rotate(InputAction.CallbackContext ctx)
     {
         Vector2 input = ctx.ReadValue<Vector2>();
@@ -97,6 +103,7 @@ public class arenaPlayer : MonoBehaviour
             transform.rotation = Quaternion.AngleAxis(rotate - 90, Vector3.forward);
         }
     }
+    //滑鼠旋轉玩家
     public void mou(InputAction.CallbackContext ctx)
     {
         Vector3 pos = ctx.ReadValue<Vector2>();
@@ -105,10 +112,12 @@ public class arenaPlayer : MonoBehaviour
         float rotate = Mathf.Atan2(line.y, line.x) * Mathf.Rad2Deg;
         transform.rotation = Quaternion.AngleAxis(rotate - 90, Vector3.forward);
     }
+    //移動玩家
     public void Move(InputAction.CallbackContext ctx)
     {
         movement = ctx.ReadValue<Vector2>();
     }
+    //開啟Title
     public void openP_Num(int num)
     {
         p_index = num;
@@ -120,15 +129,12 @@ public class arenaPlayer : MonoBehaviour
             ui.transform.Find("BlueTeam").gameObject.SetActive(false);
         }
     }
+    //重生點
     public void SpawnPoint(Vector3 pos)
     {
         this.transform.position = pos;
-        spawnPos = pos;
     }
-    public void SpawnPoint()
-    {
-        this.transform.position = spawnPos;
-    }
+    //玩家受到傷害
     public void hurt(float damege)
     {
         curH -= damege;
@@ -137,18 +143,22 @@ public class arenaPlayer : MonoBehaviour
         {
             this.gameObject.SetActive(false);
         }
+        mAnimator.SetTrigger("hurt");
     }
+    //玩家關閉(reset)
     private void OnDisable()
     {
         FightManager.Instance.gamelist.Remove(this.gameObject);
         this.GetComponent<arenaPlayer>().currentState = ArenaState.idle;
         curH = 3;
     }
+    //改變顏色
     public void changeColor()
     {
         StartCoroutine(changeMySelfColor());
     }
-    private IEnumerator changeMySelfColor()
+    //改變Title顏色
+    public IEnumerator changeMySelfColor()
     {
         this.transform.Find("NumTitle").GetChild(p_index).GetComponent<SpriteRenderer>().color = new Color32(34, 179, 229, 255);
         yield return new WaitForSeconds(transform.Find("sword").GetComponent<sword>().gaveTime);

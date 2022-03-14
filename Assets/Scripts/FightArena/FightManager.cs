@@ -10,6 +10,7 @@ public class FightManager : MonoBehaviour
     public int game_num;
     public List<GameObject> plist, gamelist;
     private PlayerInputManager manager;
+    //靜態實例基本宣告
     private void Awake()
     {
         if (Instance != null)
@@ -26,6 +27,7 @@ public class FightManager : MonoBehaviour
         gamelist = new List<GameObject>();
         manager = this.GetComponent<PlayerInputManager>();
     }
+    //inputSystm 的加入玩家函式
     private void OnPlayerJoined(PlayerInput player)
     {
         plist.Add(player.gameObject);
@@ -45,6 +47,7 @@ public class FightManager : MonoBehaviour
             GameObject.Find("ChoosePlayer").transform.Find("P" + manager.playerCount).Find("gamepad").gameObject.SetActive(true);
         }
     }
+    //重新配置
     public void retry()
     {
         if (plist.Count != 0)
@@ -57,6 +60,7 @@ public class FightManager : MonoBehaviour
             plist.Clear();
         }
     }
+    //選隊
     public void teamChoose()
     {
         int red = 0;
@@ -92,6 +96,7 @@ public class FightManager : MonoBehaviour
             Debug.Log("配置不對歐");
         }
     }
+    //選擇哪個遊戲
     public void gameNum(int num)
     {
         SceneManager.sceneLoaded += waitLoad;
@@ -103,6 +108,7 @@ public class FightManager : MonoBehaviour
         }
         SceneManager.LoadSceneAsync("FightScene", LoadSceneMode.Single);
     }
+    //選擇哪個遊戲
     public void gameNum()
     {
         SceneManager.sceneLoaded += waitLoad;
@@ -113,6 +119,7 @@ public class FightManager : MonoBehaviour
         }
         SceneManager.LoadSceneAsync("FightScene", LoadSceneMode.Single);
     }
+    //場景載入完會發生的事情
     public void waitLoad(Scene scene, LoadSceneMode mode)
     {
         SceneManager.sceneLoaded -= waitLoad;
