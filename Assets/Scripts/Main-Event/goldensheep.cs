@@ -24,6 +24,7 @@ public class goldensheep : MonoBehaviour
 
         if (nowtstatic == false)
         {
+
             if (player.GetComponent<PlayerMovement>().health.playercatchsheeponhit != 0)
             {
                 if (bonusteam == "blue")
@@ -38,12 +39,16 @@ public class goldensheep : MonoBehaviour
                 StartCoroutine(gobackcolddown());
                 nowtstatic = true;
                 bonusteam = null;
+                playerposlist.Clear();
             }
-            playerposlist.Add(player.transform.position);
-            if (playerposlist.Count > 100)
+            else
             {
-                playerposlist.RemoveAt(0);
-                transform.position = playerposlist[0];
+                playerposlist.Add(player.transform.position);
+                if (playerposlist.Count > 50)
+                {
+                    playerposlist.RemoveAt(0);
+                    transform.position = playerposlist[0];
+                }
             }
         }
 
@@ -79,10 +84,12 @@ public class goldensheep : MonoBehaviour
 
     IEnumerator gobackcolddown()
     {
-        float orginspeed = speed;
-        speed = 0;
+        mc = 1;
+        // float orginspeed = speed;
+        // speed = 0;
         yield return new WaitForSeconds(10);
-        speed = orginspeed;
+        // speed = orginspeed;
+        mc = 0;
     }
 
     private void OnTriggerStay2D(Collider2D other)

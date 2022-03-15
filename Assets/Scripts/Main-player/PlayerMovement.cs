@@ -120,7 +120,7 @@ public class PlayerMovement : MonoBehaviour
         Playerthrow();
         PlayerItemUse();
         PlayerBulid();
-        if (Input.GetKeyDown(KeyCode.E))
+        if (Input.GetKeyDown(KeyCode.J))
         {
             inventory.AddItem(new Item { itemType = Item.ItemType.Medusaeye, amount = 1 });
         }

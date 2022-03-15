@@ -15,7 +15,7 @@ public class EventGenerate : MonoBehaviour
             Instantiate(tsu, tsupos, tsu.transform.rotation);
         }
 
-        if (Input.GetKey(KeyCode.E))
+        if (Input.GetKeyDown(KeyCode.E))
         {
             Vector3 eqpos = new Vector3(0f, 0f, 0f);
             StartCoroutine(Beforeearthquakesay(eqpos));

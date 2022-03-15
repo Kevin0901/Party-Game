@@ -11,8 +11,13 @@ public class earthquake : MonoBehaviour
         {
             // Debug.Log(other.gameObject.name);
             Destroy(other.gameObject);
+            StartCoroutine(CameraShakeAndDestoryself());
         }
     }
 
-
+    IEnumerator CameraShakeAndDestoryself()
+    {
+        yield return new WaitForSeconds(2);
+        Destroy(this);
+    }
 }
