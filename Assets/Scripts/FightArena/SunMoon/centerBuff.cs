@@ -9,7 +9,7 @@ public class centerBuff : MonoBehaviour
     {
         if (other.gameObject.layer == 10)
         {
-            other.GetComponent<playerShoot>().isCenter = true;
+            other.GetComponent<arenaPlayer>().isCenter = true;
         }
     }
     //離開正中心
@@ -17,7 +17,7 @@ public class centerBuff : MonoBehaviour
     {
         if (other.gameObject.layer == 10)
         {
-            other.GetComponent<playerShoot>().isCenter = false;
+            other.GetComponent<arenaPlayer>().isCenter = false;
         }
     }
 }

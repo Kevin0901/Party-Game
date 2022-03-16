@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class CupidArrowMove : MonoBehaviour
 {
-    private float damage = 0.5f;
     public float speed = 20;
     public Vector3 Pos;
     public GameObject parent;

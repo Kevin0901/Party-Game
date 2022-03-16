@@ -80,7 +80,6 @@ GameObject:
   - component: {fileID: 2028814211212845497}
   - component: {fileID: 2028814211212845503}
   - component: {fileID: 663338559122863997}
-  - component: {fileID: -5214544181148326272}
   - component: {fileID: 7754934055589320719}
   - component: {fileID: -3661442191397062175}
   - component: {fileID: 6216084490904171514}
@@ -181,23 +180,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 1
---- !u!114 &-5214544181148326272
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2028814211212845501}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 846d5ace6c43db84cb721428e0a368cc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  item: {fileID: 3093933777940720112, guid: 7d50319c0e3dc8645b06e73f19760a27, type: 3}
-  isCenter: 0
-  speed: 50
-  mass: 1000
-  fireRate: 0.5
 --- !u!114 &7754934055589320719
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -210,13 +192,23 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cec4967692dba314cb9226d9ceb2af89, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  loveTime: 1
-  love_index: 0
-  red: 0
   currentState: 0
   speed: 135
   curH: 0
+  red: 0
   p_index: 0
+  spawnPos: {x: 0, y: 0, z: 0}
+  item: {fileID: 3093933777940720112, guid: 7d50319c0e3dc8645b06e73f19760a27, type: 3}
+  fireRate: 0.5
+  Arrowspeed: 50
+  mass: 1000
+  isCenter: 0
+  loveTime: 1
+  love_index: 0
+  lighting: {fileID: 2572263306716138460, guid: a5da32123a0cc3445add59367c944c59,
+    type: 3}
+  powerTime: 0
+  isGetLighting: 0
 --- !u!114 &-3661442191397062175
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -235,19 +227,7 @@ MonoBehaviour:
   m_UIInputModule: {fileID: 0}
   m_DeviceLostEvent:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 7754934055589320719}
-        m_TargetAssemblyTypeName: arenaPlayer, Assembly-CSharp
-        m_MethodName: test
-        m_Mode: 0
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
   m_DeviceRegainedEvent:
     m_PersistentCalls:
       m_Calls: []
@@ -312,7 +292,19 @@ MonoBehaviour:
     m_ActionId: 98cf8251-d55f-4e4d-b49d-a746b44050df
     m_ActionName: Player/mouse[/Mouse/position]
   - m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 7754934055589320719}
+        m_TargetAssemblyTypeName: arenaPlayer, Assembly-CSharp
+        m_MethodName: shoot
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_ActionId: 0c9e2cc0-22df-480e-8e44-5dd1448b1e55
     m_ActionName: Player/Shoot[/Mouse/leftButton,/XInputControllerWindows/rightTrigger]
   m_NeverAutoSwitchControlSchemes: 0

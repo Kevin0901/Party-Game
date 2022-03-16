@@ -14,8 +14,7 @@ public class SunMoonEvent : MonoBehaviour
         this.GetComponent<SunMoonEvent>().enabled = true;
         for (int i = 0; i < FightManager.Instance.gamelist.Count; i++)
         {
-            FightManager.Instance.gamelist[i].GetComponent<arenaPlayer>().currentState = ArenaState.walk;
-            FightManager.Instance.gamelist[i].GetComponent<playerShoot>().enabled = true;
+            FightManager.Instance.gamelist[i].GetComponent<arenaPlayer>().currentState = ArenaState.shoot;
         }
     }
     //改變背景大小
@@ -42,11 +41,6 @@ public class SunMoonEvent : MonoBehaviour
             else
             {
                 UI.transform.Find("blue").gameObject.SetActive(true);
-            }
-
-            for (int i = 0; i < FightManager.Instance.plist.Count; i++)
-            {
-                FightManager.Instance.plist[i].GetComponent<playerShoot>().enabled = false;
             }
             FightManager.Instance.gamelist[0].SetActive(false);
             this.gameObject.SetActive(false);

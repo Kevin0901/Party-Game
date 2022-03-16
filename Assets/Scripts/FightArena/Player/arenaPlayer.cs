@@ -8,25 +8,40 @@ public enum ArenaState
     idle,
     walk,
     love,
+    lighting,
+    shoot
 }
 public class arenaPlayer : MonoBehaviour
 {
-    [SerializeField] private float loveTime = 2f;
-    private float nextTime;
-    public int love_index;
-    public ArenaState currentState;
     [Header("玩家基礎數值")]
+    public ArenaState currentState;
     public float speed = 30f;
     [SerializeField] private float curH;
     public bool red;
     public int p_index;
     public Vector3 spawnPos;
+    [Header("月亮太陽射擊設定")]
+    [SerializeField] private GameObject item;
+    [SerializeField] private float fireRate, Arrowspeed = 50;
+    [SerializeField] private float mass = 1000;
+    private float nextfire;
+    public bool isCenter; //玩家是否在正中心
+    [Header("邱比特設定")]
+    [SerializeField] private float loveTime = 2f;
+    private float nextlove;
+    public int love_index;
+    [Header("宙斯")]
+    [SerializeField] private GameObject lighting;
+    [SerializeField] private float powerTime;
+    [SerializeField] private bool isGetLighting;
+
     private SpriteRenderer sprite;
     private Rigidbody2D mrigibody;
     private Animator mAnimator;
     private GameObject ui;
     private PlayerInput controls;
     private Vector2 movement;
+    private bool isShoot;
     void Awake()
     {
         controls = this.GetComponent<PlayerInput>();
@@ -38,8 +53,38 @@ public class arenaPlayer : MonoBehaviour
         mrigibody = this.GetComponent<Rigidbody2D>();
         mAnimator = this.GetComponent<Animator>();
         sprite = this.GetComponent<SpriteRenderer>();
-        nextTime = loveTime;
+        nextlove = loveTime;
         curH = 3f;
+        nextfire = 0;
+        isCenter = false;
+    }
+    private void Update()
+    {
+        if (Input.GetMouseButton(0) && isGetLighting)
+        {
+            currentState = ArenaState.lighting;
+            mrigibody.velocity = Vector2.zero;
+            powerTime += Time.deltaTime;
+        }
+        else if (Input.GetMouseButtonUp(0) && currentState == ArenaState.lighting)
+        {
+            Debug.Log(powerTime);
+            GameObject a = Instantiate(lighting, transform.position,
+        lighting.transform.rotation * this.transform.rotation);
+            if (2f > powerTime & powerTime >= 1f)
+            {
+                a.transform.localScale += new Vector3(a.transform.localScale.x * 2, 0, 0);
+            }
+            else if (powerTime >= 2f)
+            {
+                a.transform.localScale += new Vector3(a.transform.localScale.x * 4, 0, 0);
+            }
+
+            a.GetComponent<shootflash>().shooter = this.gameObject;
+            currentState = ArenaState.walk;
+            isGetLighting = false;
+            powerTime = 0;
+        }
     }
     //玩家狀態更新
     void FixedUpdate()
@@ -59,7 +104,7 @@ public class arenaPlayer : MonoBehaviour
             loveTime -= Time.deltaTime;
             if (loveTime < 0)
             {
-                loveTime = nextTime;
+                loveTime = nextlove;
                 this.transform.Find("NumTitle").GetChild(p_index).GetComponent<SpriteRenderer>().color = Color.white;
                 currentState = ArenaState.walk;
             }
@@ -69,6 +114,34 @@ public class arenaPlayer : MonoBehaviour
             if (movement != Vector2.zero)
             {
                 mrigibody.AddForce(movement * speed, ForceMode2D.Force);
+            }
+        }
+        else if (currentState == ArenaState.shoot)
+        {
+            if (movement != Vector2.zero)
+            {
+                mrigibody.AddForce(movement * speed, ForceMode2D.Force);
+            }
+            if (isShoot && Time.time > nextfire)
+            {
+                isShoot = false;
+                GameObject a = Instantiate(item, transform.position, transform.rotation);
+                Physics2D.IgnoreCollision(a.GetComponent<Collider2D>(), this.GetComponent<Collider2D>()); //忽略自己讓箭矢不會射到自己
+
+                if (isCenter) //如果在正中心發射的話
+                {
+                    a.GetComponent<SpriteRenderer>().color = new Color32(0, 0, 0, 255);
+                    a.GetComponent<Rigidbody2D>().mass = mass * 2f;
+                    a.GetComponent<SunMoonArrowMove>().speed = Arrowspeed * 1.8f;
+                    a.transform.localScale *= 1.5f;
+                }
+                else
+                {
+                    a.GetComponent<Rigidbody2D>().mass = mass;
+                    a.GetComponent<SunMoonArrowMove>().speed = Arrowspeed;
+                }
+                a.GetComponent<SunMoonArrowMove>().setArrow();
+                nextfire = Time.time + fireRate; //下次發射的時間
             }
         }
     }
@@ -116,6 +189,14 @@ public class arenaPlayer : MonoBehaviour
     public void Move(InputAction.CallbackContext ctx)
     {
         movement = ctx.ReadValue<Vector2>();
+    }
+    //射擊
+    public void shoot(InputAction.CallbackContext ctx)
+    {
+        if (ctx.performed)
+        {
+            isShoot = ctx.ReadValueAsButton();
+        }
     }
     //開啟Title
     public void openP_Num(int num)
