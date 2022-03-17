@@ -9,13 +9,14 @@ public enum ArenaState
     walk,
     love,
     lighting,
-    shoot
+    shoot,
+    fastMode
 }
 public class arenaPlayer : MonoBehaviour
 {
     [Header("玩家基礎數值")]
     public ArenaState currentState;
-    public float speed = 30f;
+    public float speed;
     [SerializeField] private float curH;
     public bool red;
     public int p_index;
@@ -32,9 +33,10 @@ public class arenaPlayer : MonoBehaviour
     public int love_index;
     [Header("宙斯")]
     [SerializeField] private GameObject lighting;
-    [SerializeField] private float powerTime;
-    [SerializeField] private bool isGetLighting;
-
+    [SerializeField] private float powerTime, rushTime;
+    public bool isGetLighting;
+    [Header("荷米斯")]
+    public float turboSpeed;
     private SpriteRenderer sprite;
     private Rigidbody2D mrigibody;
     private Animator mAnimator;
@@ -62,28 +64,36 @@ public class arenaPlayer : MonoBehaviour
     {
         if (Input.GetMouseButton(0) && isGetLighting)
         {
-            currentState = ArenaState.lighting;
             mrigibody.velocity = Vector2.zero;
             powerTime += Time.deltaTime;
+            if (powerTime < 2)
+                this.transform.Find("NumTitle").GetChild(p_index).GetComponent<SpriteRenderer>().color = new Color(1, 1 - (powerTime * 0.135f), 1 - (powerTime * 0.5f), 1);
+            else
+            {
+                this.transform.Find("NumTitle").GetChild(p_index).GetComponent<SpriteRenderer>().color = Color.red;
+            }
         }
-        else if (Input.GetMouseButtonUp(0) && currentState == ArenaState.lighting)
+        else if (Input.GetMouseButtonUp(0) && isGetLighting)
         {
             Debug.Log(powerTime);
             GameObject a = Instantiate(lighting, transform.position,
-        lighting.transform.rotation * this.transform.rotation);
-            if (2f > powerTime & powerTime >= 1f)
+            lighting.transform.rotation * this.transform.rotation);
+            if (powerTime < 2)
             {
-                a.transform.localScale += new Vector3(a.transform.localScale.x * 2, 0, 0);
+                a.transform.localScale += new Vector3(a.transform.localScale.x * 2 * powerTime, 0, 0);
             }
-            else if (powerTime >= 2f)
+            else
             {
-                a.transform.localScale += new Vector3(a.transform.localScale.x * 4, 0, 0);
+                a.transform.localScale += new Vector3(a.transform.localScale.x * 4.5f, 0, 0);
             }
-
+            this.transform.Find("NumTitle").GetChild(p_index).GetComponent<SpriteRenderer>().color = Color.white;
             a.GetComponent<shootflash>().shooter = this.gameObject;
-            currentState = ArenaState.walk;
             isGetLighting = false;
             powerTime = 0;
+        }
+        else if (Input.GetKeyDown(KeyCode.Space) && currentState == ArenaState.lighting)
+        {
+            mrigibody.AddForce(movement * speed, ForceMode2D.Impulse);
         }
     }
     //玩家狀態更新
@@ -142,6 +152,20 @@ public class arenaPlayer : MonoBehaviour
                 }
                 a.GetComponent<SunMoonArrowMove>().setArrow();
                 nextfire = Time.time + fireRate; //下次發射的時間
+            }
+        }
+        else if (currentState == ArenaState.lighting)
+        {
+            if (movement != Vector2.zero && powerTime == 0)
+            {
+                mrigibody.AddForce(movement * speed, ForceMode2D.Force);
+            }
+        }
+        else if (currentState == ArenaState.fastMode)
+        {
+            if (movement != Vector2.zero)
+            {
+                mrigibody.AddForce(movement * turboSpeed, ForceMode2D.Impulse);
             }
         }
     }
@@ -220,7 +244,6 @@ public class arenaPlayer : MonoBehaviour
     {
         this.transform.position = spawnPos;
     }
-
     //玩家受到傷害
     public void hurt(float damege)
     {

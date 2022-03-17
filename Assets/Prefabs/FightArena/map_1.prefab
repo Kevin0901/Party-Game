@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 6098514309516633741}
   - component: {fileID: 6098514309516633740}
   m_Layer: 8
-  m_Name: orignal_BG
+  m_Name: map_1
   m_TagString: background
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
