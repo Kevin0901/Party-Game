@@ -44,7 +44,7 @@ public class GoldenSheep : MonoBehaviour
             else
             {
                 playerposlist.Add(player.transform.position);
-                if (playerposlist.Count > 50)
+                if (playerposlist.Count > 30)
                 {
                     playerposlist.RemoveAt(0);
                     transform.position = playerposlist[0];
