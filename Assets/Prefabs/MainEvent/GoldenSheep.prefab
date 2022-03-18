@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 8356781508894599121}
   - component: {fileID: 8356781508894599122}
   m_Layer: 0
-  m_Name: golden sheep
+  m_Name: GoldenSheep
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

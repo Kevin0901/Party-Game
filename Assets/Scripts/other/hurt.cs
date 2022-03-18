@@ -10,6 +10,25 @@ public class hurt : MonoBehaviour
     void Start()
     {
         t = this.gameObject.GetComponentInParent<Team>();
+    }
+    private void OnTriggerEnter2D(Collider2D other)
+    {
+        if (other.CompareTag(t.Enemyteam))
+        {
+            getdamagetogive();
+            other.gameObject.GetComponentInChildren<health>().Hurt(damageToGive);
+        }
+
+        if (other.CompareTag("monster"))
+        {
+            getdamagetogive();
+            other.gameObject.GetComponentInChildren<health>().Hurt(damageToGive);
+        }
+
+    }
+
+    private void getdamagetogive()
+    {
         if (gameObject.transform.parent.gameObject.layer == 10)
         {
             damageToGive = this.gameObject.GetComponentInParent<PlayerMovement>().attackDamage;
@@ -18,18 +37,5 @@ public class hurt : MonoBehaviour
         {
             damageToGive = this.gameObject.GetComponentInParent<monsterMove>().attackDamage;
         }
-    }
-    private void OnTriggerEnter2D(Collider2D other)
-    {
-        if (other.CompareTag(t.Enemyteam))
-        {
-            other.gameObject.GetComponentInChildren<health>().Hurt(damageToGive);
-        }
-
-        if (other.CompareTag("monster"))
-        {
-            other.gameObject.GetComponentInChildren<health>().Hurt(damageToGive);
-        }
-
     }
 }

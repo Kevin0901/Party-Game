@@ -24,8 +24,9 @@ public class EventGenerate : MonoBehaviour
         IEnumerator Beforeearthquakesay(Vector3 pos)
         {
 
-            yield return new WaitForSeconds(10);
+            yield return new WaitForSeconds(2);
             Instantiate(eq, pos, eq.transform.rotation);
+            CameraShake.canshake = true;
         }
     }
 }

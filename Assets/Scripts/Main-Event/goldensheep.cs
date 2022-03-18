@@ -4,7 +4,7 @@ using UnityEngine;
 
 
 
-public class goldensheep : MonoBehaviour
+public class GoldenSheep : MonoBehaviour
 {
     [SerializeField]
     private string bonusteam;   //加成隊伍

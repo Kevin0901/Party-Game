@@ -13,7 +13,7 @@ public class PlayerMovement : MonoBehaviour
     private SpriteRenderer spriteRenderer;
     [Header("玩家參數")]
     [SerializeField] private PlayerState currentState;
-    [SerializeField] private float speed;
+    public float speed;
     [SerializeField] private int MaxHealth, CurHealth;
     [SerializeField] private float dir;
     public int attackDamage;
@@ -122,7 +122,8 @@ public class PlayerMovement : MonoBehaviour
         PlayerBulid();
         if (Input.GetKeyDown(KeyCode.J))
         {
-            inventory.AddItem(new Item { itemType = Item.ItemType.Medusaeye, amount = 1 });
+            StartCoroutine(this.GetComponent<Effect>().PotionHealEffect());
+            // inventory.AddItem(new Item { itemType = Item.ItemType.Medusaeye, amount = 1 });
         }
     }
     private void spawn()
@@ -143,24 +144,9 @@ public class PlayerMovement : MonoBehaviour
             // this.transform.SetParent(null);
         }
     }
-    private IEnumerator HermisEffect()
-    {
-        inventory.RemoveItem(new Item { itemType = Item.ItemType.Hermisboots, amount = 1 });
-        speed = orginspeed * 2;
-        yield return new WaitForSeconds(10);
-        speed = orginspeed;
-    }
-
-    private IEnumerator PowerEffect()
-    {
-        inventory.RemoveItem(new Item { itemType = Item.ItemType.PowerPotion, amount = 1 });
-        attackDamage *= 2;
-        yield return new WaitForSeconds(10);
-        attackDamage /= 2;
-    }
     private IEnumerator WineEffect()
     {
-        inventory.RemoveItem(new Item { itemType = Item.ItemType.Wine, amount = 1 });
+
         speed /= 2;
         for (int i = 0; i < 6; i++)
         {
@@ -441,19 +427,24 @@ public class PlayerMovement : MonoBehaviour
                 case "Hermisboots":
                     if (inventorysign.GetComponent<InventorySign>().signitemamount() != 0)
                     {
-                        StartCoroutine(HermisEffect());
+                        inventory.RemoveItem(new Item { itemType = Item.ItemType.Hermisboots, amount = 1 });
+                        StartCoroutine(this.GetComponent<Effect>().SpeedUpEffect());
+
                     }
                     break;
                 case "Wine":
                     if (inventorysign.GetComponent<InventorySign>().signitemamount() != 0)
                     {
+                        inventory.RemoveItem(new Item { itemType = Item.ItemType.Wine, amount = 1 });
                         StartCoroutine(WineEffect());
+
                     }
                     break;
                 case "PowerPotion":
                     if (inventorysign.GetComponent<InventorySign>().signitemamount() != 0)
                     {
-                        StartCoroutine(PowerEffect());
+                        inventory.RemoveItem(new Item { itemType = Item.ItemType.PowerPotion, amount = 1 });
+                        StartCoroutine(this.GetComponent<Effect>().PowerUPEffect());
                     }
                     break;
             }
@@ -466,19 +457,22 @@ public class PlayerMovement : MonoBehaviour
                 case "Hermisboots":
                     if (inventorysign.GetComponent<InventorySign>().signitemamount() != 0)
                     {
-                        StartCoroutine(HermisEffect());
+                        inventory.RemoveItem(new Item { itemType = Item.ItemType.Hermisboots, amount = 1 });
+                        StartCoroutine(this.GetComponent<Effect>().SpeedUpEffect());
                     }
                     break;
                 case "Wine":
                     if (inventorysign.GetComponent<InventorySign>().signitemamount() != 0)
                     {
+                        inventory.RemoveItem(new Item { itemType = Item.ItemType.Wine, amount = 1 });
                         StartCoroutine(WineEffect());
                     }
                     break;
                 case "PowerPotion":
                     if (inventorysign.GetComponent<InventorySign>().signitemamount() != 0)
                     {
-                        StartCoroutine(PowerEffect());
+                        inventory.RemoveItem(new Item { itemType = Item.ItemType.PowerPotion, amount = 1 });
+                        StartCoroutine(this.GetComponent<Effect>().PowerUPEffect());
                     }
                     break;
             }
