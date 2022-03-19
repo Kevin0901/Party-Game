@@ -1045,6 +1045,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: hole_circle (2)
       objectReference: {fileID: 0}
+    - target: {fileID: 280503065790102883, guid: 96de10a362fc7eb4ab961949626c22c4,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 280503065790102908, guid: 96de10a362fc7eb4ab961949626c22c4,
         type: 3}
       propertyPath: m_RootOrder
@@ -1210,6 +1215,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: hole_circle (4)
       objectReference: {fileID: 0}
+    - target: {fileID: 280503065790102883, guid: 96de10a362fc7eb4ab961949626c22c4,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 280503065790102908, guid: 96de10a362fc7eb4ab961949626c22c4,
         type: 3}
       propertyPath: m_RootOrder
@@ -1299,6 +1309,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: hole_circle (3)
+      objectReference: {fileID: 0}
+    - target: {fileID: 280503065790102883, guid: 96de10a362fc7eb4ab961949626c22c4,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 280503065790102908, guid: 96de10a362fc7eb4ab961949626c22c4,
         type: 3}
@@ -1779,6 +1794,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: hole_circle (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 280503065790102883, guid: 96de10a362fc7eb4ab961949626c22c4,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 280503065790102908, guid: 96de10a362fc7eb4ab961949626c22c4,
         type: 3}

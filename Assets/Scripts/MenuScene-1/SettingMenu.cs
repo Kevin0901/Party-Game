@@ -13,13 +13,16 @@ public class SettingMenu : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        volume = audios.volume;
-        soundSlider.value = volume;
-        audios.Play();
+        if (audios != null)
+        {
+            volume = audios.volume;
+            soundSlider.value = volume;
+            audios.Play();
+        }
     }
 
     // Update is called once per frame
-    void Update() 
+    void Update()
     {
         if (Input.GetKeyDown(KeyCode.Escape)) //ese叫設定出來
         {
@@ -32,7 +35,10 @@ public class SettingMenu : MonoBehaviour
                 transform.Find("Settings").gameObject.SetActive(true);
             }
         }
-        audios.volume = volume;
+        if (audios != null)
+        {
+            audios.volume = volume;
+        }
     }
 
     public void updateVolume(float musicVolume) //音量調節

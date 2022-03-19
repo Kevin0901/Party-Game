@@ -6,15 +6,6 @@
             "id": "fb8d6404-ed77-4dcb-9196-b47c736924a7",
             "actions": [
                 {
-                    "name": "join",
-                    "type": "Button",
-                    "id": "da5efce7-0b41-45bb-9a3c-2c57823845bf",
-                    "expectedControlType": "Button",
-                    "processors": "",
-                    "interactions": "Press",
-                    "initialStateCheck": true
-                },
-                {
                     "name": "choose",
                     "type": "Button",
                     "id": "e8cd5603-591e-4aad-8664-5fb31e5e2f9e",
@@ -61,28 +52,6 @@
                 }
             ],
             "bindings": [
-                {
-                    "name": "",
-                    "id": "143bb1cd-cc10-4eca-a2f0-a3664166fe91",
-                    "path": "<Gamepad>/buttonWest",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "Gamepad",
-                    "action": "join",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "05f6913d-c316-48b2-a6bb-e225f14c7960",
-                    "path": "<Keyboard>/space",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": ";Keyboard&Mouse",
-                    "action": "join",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
                 {
                     "name": "keyboard",
                     "id": "73e5719d-c667-4d2d-9ed8-03cbf67e9cd0",

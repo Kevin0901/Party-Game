@@ -8,9 +8,9 @@ public class pickflash : MonoBehaviour
     {
         if (other.gameObject.layer == 10)
         {
-            if (other.GetComponent<arenaPlayer>().isGetLighting != true)
+            if (other.GetComponent<arenaPlayer>().currentState != ArenaState.lighting)
             {
-                other.GetComponent<arenaPlayer>().isGetLighting = true;
+                other.GetComponent<arenaPlayer>().currentState = ArenaState.lighting;
                 Destroy(this.gameObject);
             }
         }

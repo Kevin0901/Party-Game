@@ -1,15 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.InputSystem;
-using UnityEngine.InputSystem.Users;
 using UnityEngine.SceneManagement;
 public class FightManager : MonoBehaviour
 {
     public static FightManager Instance;
     public int game_num;
     public List<GameObject> plist, gamelist;
-    private PlayerInputManager manager;
+    [SerializeField] private GameObject _player;
     //靜態實例基本宣告
     private void Awake()
     {
@@ -25,43 +23,38 @@ public class FightManager : MonoBehaviour
     {
         plist = new List<GameObject>();
         gamelist = new List<GameObject>();
-        manager = this.GetComponent<PlayerInputManager>();
+    }
+    public void joinGame()
+    {
+        Instantiate(_player, this.transform.position, transform.rotation);
+        plist.Add(_player);
+        DontDestroyOnLoad(_player);
+        _player.GetComponent<arenaPlayer>().p_index = plist.Count - 1;
+        GameObject.Find("ChoosePlayer").transform.Find("P" + plist.Count).gameObject.SetActive(true);
     }
     //inputSystm 的加入玩家函式
-    private void OnPlayerJoined(PlayerInput player)
-    {
-        plist.Add(player.gameObject);
-        player.gameObject.GetComponent<arenaPlayer>().openP_Num((plist.Count - 1));
-        Debug.Log("Joined " + player.playerIndex + " - " + player.devices[0].displayName);
-        Debug.Log("Player Count " + manager.playerCount + "/" + manager.maxPlayerCount);
-        GameObject.Find("ChoosePlayer").transform.Find("P" + manager.playerCount).gameObject.SetActive(true);
-        Debug.Log(player.currentControlScheme);
-        if (player.currentControlScheme == "Keyboard&Mouse")
-        {
-            GameObject.Find("ChoosePlayer").transform.Find("P" + manager.playerCount).Find("keyboard").gameObject.SetActive(true);
-            GameObject.Find("ChoosePlayer").transform.Find("P" + manager.playerCount).Find("gamepad").gameObject.SetActive(false);
-        }
-        else
-        {
-            GameObject.Find("ChoosePlayer").transform.Find("P" + manager.playerCount).Find("keyboard").gameObject.SetActive(false);
-            GameObject.Find("ChoosePlayer").transform.Find("P" + manager.playerCount).Find("gamepad").gameObject.SetActive(true);
-        }
-    }
-    //重新配置
-    public void retry()
-    {
-        if (plist.Count != 0)
-        {
-            for (int i = 0; i < plist.Count; i++)
-            {
-                GameObject.Find("ChoosePlayer").transform.Find("P" + (i + 1)).gameObject.SetActive(false);
-                Destroy(plist[i]);
-            }
-            plist.Clear();
-        }
-    }
-    //選隊
-    public void teamChoose()
+    // private void OnPlayerJoined(PlayerInput player)
+    // {
+    //     plist.Add(player.gameObject);
+    //     player.gameObject.GetComponent<arenaPlayer>().openP_Num((plist.Count - 1));
+    //     Debug.Log("Joined " + player.playerIndex + " - " + player.devices[0].displayName);
+    //     Debug.Log("Player Count " + manager.playerCount + "/" + manager.maxPlayerCount);
+    //     GameObject.Find("ChoosePlayer").transform.Find("P" + manager.playerCount).gameObject.SetActive(true);
+    //     Debug.Log(player.currentControlScheme);
+    //     if (player.currentControlScheme == "Keyboard&Mouse")
+    //     {
+    //         GameObject.Find("ChoosePlayer").transform.Find("P" + manager.playerCount).Find("keyboard").gameObject.SetActive(true);
+    //         GameObject.Find("ChoosePlayer").transform.Find("P" + manager.playerCount).Find("gamepad").gameObject.SetActive(false);
+    //     }
+    //     else
+    //     {
+    //         GameObject.Find("ChoosePlayer").transform.Find("P" + manager.playerCount).Find("keyboard").gameObject.SetActive(false);
+    //         GameObject.Find("ChoosePlayer").transform.Find("P" + manager.playerCount).Find("gamepad").gameObject.SetActive(true);
+    //     }
+    // }
+
+    //開始遊戲
+    public void startGame()
     {
         int red = 0;
         int blue = 0;
@@ -86,10 +79,8 @@ public class FightManager : MonoBehaviour
             GameObject.Find("GameChoose").GetComponent<CanvasGroup>().blocksRaycasts = true;
             for (int j = 0; j < plist.Count; j++)
             {
-                plist[j].GetComponent<arenaPlayer>().removeChoose();
-                DontDestroyOnLoad(plist[j]);
+                plist[j].GetComponent<changeTeam>().enabled = false;
             }
-            manager.enabled = false;
         }
         else
         {
@@ -141,8 +132,6 @@ public class FightManager : MonoBehaviour
                     plist[i].GetComponent<arenaPlayer>().SpawnPoint(new Vector3(0, -10, 0));
                     break;
             }
-            plist[i].SetActive(true);
         }
     }
-
 }
