@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 2836021406832168173}
   - component: {fileID: 2836021406832168175}
   - component: {fileID: 2836021406832168172}
-  m_Layer: 8
+  m_Layer: 5
   m_Name: Background
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -85,7 +85,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2836021406915761928}
   - component: {fileID: 2836021406915761931}
-  m_Layer: 8
+  m_Layer: 5
   m_Name: Slider
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -178,9 +178,9 @@ GameObject:
   - component: {fileID: 2836021407083763869}
   - component: {fileID: 2662688744013299010}
   - component: {fileID: 5471035562924358820}
-  m_Layer: 8
+  m_Layer: 5
   m_Name: HealthBar
-  m_TagString: EditorOnly
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -313,7 +313,7 @@ GameObject:
   - component: {fileID: 2836021408057283444}
   - component: {fileID: 2836021408057283446}
   - component: {fileID: 2836021408057283447}
-  m_Layer: 8
+  m_Layer: 5
   m_Name: Fill
   m_TagString: Untagged
   m_Icon: {fileID: 0}

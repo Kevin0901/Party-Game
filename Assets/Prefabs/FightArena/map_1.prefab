@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 6098514309516633742}
   - component: {fileID: 6098514309516633741}
   - component: {fileID: 6098514309516633740}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: map_1
   m_TagString: background
   m_Icon: {fileID: 0}
@@ -93,7 +93,7 @@ Rigidbody2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6098514309516633739}
-  m_BodyType: 1
+  m_BodyType: 2
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0

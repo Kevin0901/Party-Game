@@ -13,7 +13,6 @@ TagManager:
   - Wave
   - ball
   - monster
-  - wall
   - territory
   - red
   - blue
@@ -24,17 +23,17 @@ TagManager:
   - 
   - Water
   - UI
-  - arrow
-  - 
   - background
   - monster
-  - player
-  - bulid
   - throwitem
-  - arenaMonster
-  - Castle
-  - shop
-  - item
+  - bulid
+  - player
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
   - 
   - 
   - 

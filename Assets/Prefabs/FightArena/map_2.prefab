@@ -10,13 +10,12 @@ GameObject:
   m_Component:
   - component: {fileID: 7518546086156103233}
   - component: {fileID: 9071744604701971466}
-  - component: {fileID: 6703327382467768983}
   - component: {fileID: 3154569319968107170}
   - component: {fileID: 5800676162742032479}
   - component: {fileID: 3020976747351180927}
   m_Layer: 0
   m_Name: map_2
-  m_TagString: Untagged
+  m_TagString: background
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -75,7 +74,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 2
-  m_Sprite: {fileID: 21300000, guid: fff35c68c6a69444c80f15f5f05e997d, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 0040a4c80f3ae8142aaefba61b9d4513, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -86,21 +85,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &6703327382467768983
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1274259150474731454}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7d4772bbeeed4e94f8bdbb26236cd2b0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  cow: {fileID: 3625472658329865040, guid: 26973acdf0a17e548b616dbb895fb134, type: 3}
-  redScore: 0
-  blueScore: 0
 --- !u!50 &3154569319968107170
 Rigidbody2D:
   serializedVersion: 4
@@ -135,7 +119,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 1
-  m_Offset: {x: 0, y: 0}
+  m_Offset: {x: 0, y: 0.016493559}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -146,7 +130,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 15.7, y: 10}
+  m_Size: {x: 15.7, y: 9.439222}
   m_EdgeRadius: 0
 --- !u!66 &3020976747351180927
 CompositeCollider2D:
@@ -169,18 +153,18 @@ CompositeCollider2D:
   - m_Collider: {fileID: 5800676162742032479}
     m_ColliderPaths:
     - - X: 627999707
-        Y: -400000000
+        Y: -376249376
       - X: 627999707
-        Y: 400000000
+        Y: 378888384
       - X: -628000000
-        Y: 399999707
+        Y: 378888091
       - X: -627999707
-        Y: -400000000
+        Y: -376249376
   m_CompositePaths:
     m_Paths:
-    - - {x: 62.799942, y: -40}
-      - {x: 62.799942, y: 40}
-      - {x: -62.8, y: 39.999943}
-      - {x: -62.799942, y: -40}
+    - - {x: 62.799942, y: -37.62494}
+      - {x: 62.799942, y: 37.88884}
+      - {x: -62.8, y: 37.888783}
+      - {x: -62.799942, y: -37.62494}
   m_VertexDistance: 0.0005
   m_OffsetDistance: 0.00005

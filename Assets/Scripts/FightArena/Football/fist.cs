@@ -6,10 +6,13 @@ public class fist : MonoBehaviour
 {
     private Vector3 dir;
     private Rigidbody2D mrigidbody2D;
+    private void Awake()
+    {
+        Physics2D.IgnoreCollision(this.GetComponent<Collider2D>(), this.transform.parent.GetComponent<Collider2D>());
+    }
     private void Start()
     {
         mrigidbody2D = this.GetComponent<Rigidbody2D>();
-        Physics2D.IgnoreCollision(this.GetComponent<Collider2D>(), this.transform.parent.GetComponent<Collider2D>());
     }
     public void punch(float power)
     {

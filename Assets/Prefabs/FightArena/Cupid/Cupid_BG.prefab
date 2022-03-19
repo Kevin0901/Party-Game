@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 1503489086913257663}
   - component: {fileID: 1503489086913257660}
   - component: {fileID: 1503489086913257661}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: Cupid_BG
   m_TagString: background
   m_Icon: {fileID: 0}

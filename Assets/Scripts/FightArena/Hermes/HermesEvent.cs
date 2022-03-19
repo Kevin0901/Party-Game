@@ -44,7 +44,6 @@ public class HermesEvent : MonoBehaviour
             {
                 FightManager.Instance.gamelist[i].SetActive(false);
             }
-
             this.gameObject.SetActive(false);
         }
     }
