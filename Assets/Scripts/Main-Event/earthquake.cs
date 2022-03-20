@@ -20,14 +20,28 @@ public class Earthquake : MonoBehaviour
                 Destroy(other.gameObject);
             }
         }
+        else
+        {
+            StartCoroutine(waitfordestory());
+        }
     }
 
     IEnumerator CameraShakeAndDestoryself()
     {
+        CameraShake.canshake = true;
         yield return new WaitForSeconds(2);
         WaitQuake = true;
         yield return new WaitForSeconds(2);
         CameraShake.canshake = false;
         Destroy(this.gameObject);
+    }
+
+    IEnumerator waitfordestory()
+    {
+        yield return new WaitForSeconds(5);
+        if (!WaitQuake)
+        {
+            Destroy(this.gameObject);
+        }
     }
 }

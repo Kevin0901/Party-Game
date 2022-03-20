@@ -32,14 +32,7 @@ public class Medusaeye : MonoBehaviour
     {
         foreach (GameObject enemy in enemyinlist)
         {
-            if (enemy.GetComponent<monsterMove>() != null)
-            {
-                StartCoroutine(enemy.GetComponent<monsterMove>().MonsterStartStone());
-            }
-            else if (enemy.GetComponent<PlayerMovement>() != null)
-            {
-                StartCoroutine(enemy.GetComponent<PlayerMovement>().StoneEffect());
-            }
+            StartCoroutine(enemy.GetComponent<Effect>().StoneEffect());
         }
     }
 }

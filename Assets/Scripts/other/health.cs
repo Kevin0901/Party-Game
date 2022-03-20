@@ -69,28 +69,11 @@ public class health : MonoBehaviour
             playercatchsheeponhit = 1;
         }
     }
-    public void burnhurt(int sec, int secdamage)
-    {
-        if (burnstack == 0)
-        {
-            burnstack = 1;
-            StartCoroutine(burn(sec, secdamage));
-        }
-    }
     private IEnumerator phoenix(int t) //無敵
     {
         parentSet.GetComponent<PlayerMovement>().phfeatheruse = 1;
         yield return new WaitForSeconds(t);
         parentSet.GetComponent<PlayerMovement>().phfeather -= 1;
-    }
-    private IEnumerator burn(int sec, int secdamage)
-    {
-        for (int i = 0; i < sec; i++)
-        {
-            Hurt(secdamage);
-            yield return new WaitForSeconds(0.5f);
-        }
-        burnstack = 0;
     }
     void healthBarSet()
     {

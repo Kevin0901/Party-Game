@@ -26,7 +26,6 @@ public class EventGenerate : MonoBehaviour
 
             yield return new WaitForSeconds(2);
             Instantiate(eq, pos, eq.transform.rotation);
-            CameraShake.canshake = true;
         }
     }
 }

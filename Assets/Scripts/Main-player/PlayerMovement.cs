@@ -122,7 +122,7 @@ public class PlayerMovement : MonoBehaviour
         PlayerBulid();
         if (Input.GetKeyDown(KeyCode.J))
         {
-            StartCoroutine(this.GetComponent<Effect>().PotionHealEffect());
+            StartCoroutine(this.GetComponent<Effect>().BurnEffect());
             // inventory.AddItem(new Item { itemType = Item.ItemType.Medusaeye, amount = 1 });
         }
     }
@@ -144,36 +144,7 @@ public class PlayerMovement : MonoBehaviour
             // this.transform.SetParent(null);
         }
     }
-    private IEnumerator WineEffect()
-    {
 
-        speed /= 2;
-        for (int i = 0; i < 6; i++)
-        {
-            int reheal = (int)((health.maxH * 0.4f) / 6);
-            if (health.curH < health.maxH)
-            {
-                if (health.curH + reheal > health.maxH)
-                {
-                    health.curH = health.maxH;
-                }
-                else
-                {
-                    health.curH += reheal;
-                }
-            }
-            yield return new WaitForSeconds(0.5f);
-        }
-        speed *= 2;
-    }
-    public IEnumerator StoneEffect()
-    {
-        speed = 0;
-        this.GetComponent<SpriteRenderer>().color = new Color32(89, 89, 89, 255);
-        yield return new WaitForSeconds(5);
-        this.GetComponent<SpriteRenderer>().color = new Color32(255, 255, 255, 255);
-        speed = orginspeed;
-    }
     void PlayerMove()
     {
         if (Input.GetButton("attack" + joynum) && currentState != PlayerState.attack) //如果按下攻擊鍵且玩家不在攻擊動作
@@ -436,7 +407,7 @@ public class PlayerMovement : MonoBehaviour
                     if (inventorysign.GetComponent<InventorySign>().signitemamount() != 0)
                     {
                         inventory.RemoveItem(new Item { itemType = Item.ItemType.Wine, amount = 1 });
-                        StartCoroutine(WineEffect());
+                        StartCoroutine(this.GetComponent<Effect>().PotionHealEffect());
 
                     }
                     break;
@@ -465,7 +436,7 @@ public class PlayerMovement : MonoBehaviour
                     if (inventorysign.GetComponent<InventorySign>().signitemamount() != 0)
                     {
                         inventory.RemoveItem(new Item { itemType = Item.ItemType.Wine, amount = 1 });
-                        StartCoroutine(WineEffect());
+                        StartCoroutine(this.GetComponent<Effect>().PotionHealEffect());
                     }
                     break;
                 case "PowerPotion":
@@ -506,64 +477,6 @@ public class PlayerMovement : MonoBehaviour
     {
         return inventorysign;
     }
-    // void spawnUI()
-    // {
-    //     switch (order)
-    //     {
-    //         case 1:
-    //             for (int i = 0; i < generateUI.Length; i++)
-    //             {
-    //                 GameObject resource = Instantiate(generateUI[i]);
-    //                 resource.transform.parent = GameObject.Find("P" + order + "UI").gameObject.transform;
-    //                 Canvas canvas = resource.GetComponent<Canvas>();
-    //                 canvas.renderMode = RenderMode.ScreenSpaceCamera;
-    //                 canvas.worldCamera = this.transform.GetChild(0).gameObject.GetComponent<Camera>();
-    //                 canvas.sortingLayerName = "UI";
-    //                 canvas.sortingOrder = 1;
-    //             }
-    //             UiandInventoryGet();
-    //             break;
-    //         case 2:
-    //             for (int i = 0; i < generateUI.Length; i++)
-    //             {
-    //                 GameObject resource = Instantiate(generateUI[i]);
-    //                 resource.transform.parent = GameObject.Find("P" + order + "UI").gameObject.transform;
-    //                 Canvas canvas = resource.GetComponent<Canvas>();
-    //                 canvas.renderMode = RenderMode.ScreenSpaceCamera;
-    //                 canvas.worldCamera = this.transform.GetChild(0).gameObject.GetComponent<Camera>();
-    //                 canvas.sortingLayerName = "UI";
-    //                 canvas.sortingOrder = 1;
-    //             }
-    //             UiandInventoryGet();
-    //             break;
-    //         case 3:
-    //             for (int i = 0; i < generateUI.Length; i++)
-    //             {
-    //                 GameObject resource = Instantiate(generateUI[i]);
-    //                 resource.transform.parent = GameObject.Find("P" + order + "UI").gameObject.transform;
-    //                 Canvas canvas = resource.GetComponent<Canvas>();
-    //                 canvas.renderMode = RenderMode.ScreenSpaceCamera;
-    //                 canvas.worldCamera = this.transform.GetChild(0).gameObject.GetComponent<Camera>();
-    //                 canvas.sortingLayerName = "UI";
-    //                 canvas.sortingOrder = 1;
-    //             }
-    //             UiandInventoryGet();
-    //             break;
-    //         case 4:
-    //             for (int i = 0; i < generateUI.Length; i++)
-    //             {
-    //                 GameObject resource = Instantiate(generateUI[i]);
-    //                 resource.transform.parent = GameObject.Find("P" + order + "UI").gameObject.transform;
-    //                 Canvas canvas = resource.GetComponent<Canvas>();
-    //                 canvas.renderMode = RenderMode.ScreenSpaceCamera;
-    //                 canvas.worldCamera = this.transform.GetChild(0).gameObject.GetComponent<Camera>();
-    //                 canvas.sortingLayerName = "UI";
-    //                 canvas.sortingOrder = 1;
-    //             }
-    //             UiandInventoryGet();
-    //             break;
-    //     }
-    // }
     void UiandInventoryGet()
     {
         UI = this.GetComponent<UIState>();
