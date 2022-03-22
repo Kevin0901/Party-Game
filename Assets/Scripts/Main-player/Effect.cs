@@ -37,6 +37,57 @@ public class Effect : MonoBehaviour
     [Header("燃燒扣血總趴數")]
     [SerializeField] private float BurnPersen = 30;
 
+    private bool InvincibleStatus = false;
+    [Header("燃燒扣血單次秒數")]
+    [SerializeField] private float InvincibleDuration = 5;
+    [Header("隨機效果數")]
+    [SerializeField] private int RandEffectTimes = 3;
+    // private List<int> nonre = new List<int>();
+
+
+    public IEnumerator RandGiveEffect()
+    {
+        int[] nonre = new int[RandEffectTimes];
+        for (int i = 0; i < RandEffectTimes; i++)
+        {
+            nonre[i] = Random.Range(0, 5);
+
+            for (int j = 0; j < i; j++)
+            {
+                while (nonre[j] == nonre[i])
+                {
+                    j = 0;
+                    nonre[i] = Random.Range(0, 5);
+                }
+            }
+        }
+        for (int i = 0; i < RandEffectTimes; i++)
+        {
+            switch (nonre[i])
+            {
+                case 0:
+                    StartCoroutine(PowerUPEffect());
+                    break;
+                case 1:
+                    StartCoroutine(SpeedUpEffect());
+                    break;
+                case 2:
+                    StartCoroutine(PotionHealEffect());
+                    break;
+                case 3:
+                    StartCoroutine(StoneEffect());
+                    break;
+                case 4:
+                    StartCoroutine(BurnEffect());
+                    break;
+                case 5:
+                    StartCoroutine(InvincibleEffect());
+                    break;
+            }
+
+        }
+        yield return null;
+    }
 
     public IEnumerator PowerUPEffect()
     {
@@ -73,7 +124,7 @@ public class Effect : MonoBehaviour
             SpeedUpStatus = true;
             if (this.gameObject.layer == 10)
             {
-                orginspeed = this.GetComponent<PlayerMovement>().speed;
+                orginspeed = this.GetComponent<PlayerMovement>().orginspeed;
                 this.GetComponent<PlayerMovement>().speed = orginspeed * SpeedMagnification;
                 yield return new WaitForSeconds(SpeedDuration);
                 this.GetComponent<PlayerMovement>().speed = orginspeed;
@@ -99,7 +150,7 @@ public class Effect : MonoBehaviour
             PotionHealStatus = true;
             if (this.gameObject.layer == 10)
             {
-                orginspeed = this.GetComponent<PlayerMovement>().speed;
+                orginspeed = this.GetComponent<PlayerMovement>().orginspeed;
                 health targetheal = this.GetComponentInChildren<health>();
 
                 this.GetComponent<PlayerMovement>().speed = orginspeed / 2;
@@ -162,7 +213,7 @@ public class Effect : MonoBehaviour
             StoneStatus = true;
             if (this.gameObject.layer == 10)
             {
-                orginspeed = this.GetComponent<PlayerMovement>().speed;
+                orginspeed = this.GetComponent<PlayerMovement>().orginspeed;
                 this.GetComponent<PlayerMovement>().speed = 0;
                 this.GetComponent<SpriteRenderer>().color = new Color32(89, 89, 89, 255);
                 yield return new WaitForSeconds(StoneDuration);
@@ -194,14 +245,30 @@ public class Effect : MonoBehaviour
             float times = BurnDuration / BurnPreSec;
             for (int i = 0; i < times; i++)
             {
-                int reheal = (int)((targetheal.maxH * (BurnPersen / 100)) / times);
-                this.GetComponent<SpriteRenderer>().color = new Color32(255, 60, 60, 255);
-                targetheal.curH -= reheal;
-                yield return new WaitForSeconds(BurnPreSec);
-                this.GetComponent<SpriteRenderer>().color = new Color32(255, 255, 255, 255);
+                if (!targetheal.iswudi)
+                {
+                    int reheal = (int)((targetheal.maxH * (BurnPersen / 100)) / times);
+                    this.GetComponent<SpriteRenderer>().color = new Color32(255, 60, 60, 255);
+                    targetheal.curH -= reheal;
+                    yield return new WaitForSeconds(BurnPreSec);
+                    this.GetComponent<SpriteRenderer>().color = new Color32(255, 255, 255, 255);
+                }
             }
             BurnStatus = false;
         }
     }
+
+    public IEnumerator InvincibleEffect()
+    {
+        if (!InvincibleStatus)
+        {
+            Debug.Log("widi!");
+            health targetstatus = this.GetComponentInChildren<health>();
+            targetstatus.iswudi = true;
+            yield return new WaitForSeconds(InvincibleDuration);
+            targetstatus.iswudi = false;
+        }
+    }
+
 
 }

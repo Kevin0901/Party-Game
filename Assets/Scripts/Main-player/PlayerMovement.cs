@@ -55,7 +55,8 @@ public class PlayerMovement : MonoBehaviour
     private UIState UI;
     private int getallinv = 0;
     private static int spriteNum = 0;
-    private float orginspeed, nextfire;
+    public float orginspeed;
+    private float nextfire;
 
     // Start is called before the first frame update
     private void Awake()
@@ -122,7 +123,7 @@ public class PlayerMovement : MonoBehaviour
         PlayerBulid();
         if (Input.GetKeyDown(KeyCode.J))
         {
-            StartCoroutine(this.GetComponent<Effect>().BurnEffect());
+            StartCoroutine(this.GetComponent<Effect>().RandGiveEffect());
             // inventory.AddItem(new Item { itemType = Item.ItemType.Medusaeye, amount = 1 });
         }
     }

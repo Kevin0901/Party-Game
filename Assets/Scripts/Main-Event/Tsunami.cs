@@ -16,7 +16,7 @@ public class Tsunami : MonoBehaviour
 
     void Update()
     {
-        transform.position += new Vector3(0, wavespeed, 0) * Time.deltaTime;
+        transform.position += new Vector3(wavespeed, 0, 0) * Time.deltaTime;
     }
 
     void OnTriggerStay2D(Collider2D other)
@@ -25,7 +25,7 @@ public class Tsunami : MonoBehaviour
         {
             health eheal = other.GetComponentInChildren<health>();
             eheal.Hurt((int)damage);
-            other.transform.position += new Vector3(0, wavespeed / 2, 0) * Time.deltaTime;
+            other.transform.position += new Vector3(wavespeed / 2, 0, 0) * Time.deltaTime;
         }
 
         if (other.gameObject.layer == 11)

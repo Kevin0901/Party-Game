@@ -11,7 +11,7 @@ public class EventGenerate : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.T))
         {
-            Vector3 tsupos = new Vector3(-18.0f, -66.0f, 0.0f);
+            Vector3 tsupos = new Vector3(-75f, 1f, 0.0f);
             Instantiate(tsu, tsupos, tsu.transform.rotation);
         }
 

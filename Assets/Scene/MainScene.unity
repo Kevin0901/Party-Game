@@ -830,6 +830,8 @@ MonoBehaviour:
   BurnPreSec: 0.5
   BurnDuration: 3
   BurnPersen: 30
+  InvincibleDuration: 5
+  RandEffectTimes: 3
 --- !u!1001 &415961302
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -846,6 +848,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4977036039124889599, guid: f6d4a44ac74b6c643a9732db4d161589,
+        type: 3}
+      propertyPath: m_PresetInfoIsWorld
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6822871495253970992, guid: f6d4a44ac74b6c643a9732db4d161589,
         type: 3}
