@@ -12,7 +12,6 @@ public class FootEvent : MonoBehaviour
         _time = 100;
         // SetPos();
         GameObject a = Instantiate(ball, Vector3.zero, ball.transform.rotation);
-        a.GetComponent<football>().parent = this.gameObject;
     }
     public void StartGame()
     {
@@ -43,6 +42,7 @@ public class FootEvent : MonoBehaviour
             for (int i = 0; i < FightManager.Instance.gamelist.Count; i++)
             {
                 FightManager.Instance.gamelist[i].SetActive(false);
+                FightManager.Instance.gamelist[i].transform.Find("fist").gameObject.SetActive(false);
             }
             this.gameObject.SetActive(false);
         }
@@ -98,7 +98,6 @@ public class FootEvent : MonoBehaviour
         this.transform.GetChild(0).Find("score").GetComponent<Text>().text = blueScore.ToString() + " : " + redScore.ToString();
         yield return new WaitForSeconds(2.5f);
         GameObject a = Instantiate(ball, Vector3.zero, ball.transform.rotation);
-        a.GetComponent<football>().parent = this.gameObject;
         yield return new WaitForSeconds(0.5f);
         this.transform.GetChild(0).Find("score").gameObject.SetActive(false);
         for (int i = 0; i < FightManager.Instance.gamelist.Count; i++)

@@ -67,19 +67,12 @@ public class CupidEvent : MonoBehaviour
         }
     }
     //移動
-    public IEnumerator Move()
-    {
-        mrigibody.velocity = cupidpos * Cupid_Speed;
-        yield return null;
-        StartCoroutine(Move());
-    }
-    //移動
     public IEnumerator Move(float time)
     {
         yield return new WaitForSeconds(time);
         mrigibody.velocity = cupidpos * Cupid_Speed;
         yield return null;
-        StartCoroutine(Move());
+        StartCoroutine(Move(0));
     }
     //箭矢生成
     IEnumerator spawnArrow(float time, int type)

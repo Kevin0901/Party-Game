@@ -228,7 +228,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cec4967692dba314cb9226d9ceb2af89, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  currentState: 6
+  currentState: 0
   speed: 135
   red: 0
   p_index: 0
@@ -648,18 +648,17 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 4050833931296437834, guid: 8bd9fd43acf7f9d479cbbf07a5833716,
-        type: 3}
-      propertyPath: m_UsedByComposite
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 4050833931296437836, guid: 8bd9fd43acf7f9d479cbbf07a5833716,
         type: 3}
       propertyPath: m_Name
       value: fist
       objectReference: {fileID: 0}
-    m_RemovedComponents:
-    - {fileID: 1608683068704046983, guid: 8bd9fd43acf7f9d479cbbf07a5833716, type: 3}
+    - target: {fileID: 4050833931296437836, guid: 8bd9fd43acf7f9d479cbbf07a5833716,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8bd9fd43acf7f9d479cbbf07a5833716, type: 3}
 --- !u!4 &2650016244554541034 stripped
 Transform:

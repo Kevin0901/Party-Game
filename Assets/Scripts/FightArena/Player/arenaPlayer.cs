@@ -168,7 +168,7 @@ public class arenaPlayer : MonoBehaviour
             isPress = true;
             mrigibody.velocity = Vector2.zero;
             powerTime += Time.deltaTime;
-            if (powerTime < 2)
+            if (powerTime < 2.5)
                 this.transform.Find("NumTitle").GetChild(p_index).GetComponent<SpriteRenderer>().color = new Color(1, 1 - (powerTime * 0.135f), 1 - (powerTime * 0.5f), 1);
             else
             {
@@ -181,13 +181,13 @@ public class arenaPlayer : MonoBehaviour
             isPress = false;
             GameObject a = Instantiate(lighting, transform.position,
             lighting.transform.rotation * this.transform.rotation);
-            if (powerTime < 2)
+            if (powerTime < 2.5)
             {
                 a.transform.localScale += new Vector3(a.transform.localScale.x * 2 * powerTime, 0, 0);
             }
             else
             {
-                a.transform.localScale += new Vector3(a.transform.localScale.x * 4.5f, 0, 0);
+                a.transform.localScale += new Vector3(a.transform.localScale.x * 6f, 0, 0);
             }
             this.transform.Find("NumTitle").GetChild(p_index).GetComponent<SpriteRenderer>().color = Color.white;
             a.GetComponent<shootflash>().shooter = this.gameObject;
@@ -227,11 +227,6 @@ public class arenaPlayer : MonoBehaviour
         FightManager.Instance.gamelist.Remove(this.gameObject);
         this.GetComponent<arenaPlayer>().currentState = ArenaState.idle;
         curH = 3;
-    }
-    //改變顏色
-    public void changeColor()
-    {
-        StartCoroutine(changeColorTitle_Sword());
     }
     //改變Title顏色
     private IEnumerator changeColorTitle_Sword()

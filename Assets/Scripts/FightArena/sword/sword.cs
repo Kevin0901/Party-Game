@@ -22,8 +22,8 @@ public class sword : MonoBehaviour
         if (other.gameObject.layer == 10 && (other.gameObject != player.gameObject) && (lastplayer != other.gameObject))
         {
             other.gameObject.transform.Find("sword").gameObject.SetActive(true);
-            other.gameObject.transform.Find("sword").gameObject.GetComponent<sword>().Savelastplayer(player.gameObject);
-            player.changeColor();
+            other.gameObject.transform.Find("sword").gameObject.GetComponent<sword>().StartCoroutine("Savelastplayer", player.gameObject);
+            player.StartCoroutine("changeColorTitle_Sword");
             this.gameObject.SetActive(false);
         }
     }
@@ -55,14 +55,9 @@ public class sword : MonoBehaviour
         }
     }
     //在被碰到劍的玩家上，記錄上一個玩家
-    public void Savelastplayer(GameObject p)
+    public IEnumerator Savelastplayer(GameObject p)
     {
         lastplayer = p;
-        StartCoroutine(Savelastplayer());
-    }
-    //等待時間
-    public IEnumerator Savelastplayer()
-    {
         yield return new WaitForSeconds(gaveTime);
         lastplayer = null;
     }

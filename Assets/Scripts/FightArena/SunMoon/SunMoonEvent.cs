@@ -11,7 +11,6 @@ public class SunMoonEvent : MonoBehaviour
     public void StartGame()
     {
         StartCoroutine(changeBG());
-        this.GetComponent<SunMoonEvent>().enabled = true;
         for (int i = 0; i < FightManager.Instance.gamelist.Count; i++)
         {
             FightManager.Instance.gamelist[i].GetComponent<arenaPlayer>().currentState = ArenaState.shoot;
@@ -42,7 +41,7 @@ public class SunMoonEvent : MonoBehaviour
             {
                 UI.transform.Find("blue").gameObject.SetActive(true);
             }
-            FightManager.Instance.gamelist[0].SetActive(false);
+            FightManager.Instance.gamelist[0].SetActive(false); //可刪除
             this.gameObject.SetActive(false);
         }
     }
