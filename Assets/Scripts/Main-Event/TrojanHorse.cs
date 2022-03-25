@@ -49,6 +49,11 @@ public class TrojanHorse : MonoBehaviour
                 Destroy(this.gameObject);
             }
         }
+
+        if(this.GetComponentInChildren<health>().curH < 50){
+            Instantiate(SoliderGenerator, this.transform.position, SoliderGenerator.transform.rotation);
+            Destroy(this.gameObject);
+        }
     }
 
     private void OnTriggerEnter2D(Collider2D other)

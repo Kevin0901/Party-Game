@@ -57,6 +57,7 @@ public class PlayerMovement : MonoBehaviour
     private static int spriteNum = 0;
     public float orginspeed;
     private float nextfire;
+    public int ProjectileCost=1;
 
     // Start is called before the first frame update
     private void Awake()
@@ -123,8 +124,13 @@ public class PlayerMovement : MonoBehaviour
         PlayerBulid();
         if (Input.GetKeyDown(KeyCode.J))
         {
-            StartCoroutine(this.GetComponent<Effect>().RandGiveEffect());
+            StartCoroutine(this.GetComponent<Effect>().ProjectileInfiniteEffect());
             // inventory.AddItem(new Item { itemType = Item.ItemType.Medusaeye, amount = 1 });
+        }
+
+        if (Input.GetKeyDown(KeyCode.K))
+        {
+            inventory.AddItem(new Item { itemType = Item.ItemType.Medusaeye, amount = 1 });
         }
     }
     private void spawn()
@@ -194,13 +200,13 @@ public class PlayerMovement : MonoBehaviour
                                 switch (i)
                                 {
                                     case 0:
-                                        inventory.RemoveItem(new Item { itemType = Item.ItemType.Firehell, amount = 1 });
+                                        inventory.RemoveItem(new Item { itemType = Item.ItemType.Firehell, amount = ProjectileCost });
                                         break;
                                     case 1:
-                                        inventory.RemoveItem(new Item { itemType = Item.ItemType.TransPotion, amount = 1 });
+                                        inventory.RemoveItem(new Item { itemType = Item.ItemType.TransPotion, amount = ProjectileCost });
                                         break;
                                     case 2:
-                                        inventory.RemoveItem(new Item { itemType = Item.ItemType.Medusaeye, amount = 1 });
+                                        inventory.RemoveItem(new Item { itemType = Item.ItemType.Medusaeye, amount = ProjectileCost });
                                         break;
                                 }
 
@@ -220,13 +226,13 @@ public class PlayerMovement : MonoBehaviour
                                 switch (i)
                                 {
                                     case 0:
-                                        inventory.RemoveItem(new Item { itemType = Item.ItemType.Firehell, amount = 1 });
+                                        inventory.RemoveItem(new Item { itemType = Item.ItemType.Firehell, amount = ProjectileCost });
                                         break;
                                     case 1:
-                                        inventory.RemoveItem(new Item { itemType = Item.ItemType.TransPotion, amount = 1 });
+                                        inventory.RemoveItem(new Item { itemType = Item.ItemType.TransPotion, amount = ProjectileCost });
                                         break;
                                     case 2:
-                                        inventory.RemoveItem(new Item { itemType = Item.ItemType.Medusaeye, amount = 1 });
+                                        inventory.RemoveItem(new Item { itemType = Item.ItemType.Medusaeye, amount = ProjectileCost });
                                         break;
                                 }
 

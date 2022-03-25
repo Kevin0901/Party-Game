@@ -42,8 +42,10 @@ public class Effect : MonoBehaviour
     [SerializeField] private float InvincibleDuration = 5;
     [Header("隨機效果數")]
     [SerializeField] private int RandEffectTimes = 3;
-    // private List<int> nonre = new List<int>();
-
+    
+    private bool ProjectileStatus = false;
+    [Header("投射物無限秒數")]
+    [SerializeField] private float ProjectileInfiniteDuration = 5;
 
     public IEnumerator RandGiveEffect()
     {
@@ -270,5 +272,15 @@ public class Effect : MonoBehaviour
         }
     }
 
+     public IEnumerator ProjectileInfiniteEffect()
+    {
+        if (!ProjectileStatus && this.gameObject.layer == 10)
+        {
+            Debug.Log("infinite!");
+            this.GetComponentInChildren<PlayerMovement>().ProjectileCost =0;
+            yield return new WaitForSeconds(ProjectileInfiniteDuration);
+            this.GetComponentInChildren<PlayerMovement>().ProjectileCost =1;
 
+        }
+    }
 }

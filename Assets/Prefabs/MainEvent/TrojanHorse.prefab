@@ -103,7 +103,7 @@ MonoBehaviour:
     type: 3}
   TargetRed: {fileID: 119025310389127896, guid: c19287010e7fa5744ba83296df192786,
     type: 3}
-  speed: 5
+  speed: 0
   MaxHealth: 0
   CurHealth: 0
   damagepersen: 20
@@ -291,6 +291,21 @@ PrefabInstance:
         type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2836021408057283447, guid: 677a5437033343a4cb499601d72c41de,
+        type: 3}
+      propertyPath: m_Color.b
+      value: 0.45123374
+      objectReference: {fileID: 0}
+    - target: {fileID: 2836021408057283447, guid: 677a5437033343a4cb499601d72c41de,
+        type: 3}
+      propertyPath: m_Color.g
+      value: 0.9339623
+      objectReference: {fileID: 0}
+    - target: {fileID: 2836021408057283447, guid: 677a5437033343a4cb499601d72c41de,
+        type: 3}
+      propertyPath: m_Color.r
+      value: 0.43614274
       objectReference: {fileID: 0}
     - target: {fileID: 5471035562924358820, guid: 677a5437033343a4cb499601d72c41de,
         type: 3}
