@@ -85,7 +85,7 @@ public class health : MonoBehaviour
         }
         burnstack = 0;
     }
-    void healthBarSet()
+    public void healthBarSet()
     {
         // baseTop = proportion.anchoredPosition.y;
         // newTop = baseTop / 1.3f;

@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using Photon.Pun;
+using Photon.Realtime;
 public enum PlayerState
 {
     walk,
@@ -57,6 +59,8 @@ public class PlayerMovement : MonoBehaviour
     private static int spriteNum = 0;
     private float orginspeed, nextfire;
     // Start is called before the first frame update
+    public PhotonView PV;
+    public MultiPlayerManager MultiPlayerManager;
     private void Awake()
     {
         spriteRenderer = this.GetComponent<SpriteRenderer>();
@@ -64,12 +68,22 @@ public class PlayerMovement : MonoBehaviour
         animator = this.GetComponent<Animator>();
         health.maxH = MaxHealth;
         orginspeed = speed;
+        // PV = GetComponent<PhotonView>();  //定義PhotonView
+        // MultiPlayerManager = PhotonView.Find((int)PV.InstantiationData[0]).GetComponent<MultiPlayerManager>();  //設定自己的 PlayerManager
+        // MultiPlayerManager.OherPlayer = this.gameObject;  //設定 PlayerManager 中的 OherPlayer
     }
     void Start()
     {
         mouse = this.transform.parent.Find("mouseUI").gameObject;
         nextfire = 0;
         mrigibody = this.GetComponent<Rigidbody2D>();
+        // if (!PV.IsMine)  //如果此玩家 GameObject 是別人的鏡像，消除 UI 以及 Camera
+        // {
+        //     Destroy(mouse);
+        //     Destroy(timer);
+        //     Destroy(playercamera.gameObject);
+        //     return;
+        // }
         UiandInventoryGet();
         // spawnUI();
     }
@@ -115,6 +129,10 @@ public class PlayerMovement : MonoBehaviour
             Invoke("spawn", 2);
             this.gameObject.SetActive(false);
         }
+        // if (!PV.IsMine)
+        // {
+        //     return;
+        // }
         PlayerMove();
         Playerthrow();
         PlayerItemUse();
@@ -124,7 +142,7 @@ public class PlayerMovement : MonoBehaviour
             inventory.AddItem(new Item { itemType = Item.ItemType.Medusaeye, amount = 1 });
         }
     }
-    private void spawn()
+    public void spawn()
     {
         health.curH = health.maxH;
         if (this.tag == "red")

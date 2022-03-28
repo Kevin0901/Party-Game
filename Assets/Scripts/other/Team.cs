@@ -13,16 +13,14 @@ public class Team : MonoBehaviour
     public string Enemyteam; //敵人
     private void Awake()
     {
-        if (this.gameObject.tag == "red")
-        {
-            Enemyteam = "blue";
-        }
-        else if (this.gameObject.tag == "blue")
-        {
-            Enemyteam = "red";
-        }
+        SetEnemy();
     }
     private void Start()
+    {
+        SetEnemy();
+    }
+
+    public void SetEnemy()
     {
         if (this.gameObject.tag == "red")
         {
