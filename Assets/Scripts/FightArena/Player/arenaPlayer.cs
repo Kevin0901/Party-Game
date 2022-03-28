@@ -23,8 +23,7 @@ public class arenaPlayer : MonoBehaviour
     public Vector3 spawnPos;
     [Header("月亮太陽射擊設定")]
     [SerializeField] private GameObject item;
-    [SerializeField] private float fireRate, Arrowspeed = 50;
-    [SerializeField] private float mass = 1000;
+    [SerializeField] private float fireRate, Arrowspeed = 50, power;
     private float nextfire;
     public bool isCenter; //玩家是否在正中心
     [Header("邱比特設定")]
@@ -44,7 +43,6 @@ public class arenaPlayer : MonoBehaviour
     private Vector2 movement;
     [Header("足球")]
     [SerializeField] private float fistpower;
-
     void Start()
     {
         mrigibody = this.GetComponent<Rigidbody2D>();
@@ -76,11 +74,7 @@ public class arenaPlayer : MonoBehaviour
     //玩家狀態更新
     void FixedUpdate()
     {
-        if (currentState != ArenaState.idle && currentState != ArenaState.lighting)
-        {
-            Move();
-        }
-        else if (currentState == ArenaState.love)
+        if (currentState == ArenaState.love)
         {
             Lover();
         }
@@ -92,6 +86,10 @@ public class arenaPlayer : MonoBehaviour
             }
         }
         else if (currentState == ArenaState.lighting && !isPress)
+        {
+            Move();
+        }
+        else if (currentState != ArenaState.idle && currentState != ArenaState.lighting)
         {
             Move();
         }
@@ -119,16 +117,16 @@ public class arenaPlayer : MonoBehaviour
     //魅惑
     private void Lover()
     {
-        if (love_index >= FightManager.Instance.gamelist.Count)
+        if (love_index >= FightManager.Instance.plist.Count)
         {
-            love_index = FightManager.Instance.gamelist.Count - 1;
+            love_index = FightManager.Instance.plist.Count - 1;
             if (love_index == p_index && love_index != 0)
             {
                 love_index = love_index - 1;
             }
         }
-        Vector3 pos = FightManager.Instance.gamelist[love_index].transform.position;
-        mrigibody.AddForce((pos - this.transform.position).normalized * speed, ForceMode2D.Force);
+        Vector3 pos = FightManager.Instance.plist[love_index].transform.position;
+        mrigibody.AddForce((pos - this.transform.position).normalized * speed * 0.66f, ForceMode2D.Force);
         loveTime -= Time.deltaTime;
         if (loveTime < 0)
         {
@@ -143,18 +141,17 @@ public class arenaPlayer : MonoBehaviour
         if (Input.GetMouseButtonDown(0) && Time.time > nextfire)
         {
             GameObject arr = Instantiate(item, transform.position, transform.rotation);
-            Physics2D.IgnoreCollision(arr.GetComponent<Collider2D>(), this.GetComponent<Collider2D>()); //忽略自己讓箭矢不會射到自己
             if (isCenter) //如果在正中心發射的話
             {
                 arr.GetComponent<SpriteRenderer>().color = new Color32(0, 0, 0, 255);
-                arr.GetComponent<Rigidbody2D>().mass = mass * 2f;
-                arr.GetComponent<SunMoonArrowMove>().speed = Arrowspeed * 1.8f;
-                arr.transform.localScale *= 1.5f;
+                arr.GetComponent<SunMoonArrowMove>().speed = Arrowspeed * 1.75f;
+                arr.GetComponent<SunMoonArrowMove>().power = power * 1.25f;
+                arr.transform.localScale *= 1.25f;
             }
             else
             {
-                arr.GetComponent<Rigidbody2D>().mass = mass;
                 arr.GetComponent<SunMoonArrowMove>().speed = Arrowspeed;
+                arr.GetComponent<SunMoonArrowMove>().power = power;
             }
             arr.GetComponent<SunMoonArrowMove>().setArrow();
             nextfire = Time.time + fireRate; //下次發射的時間
@@ -221,15 +218,13 @@ public class arenaPlayer : MonoBehaviour
         }
         mAnimator.SetTrigger("hurt");
     }
-    //玩家關閉(reset)
+    //玩家關閉
     private void OnDisable()
     {
-        FightManager.Instance.gamelist.Remove(this.gameObject);
-        this.GetComponent<arenaPlayer>().currentState = ArenaState.idle;
-        curH = 3;
+        FightManager.Instance.plist.Remove(this.gameObject);
     }
     //改變Title顏色
-    private IEnumerator changeColorTitle_Sword()
+    public IEnumerator changeColorTitle_Sword()
     {
         this.transform.Find("NumTitle").GetChild(p_index).GetComponent<SpriteRenderer>().color = new Color32(34, 179, 229, 255);
         yield return new WaitForSeconds(transform.Find("sword").GetComponent<sword>().gaveTime);

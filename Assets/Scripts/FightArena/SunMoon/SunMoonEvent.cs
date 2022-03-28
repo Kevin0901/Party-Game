@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -11,9 +11,9 @@ public class SunMoonEvent : MonoBehaviour
     public void StartGame()
     {
         StartCoroutine(changeBG());
-        for (int i = 0; i < FightManager.Instance.gamelist.Count; i++)
+        for (int i = 0; i < FightManager.Instance.plist.Count; i++)
         {
-            FightManager.Instance.gamelist[i].GetComponent<arenaPlayer>().currentState = ArenaState.shoot;
+            FightManager.Instance.plist[i].GetComponent<arenaPlayer>().currentState = ArenaState.shoot;
         }
     }
     //改變背景大小
@@ -30,10 +30,10 @@ public class SunMoonEvent : MonoBehaviour
     }
     private void Update()
     {
-        if (FightManager.Instance.gamelist.Count <= 1)
+        if (FightManager.Instance.plist.Count <= 1)
         {
             UI.SetActive(true);
-            if (FightManager.Instance.gamelist[0].GetComponent<arenaPlayer>().red)
+            if (FightManager.Instance.plist[0].GetComponent<arenaPlayer>().red)
             {
                 UI.transform.Find("red").gameObject.SetActive(true);
             }
@@ -41,8 +41,7 @@ public class SunMoonEvent : MonoBehaviour
             {
                 UI.transform.Find("blue").gameObject.SetActive(true);
             }
-            FightManager.Instance.gamelist[0].SetActive(false); //可刪除
-            this.gameObject.SetActive(false);
+            this.transform.parent.gameObject.SetActive(false);
         }
     }
     //玩家離開地圖判定

@@ -10,9 +10,9 @@ GameObject:
   m_Component:
   - component: {fileID: 7261282391864592177}
   - component: {fileID: 7261282391864592176}
-  - component: {fileID: 7261282391864592178}
   - component: {fileID: 7261282391864592179}
   - component: {fileID: 1985946330383409254}
+  - component: {fileID: 7261282391864592178}
   m_Layer: 0
   m_Name: Cupid
   m_TagString: Untagged
@@ -74,32 +74,17 @@ SpriteRenderer:
   m_SortingLayerID: -215895229
   m_SortingLayer: 4
   m_SortingOrder: 3
-  m_Sprite: {fileID: 21300000, guid: 60184aceaea0d7f42912b5a87cdc209e, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 15fb16ad08257534ab2f6f54eae96ed2, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 2.25, y: 2.25}
+  m_Size: {x: 3, y: 3}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &7261282391864592178
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7261282391864592181}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5300e4ef136cb4a429c98fef21e793c3, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  arrow: {fileID: 3666557185527591331, guid: 8e8453c9748937a438a915e04499de89, type: 3}
-  UI: {fileID: 0}
-  Cupid_Speed: 5
 --- !u!50 &7261282391864592179
 Rigidbody2D:
   serializedVersion: 4
@@ -137,3 +122,18 @@ CapsuleCollider2D:
   m_Offset: {x: 0.029400354, y: -0.016075132}
   m_Size: {x: 2.256996, y: 1.7638041}
   m_Direction: 1
+--- !u!114 &7261282391864592178
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7261282391864592181}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5300e4ef136cb4a429c98fef21e793c3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  arrow: {fileID: 3666557185527591331, guid: 8e8453c9748937a438a915e04499de89, type: 3}
+  UI: {fileID: 0}
+  Cupid_Speed: 5

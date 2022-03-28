@@ -83,7 +83,6 @@ GameObject:
   - component: {fileID: 7452416004739487910}
   - component: {fileID: 6826707719488966329}
   - component: {fileID: 7754934055589320719}
-  - component: {fileID: 6991745016618870763}
   m_Layer: 10
   m_Name: arenaPlayer
   m_TagString: Untagged
@@ -172,7 +171,7 @@ SpriteRenderer:
   m_SortingOrder: 3
   m_Sprite: {fileID: 21300000, guid: 905aa93ecb534d640af2234752aff6f6, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_FlipX: 0
+  m_FlipX: 1
   m_FlipY: 0
   m_DrawMode: 0
   m_Size: {x: 7.8, y: 4.8}
@@ -230,15 +229,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   currentState: 0
   speed: 135
-  red: 0
-  p_index: 0
-  spawnPos: {x: 0, y: 0, z: 0}
+  red: 1
+  p_index: 1
+  spawnPos: {x: 0, y: 10, z: 0}
   item: {fileID: 3093933777940720112, guid: 7d50319c0e3dc8645b06e73f19760a27, type: 3}
   fireRate: 0.5
   Arrowspeed: 50
-  mass: 1000
+  power: 100
   isCenter: 0
-  loveTime: 1
+  loveTime: 1.5
   love_index: 0
   lighting: {fileID: 2572263306716138460, guid: a5da32123a0cc3445add59367c944c59,
     type: 3}
@@ -246,18 +245,6 @@ MonoBehaviour:
   isPress: 0
   turboSpeed: 10
   fistpower: 150
---- !u!114 &6991745016618870763
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2028814211212845501}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8ab1457f831d3af4e9d34036b7ccbf53, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &5195281706139582395
 GameObject:
   m_ObjectHideFlags: 0
@@ -606,7 +593,7 @@ PrefabInstance:
     - target: {fileID: 4050833931296437833, guid: 8bd9fd43acf7f9d479cbbf07a5833716,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 1.36
+      value: 1.6
       objectReference: {fileID: 0}
     - target: {fileID: 4050833931296437833, guid: 8bd9fd43acf7f9d479cbbf07a5833716,
         type: 3}
@@ -656,7 +643,7 @@ PrefabInstance:
     - target: {fileID: 4050833931296437836, guid: 8bd9fd43acf7f9d479cbbf07a5833716,
         type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8bd9fd43acf7f9d479cbbf07a5833716, type: 3}

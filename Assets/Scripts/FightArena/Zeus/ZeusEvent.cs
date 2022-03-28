@@ -9,20 +9,20 @@ public class ZeusEvent : MonoBehaviour
     // Start is called before the first frame update
     public void StartGame()
     {
-        for (int i = 0; i < FightManager.Instance.gamelist.Count; i++)
+        for (int i = 0; i < FightManager.Instance.plist.Count; i++)
         {
             GameObject.Find("HealthUI").transform.GetChild(i).gameObject.SetActive(true);
-            FightManager.Instance.gamelist[i].GetComponent<arenaPlayer>().currentState = ArenaState.lighting;
+            FightManager.Instance.plist[i].GetComponent<arenaPlayer>().currentState = ArenaState.lighting;
         }
         StartCoroutine(spawnLight());
     }
     // Update is called once per frame
     void Update()
     {
-        if (FightManager.Instance.gamelist.Count <= 1)
+        if (FightManager.Instance.plist.Count <= 1)
         {
             UI.SetActive(true);
-            if (FightManager.Instance.gamelist[0].GetComponent<arenaPlayer>().red)
+            if (FightManager.Instance.plist[0].GetComponent<arenaPlayer>().red)
             {
                 UI.transform.Find("red").gameObject.SetActive(true);
             }
@@ -30,15 +30,15 @@ public class ZeusEvent : MonoBehaviour
             {
                 UI.transform.Find("blue").gameObject.SetActive(true);
             }
-            FightManager.Instance.gamelist[0].SetActive(false);
             this.gameObject.SetActive(false);
         }
     }
+    //生成閃電
     private IEnumerator spawnLight()
     {
         yield return new WaitForSeconds(spawnTime);
-        float x = Random.Range(-24f, 24f);
-        float y = Random.Range(-24f, 24f);
+        float x = Random.Range(-55f, 55f);
+        float y = Random.Range(-33f, 33f);
         Instantiate(theLight, new Vector3(x, y, 0), theLight.transform.rotation);
         StartCoroutine(spawnLight());
     }

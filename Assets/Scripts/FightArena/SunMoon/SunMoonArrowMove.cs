@@ -5,7 +5,7 @@ using UnityEngine;
 public class SunMoonArrowMove : MonoBehaviour
 {
     public bool isSun, noEffect;
-    public float speed;
+    public float speed, power;
     private Vector3 dir;
     private Rigidbody2D mrigibody2D;
     private void Start()
@@ -21,7 +21,7 @@ public class SunMoonArrowMove : MonoBehaviour
         }
         else if (isSun)
         {
-            mrigibody2D.velocity = dir.normalized * speed * 2.5f;
+            mrigibody2D.velocity = dir.normalized * speed * 2.25f;
         }
         else
         {
@@ -29,10 +29,11 @@ public class SunMoonArrowMove : MonoBehaviour
         }
     }
     //箭矢摧毀
-    private void OnCollisionEnter2D(Collision2D other)
+    private void OnTriggerEnter2D(Collider2D other)
     {
         if (other.gameObject.layer == 10)
         {
+            other.GetComponent<Rigidbody2D>().AddForce(dir.normalized * power, ForceMode2D.Impulse);
             Destroy(this.gameObject);
         }
     }

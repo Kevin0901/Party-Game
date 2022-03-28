@@ -11,8 +11,8 @@ GameObject:
   - component: {fileID: 1579465998448087654}
   - component: {fileID: 4933002646520707816}
   - component: {fileID: 1897444733052139286}
-  - component: {fileID: 1676232026777544297}
   - component: {fileID: 3174019689895932707}
+  - component: {fileID: 1676232026777544297}
   m_Layer: 0
   m_Name: hole_square
   m_TagString: Untagged
@@ -106,18 +106,6 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
---- !u!114 &1676232026777544297
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5372913218757971651}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 36e0333d68bf99f4397cb1bb4e29a895, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!61 &3174019689895932707
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -144,3 +132,15 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.75, y: 0.65}
   m_EdgeRadius: 0
+--- !u!114 &1676232026777544297
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5372913218757971651}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 36e0333d68bf99f4397cb1bb4e29a895, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

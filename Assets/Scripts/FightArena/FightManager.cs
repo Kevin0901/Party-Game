@@ -2,12 +2,15 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+
 public class FightManager : MonoBehaviour
 {
     public static FightManager Instance;
-    public int game_num;
-    public List<GameObject> plist, gamelist;
+    private int game_num;
+    public List<GameObject> plist;
+    private List<bool> redOrBlue; //紀錄是紅隊還是藍隊
     [SerializeField] private GameObject _player;
+
     //靜態實例基本宣告
     private void Awake()
     {
@@ -21,16 +24,96 @@ public class FightManager : MonoBehaviour
     }
     private void Start()
     {
+        redOrBlue = new List<bool>();
         plist = new List<GameObject>();
-        gamelist = new List<GameObject>();
     }
+    //點擊畫面加入玩家(點擊事件)
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.O) && redOrBlue.Count < 2)
+        {
+            redOrBlue.Add(false);
+            GameObject.Find("ChoosePlayer").transform.Find("P" + redOrBlue.Count).gameObject.SetActive(true);
+        }
+    }
+    //開始遊戲(點擊事件)
     public void joinGame()
     {
-        Instantiate(_player, this.transform.position, transform.rotation);
-        plist.Add(_player);
-        DontDestroyOnLoad(_player);
-        _player.GetComponent<arenaPlayer>().p_index = plist.Count - 1;
-        GameObject.Find("ChoosePlayer").transform.Find("P" + plist.Count).gameObject.SetActive(true);
+        redOrBlue.Add(false);
+        GameObject.Find("ChoosePlayer").transform.Find("P" + redOrBlue.Count).gameObject.SetActive(true);
+    }
+    public void startGame()
+    {
+        int red = 0;
+        int blue = 0;
+        for (int i = 0; i < redOrBlue.Count; i++)
+        {
+            if (GameObject.Find("ChoosePlayer").transform.Find("P" + (i + 1)).Find("RedTeam").gameObject.activeSelf)
+            {
+                red += 1;
+                redOrBlue[i] = true;
+            }
+            else
+            {
+                blue += 1;
+                redOrBlue[i] = false;
+            }
+        }
+        // if (red > 0 && blue > 0)
+        // {
+        GameObject.Find("ChoosePlayer").GetComponent<CanvasGroup>().alpha = 0;
+        GameObject.Find("ChoosePlayer").GetComponent<CanvasGroup>().blocksRaycasts = false;
+        GameObject.Find("GameChoose").GetComponent<CanvasGroup>().alpha = 1;
+        GameObject.Find("GameChoose").GetComponent<CanvasGroup>().blocksRaycasts = true;
+        // }
+        // else
+        // {
+        //     Debug.Log("配置不對歐");
+        // }
+    }
+    //選擇哪個遊戲(點擊事件)
+    public void gameNum(int num)
+    {
+        game_num = num;
+        SceneManager.sceneLoaded += waitLoad;
+        SceneManager.LoadSceneAsync("FightScene", LoadSceneMode.Single);
+    }
+    //重新開始遊戲(點擊事件)
+    public void gameNum()
+    {
+        SceneManager.sceneLoaded += waitLoad;
+        SceneManager.LoadSceneAsync("FightScene", LoadSceneMode.Single);
+    }
+    //場景載入完(跳場景)
+    public void waitLoad(Scene scene, LoadSceneMode mode)
+    {
+        SceneManager.sceneLoaded -= waitLoad;
+     
+        GameObject.Find("EventManager").transform.GetChild(game_num).gameObject.SetActive(true);//開啟該場景
+
+        for (int i = 0; i < redOrBlue.Count; i++)//生成玩家
+        {
+            GameObject a = Instantiate(_player);
+            plist.Add(a);
+            a.GetComponent<arenaPlayer>().p_index = plist.Count - 1;
+            a.GetComponent<arenaPlayer>().red = redOrBlue[i];
+            a.transform.Find("NumTitle").GetChild(plist.Count - 1).gameObject.SetActive(true);
+            switch (i) //初始位置
+            {
+                case 0:
+                    plist[i].GetComponent<arenaPlayer>().SpawnPoint(new Vector3(-10, 0, 0));
+                    break;
+                case 1:
+                    plist[i].GetComponent<arenaPlayer>().SpawnPoint(new Vector3(0, 10, 0));
+                    break;
+                case 2:
+                    plist[i].GetComponent<arenaPlayer>().SpawnPoint(new Vector3(10, 0, 0));
+                    break;
+                case 3:
+                    plist[i].GetComponent<arenaPlayer>().SpawnPoint(new Vector3(0, -10, 0));
+                    break;
+            }
+        }
     }
     //inputSystm 的加入玩家函式
     // private void OnPlayerJoined(PlayerInput player)
@@ -52,86 +135,4 @@ public class FightManager : MonoBehaviour
     //         GameObject.Find("ChoosePlayer").transform.Find("P" + manager.playerCount).Find("gamepad").gameObject.SetActive(true);
     //     }
     // }
-
-    //開始遊戲
-    public void startGame()
-    {
-        int red = 0;
-        int blue = 0;
-        for (int i = 0; i < plist.Count; i++)
-        {
-            if (GameObject.Find("ChoosePlayer").transform.Find("P" + (i + 1)).Find("RedTeam").gameObject.activeSelf)
-            {
-                red += 1;
-                plist[i].GetComponent<arenaPlayer>().red = true;
-            }
-            else
-            {
-                blue += 1;
-                plist[i].GetComponent<arenaPlayer>().red = false;
-            }
-        }
-        if (plist.Count >= 2 && (red > 0 && blue > 0))
-        {
-            GameObject.Find("ChoosePlayer").GetComponent<CanvasGroup>().alpha = 0;
-            GameObject.Find("ChoosePlayer").GetComponent<CanvasGroup>().blocksRaycasts = false;
-            GameObject.Find("GameChoose").GetComponent<CanvasGroup>().alpha = 1;
-            GameObject.Find("GameChoose").GetComponent<CanvasGroup>().blocksRaycasts = true;
-            for (int j = 0; j < plist.Count; j++)
-            {
-                plist[j].GetComponent<changeTeam>().enabled = false;
-            }
-        }
-        else
-        {
-            Debug.Log("配置不對歐");
-        }
-    }
-    //選擇哪個遊戲
-    public void gameNum(int num)
-    {
-        SceneManager.sceneLoaded += waitLoad;
-        gamelist.Clear();
-        game_num = num;
-        for (int i = 0; i < plist.Count; i++)
-        {
-            gamelist.Add(plist[i]);
-        }
-        SceneManager.LoadSceneAsync("FightScene", LoadSceneMode.Single);
-    }
-    //選擇哪個遊戲
-    public void gameNum()
-    {
-        SceneManager.sceneLoaded += waitLoad;
-        gamelist.Clear();
-        for (int i = 0; i < plist.Count; i++)
-        {
-            gamelist.Add(plist[i]);
-        }
-        SceneManager.LoadSceneAsync("FightScene", LoadSceneMode.Single);
-    }
-    //場景載入完會發生的事情
-    public void waitLoad(Scene scene, LoadSceneMode mode)
-    {
-        SceneManager.sceneLoaded -= waitLoad;
-        GameObject.Find("EventManager").transform.GetChild(game_num).gameObject.SetActive(true);
-        for (int i = 0; i < plist.Count; i++)
-        {
-            switch (i)
-            {
-                case 0:
-                    plist[i].GetComponent<arenaPlayer>().SpawnPoint(new Vector3(-10, 0, 0));
-                    break;
-                case 1:
-                    plist[i].GetComponent<arenaPlayer>().SpawnPoint(new Vector3(0, 10, 0));
-                    break;
-                case 2:
-                    plist[i].GetComponent<arenaPlayer>().SpawnPoint(new Vector3(10, 0, 0));
-                    break;
-                case 3:
-                    plist[i].GetComponent<arenaPlayer>().SpawnPoint(new Vector3(0, -10, 0));
-                    break;
-            }
-        }
-    }
 }

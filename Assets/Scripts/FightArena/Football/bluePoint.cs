@@ -4,19 +4,19 @@ using UnityEngine;
 
 public class bluePoint : MonoBehaviour
 {
-    public GameObject parent;
+    public GameObject scoreADD;
     //藍隊球門被得分
     private void OnCollisionEnter2D(Collision2D other)
     {
         if (other.gameObject.CompareTag("arrow"))
         {
-            parent.GetComponent<FootEvent>().red_Score();
-            other.gameObject.GetComponent<football>().StartCoroutine("waitBall");
+            scoreADD.GetComponent<FootEvent>().red_Score();
+            StartCoroutine(other.gameObject.GetComponent<football>().waitBall());
         }
         else if (other.gameObject.layer == 10)
         {
             if (!other.gameObject.GetComponent<arenaPlayer>().red)
-                parent.GetComponent<FootEvent>().red_Score();
+                scoreADD.GetComponent<FootEvent>().red_Score();
         }
     }
 }

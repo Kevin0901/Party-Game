@@ -10,12 +10,12 @@ TagManager:
   - moon
   - arrow
   - pick
-  - Wave
   - ball
   - monster
   - territory
   - red
   - blue
+  - wave
   layers:
   - Default
   - TransparentFX
@@ -24,14 +24,14 @@ TagManager:
   - Water
   - UI
   - background
-  - monster
   - throwitem
-  - bulid
+  - 
+  - 
   - player
+  - bulid
+  - monster
   - 
-  - 
-  - 
-  - 
+  - arenaMonster
   - 
   - 
   - 

@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class pickcow : MonoBehaviour
 {
-    [HideInInspector] public GameObject parent;
     public int cowScore;
     private void OnTriggerStay2D(Collider2D other)
     {
@@ -12,20 +11,14 @@ public class pickcow : MonoBehaviour
         {
             if (other.GetComponent<arenaPlayer>().red)
             {
-                parent.GetComponent<HermesEvent>().red_Score(cowScore);
+                this.transform.parent.GetComponent<HermesEvent>().red_Score(cowScore);
                 Destroy(this.gameObject);
             }
             else
             {
-                parent.GetComponent<HermesEvent>().blue_Score(cowScore);
+                this.transform.parent.GetComponent<HermesEvent>().blue_Score(cowScore);
                 Destroy(this.gameObject);
             }
-        }
-    }
-    private void Update()
-    {
-        if (parent.GetComponent<HermesEvent>()._time < 0){
-             Destroy(this.gameObject);
         }
     }
 }

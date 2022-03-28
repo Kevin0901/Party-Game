@@ -1,8 +1,7 @@
-﻿
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
+
 public class CupidEvent : MonoBehaviour
 {
     [SerializeField] private GameObject arrow;
@@ -14,7 +13,7 @@ public class CupidEvent : MonoBehaviour
     private List<GameObject> arrow_Store;
     private Rigidbody2D mrigibody;
     private Vector3 firstpos, newpos;
-    private Vector2 cupidpos;
+    private Vector3 cupidPos;
     void Awake()
     {
         mrigibody = this.GetComponent<Rigidbody2D>();
@@ -24,33 +23,29 @@ public class CupidEvent : MonoBehaviour
         //初始化物件池
         for (int i = 0; i < arrow_limit; i++)
         {
-            GameObject addArrow = Instantiate(arrow, this.transform.position, Quaternion.identity);
+            GameObject addArrow = Instantiate(arrow, this.transform.position, this.transform.rotation);
+            addArrow.transform.SetParent(this.transform);
             arrow_Store.Add(addArrow);
-            if (addArrow.transform.parent != this.transform)
-            {
-                addArrow.transform.SetParent(this.transform);
-            }
             addArrow.GetComponent<CupidArrowMove>().parent = this.gameObject;
             addArrow.SetActive(false);
         }
-        cupidpos = new Vector2(Random.Range(-1.0f, 1.0f), Random.Range(-1.0f, 1.0f)).normalized;
     }
     //開始遊戲
     public void StartGame()
     {
-        for (int i = 0; i < FightManager.Instance.gamelist.Count; i++)
+        for (int i = 0; i < FightManager.Instance.plist.Count; i++)
         {
-            FightManager.Instance.gamelist[i].GetComponent<arenaPlayer>().currentState = ArenaState.walk;
+            FightManager.Instance.plist[i].GetComponent<arenaPlayer>().currentState = ArenaState.walk;
         }
         StartCoroutine(spawnArrow(cooldownTime, Random.Range(1, 4)));//隨機一種模式
-        StartCoroutine(Move(cooldownTime));  //給邱比特移動
+        StartCoroutine(Move(cooldownTime));
     }
     private void Update()
     {
-        if (FightManager.Instance.gamelist.Count <= 1)
+        if (FightManager.Instance.plist.Count == 1)
         {
             UI.SetActive(true);
-            if (FightManager.Instance.gamelist[0].GetComponent<arenaPlayer>().red)
+            if (FightManager.Instance.plist[0].GetComponent<arenaPlayer>().red)
             {
                 UI.transform.Find("red").gameObject.SetActive(true);
             }
@@ -58,28 +53,30 @@ public class CupidEvent : MonoBehaviour
             {
                 UI.transform.Find("blue").gameObject.SetActive(true);
             }
-            FightManager.Instance.gamelist[0].SetActive(false);
-            for (int i = 0; i < FightManager.Instance.plist.Count; i++)
-            {
-                FightManager.Instance.plist[i].transform.Find("NumTitle").GetChild(i).GetComponent<SpriteRenderer>().color = Color.white;
-            }
-            this.gameObject.SetActive(false);
+            this.transform.parent.gameObject.SetActive(false);
         }
+    }
+    //移動
+    public IEnumerator Move()
+    {
+        mrigibody.velocity = cupidPos * Cupid_Speed;
+        yield return null;
+        StartCoroutine(Move());
     }
     //移動
     public IEnumerator Move(float time)
     {
         yield return new WaitForSeconds(time);
-        mrigibody.velocity = cupidpos * Cupid_Speed;
-        yield return null;
-        StartCoroutine(Move(0));
+        cupid_Rotate();
+        mrigibody.velocity = cupidPos * Cupid_Speed;
+        StartCoroutine(Move());
     }
     //箭矢生成
     IEnumerator spawnArrow(float time, int type)
     {
         yield return new WaitForSeconds(time);
         string FunName = "FireType_" + type;
-        StartCoroutine(FunName, 2); //總共幾波攻擊
+        StartCoroutine(FunName, Random.Range(1, 3)); //總共幾波攻擊
     }
     //攻擊模式_1
     IEnumerator FireType_1(int number)
@@ -87,9 +84,10 @@ public class CupidEvent : MonoBehaviour
         speed = 50f;
         for (int i = 0; i < number; i++)
         {
-            for (int j = 0; j < FightManager.Instance.gamelist.Count; j++)
+            for (int j = 0; j < FightManager.Instance.plist.Count; j++)
             {
-                Vector3 playPos = FightManager.Instance.gamelist[j].transform.position;
+                Vector3 playPos = FightManager.Instance.plist[j].transform.position;
+                Debug.Log(playPos);
                 newpos = playPos - this.transform.position;
                 rotate = (Mathf.Atan2(newpos.y, newpos.x) * Mathf.Rad2Deg) - 180;
                 GetPoolInstance();
@@ -223,16 +221,15 @@ public class CupidEvent : MonoBehaviour
     {
         if (other.gameObject.CompareTag("background"))
         {
-            cupidpos = new Vector2(Random.Range(-1.0f, 1.0f), Random.Range(-1.0f, 1.0f)).normalized;
+            cupid_Rotate();
         }
     }
-    // private IEnumerator TimeCount()
-    // {
-    //     while (countdownTime > 0)
-    //     {
-    //         countdownDisplay.text = countdownTime.ToString();
-    //         yield return new WaitForSeconds(1f);
-    //         countdownTime -= 1;
-    //     }
-    // }
+    //邱比特移動旋轉
+    void cupid_Rotate()
+    {
+        cupidPos = new Vector3(Random.Range(-1.0f, 1.0f), Random.Range(-1.0f, 1.0f)).normalized;
+        Vector2 line = cupidPos - transform.position;
+        float f = (Mathf.Atan2(line.y, line.x) * Mathf.Rad2Deg) - 90;
+        this.transform.rotation = Quaternion.Euler(0, 0, f);
+    }
 }

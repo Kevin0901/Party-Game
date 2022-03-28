@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -6,10 +6,10 @@ public class CupidArrowMove : MonoBehaviour
 {
     public float speed = 20;
     public Vector3 Pos;
-    public GameObject parent;
+    [HideInInspector]public GameObject parent;
     void Update()
     {
-        if (FightManager.Instance.gamelist.Count == 1)
+        if (FightManager.Instance.plist.Count == 1)
         {
             this.gameObject.SetActive(false);
         }
@@ -19,19 +19,19 @@ public class CupidArrowMove : MonoBehaviour
     //碰撞設定
     private void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.gameObject.layer == 10 && other.GetComponent<arenaPlayer>().currentState == ArenaState.walk)
+        if (other.gameObject.layer == 10)
         {
             arenaPlayer curPlayer = other.GetComponent<arenaPlayer>();
             //隨機追蹤玩家
-            int r = Random.Range(0, FightManager.Instance.gamelist.Count);
+            int r = Random.Range(0, FightManager.Instance.plist.Count);
             //如果等於自己或是玩家剩一位的話
             while (r == curPlayer.p_index)
             {
-                if (FightManager.Instance.gamelist.Count == 1)
+                if (FightManager.Instance.plist.Count == 1)
                 {
                     break;
                 }
-                r = Random.Range(0, FightManager.Instance.gamelist.Count);
+                r = Random.Range(0, FightManager.Instance.plist.Count);
             }
             //給玩家設定
             curPlayer.love_index = r;

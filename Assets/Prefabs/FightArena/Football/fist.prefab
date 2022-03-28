@@ -12,8 +12,8 @@ GameObject:
   - component: {fileID: 4050833931296437832}
   - component: {fileID: 4050833931296437835}
   - component: {fileID: 4050833931296437834}
-  - component: {fileID: 1842380047562014661}
   - component: {fileID: 3402190997575108581}
+  - component: {fileID: 1842380047562014661}
   m_Layer: 0
   m_Name: fist
   m_TagString: Untagged
@@ -190,18 +190,6 @@ PolygonCollider2D:
       - {x: 1.5999999, y: -2.56}
       - {x: 1.5999999, y: -1.62}
       - {x: 2, y: -1.12}
---- !u!114 &1842380047562014661
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4050833931296437836}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5c8a4fdf53ebd8e4bbe9aadee5f1f5db, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!95 &3402190997575108581
 Animator:
   serializedVersion: 3
@@ -221,3 +209,15 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &1842380047562014661
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4050833931296437836}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5c8a4fdf53ebd8e4bbe9aadee5f1f5db, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

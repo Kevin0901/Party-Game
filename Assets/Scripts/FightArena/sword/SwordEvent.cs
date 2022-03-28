@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -13,10 +13,10 @@ public class SwordEvent : MonoBehaviour
     public void StartGame()
     {
         this.GetComponent<SwordEvent>().enabled = true;
-        for (int i = 0; i < FightManager.Instance.gamelist.Count; i++)
+        for (int i = 0; i < FightManager.Instance.plist.Count; i++)
         {
             GameObject.Find("HealthUI").transform.GetChild(i).gameObject.SetActive(true);
-            FightManager.Instance.gamelist[i].GetComponent<arenaPlayer>().currentState = ArenaState.walk;
+            FightManager.Instance.plist[i].GetComponent<arenaPlayer>().currentState = ArenaState.walk;
         }
         StartCoroutine(randomSword(1.5f));
         StartCoroutine(changeBG());
@@ -30,26 +30,16 @@ public class SwordEvent : MonoBehaviour
     }
     private void Update()
     {
-        if (FightManager.Instance.gamelist.Count <= 1)
+        if (FightManager.Instance.plist.Count <= 1)
         {
             UI.SetActive(true);
-            if (FightManager.Instance.gamelist[0].GetComponent<arenaPlayer>().red)
+            if (FightManager.Instance.plist[0].GetComponent<arenaPlayer>().red)
             {
                 UI.transform.Find("red").gameObject.SetActive(true);
             }
             else
             {
                 UI.transform.Find("blue").gameObject.SetActive(true);
-            }
-
-            for (int i = 0; i < FightManager.Instance.plist.Count; i++)
-            {
-                FightManager.Instance.plist[i].transform.Find("sword").gameObject.SetActive(false);
-            }
-            FightManager.Instance.gamelist[0].SetActive(false);
-            for (int i = 0; i < FightManager.Instance.plist.Count; i++)
-            {
-                FightManager.Instance.plist[i].transform.Find("NumTitle").GetChild(i).GetComponent<SpriteRenderer>().color = Color.white;
             }
             this.gameObject.SetActive(false);
         }
@@ -58,7 +48,7 @@ public class SwordEvent : MonoBehaviour
     private IEnumerator randomSword(float time)
     {
         yield return new WaitForSeconds(time);
-        int num = Random.Range(0, FightManager.Instance.gamelist.Count);
-        FightManager.Instance.gamelist[num].transform.Find("sword").gameObject.SetActive(true);
+        int num = Random.Range(0, FightManager.Instance.plist.Count);
+        FightManager.Instance.plist[num].transform.Find("sword").gameObject.SetActive(true);
     }
 }

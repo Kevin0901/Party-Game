@@ -22,8 +22,8 @@ public class sword : MonoBehaviour
         if (other.gameObject.layer == 10 && (other.gameObject != player.gameObject) && (lastplayer != other.gameObject))
         {
             other.gameObject.transform.Find("sword").gameObject.SetActive(true);
-            other.gameObject.transform.Find("sword").gameObject.GetComponent<sword>().StartCoroutine("Savelastplayer", player.gameObject);
-            player.StartCoroutine("changeColorTitle_Sword");
+            StartCoroutine(other.gameObject.transform.Find("sword").gameObject.GetComponent<sword>().Savelastplayer(player.gameObject));
+            StartCoroutine(player.changeColorTitle_Sword());
             this.gameObject.SetActive(false);
         }
     }

@@ -7,7 +7,7 @@ public class HermesEvent : MonoBehaviour
     //生成點 x=55 , y=33
     [SerializeField] private GameObject cow, UI;
     [HideInInspector] public float redScore, blueScore;
-    [HideInInspector]public int _time;
+    [HideInInspector] public int _time;
     public float Nor_mix, Nor_max, Gold_mix, Gold_max;
     private void Start()
     {
@@ -15,10 +15,10 @@ public class HermesEvent : MonoBehaviour
     }
     public void StartGame()
     {
-        // for (int i = 0; i < FightManager.Instance.gamelist.Count; i++)
-        // {
-        //     FightManager.Instance.gamelist[i].GetComponent<arenaPlayer>().currentState = ArenaState.fastMode;
-        // }
+        for (int i = 0; i < FightManager.Instance.plist.Count; i++)
+        {
+            FightManager.Instance.plist[i].GetComponent<arenaPlayer>().currentState = ArenaState.fastMode;
+        }
         StartCoroutine(spawnCow(Random.Range(Nor_mix, Nor_max)));
         StartCoroutine(spawnGoldCow(Random.Range(Gold_mix, Gold_max)));
         StartCoroutine(timeCount());
@@ -40,9 +40,9 @@ public class HermesEvent : MonoBehaviour
             {
                 UI.transform.Find("draw").gameObject.SetActive(true);
             }
-            for (int i = 0; i < FightManager.Instance.gamelist.Count; i++)
+            for (int i = 0; i < FightManager.Instance.plist.Count; i++)
             {
-                FightManager.Instance.gamelist[i].SetActive(false);
+                FightManager.Instance.plist[i].SetActive(false);
             }
             this.gameObject.SetActive(false);
         }
@@ -53,8 +53,8 @@ public class HermesEvent : MonoBehaviour
         float x = Random.Range(-55f, 55f);
         float y = Random.Range(-33f, 33f);
         GameObject a = Instantiate(cow, new Vector3(x, y, 0), this.transform.rotation);
+        a.transform.parent = this.transform;
         a.GetComponent<pickcow>().cowScore = 1;
-        a.GetComponent<pickcow>().parent = this.gameObject;
         StartCoroutine(spawnCow(Random.Range(Nor_mix, Nor_max)));
     }
     private IEnumerator spawnGoldCow(float time)
@@ -63,8 +63,9 @@ public class HermesEvent : MonoBehaviour
         float x = Random.Range(-55f, 55f);
         float y = Random.Range(-33f, 33f);
         GameObject a = Instantiate(cow, new Vector3(x, y, 0), this.transform.rotation * Quaternion.Euler(0, 0, 180));
+        a.transform.parent = this.transform;
         a.GetComponent<pickcow>().cowScore = 3;
-        a.GetComponent<pickcow>().parent = this.gameObject;
+
         StartCoroutine(spawnGoldCow(Random.Range(Gold_mix, Gold_max)));
     }
     public void red_Score(int point)
