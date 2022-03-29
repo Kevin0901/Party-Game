@@ -5,9 +5,16 @@ using UnityEngine;
 public class MedusaEvent : MonoBehaviour
 {
     [SerializeField] private GameObject UI, ball, mirror;
-    [SerializeField] private float waitTime, changeTime, speed, damage;
+    [SerializeField] private float waitToMove, changeTime, speed, damage;
     private float rotate, hurtRate, nextTime;
     private int randomPlayer;
+    private void OnEnable()
+    {
+        for (int i = 0; i < FightManager.Instance.plist.Count; i++)
+        {
+            FightManager.Instance.plist[i].transform.Find("shield").gameObject.SetActive(true);
+        }
+    }
     void Start()
     {
         nextTime = 0;
@@ -21,9 +28,9 @@ public class MedusaEvent : MonoBehaviour
         {
             GameObject.Find("HealthUI").transform.GetChild(i).gameObject.SetActive(true);
             FightManager.Instance.plist[i].GetComponent<arenaPlayer>().currentState = ArenaState.walk;
-            FightManager.Instance.plist[i].transform.Find("shield").gameObject.SetActive(true);
+
         }
-        StartCoroutine(wait(waitTime));
+        StartCoroutine(wait(waitToMove));
     }
     //等待時間
     IEnumerator wait(float t)

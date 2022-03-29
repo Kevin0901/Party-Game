@@ -42,6 +42,7 @@ public class ball : MonoBehaviour
         else if (other.gameObject.tag == "pick")
         {
             other.gameObject.SetActive(false);
+            other.gameObject.GetComponent<Spawnshield>().spawnS();
         }
         //撞到任何物體都會加速
         rb.velocity = rb.velocity.normalized * speed * cnt;

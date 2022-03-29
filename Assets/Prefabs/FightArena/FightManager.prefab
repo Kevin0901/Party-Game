@@ -45,5 +45,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   game_num: 0
   plist: []
-  gamelist: []
+  redOrBlue: 
   _player: {fileID: 2028814211212845501, guid: c775dd2b651076e4695745b131227a23, type: 3}

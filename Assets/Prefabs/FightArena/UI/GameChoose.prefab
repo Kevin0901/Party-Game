@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 2256914519788118201}
   - component: {fileID: 451150864849621844}
   - component: {fileID: 3565323942038625282}
+  - component: {fileID: 2601270986559628330}
   m_Layer: 5
   m_Name: Button (8)
   m_TagString: Untagged
@@ -121,10 +122,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 8693309853996476145, guid: 50d34f9cae4f1fc4992e63a7e517e3e7,
-          type: 3}
-        m_TargetAssemblyTypeName: FightManager, Assembly-CSharp
-        m_MethodName: gameNum
+      - m_Target: {fileID: 2601270986559628330}
+        m_TargetAssemblyTypeName: findGame, Assembly-CSharp
+        m_MethodName: chooseGame
         m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -134,6 +134,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+--- !u!114 &2601270986559628330
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 646349737048428862}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 838dd875a0bddc64ca56ad772e5a7c38, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1224107112363912090
 GameObject:
   m_ObjectHideFlags: 0
@@ -146,6 +158,7 @@ GameObject:
   - component: {fileID: 4152545406054483102}
   - component: {fileID: 9128964147396203754}
   - component: {fileID: 7763248002106465072}
+  - component: {fileID: 8938373183603907580}
   m_Layer: 5
   m_Name: Button (6)
   m_TagString: Untagged
@@ -255,10 +268,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 8693309853996476145, guid: 50d34f9cae4f1fc4992e63a7e517e3e7,
-          type: 3}
-        m_TargetAssemblyTypeName: FightManager, Assembly-CSharp
-        m_MethodName: gameNum
+      - m_Target: {fileID: 2601270986559628330}
+        m_TargetAssemblyTypeName: findGame, Assembly-CSharp
+        m_MethodName: chooseGame
         m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -268,6 +280,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+--- !u!114 &8938373183603907580
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1224107112363912090}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 838dd875a0bddc64ca56ad772e5a7c38, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1666232977427077701
 GameObject:
   m_ObjectHideFlags: 0
@@ -513,6 +537,7 @@ GameObject:
   - component: {fileID: 5389917286662716648}
   - component: {fileID: 5389917286662716649}
   - component: {fileID: 5389917286662716662}
+  - component: {fileID: 5029134620271901249}
   m_Layer: 5
   m_Name: Button (1)
   m_TagString: Untagged
@@ -622,10 +647,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 8693309853996476145, guid: 50d34f9cae4f1fc4992e63a7e517e3e7,
-          type: 3}
-        m_TargetAssemblyTypeName: FightManager, Assembly-CSharp
-        m_MethodName: gameNum
+      - m_Target: {fileID: 2601270986559628330}
+        m_TargetAssemblyTypeName: findGame, Assembly-CSharp
+        m_MethodName: chooseGame
         m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -635,6 +659,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+--- !u!114 &5029134620271901249
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5389917286662716660}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 838dd875a0bddc64ca56ad772e5a7c38, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &5389917286859156838
 GameObject:
   m_ObjectHideFlags: 0
@@ -993,7 +1029,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: "\u528D"
+  m_Text: "\u50B3\u70B8\u5F48"
 --- !u!1 &5389917287831617238
 GameObject:
   m_ObjectHideFlags: 0
@@ -1006,6 +1042,7 @@ GameObject:
   - component: {fileID: 5389917287831617226}
   - component: {fileID: 5389917287831617227}
   - component: {fileID: 5389917287831617224}
+  - component: {fileID: 7830254677105697071}
   m_Layer: 5
   m_Name: Button
   m_TagString: Untagged
@@ -1115,10 +1152,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 8693309853996476145, guid: 50d34f9cae4f1fc4992e63a7e517e3e7,
-          type: 3}
-        m_TargetAssemblyTypeName: FightManager, Assembly-CSharp
-        m_MethodName: gameNum
+      - m_Target: {fileID: 2601270986559628330}
+        m_TargetAssemblyTypeName: findGame, Assembly-CSharp
+        m_MethodName: chooseGame
         m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -1128,6 +1164,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+--- !u!114 &7830254677105697071
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5389917287831617238}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 838dd875a0bddc64ca56ad772e5a7c38, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &5389917288230273720
 GameObject:
   m_ObjectHideFlags: 0
@@ -1140,6 +1188,7 @@ GameObject:
   - component: {fileID: 5389917288230273724}
   - component: {fileID: 5389917288230273725}
   - component: {fileID: 5389917288230273722}
+  - component: {fileID: 1244959420443050081}
   m_Layer: 5
   m_Name: Button (2)
   m_TagString: Untagged
@@ -1249,10 +1298,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 8693309853996476145, guid: 50d34f9cae4f1fc4992e63a7e517e3e7,
-          type: 3}
-        m_TargetAssemblyTypeName: FightManager, Assembly-CSharp
-        m_MethodName: gameNum
+      - m_Target: {fileID: 2601270986559628330}
+        m_TargetAssemblyTypeName: findGame, Assembly-CSharp
+        m_MethodName: chooseGame
         m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -1262,6 +1310,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+--- !u!114 &1244959420443050081
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5389917288230273720}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 838dd875a0bddc64ca56ad772e5a7c38, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &5926793471055341613
 GameObject:
   m_ObjectHideFlags: 0
@@ -1340,7 +1400,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 0
+  m_Text: "\u6253\u9020\u5927\u5E2B"
 --- !u!1 &5935718078099969992
 GameObject:
   m_ObjectHideFlags: 0
@@ -1353,6 +1413,7 @@ GameObject:
   - component: {fileID: 3594162511851207456}
   - component: {fileID: 3461799680147944361}
   - component: {fileID: 261670767916231874}
+  - component: {fileID: 3640271349977779554}
   m_Layer: 5
   m_Name: Button (3)
   m_TagString: Untagged
@@ -1462,10 +1523,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 8693309853996476145, guid: 50d34f9cae4f1fc4992e63a7e517e3e7,
-          type: 3}
-        m_TargetAssemblyTypeName: FightManager, Assembly-CSharp
-        m_MethodName: gameNum
+      - m_Target: {fileID: 2601270986559628330}
+        m_TargetAssemblyTypeName: findGame, Assembly-CSharp
+        m_MethodName: chooseGame
         m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -1475,6 +1535,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+--- !u!114 &3640271349977779554
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5935718078099969992}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 838dd875a0bddc64ca56ad772e5a7c38, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &6223907082725304353
 GameObject:
   m_ObjectHideFlags: 0
@@ -1566,6 +1638,7 @@ GameObject:
   - component: {fileID: 10146184566633106}
   - component: {fileID: 8353794649814071049}
   - component: {fileID: 7269583045452639919}
+  - component: {fileID: 1142832540595081805}
   m_Layer: 5
   m_Name: Button (7)
   m_TagString: Untagged
@@ -1675,10 +1748,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 8693309853996476145, guid: 50d34f9cae4f1fc4992e63a7e517e3e7,
-          type: 3}
-        m_TargetAssemblyTypeName: FightManager, Assembly-CSharp
-        m_MethodName: gameNum
+      - m_Target: {fileID: 2601270986559628330}
+        m_TargetAssemblyTypeName: findGame, Assembly-CSharp
+        m_MethodName: chooseGame
         m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -1688,6 +1760,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+--- !u!114 &1142832540595081805
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6569635163706382440}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 838dd875a0bddc64ca56ad772e5a7c38, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &7629342826647275379
 GameObject:
   m_ObjectHideFlags: 0
@@ -1779,6 +1863,7 @@ GameObject:
   - component: {fileID: 740422472609135569}
   - component: {fileID: 4574099240528884405}
   - component: {fileID: 8174575400178834184}
+  - component: {fileID: 6578237540647043312}
   m_Layer: 5
   m_Name: Button (4)
   m_TagString: Untagged
@@ -1888,10 +1973,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 8693309853996476145, guid: 50d34f9cae4f1fc4992e63a7e517e3e7,
-          type: 3}
-        m_TargetAssemblyTypeName: FightManager, Assembly-CSharp
-        m_MethodName: gameNum
+      - m_Target: {fileID: 2601270986559628330}
+        m_TargetAssemblyTypeName: findGame, Assembly-CSharp
+        m_MethodName: chooseGame
         m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -1901,6 +1985,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+--- !u!114 &6578237540647043312
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8001513835111859767}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 838dd875a0bddc64ca56ad772e5a7c38, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &8314252888670572633
 GameObject:
   m_ObjectHideFlags: 0
@@ -1992,6 +2088,7 @@ GameObject:
   - component: {fileID: 5631435765549975067}
   - component: {fileID: 4982903749690627993}
   - component: {fileID: 3971532363570288322}
+  - component: {fileID: 2793623630214329924}
   m_Layer: 5
   m_Name: Button (5)
   m_TagString: Untagged
@@ -2101,10 +2198,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 8693309853996476145, guid: 50d34f9cae4f1fc4992e63a7e517e3e7,
-          type: 3}
-        m_TargetAssemblyTypeName: FightManager, Assembly-CSharp
-        m_MethodName: gameNum
+      - m_Target: {fileID: 2601270986559628330}
+        m_TargetAssemblyTypeName: findGame, Assembly-CSharp
+        m_MethodName: chooseGame
         m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -2114,3 +2210,15 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+--- !u!114 &2793623630214329924
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8363919010085255953}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 838dd875a0bddc64ca56ad772e5a7c38, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

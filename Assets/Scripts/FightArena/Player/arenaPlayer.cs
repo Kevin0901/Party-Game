@@ -36,18 +36,18 @@ public class arenaPlayer : MonoBehaviour
     public bool isPress;
     [Header("荷米斯")]
     public float turboSpeed;
-    private SpriteRenderer sprite;
-    private Rigidbody2D mrigibody;
-    private Animator mAnimator;
-    private GameObject ui;
-    private Vector2 movement;
     [Header("足球")]
     [SerializeField] private float fistpower;
+
+    private Rigidbody2D mrigibody;
+    private Animator mAnimator;
+    [HideInInspector] public SpriteRenderer titleColor;
+    private heart lifeUI;
+    private Vector2 movement;
     void Start()
     {
         mrigibody = this.GetComponent<Rigidbody2D>();
         mAnimator = this.GetComponent<Animator>();
-        sprite = this.GetComponent<SpriteRenderer>();
         nextlove = loveTime;
         nextfire = 0;
         curH = 3f;
@@ -80,6 +80,7 @@ public class arenaPlayer : MonoBehaviour
         }
         else if (currentState == ArenaState.fastMode)
         {
+            Move();
             if (movement != Vector2.zero)
             {
                 mrigibody.AddForce(movement * turboSpeed, ForceMode2D.Impulse);
@@ -131,7 +132,7 @@ public class arenaPlayer : MonoBehaviour
         if (loveTime < 0)
         {
             loveTime = nextlove;
-            this.transform.Find("NumTitle").GetChild(p_index).GetComponent<SpriteRenderer>().color = Color.white;
+            titleColor.color = Color.white;
             currentState = ArenaState.walk;
         }
     }
@@ -166,10 +167,10 @@ public class arenaPlayer : MonoBehaviour
             mrigibody.velocity = Vector2.zero;
             powerTime += Time.deltaTime;
             if (powerTime < 2.5)
-                this.transform.Find("NumTitle").GetChild(p_index).GetComponent<SpriteRenderer>().color = new Color(1, 1 - (powerTime * 0.135f), 1 - (powerTime * 0.5f), 1);
+                titleColor.color = new Color(1, 1 - (powerTime * 0.128f), 1 - (powerTime * 0.348f));
             else
             {
-                this.transform.Find("NumTitle").GetChild(p_index).GetComponent<SpriteRenderer>().color = Color.red;
+                titleColor.color = Color.red;
             }
         }
         else if (Input.GetMouseButtonUp(0))
@@ -181,12 +182,15 @@ public class arenaPlayer : MonoBehaviour
             if (powerTime < 2.5)
             {
                 a.transform.localScale += new Vector3(a.transform.localScale.x * 2 * powerTime, 0, 0);
+                a.GetComponent<shootflash>().damege = 0.5f;
             }
             else
             {
-                a.transform.localScale += new Vector3(a.transform.localScale.x * 6f, 0, 0);
+                a.transform.localScale += new Vector3(a.transform.localScale.x * 8, 0, 0);
+                a.GetComponent<shootflash>().damege = 1f;
+
             }
-            this.transform.Find("NumTitle").GetChild(p_index).GetComponent<SpriteRenderer>().color = Color.white;
+            titleColor.color = Color.white;
             a.GetComponent<shootflash>().shooter = this.gameObject;
             currentState = ArenaState.walk;
             powerTime = 0;
@@ -211,23 +215,30 @@ public class arenaPlayer : MonoBehaviour
     public void hurt(float damege)
     {
         curH -= damege;
-        GameObject.Find("HealthUI").transform.Find("P" + (p_index + 1)).GetComponent<heart>().hurt(curH);
+        lifeUI.hurt(curH);
         if (curH <= 0)
         {
             this.gameObject.SetActive(false);
         }
         mAnimator.SetTrigger("hurt");
     }
+    public void setUI()
+    {
+        this.transform.Find("NumTitle").GetChild(p_index).gameObject.SetActive(true);
+        lifeUI = GameObject.Find("HealthUI").transform.Find("P" + (p_index + 1)).GetComponent<heart>();
+        titleColor = this.transform.Find("NumTitle").GetChild(p_index).GetComponent<SpriteRenderer>();
+    }
     //玩家關閉
     private void OnDisable()
     {
-        FightManager.Instance.plist.Remove(this.gameObject);
+        if (!this.gameObject.activeSelf)
+            FightManager.Instance.plist.Remove(this.gameObject);
     }
     //改變Title顏色
     public IEnumerator changeColorTitle_Sword()
     {
-        this.transform.Find("NumTitle").GetChild(p_index).GetComponent<SpriteRenderer>().color = new Color32(34, 179, 229, 255);
+        titleColor.color = new Color32(34, 179, 229, 255);
         yield return new WaitForSeconds(transform.Find("sword").GetComponent<sword>().gaveTime);
-        this.transform.Find("NumTitle").GetChild(p_index).GetComponent<SpriteRenderer>().color = Color.white;
+        titleColor.color = Color.white;
     }
 }

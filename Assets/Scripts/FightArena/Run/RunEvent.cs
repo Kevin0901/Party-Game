@@ -4,20 +4,27 @@ using UnityEngine;
 
 public class RunEvent : MonoBehaviour
 {
-    [SerializeField] private GameObject UI, _type;
-    public void StartGame()
+    [SerializeField] private GameObject UI, typeMachine;
+    public void startGame()
+    {
+        for (int i = 0; i < FightManager.Instance.plist.Count; i++)
+        {
+            FightManager.Instance.plist[i].GetComponentInChildren<typeMove>().enabled = true;
+        }
+    }
+    private void OnEnable()
     {
         SetPlayer();
     }
-    public void SetPlayer()
+    private void SetPlayer()
     {
         for (int i = 0; i < FightManager.Instance.plist.Count; i++)
         {
             FightManager.Instance.plist[i].GetComponent<arenaPlayer>().enabled = false;
-            Instantiate(_type, FightManager.Instance.plist[i].transform);
+            Instantiate(typeMachine, FightManager.Instance.plist[i].transform);
             FightManager.Instance.plist[i].transform.localScale = new Vector3(2.8f, 2.8f, 0);
             FightManager.Instance.plist[i].transform.rotation = Quaternion.Euler(0, 0, -90);
-            switch (i)
+            switch (i + 1)
             {
                 case 1:
                     FightManager.Instance.plist[i].GetComponent<arenaPlayer>().SpawnPoint(new Vector3(-60, 25, 0));
@@ -38,7 +45,7 @@ public class RunEvent : MonoBehaviour
     {
         for (int i = 0; i < FightManager.Instance.plist.Count; i++)
         {
-            Destroy(FightManager.Instance.plist[i].transform.Find("type").GetComponent<runnerMove>());
+            FightManager.Instance.plist[i].GetComponentInChildren<typeMove>().enabled = false;
         }
         yield return new WaitForSeconds(3f);
         UI.SetActive(true);

@@ -14,6 +14,7 @@ public class CupidEvent : MonoBehaviour
     private Rigidbody2D mrigibody;
     private Vector3 firstpos, newpos;
     private Vector3 cupidPos;
+    private int totalPlayer;
     void Awake()
     {
         mrigibody = this.GetComponent<Rigidbody2D>();
@@ -35,6 +36,7 @@ public class CupidEvent : MonoBehaviour
     {
         for (int i = 0; i < FightManager.Instance.plist.Count; i++)
         {
+            totalPlayer++;
             FightManager.Instance.plist[i].GetComponent<arenaPlayer>().currentState = ArenaState.walk;
         }
         StartCoroutine(spawnArrow(cooldownTime, Random.Range(1, 4)));//隨機一種模式
@@ -54,6 +56,14 @@ public class CupidEvent : MonoBehaviour
                 UI.transform.Find("blue").gameObject.SetActive(true);
             }
             this.transform.parent.gameObject.SetActive(false);
+        }
+        else if (totalPlayer > FightManager.Instance.plist.Count)
+        {
+            for (int i = 0; i < FightManager.Instance.plist.Count; i++)
+            {
+                FightManager.Instance.plist[i].GetComponent<arenaPlayer>().p_index = i;
+            }
+            totalPlayer = FightManager.Instance.plist.Count;
         }
     }
     //移動
@@ -87,7 +97,6 @@ public class CupidEvent : MonoBehaviour
             for (int j = 0; j < FightManager.Instance.plist.Count; j++)
             {
                 Vector3 playPos = FightManager.Instance.plist[j].transform.position;
-                Debug.Log(playPos);
                 newpos = playPos - this.transform.position;
                 rotate = (Mathf.Atan2(newpos.y, newpos.x) * Mathf.Rad2Deg) - 180;
                 GetPoolInstance();

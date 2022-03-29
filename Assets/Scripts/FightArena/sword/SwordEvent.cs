@@ -6,6 +6,9 @@ public class SwordEvent : MonoBehaviour
 {
     [SerializeField] private GameObject UI;
     //旋轉地圖
+    [SerializeField] private float rotateSpeed;
+    [SerializeField] private float waitToSword;
+    private int totalPlayer;
     private void OnEnable()
     {
         transform.Rotate(0, 0, Random.Range(0, 360));
@@ -15,16 +18,17 @@ public class SwordEvent : MonoBehaviour
         this.GetComponent<SwordEvent>().enabled = true;
         for (int i = 0; i < FightManager.Instance.plist.Count; i++)
         {
+            totalPlayer++;
             GameObject.Find("HealthUI").transform.GetChild(i).gameObject.SetActive(true);
             FightManager.Instance.plist[i].GetComponent<arenaPlayer>().currentState = ArenaState.walk;
         }
-        StartCoroutine(randomSword(1.5f));
+        StartCoroutine(randomSword(waitToSword));
         StartCoroutine(changeBG());
     }
     //地圖懸轉
     private IEnumerator changeBG()
     {
-        this.transform.Rotate(0, 0, -0.05f);
+        this.transform.Rotate(0, 0, rotateSpeed);
         yield return null;
         StartCoroutine(changeBG());
     }
@@ -42,6 +46,11 @@ public class SwordEvent : MonoBehaviour
                 UI.transform.Find("blue").gameObject.SetActive(true);
             }
             this.gameObject.SetActive(false);
+        }
+        else if (totalPlayer > FightManager.Instance.plist.Count)
+        {
+            StartCoroutine(randomSword(waitToSword));
+            totalPlayer = FightManager.Instance.plist.Count;
         }
     }
     //隨機給一個玩家劍

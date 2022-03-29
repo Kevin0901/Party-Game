@@ -3,14 +3,13 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 using UnityEngine.UI;
-public class runnerMove : MonoBehaviour
+public class typeMove : MonoBehaviour
 {
-    [SerializeField] private List<string> strAry;//打字機器
+    [SerializeField] private List<string> strAry = new List<string> { "a", "w", "d" };//打字機器
     [SerializeField] private string nowStr;//現在的字
-    [SerializeField] private float badTime, greatTime;//生成按鍵時間
-    [SerializeField] private float move; //移動距離
+    [SerializeField] private float badTime = 0.75f, greatTime = 0.15f;//生成按鍵時間
+    [SerializeField] private float move = 15; //移動距離
     private bool _enter, isRight;
-
     private int num;
     private void Start()
     {
@@ -21,7 +20,7 @@ public class runnerMove : MonoBehaviour
     private void Update()
     {
         if (Input.anyKeyDown && !(Input.GetMouseButtonDown(0)
-            || Input.GetMouseButtonDown(1) || Input.GetMouseButtonDown(2)) && _enter)
+         || Input.GetMouseButtonDown(1) || Input.GetMouseButtonDown(2)) && _enter)
         {
             if (Input.GetKeyDown(nowStr))
             {

@@ -352,6 +352,11 @@ PrefabInstance:
       propertyPath: m_Text
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5389917286859156824, guid: 6e5781cc7d5fdbd4e906f5bbf5d271f3,
+        type: 3}
+      propertyPath: m_Alpha
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5389917286859156828, guid: 6e5781cc7d5fdbd4e906f5bbf5d271f3,
         type: 3}
       propertyPath: m_Pivot.x
@@ -892,8 +897,19 @@ PrefabInstance:
       objectReference: {fileID: 827042780}
     - target: {fileID: 3858420232600534028, guid: 100f5248df1852d438e603a7bc105553,
         type: 3}
+      propertyPath: shield
+      value: 
+      objectReference: {fileID: 5086421472729322868, guid: 8ce184e7dd08f544c9da4387fc4f8a7d,
+        type: 3}
+    - target: {fileID: 3858420232600534028, guid: 100f5248df1852d438e603a7bc105553,
+        type: 3}
       propertyPath: changeTime
       value: 2.75
+      objectReference: {fileID: 0}
+    - target: {fileID: 3858420232600534028, guid: 100f5248df1852d438e603a7bc105553,
+        type: 3}
+      propertyPath: waitToMove
+      value: 1.25
       objectReference: {fileID: 0}
     - target: {fileID: 5824149159706520575, guid: 100f5248df1852d438e603a7bc105553,
         type: 3}
@@ -4177,7 +4193,7 @@ GameObject:
   m_Component:
   - component: {fileID: 256348856}
   m_Layer: 0
-  m_Name: "\u6885\u675C\u838E\u548C\u93E1\u5B50"
+  m_Name: monster&mirror
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5007,7 +5023,7 @@ MonoBehaviour:
         m_CallState: 2
       - m_Target: {fileID: 988460418}
         m_TargetAssemblyTypeName: RunEvent, Assembly-CSharp
-        m_MethodName: StartGame
+        m_MethodName: startGame
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -5706,7 +5722,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &691390681
 RectTransform:
   m_ObjectHideFlags: 0
@@ -5982,7 +5998,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0efd1bae9cd04f244958f13b3373db41, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  scoreADD: {fileID: 0}
+  scoreADD: {fileID: 1274259151097775781}
 --- !u!1 &724758431
 GameObject:
   m_ObjectHideFlags: 0
@@ -12176,7 +12192,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   UI: {fileID: 832589408}
-  _type: {fileID: 3839184305971200187, guid: 34a176e0b8b5bb743bec3ac8d39ed7db, type: 3}
+  typeMachine: {fileID: 3839184305971200187, guid: 34a176e0b8b5bb743bec3ac8d39ed7db,
+    type: 3}
 --- !u!66 &988460419
 CompositeCollider2D:
   m_ObjectHideFlags: 0
@@ -12821,7 +12838,7 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: fb51effe7bcee60449bbcca9d03e42e0, type: 3}
+  m_audioClip: {fileID: 0}
   m_PlayOnAwake: 1
   m_Volume: 0.5
   m_Pitch: 1
@@ -17467,7 +17484,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d75c19953b9ceff44b054efa21bbf701, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  scoreADD: {fileID: 0}
+  scoreADD: {fileID: 1274259151097775781}
 --- !u!1 &2072813189
 GameObject:
   m_ObjectHideFlags: 0
@@ -17772,7 +17789,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   UI: {fileID: 832589408}
-  _hammer: {fileID: 0}
+  _hammer: {fileID: 8389298455140430745, guid: de272396d638740439a2b4fbee594295, type: 3}
+  isEnd: 0
 --- !u!66 &2124665735
 CompositeCollider2D:
   m_ObjectHideFlags: 0
@@ -18000,6 +18018,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   UI: {fileID: 832589408}
+  rotateSpeed: 0.05
+  waitToSword: 1.25
 --- !u!1 &1274259150265348529
 GameObject:
   m_ObjectHideFlags: 0

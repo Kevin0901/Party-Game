@@ -35,7 +35,7 @@ public class CupidArrowMove : MonoBehaviour
             }
             //給玩家設定
             curPlayer.love_index = r;
-            curPlayer.transform.Find("NumTitle").GetChild(curPlayer.p_index).GetComponent<SpriteRenderer>().color = new Color32(255, 0, 255, 255);
+            curPlayer.titleColor.color = new Color32(255, 0, 255, 255);
             curPlayer.currentState = ArenaState.love;
             //回去物件池
             parent.GetComponent<CupidEvent>().BackToPool(this.gameObject);

@@ -7,7 +7,7 @@ public class FootEvent : MonoBehaviour
     [SerializeField] private GameObject ball, UI;
     [HideInInspector] public float redScore, blueScore;
     public int _time;
-    private void Start()
+    void OnEnable()
     {
         SetPos();
     }
@@ -83,12 +83,16 @@ public class FootEvent : MonoBehaviour
         yield return new WaitForSeconds(2.5f);
         this.transform.Find("textUI").Find("score").gameObject.SetActive(false);
 
-        GameObject a = Instantiate(ball, Vector3.zero, ball.transform.rotation);
-        yield return new WaitForSeconds(0.5f);
-
         for (int i = 0; i < FightManager.Instance.plist.Count; i++)
         {
             FightManager.Instance.plist[i].GetComponent<arenaPlayer>().SpawnPoint();
+        }
+
+        GameObject a = Instantiate(ball, Vector3.zero, ball.transform.rotation);
+        yield return new WaitForSeconds(1f);
+
+        for (int i = 0; i < FightManager.Instance.plist.Count; i++)
+        {
             FightManager.Instance.plist[i].GetComponent<arenaPlayer>().currentState = ArenaState.punch;
         }
     }
@@ -103,9 +107,9 @@ public class FootEvent : MonoBehaviour
         this.transform.Find("textUI").Find("score").gameObject.SetActive(true);
         yield return new WaitForSeconds(0.5f);
         this.transform.Find("textUI").Find("score").GetComponent<Text>().text = blueScore.ToString() + " : " + redScore.ToString();
-        yield return new WaitForSeconds(2.5f);
+        yield return new WaitForSeconds(1.5f);
         this.transform.Find("textUI").Find("end").gameObject.SetActive(true);
-        yield return new WaitForSeconds(0.5f);
+        yield return new WaitForSeconds(2f);
 
         UI.SetActive(true);
         if (redScore > blueScore)

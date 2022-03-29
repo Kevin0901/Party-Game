@@ -6055,36 +6055,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 261670767916231874, guid: 6e5781cc7d5fdbd4e906f5bbf5d271f3,
-        type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
-      value: 
-      objectReference: {fileID: 1007347798}
-    - target: {fileID: 261670767916231874, guid: 6e5781cc7d5fdbd4e906f5bbf5d271f3,
-        type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: gameNum
-      objectReference: {fileID: 0}
-    - target: {fileID: 3971532363570288322, guid: 6e5781cc7d5fdbd4e906f5bbf5d271f3,
-        type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
-      value: 
-      objectReference: {fileID: 1007347798}
-    - target: {fileID: 3971532363570288322, guid: 6e5781cc7d5fdbd4e906f5bbf5d271f3,
-        type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: gameNum
-      objectReference: {fileID: 0}
-    - target: {fileID: 5389917286662716662, guid: 6e5781cc7d5fdbd4e906f5bbf5d271f3,
-        type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
-      value: 
-      objectReference: {fileID: 1007347798}
-    - target: {fileID: 5389917286859156824, guid: 6e5781cc7d5fdbd4e906f5bbf5d271f3,
-        type: 3}
-      propertyPath: m_Alpha
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 5389917286859156828, guid: 6e5781cc7d5fdbd4e906f5bbf5d271f3,
         type: 3}
       propertyPath: m_Pivot.x
@@ -6194,26 +6164,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: GameChoose
-      objectReference: {fileID: 0}
-    - target: {fileID: 5389917287831617224, guid: 6e5781cc7d5fdbd4e906f5bbf5d271f3,
-        type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
-      value: 
-      objectReference: {fileID: 1007347798}
-    - target: {fileID: 5389917288230273722, guid: 6e5781cc7d5fdbd4e906f5bbf5d271f3,
-        type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
-      value: 
-      objectReference: {fileID: 1007347798}
-    - target: {fileID: 8174575400178834184, guid: 6e5781cc7d5fdbd4e906f5bbf5d271f3,
-        type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
-      value: 
-      objectReference: {fileID: 1007347798}
-    - target: {fileID: 8174575400178834184, guid: 6e5781cc7d5fdbd4e906f5bbf5d271f3,
-        type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: gameNum
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6e5781cc7d5fdbd4e906f5bbf5d271f3, type: 3}

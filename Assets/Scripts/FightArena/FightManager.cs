@@ -6,19 +6,13 @@ using UnityEngine.SceneManagement;
 public class FightManager : MonoBehaviour
 {
     public static FightManager Instance;
-    private int game_num;
+    [SerializeField] private int game_num;
     public List<GameObject> plist;
-    private List<bool> redOrBlue; //紀錄是紅隊還是藍隊
+    [SerializeField] private List<bool> redOrBlue; //紀錄是紅隊還是藍隊
     [SerializeField] private GameObject _player;
-
     //靜態實例基本宣告
     private void Awake()
     {
-        if (Instance != null)
-        {
-            Destroy(gameObject);
-            return;
-        }
         Instance = this;
         DontDestroyOnLoad(gameObject);
     }
@@ -27,14 +21,14 @@ public class FightManager : MonoBehaviour
         redOrBlue = new List<bool>();
         plist = new List<GameObject>();
     }
-    //點擊畫面加入玩家(點擊事件)
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.O) && redOrBlue.Count < 2)
+        if (Input.GetKeyDown(KeyCode.O) && redOrBlue.Count < 3)
         {
             redOrBlue.Add(false);
             GameObject.Find("ChoosePlayer").transform.Find("P" + redOrBlue.Count).gameObject.SetActive(true);
         }
+
     }
     //開始遊戲(點擊事件)
     public void joinGame()
@@ -88,16 +82,17 @@ public class FightManager : MonoBehaviour
     public void waitLoad(Scene scene, LoadSceneMode mode)
     {
         SceneManager.sceneLoaded -= waitLoad;
-     
-        GameObject.Find("EventManager").transform.GetChild(game_num).gameObject.SetActive(true);//開啟該場景
-
+        playerSet();
+    }
+    void playerSet()
+    {
         for (int i = 0; i < redOrBlue.Count; i++)//生成玩家
         {
             GameObject a = Instantiate(_player);
             plist.Add(a);
             a.GetComponent<arenaPlayer>().p_index = plist.Count - 1;
             a.GetComponent<arenaPlayer>().red = redOrBlue[i];
-            a.transform.Find("NumTitle").GetChild(plist.Count - 1).gameObject.SetActive(true);
+            a.GetComponent<arenaPlayer>().setUI();
             switch (i) //初始位置
             {
                 case 0:
@@ -114,6 +109,7 @@ public class FightManager : MonoBehaviour
                     break;
             }
         }
+        GameObject.Find("EventManager").transform.GetChild(game_num).gameObject.SetActive(true);//開啟該場景
     }
     //inputSystm 的加入玩家函式
     // private void OnPlayerJoined(PlayerInput player)
