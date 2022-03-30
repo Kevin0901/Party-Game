@@ -12,7 +12,8 @@ public class ZeusEvent : MonoBehaviour
         for (int i = 0; i < FightManager.Instance.plist.Count; i++)
         {
             GameObject.Find("HealthUI").transform.GetChild(i).gameObject.SetActive(true);
-            FightManager.Instance.plist[i].GetComponent<arenaPlayer>().currentState = ArenaState.lighting;
+            FightManager.Instance.plist[i].GetComponent<arenaPlayer>().currentState = ArenaState.walk;
+            FightManager.Instance.plist[i].GetComponent<arenaPlayer>().speed *= 1.5f;
         }
         StartCoroutine(spawnLight());
     }

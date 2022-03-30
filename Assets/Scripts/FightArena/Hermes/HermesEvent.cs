@@ -27,25 +27,34 @@ public class HermesEvent : MonoBehaviour
     {
         if (_time < 0)
         {
-            UI.SetActive(true);
-            if (redScore > blueScore)
-            {
-                UI.transform.Find("red").gameObject.SetActive(true);
-            }
-            else if ((redScore < blueScore))
-            {
-                UI.transform.Find("blue").gameObject.SetActive(true);
-            }
-            else if ((redScore == blueScore))
-            {
-                UI.transform.Find("draw").gameObject.SetActive(true);
-            }
-            for (int i = 0; i < FightManager.Instance.plist.Count; i++)
-            {
-                FightManager.Instance.plist[i].SetActive(false);
-            }
-            this.gameObject.SetActive(false);
+            StopAllCoroutines();
+            StartCoroutine(endGame());
         }
+    }
+    IEnumerator endGame()
+    {
+        for (int i = 0; i < FightManager.Instance.plist.Count; i++)
+        {
+            FightManager.Instance.plist[i].GetComponent<arenaPlayer>().currentState = ArenaState.idle;
+        }
+        this.transform.Find("GameUI").Find("end").GetComponent<Text>().text =
+        "遊戲結束\n" + blueScore.ToString() + "  ：  " + redScore.ToString();
+        yield return new WaitForSeconds(3f);
+        
+        UI.SetActive(true);
+        if (redScore > blueScore)
+        {
+            UI.transform.Find("red").gameObject.SetActive(true);
+        }
+        else if ((redScore < blueScore))
+        {
+            UI.transform.Find("blue").gameObject.SetActive(true);
+        }
+        else if ((redScore == blueScore))
+        {
+            UI.transform.Find("draw").gameObject.SetActive(true);
+        }
+        this.gameObject.SetActive(false);
     }
     private IEnumerator spawnCow(float time)
     {
@@ -71,17 +80,17 @@ public class HermesEvent : MonoBehaviour
     public void red_Score(int point)
     {
         redScore += point;
-        this.transform.GetChild(0).Find("red").GetComponent<Text>().text = "Score:" + redScore.ToString();
+        this.transform.Find("GameUI").Find("red").GetComponent<Text>().text = "Score:" + redScore.ToString();
     }
     public void blue_Score(int point)
     {
         blueScore += point;
-        this.transform.GetChild(0).Find("blue").GetComponent<Text>().text = "Score:" + blueScore.ToString();
+        this.transform.Find("GameUI").Find("blue").GetComponent<Text>().text = "Score:" + blueScore.ToString();
     }
     public IEnumerator timeCount()
     {
         yield return new WaitForSeconds(1f);
-        this.transform.GetChild(0).Find("time").GetComponent<Text>().text = (--_time).ToString();
+        this.transform.Find("GameUI").Find("time").GetComponent<Text>().text = (--_time).ToString();
         StartCoroutine(timeCount());
     }
 }

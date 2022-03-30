@@ -24,18 +24,18 @@ public class RunEvent : MonoBehaviour
             Instantiate(typeMachine, FightManager.Instance.plist[i].transform);
             FightManager.Instance.plist[i].transform.localScale = new Vector3(2.8f, 2.8f, 0);
             FightManager.Instance.plist[i].transform.rotation = Quaternion.Euler(0, 0, -90);
-            switch (i + 1)
+            switch (i)
             {
-                case 1:
+                case 0:
                     FightManager.Instance.plist[i].GetComponent<arenaPlayer>().SpawnPoint(new Vector3(-60, 25, 0));
                     break;
-                case 2:
+                case 1:
                     FightManager.Instance.plist[i].GetComponent<arenaPlayer>().SpawnPoint(new Vector3(-60, 7.5f, 0));
                     break;
-                case 3:
+                case 2:
                     FightManager.Instance.plist[i].GetComponent<arenaPlayer>().SpawnPoint(new Vector3(-60, -10, 0));
                     break;
-                case 4:
+                case 3:
                     FightManager.Instance.plist[i].GetComponent<arenaPlayer>().SpawnPoint(new Vector3(-60, -27.5f, 0));
                     break;
             }

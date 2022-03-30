@@ -13,6 +13,11 @@ public class FightManager : MonoBehaviour
     //靜態實例基本宣告
     private void Awake()
     {
+        if (Instance != null)
+        {
+            Destroy(gameObject);
+            return;
+        }
         Instance = this;
         DontDestroyOnLoad(gameObject);
     }
@@ -86,6 +91,7 @@ public class FightManager : MonoBehaviour
     }
     void playerSet()
     {
+        plist.Clear(); 
         for (int i = 0; i < redOrBlue.Count; i++)//生成玩家
         {
             GameObject a = Instantiate(_player);

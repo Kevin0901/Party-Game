@@ -61,7 +61,7 @@ public class arenaPlayer : MonoBehaviour
         {
             ShootLight();
         }
-        else if (Input.GetMouseButtonDown(0) && currentState == ArenaState.punch)
+        else if (currentState == ArenaState.punch && (Input.GetMouseButtonDown(0)))
         {
             transform.Find("fist").GetComponent<Animator>().SetTrigger("punch");
             transform.Find("fist").GetComponent<fist>().punch(fistpower);

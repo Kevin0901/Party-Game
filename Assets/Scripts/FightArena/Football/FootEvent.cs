@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 public class FootEvent : MonoBehaviour
 {
-    [SerializeField] private GameObject ball, UI;
+    [SerializeField] private GameObject ball, UI, fist;
     [HideInInspector] public float redScore, blueScore;
     public int _time;
     void OnEnable()
@@ -76,12 +76,12 @@ public class FootEvent : MonoBehaviour
         {
             FightManager.Instance.plist[i].GetComponent<arenaPlayer>().currentState = ArenaState.idle;
         }
-        this.transform.Find("textUI").Find("score").gameObject.SetActive(true);
+        this.transform.Find("GameUI").Find("score").gameObject.SetActive(true);
         yield return new WaitForSeconds(0.5f);
 
-        this.transform.Find("textUI").Find("score").GetComponent<Text>().text = blueScore.ToString() + " : " + redScore.ToString();
+        this.transform.Find("GameUI").Find("score").GetComponent<Text>().text = blueScore.ToString() + " : " + redScore.ToString();
         yield return new WaitForSeconds(2.5f);
-        this.transform.Find("textUI").Find("score").gameObject.SetActive(false);
+        this.transform.Find("GameUI").Find("score").gameObject.SetActive(false);
 
         for (int i = 0; i < FightManager.Instance.plist.Count; i++)
         {
@@ -104,12 +104,14 @@ public class FootEvent : MonoBehaviour
         {
             FightManager.Instance.plist[i].GetComponent<arenaPlayer>().currentState = ArenaState.idle;
         }
-        this.transform.Find("textUI").Find("score").gameObject.SetActive(true);
+        this.transform.Find("GameUI").Find("score").gameObject.SetActive(true);
         yield return new WaitForSeconds(0.5f);
-        this.transform.Find("textUI").Find("score").GetComponent<Text>().text = blueScore.ToString() + " : " + redScore.ToString();
-        yield return new WaitForSeconds(1.5f);
-        this.transform.Find("textUI").Find("end").gameObject.SetActive(true);
-        yield return new WaitForSeconds(2f);
+
+        this.transform.Find("GameUI").Find("score").GetComponent<Text>().text = blueScore.ToString() + " : " + redScore.ToString();
+        yield return new WaitForSeconds(1f);
+
+        this.transform.Find("GameUI").Find("score").GetComponent<Text>().text = "遊戲結束";
+        yield return new WaitForSeconds(3f);
 
         UI.SetActive(true);
         if (redScore > blueScore)
@@ -135,20 +137,20 @@ public class FootEvent : MonoBehaviour
     {
         redScore++;
         StartCoroutine(pointGet());
-        this.transform.Find("textUI").Find("red").GetComponent<Text>().text = "Score:" + redScore.ToString();
+        this.transform.Find("GameUI").Find("red").GetComponent<Text>().text = "Score:" + redScore.ToString();
     }
     //藍隊加分
     public void blue_Score()
     {
         blueScore++;
         StartCoroutine(pointGet());
-        this.transform.Find("textUI").Find("blue").GetComponent<Text>().text = "Score:" + blueScore.ToString();
+        this.transform.Find("GameUI").Find("blue").GetComponent<Text>().text = "Score:" + blueScore.ToString();
     }
     //計時器
     IEnumerator timeCount()
     {
         yield return new WaitForSeconds(1f);
-        this.transform.Find("textUI").Find("time").GetComponent<Text>().text = (--_time).ToString();
+        this.transform.Find("GameUI").Find("time").GetComponent<Text>().text = (--_time).ToString();
         StartCoroutine(timeCount());
     }
 }
