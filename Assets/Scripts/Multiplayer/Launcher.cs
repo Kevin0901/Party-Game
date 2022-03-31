@@ -10,12 +10,12 @@ public class Launcher : MonoBehaviourPunCallbacks
 {
     public static Launcher Instance;
     string PlayerName;
-    string otherPlayerName;
-    string orderName;
-    [Header("玩家英文代號( One 代表 P1 )")]
+    [Header("玩家英文代號( A 代表 P1 )")]
     [SerializeField] string[] OrderList;
     [Header("創建房間名字輸入")]
     [SerializeField] TMP_InputField roomNameInputField;
+    [Header("玩家名字顯示")]
+    [SerializeField] TMP_Text UserNameText;
     [Header("錯誤訊息(連線失敗)")]
     [SerializeField] TMP_Text errorText;
     [Header("房間名稱")]
@@ -33,6 +33,8 @@ public class Launcher : MonoBehaviourPunCallbacks
     public Room Room;
     [Header("房間管理器")]
     [SerializeField] RoomManager RoomManager;
+    [Header("是否已經登入")]
+    public bool isLogin;
     void Awake()
     {
         Instance = this;
@@ -40,6 +42,7 @@ public class Launcher : MonoBehaviourPunCallbacks
 
     void Start()
     {
+        isLogin = false;
         reference = FirebaseDatabase.DefaultInstance.RootReference;  //定義資料庫連接
         Debug.Log("Connecting to Master");
         PhotonNetwork.ConnectUsingSettings();  //開啟連線
@@ -54,7 +57,15 @@ public class Launcher : MonoBehaviourPunCallbacks
 
     public override void OnJoinedLobby()  //已加入大廳
     {
-        MenuManger.Instance.OpenMenu("title");  //打開 TitleMenu UI
+        if(isLogin)
+        {
+            MenuManger.Instance.OpenMenu("title");  //打開 TitleMenu UI
+        }
+        else
+        {
+            MenuManger.Instance.OpenMenu("start");  //打開 StartMenu UI
+        }
+        
         Debug.Log("Joined Lobby");
     }
 
@@ -93,133 +104,136 @@ public class Launcher : MonoBehaviourPunCallbacks
         {
             if (players[players.Length - 1].ActorNumber == 2)
             {
-                reference.Child("GameRoom").Child(PhotonNetwork.CurrentRoom.Name).Child("Order").Child("Two").SetValueAsync(PlayerName);
+                reference.Child("GameRoom").Child(PhotonNetwork.CurrentRoom.Name).Child("Order").Child("B").SetValueAsync(PlayerName);  //P2
             }
             else if (players[players.Length - 1].ActorNumber == 3)
             {
-                reference.Child("GameRoom").Child(PhotonNetwork.CurrentRoom.Name).Child("Order").Child("Three").SetValueAsync(PlayerName);
+                reference.Child("GameRoom").Child(PhotonNetwork.CurrentRoom.Name).Child("Order").Child("C").SetValueAsync(PlayerName);  //P3
             }
             else if (players[players.Length - 1].ActorNumber == 4)
             {
-                reference.Child("GameRoom").Child(PhotonNetwork.CurrentRoom.Name).Child("Order").Child("Four").SetValueAsync(PlayerName);
+                reference.Child("GameRoom").Child(PhotonNetwork.CurrentRoom.Name).Child("Order").Child("D").SetValueAsync(PlayerName);  //P4
             }
+            SetPlayerUI();
 
-            StartCoroutine(SetPlayerUI());  //進入房間後，依資料庫的玩家資料創建相對應的 UI
         }
-        else
+        else  //如果有人退出過房間，就執行以下程式碼
         {
-            StartCoroutine(FillVacancyOrder_And_SetPlayer(players));  //有人退出過此房間，就執行此方法
+            StartCoroutine(GetRoomInfo((DataSnapshot info) =>
+            {
+                foreach (var rules in info.Children)  //Order，PlayList
+                {
+                    foreach (var item in rules.Children)  //A，B，C，D，[PlayerName]
+                    {
+                        if (item.ChildrenCount == 0)  //只有 Order 的 A，B，C，D 進入以下程式碼
+                        {
+                            if (item.Value.ToString().Equals("Empty"))  //找出空位子，然後把自己替補進去
+                            {
+                                //寫入資料庫
+                                reference.Child("GameRoom").Child(PhotonNetwork.CurrentRoom.Name).Child("Order").Child(item.Key.ToString()).SetValueAsync(PhotonNetwork.NickName);
+                                SetPlayerUI();  //設定 UI
+                                break;
+                            }
+                            else
+                            {
+                                continue;  //如果不是 Empty，就直接往下一個查詢
+                            }
+                        }
+                        else
+                        {
+                            break;  //如果進到 PlayList 的 [PlayerName]，直接 Break 出去
+                        }
+                    }
+                }
+            }));
         }
         StartGameButton.SetActive(PhotonNetwork.IsMasterClient);  //如果是房主，才會顯示開始按鈕
     }
-
-    IEnumerator FillVacancyOrder_And_SetPlayer(Player[] players)
-    {
-        //簡單來說，把我自己的代號設為沒人使用的玩家代號，EX.在資料庫中， Two 顯示 Empty，就把我的玩家代號設為 Two (P2)
-        bool isAdd = false;
-        for (int i = 0; i < OrderList.Length; i++)
-        {
-            orderName = OrderList[i];
-            //從資料庫一一抓取各個玩家代號
-            StartCoroutine(GetOrder((string order) =>
-            {
-                if (order.Equals("Empty"))  //如果玩家代號內顯示 Empty
-                {
-                    //把我自己的玩家代號設為此玩家代號
-                    reference.Child("GameRoom").Child(PhotonNetwork.CurrentRoom.Name).Child("Order").Child(orderName).SetValueAsync(PlayerName);
-                    isAdd = true;
-                }
-            }));
-            yield return new WaitForSeconds(0.5f);  //每隔 0.5s 讀取下一筆，防止錯誤
-
-            if (isAdd)
-            {
-                //代號設定完後，依資料庫的玩家資料創建相對應的 UI
-                StartCoroutine(SetPlayerUI());
-                break;
-            }
-        }
-    }
-
     void AddPlayer(Player[] players)
     {
         //在資料庫創建並紀錄 玩家基本資料
         User NewUser = new User("red", players[players.Length - 1].ActorNumber.ToString());
         string Json = JsonUtility.ToJson(NewUser);
         reference.Child("GameRoom").Child(PhotonNetwork.CurrentRoom.Name).Child("PlayerList").Child(PlayerName).SetRawJsonValueAsync(Json);
-        //GR
-        //  - RoomName
-        //     -- PN
-        //        -team
-        //        
     }
 
-    public IEnumerator SetPlayerUI()
+    public void SetPlayerUI()
     {
         Player[] players = PhotonNetwork.PlayerList;  //取得已加入房間的玩家陣列
 
-        for (int i = 0; i < OrderList.Length; i++)
+        StartCoroutine(GetRoomInfo((DataSnapshot info) =>  //從資料庫抓取此房間內的所有資料
         {
-            orderName = OrderList[i];
-            StartCoroutine(GetOrder((string order) =>  //從資料庫抓取各個玩家代號
+            string[] PName = new string[4];  //臨時存放玩家的陣列 (照 P1、P2...順序)
+            int cnt = 0;  //計數器，紀錄放了幾個玩家名字在 PName[]
+
+            foreach (var rules in info.Children)  //Order，PlayList
             {
-                if (!(order.Equals("Empty")))  //如果玩家代號內的值不為 Empty (表示有玩家)
+                foreach (var item in rules.Children)  //A，B，C，D，[PlayerName]
                 {
-                    otherPlayerName = order;
-                    StartCoroutine(GetTeam((string team) =>  //取得該玩家在資料庫內，的隊伍資料(red 或 blue)
+                    if (item.ChildrenCount == 0)  //只有 Order 的 A，B，C，D 進入以下程式碼
                     {
-                        GameObject PlayerUI = PlayerMenus[i];  // 取得玩家 UI
-                        PlayerUI.transform.Find("Text (TMP)").gameObject.SetActive(true);  //打開玩家名稱 UI
-                        for (int j = 0; j < players.Length; j++)
+                        if (!item.Value.ToString().Equals("Empty"))  //如果不是空的，就把該玩家名字加入 PName[]
                         {
-                            if (players[j].NickName.Equals(order))
-                            {
-                                PlayerUI.GetComponent<PlayerListItem>().SetUp(players[j]);  //設定玩家名稱 UI
-                                PlayerUI.GetComponent<PhotonView>().TransferOwnership(players[j]);  //設定 PhotonView Owner (表示只有 XXX 有此 UI 的擁有權)
-                            }
-                        }
-                        if (team.Equals("red"))  // Team判斷
-                        {
-                            PlayerUI.GetComponent<TeamSelect>().red = true;
-                            PlayerUI.GetComponent<TeamSelect>().blue = false;
+                            PName[cnt] = item.Value.ToString();
+                            cnt++;
                         }
                         else
                         {
-                            PlayerUI.GetComponent<TeamSelect>().blue = true;
-                            PlayerUI.GetComponent<TeamSelect>().red = false;
+                            continue;  //空的就直接 continue
                         }
-
-                        PlayerUI.GetComponent<TeamSelect>().ArrowStart();
-                    }));
+                    }
+                    else  //進到 PlayList 的 [PlayerName]
+                    {
+                        string team = "";  //臨時儲存 team 
+                        for (int i = 0; i < PName.Length; i++)
+                        {
+                            if (item.Key.ToString().Equals(PName[i]))  //抓取 [PlayerName] 內的 team
+                            {
+                                foreach (var Pinfo in item.Children)
+                                {
+                                    if (Pinfo.Key.ToString().Equals("team"))
+                                    {
+                                        team = Pinfo.Value.ToString();
+                                    }
+                                }
+                                GameObject PlayerUI = PlayerMenus[i];  // 取得玩家 UI
+                                PlayerUI.transform.Find("Text (TMP)").gameObject.SetActive(true);  //打開玩家名稱 UI
+                                for (int j = 0; j < players.Length; j++)
+                                {
+                                    if (players[j].NickName.Equals(PName[i]))
+                                    {
+                                        PlayerUI.GetComponent<PlayerListItem>().SetUp(players[j]);  //設定玩家名稱 UI
+                                        PlayerUI.GetComponent<PhotonView>().TransferOwnership(players[j]);  //設定 PhotonView Owner (表示只有 XXX 有此 UI 的擁有權)
+                                    }
+                                }
+                                if (team.Equals("red"))  // Team判斷
+                                {
+                                    PlayerUI.GetComponent<TeamSelect>().red = true;
+                                    PlayerUI.GetComponent<TeamSelect>().blue = false;
+                                }
+                                else
+                                {
+                                    PlayerUI.GetComponent<TeamSelect>().blue = true;
+                                    PlayerUI.GetComponent<TeamSelect>().red = false;
+                                }
+                                PlayerUI.GetComponent<TeamSelect>().ArrowStart();
+                            }
+                        }
+                    }
                 }
-            }));
-
-            yield return new WaitForSeconds(0.5f); //每隔 0.5s 讀取下一筆，防止錯誤
-        }
+            }
+        }));
     }
-    public IEnumerator GetTeam(System.Action<string> onCallbacks) //從資料庫讀取玩家 Team
+    IEnumerator GetRoomInfo(System.Action<DataSnapshot> onCallbacks)  //從資料庫抓取此房間的所有資料
     {
-        var userData = reference.Child("GameRoom").Child(PhotonNetwork.CurrentRoom.Name).Child("PlayerList").Child(otherPlayerName).Child("team").GetValueAsync();
+        var userData = reference.Child("GameRoom").Child(PhotonNetwork.CurrentRoom.Name).GetValueAsync();
 
         yield return new WaitUntil(predicate: () => userData.IsCompleted);
 
         if (userData != null)
         {
             DataSnapshot snapshot = userData.Result;
-            onCallbacks.Invoke(snapshot.Value.ToString());
-        }
-    }
-
-    public IEnumerator GetOrder(System.Action<string> onCallback)  //從資料庫讀取玩家代號
-    {
-        var OrderData = reference.Child("GameRoom").Child(PhotonNetwork.CurrentRoom.Name).Child("Order").Child(orderName).GetValueAsync();
-
-        yield return new WaitUntil(predicate: () => OrderData.IsCompleted);
-
-        if (OrderData != null)
-        {
-            DataSnapshot snapshot = OrderData.Result;
-            onCallback.Invoke(snapshot.Value.ToString());
+            onCallbacks.Invoke(snapshot);
         }
     }
 
@@ -301,46 +315,55 @@ public class Launcher : MonoBehaviourPunCallbacks
 
     public IEnumerator AddNewPlayerUI(Player newPlayer)  //新增新玩家的 UI
     {
-        yield return new WaitForSeconds(2f);
+        yield return new WaitForSeconds(0.3f);
 
-        Player[] players = PhotonNetwork.PlayerList;
+        Player[] players = PhotonNetwork.PlayerList;  //取得已加入房間的玩家陣列
 
-        for (int i = 0; i < OrderList.Length; i++)
+        StartCoroutine(GetRoomInfo((DataSnapshot info) =>  //從資料庫抓取此房間內的所有資料
         {
-            orderName = OrderList[i];
-            StartCoroutine(GetOrder((string order) =>
+            foreach (var rules in info.Children)  //Order，PlayList
             {
-                if (order.Equals(newPlayer.NickName))
+                foreach (var item in rules.Children)  //A，B，C，D，[PlayerName]
                 {
-                    otherPlayerName = order;
-                    StartCoroutine(GetTeam((string team) =>
+                    if (item.ChildrenCount == 0)  //只有 Order 的 A，B，C，D 進入以下程式碼
                     {
-                        GameObject PlayerUI = PlayerMenus[i];
-                        PlayerUI.transform.Find("Text (TMP)").gameObject.SetActive(true);
-                        for (int j = 0; j < players.Length; j++)
+                        if (item.Value.ToString().Equals(newPlayer.NickName))  //抓取新玩家的位置 (P 幾)，抓完生成 UI
                         {
-                            if (players[j].NickName.Equals(order))
+                            int pos = 0;
+                            switch (item.Key)
                             {
-                                PlayerUI.GetComponent<PlayerListItem>().SetUp(players[j]);
-                                PlayerUI.GetComponent<PhotonView>().TransferOwnership(players[j]);
+                                case "A":
+                                    pos = 0;
+                                    break;
+                                case "B":
+                                    pos = 1;
+                                    break;
+                                case "C":
+                                    pos = 2;
+                                    break;
+                                case "D":
+                                    pos = 3;
+                                    break;
                             }
-                        }
-                        if (team.Equals("red"))
-                        {
+                            GameObject PlayerUI = PlayerMenus[pos];
+                            PlayerUI.transform.Find("Text (TMP)").gameObject.SetActive(true);
+                            PlayerUI.GetComponent<PlayerListItem>().SetUp(newPlayer);
+                            PlayerUI.GetComponent<PhotonView>().TransferOwnership(newPlayer);
                             PlayerUI.GetComponent<TeamSelect>().red = true;
                             PlayerUI.GetComponent<TeamSelect>().blue = false;
+                            PlayerUI.GetComponent<TeamSelect>().ArrowStart();
                         }
                         else
                         {
-                            PlayerUI.GetComponent<TeamSelect>().blue = true;
-                            PlayerUI.GetComponent<TeamSelect>().red = false;
+                            continue;
                         }
-
-                        PlayerUI.GetComponent<TeamSelect>().ArrowStart();
-                    }));
+                    }
+                    else
+                    {
+                        break;
+                    }
                 }
-            }));
-            yield return new WaitForSeconds(0.5f);
-        }
+            }
+        }));
     }
 }

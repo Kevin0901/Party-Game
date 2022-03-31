@@ -70,19 +70,19 @@ public class PlayerListItem : MonoBehaviourPunCallbacks
         Debug.Log(this.gameObject.name);
         if (this.gameObject.name.Equals("P1Join"))
         {
-            reference.Child("GameRoom").Child(roomName).Child("Order").Child("One").SetValueAsync("Empty");
+            reference.Child("GameRoom").Child(roomName).Child("Order").Child("A").SetValueAsync("Empty");
         }
         else if (this.gameObject.name.Equals("P2Join"))
         {
-            reference.Child("GameRoom").Child(roomName).Child("Order").Child("Two").SetValueAsync("Empty");
+            reference.Child("GameRoom").Child(roomName).Child("Order").Child("B").SetValueAsync("Empty");
         }
         else if (this.gameObject.name.Equals("P3Join"))
         {
-            reference.Child("GameRoom").Child(roomName).Child("Order").Child("Three").SetValueAsync("Empty");
+            reference.Child("GameRoom").Child(roomName).Child("Order").Child("C").SetValueAsync("Empty");
         }
         else if (this.gameObject.name.Equals("P4Join"))
         {
-            reference.Child("GameRoom").Child(roomName).Child("Order").Child("Four").SetValueAsync("Empty");
+            reference.Child("GameRoom").Child(roomName).Child("Order").Child("D").SetValueAsync("Empty");
         }
 
         reference.Child("GameRoom").Child(roomName).Child("PlayerList").Child(text.text).SetValueAsync(null);
