@@ -8,7 +8,6 @@ public class ResourceUI : MonoBehaviour
 {
     public string Playertag;
     private ResourceTypeListSO resourceTypeList;
-
     private Dictionary<ResourceTypeSo, Transform> resourceTypeTransformDictionary;
 
 

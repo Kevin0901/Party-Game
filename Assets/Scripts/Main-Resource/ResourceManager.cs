@@ -2,6 +2,8 @@
 using System;
 using System.Collections.Generic;
 using UnityEngine;
+using Firebase.Database;
+using Photon.Pun;
 
 public class ResourceManager : MonoBehaviour
 {
@@ -11,14 +13,14 @@ public class ResourceManager : MonoBehaviour
 
     private Dictionary<ResourceTypeSo, int> RedresourceAmountDictionary;
     private Dictionary<ResourceTypeSo, int> BlueresourceAmountDictionary;
-
     private float timer;
     private float timerMax = 1f;
     private int c = 0;
-
+    public DatabaseReference reference;
     private void Awake()
     {
         Instance = this;
+        reference = FirebaseDatabase.DefaultInstance.RootReference;  //定義資料庫連接
         RedresourceAmountDictionary = new Dictionary<ResourceTypeSo, int>();
         BlueresourceAmountDictionary = new Dictionary<ResourceTypeSo, int>();
 
@@ -26,6 +28,8 @@ public class ResourceManager : MonoBehaviour
 
         foreach (ResourceTypeSo resourceType in resourceTypeList.list)
         {
+            reference.Child("GameRoom").Child(PhotonNetwork.CurrentRoom.Name).Child("RedResource").Child("resourceType.ToString()").SetValueAsync(100);
+            reference.Child("GameRoom").Child(PhotonNetwork.CurrentRoom.Name).Child("BlueResource").Child("resourceType.ToString()").SetValueAsync(100);
             RedresourceAmountDictionary[resourceType] = 100;
             BlueresourceAmountDictionary[resourceType] = 100;
 

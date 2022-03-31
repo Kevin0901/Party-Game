@@ -153,10 +153,7 @@ public class ShopUI : MonoBehaviour
         {
             foreach (Item item in inventory.GetItemList())
             {
-                if (item.itemType != null)
-                {
-                    itemcount++;
-                }
+                itemcount++;
                 if (getitem.itemType == item.itemType && getitem.IsStackable())
                 {
                     return true;
