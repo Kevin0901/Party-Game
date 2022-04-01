@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class centerBuff : MonoBehaviour
 {
-    //進去正中心
+    //在正中心
     private void OnTriggerStay2D(Collider2D other)
     {
         if (other.gameObject.layer == 10)

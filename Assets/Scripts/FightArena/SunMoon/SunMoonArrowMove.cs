@@ -8,6 +8,7 @@ public class SunMoonArrowMove : MonoBehaviour
     public float speed, power;
     private Vector3 dir;
     private Rigidbody2D mrigibody2D;
+    public GameObject shooter;
     private void Start()
     {
         mrigibody2D = this.GetComponent<Rigidbody2D>();
@@ -31,13 +32,13 @@ public class SunMoonArrowMove : MonoBehaviour
     //箭矢摧毀
     private void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.gameObject.layer == 10)
+        if (other.gameObject.layer == 10 && other.gameObject != shooter)
         {
             other.GetComponent<Rigidbody2D>().AddForce(dir.normalized * power, ForceMode2D.Impulse);
             Destroy(this.gameObject);
         }
     }
-    //箭矢摧毀
+    //離開背景
     private void OnTriggerExit2D(Collider2D other)
     {
         if (other.CompareTag("background"))

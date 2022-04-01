@@ -11,9 +11,9 @@ GameObject:
   - component: {fileID: 1063082600710075565}
   - component: {fileID: 3790474103717290826}
   - component: {fileID: 2919149816849718201}
-  - component: {fileID: 2987789965275158385}
-  - component: {fileID: 3858420232600534028}
   - component: {fileID: 4735371440622039574}
+  - component: {fileID: 2987789965275158385}
+  - component: {fileID: 8050354781031669779}
   m_Layer: 14
   m_Name: monster
   m_TagString: Untagged
@@ -94,57 +94,19 @@ Rigidbody2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5824149159706520575}
-  m_BodyType: 1
+  m_BodyType: 0
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
-  m_Mass: 600
-  m_LinearDrag: 0
-  m_AngularDrag: 0.05
+  m_Mass: 20
+  m_LinearDrag: 1000
+  m_AngularDrag: 1000
   m_GravityScale: 0
   m_Material: {fileID: 0}
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 1
   m_Constraints: 0
---- !u!95 &2987789965275158385
-Animator:
-  serializedVersion: 3
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5824149159706520575}
-  m_Enabled: 0
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: b05b80cca88149045b0b0faec1d015be, type: 2}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorControllerStateOnDisable: 0
---- !u!114 &3858420232600534028
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5824149159706520575}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b1b726b959dbec44bad441f37b3dd4ab, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  UI: {fileID: 0}
-  ball: {fileID: 3338618263098886804, guid: 7c45fa9a774e5a445b407c7234a3a1c7, type: 3}
-  mirror: {fileID: 437497666712556185, guid: 74c7bfbfbe1a6a84ea8d6e85a2a4caf3, type: 3}
-  waitTime: 1.2
-  changeTime: 2.5
-  speed: 2.5
-  damage: 0.5
 --- !u!60 &4735371440622039574
 PolygonCollider2D:
   m_ObjectHideFlags: 0
@@ -157,7 +119,7 @@ PolygonCollider2D:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_UsedByEffector: 0
-  m_UsedByComposite: 1
+  m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
@@ -322,3 +284,41 @@ PolygonCollider2D:
       - {x: 0.049999997, y: -0.945}
       - {x: 0, y: -0.965}
       - {x: -0.04, y: -0.995}
+--- !u!95 &2987789965275158385
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5824149159706520575}
+  m_Enabled: 0
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: b05b80cca88149045b0b0faec1d015be, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &8050354781031669779
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5824149159706520575}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 637e4d8b6b6b68f41a7906d8c80f0c87, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ball: {fileID: 3338618263098886804, guid: 7c45fa9a774e5a445b407c7234a3a1c7, type: 3}
+  changeRate: 1.25
+  hurtRate: 2.75
+  M_speed: 1.5
+  M_damage: 0.5
+  B_speed: 5
+  B_damege: 0.5

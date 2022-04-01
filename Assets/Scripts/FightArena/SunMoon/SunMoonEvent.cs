@@ -19,15 +19,15 @@ public class SunMoonEvent : MonoBehaviour
     //改變背景大小
     private IEnumerator changeBG()
     {
-        if (this.transform.localScale.x != 0)
+        if (this.transform.localScale.x != 2)
         {
-            this.transform.localScale = new Vector3(this.transform.localScale.x - Time.deltaTime * size,
-                                                            this.transform.localScale.y - Time.deltaTime * size,
-                                                            this.transform.localScale.z - Time.deltaTime * size);
+            this.transform.localScale = new Vector2(this.transform.localScale.x - Time.deltaTime * size,
+                                                    this.transform.localScale.y - Time.deltaTime * size);
         }
         yield return null;
         StartCoroutine(changeBG());
     }
+    //直到玩家剩一位
     private void Update()
     {
         if (FightManager.Instance.plist.Count <= 1)
@@ -41,7 +41,7 @@ public class SunMoonEvent : MonoBehaviour
             {
                 UI.transform.Find("blue").gameObject.SetActive(true);
             }
-            this.transform.parent.gameObject.SetActive(false);
+            this.transform.gameObject.SetActive(false);
         }
     }
     //玩家離開地圖判定

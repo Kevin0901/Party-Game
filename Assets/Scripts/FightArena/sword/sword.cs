@@ -4,18 +4,18 @@ using UnityEngine;
 
 public class sword : MonoBehaviour
 {
-    [SerializeField] private GameObject lastplayer;
+    private GameObject lastplayer; //上一個玩家
     private arenaPlayer player;
-    [SerializeField] private float hurtTime;
-    public float gaveTime = 1;
+    [HideInInspector] public float hurtTime;
+    [HideInInspector] public float waitTime;
     private float nexthurt;
     private int num;
     void Awake()
     {
         player = this.GetComponentInParent<arenaPlayer>();
         num = player.p_index;
-        lastplayer = null;
     }
+
     //如果劍碰到玩家的話，判斷不是自己 & 不是上一個傳的對象
     private void OnTriggerStay2D(Collider2D other)
     {
@@ -32,25 +32,20 @@ public class sword : MonoBehaviour
     {
         player.speed *= 1.5f;
         //改變Title顏色
-        player.gameObject.transform.Find("NumTitle").GetChild(num).GetComponent<SpriteRenderer>().color = new Color32(255, 28, 28, 255);
-        nexthurt = Time.time;
+        player.titleColor.color = new Color32(255, 28, 28, 255);
+        nexthurt = Time.time + hurtTime;
     }
     //如果劍關閉
     private void OnDisable()
     {
         player.speed /= 1.5f;
     }
-    //傷害
-    private void Hurt()
-    {
-        player.hurt(0.5f);
-    }
     private void Update()
     {
         //如果劍在自己身上等到傷害時間
-        if (Time.time - nexthurt > hurtTime)
+        if (Time.time > nexthurt)
         {
-            Hurt();
+            player.hurt(0.5f);
             nexthurt = Time.time + hurtTime;
         }
     }
@@ -58,7 +53,7 @@ public class sword : MonoBehaviour
     public IEnumerator Savelastplayer(GameObject p)
     {
         lastplayer = p;
-        yield return new WaitForSeconds(gaveTime);
+        yield return new WaitForSeconds(waitTime);
         lastplayer = null;
     }
 }

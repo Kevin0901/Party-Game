@@ -4,20 +4,19 @@ using UnityEngine;
 
 public class ball : MonoBehaviour
 {
-    [SerializeField] private float speed;
-    private float damage = 0.5f;
+    [HideInInspector] public float speed, damage;
     private Rigidbody2D rb;
     private float cnt; //速度計數器
-    void Awake()
+    void Start()
     {
         cnt = 1.5f;
         rb = this.GetComponent<Rigidbody2D>();
     }
     //旋轉跟刪除物件
-    void Update()
+    void FixedUpdate()
     {
         this.transform.Rotate(0, 0, 3f);
-        if (FightManager.Instance.plist.Count == 1)
+        if (FightManager.Instance.plist.Count <= 1)
         {
             Destroy(this.gameObject);
         }
@@ -30,7 +29,7 @@ public class ball : MonoBehaviour
     public void move(int num)
     {
         Vector2 pos = (FightManager.Instance.plist[num].transform.position - this.transform.position).normalized;
-        rb.AddForce(pos * speed, ForceMode2D.Force);
+        rb.AddForce(pos * speed, ForceMode2D.Impulse);
     }
     //碰撞判定
     private void OnCollisionEnter2D(Collision2D other)

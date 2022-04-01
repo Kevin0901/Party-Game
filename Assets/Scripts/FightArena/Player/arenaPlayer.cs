@@ -10,7 +10,8 @@ public enum ArenaState
     lighting,
     shoot,
     fastMode,
-    punch
+    punch,
+    ares
 }
 public class arenaPlayer : MonoBehaviour
 {
@@ -24,7 +25,6 @@ public class arenaPlayer : MonoBehaviour
     [Header("月亮太陽射擊設定")]
     [SerializeField] private GameObject item;
     [SerializeField] private float fireRate, Arrowspeed = 50, power;
-    private float nextfire;
     public bool isCenter; //玩家是否在正中心
     [Header("邱比特設定")]
     [SerializeField] private float loveTime = 2f;
@@ -38,9 +38,12 @@ public class arenaPlayer : MonoBehaviour
     public float turboSpeed;
     [Header("足球")]
     [SerializeField] private float fistpower;
+    [Header("戰神")]
+    [SerializeField] private GameObject spear;
 
     private Rigidbody2D mrigibody;
     private Animator mAnimator;
+    private float nextfire;
     [HideInInspector] public SpriteRenderer titleColor;
     private heart lifeUI;
     private Vector2 movement;
@@ -56,7 +59,6 @@ public class arenaPlayer : MonoBehaviour
     //偵測按鍵輸入
     private void Update()
     {
-        mouseRotate();
         if (currentState == ArenaState.lighting)
         {
             ShootLight();
@@ -95,6 +97,10 @@ public class arenaPlayer : MonoBehaviour
             Move();
         }
     }
+    private void LateUpdate()
+    {
+        mouseRotate();
+    }
     //滑鼠旋轉玩家
     private void mouseRotate()
     {
@@ -114,6 +120,20 @@ public class arenaPlayer : MonoBehaviour
         {
             mrigibody.AddForce(movement * speed, ForceMode2D.Force);
         }
+    }
+    public IEnumerator ChangeARES(float time)
+    {
+        mAnimator.SetTrigger("change");
+        yield return new WaitForSeconds(1f);
+
+        mAnimator.GetComponent<arenaPlayer>().currentState = ArenaState.ares;
+        GameObject s = Instantiate(spear);
+        s.GetComponent<spear>().player = this.gameObject;
+
+        yield return new WaitForSeconds(time);
+        mAnimator.GetComponent<arenaPlayer>().currentState = ArenaState.walk;
+        mAnimator.GetComponent<Animator>().SetTrigger("change");
+        Destroy(s);
     }
     //魅惑
     private void Lover()
@@ -142,10 +162,11 @@ public class arenaPlayer : MonoBehaviour
         if (Input.GetMouseButtonDown(0) && Time.time > nextfire)
         {
             GameObject arr = Instantiate(item, transform.position, transform.rotation);
+            arr.GetComponent<SunMoonArrowMove>().shooter = this.gameObject;
             if (isCenter) //如果在正中心發射的話
             {
                 arr.GetComponent<SpriteRenderer>().color = new Color32(0, 0, 0, 255);
-                arr.GetComponent<SunMoonArrowMove>().speed = Arrowspeed * 1.75f;
+                arr.GetComponent<SunMoonArrowMove>().speed = Arrowspeed * 1.5f;
                 arr.GetComponent<SunMoonArrowMove>().power = power * 1.25f;
                 arr.transform.localScale *= 1.25f;
             }
@@ -175,7 +196,6 @@ public class arenaPlayer : MonoBehaviour
         }
         else if (Input.GetMouseButtonUp(0))
         {
-            Debug.Log(powerTime);
             isPress = false;
             GameObject a = Instantiate(lighting, transform.position,
             lighting.transform.rotation * this.transform.rotation);
@@ -238,7 +258,7 @@ public class arenaPlayer : MonoBehaviour
     public IEnumerator changeColorTitle_Sword()
     {
         titleColor.color = new Color32(34, 179, 229, 255);
-        yield return new WaitForSeconds(transform.Find("sword").GetComponent<sword>().gaveTime);
+        yield return new WaitForSeconds(transform.Find("sword").GetComponent<sword>().waitTime);
         titleColor.color = Color.white;
     }
 }

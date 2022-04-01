@@ -21,6 +21,7 @@ public class HammerEvent : MonoBehaviour
     {
         for (int i = 0; i < FightManager.Instance.plist.Count; i++)
         {
+            FightManager.Instance.plist[i].GetComponent<Animator>().enabled = false;
             FightManager.Instance.plist[i].GetComponent<arenaPlayer>().enabled = false;
             FightManager.Instance.plist[i].transform.localScale = new Vector3(2.8f, 2.8f, 0);
             FightManager.Instance.plist[i].transform.rotation = Quaternion.Euler(0, 0, -180);

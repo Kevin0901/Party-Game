@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class changeTeam : MonoBehaviour
 {
+    //簡易換隊
     private void Update()
     {
         if (Input.GetButtonDown("Horizontal"))
@@ -11,7 +12,7 @@ public class changeTeam : MonoBehaviour
             choose();
         }
     }
-    public void choose()
+    private void choose()
     {
         if (this.transform.Find("RedTeam").gameObject.activeSelf)
         {

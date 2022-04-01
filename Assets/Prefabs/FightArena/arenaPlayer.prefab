@@ -66,7 +66,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1872367350614728569}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c08af3efefce5664b94039d4d8b6a4d7, type: 3}
+  m_Script: {fileID: 11500000, guid: 6e0d714dc49e7e346878c749781e73a5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &2028814211212845501
@@ -230,12 +230,12 @@ MonoBehaviour:
   currentState: 0
   speed: 135
   red: 1
-  p_index: 1
-  spawnPos: {x: 0, y: 10, z: 0}
+  p_index: 0
+  spawnPos: {x: 0, y: 0, z: 0}
   item: {fileID: 3093933777940720112, guid: 7d50319c0e3dc8645b06e73f19760a27, type: 3}
   fireRate: 0.5
   Arrowspeed: 50
-  power: 100
+  power: 120
   isCenter: 0
   loveTime: 1.5
   love_index: 0
@@ -243,8 +243,9 @@ MonoBehaviour:
     type: 3}
   powerTime: 0
   isPress: 0
-  turboSpeed: 8
+  turboSpeed: 9
   fistpower: 150
+  spear: {fileID: 2037616527455417162, guid: 723aa1847ff0af04688c20c9a6fee444, type: 3}
   titleColor: {fileID: 0}
 --- !u!1 &5195281706139582395
 GameObject:
