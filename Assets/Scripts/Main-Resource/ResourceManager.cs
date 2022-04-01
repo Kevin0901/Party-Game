@@ -17,18 +17,17 @@ public class ResourceManager : MonoBehaviour
     private float timerMax = 1f;
     private int c = 0;
     public DatabaseReference reference;
-    private DataSnapshot RedResData, BlueResData;
     private void Awake()
     {
         Instance = this;
         reference = FirebaseDatabase.DefaultInstance.RootReference;  //定義資料庫連接
         RedresourceAmountDictionary = new Dictionary<ResourceTypeSo, int>();
         BlueresourceAmountDictionary = new Dictionary<ResourceTypeSo, int>();
-
+        Debug.Log(reference);
         ResourceTypeListSO resourceTypeList = Resources.Load<ResourceTypeListSO>(typeof(ResourceTypeListSO).Name);
-
         foreach (ResourceTypeSo resourceType in resourceTypeList.list)
         {
+            Debug.Log(resourceType.ToString());
             reference.Child("GameRoom").Child("123456").Child("RedResource").Child(resourceType.ToString()).SetValueAsync(100);
             reference.Child("GameRoom").Child("123456").Child("BlueResource").Child(resourceType.ToString()).SetValueAsync(100);
             RedresourceAmountDictionary[resourceType] = 100;
@@ -63,15 +62,17 @@ public class ResourceManager : MonoBehaviour
 
     public void AddResource(ResourceTypeSo resourceType, int amount)
     {
-        updateResource();
-        // int RedresValue = Convert.ToInt32(RedResData.Child(resourceType.ToString()).Value);
-        // reference.Child("GameRoom").Child("123456").Child("RedResource").Child(resourceType.ToString()).SetValueAsync(RedresValue + amount);
-        Debug.Log("2");
-        Debug.Log(RedResData.ChildrenCount);
-
-        // int BlueresValue = Convert.ToInt32(BlueResData.Child(resourceType.ToString()).Value);
-        // reference.Child("GameRoom").Child("123456").Child("BlueResource").Child(resourceType.ToString()).SetValueAsync(BlueresValue + amount);
-        // Debug.Log(BlueResData.Child(resourceType.ToString()).Value);
+        StartCoroutine(GetTeamResourceData((DataSnapshot Redinfo) =>
+        {
+            int RedresValue = Convert.ToInt32(Redinfo.Child(resourceType.ToString()).Value);
+            reference.Child("GameRoom").Child("123456").Child("RedResource").Child(resourceType.ToString()).SetValueAsync(RedresValue + amount);
+            Debug.Log(Redinfo.Child(resourceType.ToString()).Value);
+        }, (DataSnapshot Blueinfo) =>
+        {
+            int BlueresValue = Convert.ToInt32(Blueinfo.Child(resourceType.ToString()).Value);
+            reference.Child("GameRoom").Child("123456").Child("BlueResource").Child(resourceType.ToString()).SetValueAsync(BlueresValue + amount);
+            Debug.Log(Blueinfo.Child(resourceType.ToString()).Value);
+        }));
 
         OnResourceAmountChanged?.Invoke(this, EventArgs.Empty);
     }
@@ -82,14 +83,9 @@ public class ResourceManager : MonoBehaviour
         {
             int resValue = Convert.ToInt32(Redinfo.Child(resourceType.ToString()).Value);
             reference.Child("GameRoom").Child("123456").Child("RedResource").Child(resourceType.ToString()).SetValueAsync(resValue + amount);
-            reference.Child("GameRoom").Child("123456").Child("BlueResource").Child(resourceType.ToString()).SetValueAsync(resValue + amount);
             Debug.Log(Redinfo.Child(resourceType.ToString()).Value);
         }, (DataSnapshot Blueinfo) => { }));
         OnResourceAmountChanged?.Invoke(this, EventArgs.Empty);
-
-        // if (OnResourceAmountChanged != null) {
-        //     OnResourceAmountChanged(this, EventArgs.Empty);
-        // }
     }
 
     public void BlueAddResource(ResourceTypeSo resourceType, int amount)
@@ -97,16 +93,11 @@ public class ResourceManager : MonoBehaviour
         StartCoroutine(GetTeamResourceData((DataSnapshot Redinfo) => { }, (DataSnapshot Blueinfo) =>
            {
                int resValue = Convert.ToInt32(Blueinfo.Child(resourceType.ToString()).Value);
-               reference.Child("GameRoom").Child("123456").Child("RedResource").Child(resourceType.ToString()).SetValueAsync(resValue + amount);
                reference.Child("GameRoom").Child("123456").Child("BlueResource").Child(resourceType.ToString()).SetValueAsync(resValue + amount);
                Debug.Log(Blueinfo.Child(resourceType.ToString()).Value);
            }
         ));
         OnResourceAmountChanged?.Invoke(this, EventArgs.Empty);
-
-        // if (OnResourceAmountChanged != null) {
-        //     OnResourceAmountChanged(this, EventArgs.Empty);
-        // }
     }
 
     private void timeadd()
@@ -180,22 +171,5 @@ public class ResourceManager : MonoBehaviour
             RedonCallbacks.Invoke(Redsnapshot);
             BlueonCallbacks.Invoke(Bluesnapshot);
         }
-    }
-
-    private void updateResource()
-    {
-        Debug.Log("3");
-        StartCoroutine(GetTeamResourceData((DataSnapshot Redinfo) =>
-       {
-           RedResData = Redinfo;
-           Debug.Log(RedResData);
-           Debug.Log("1");
-       }, (DataSnapshot Blueinfo) =>
-         {
-           BlueResData = Blueinfo;
-           Debug.Log(BlueResData);
-           Debug.Log("1.5");
-       }
-       ));
     }
 }
