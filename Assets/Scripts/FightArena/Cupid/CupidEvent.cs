@@ -14,7 +14,6 @@ public class CupidEvent : MonoBehaviour
     private Rigidbody2D mrigibody;
     private Vector3 firstpos, newpos;
     private Vector3 cupidPos;
-    private int totalPlayer;
     void Awake()
     {
         mrigibody = this.GetComponent<Rigidbody2D>();
@@ -24,10 +23,10 @@ public class CupidEvent : MonoBehaviour
         //初始化物件池
         for (int i = 0; i < arrow_limit; i++)
         {
-            GameObject addArrow = Instantiate(arrow, this.transform.position, this.transform.rotation);
+            GameObject addArrow = Instantiate(arrow, this.transform.position, Quaternion.identity);
             addArrow.transform.SetParent(this.transform);
             arrow_Store.Add(addArrow);
-            addArrow.GetComponent<CupidArrowMove>().parent = this.gameObject;
+            addArrow.GetComponent<CupidArrowMove>().Cupid_parent = this.gameObject;
             addArrow.SetActive(false);
         }
     }
@@ -36,7 +35,6 @@ public class CupidEvent : MonoBehaviour
     {
         for (int i = 0; i < FightManager.Instance.plist.Count; i++)
         {
-            totalPlayer++;
             FightManager.Instance.plist[i].GetComponent<arenaPlayer>().currentState = ArenaState.walk;
         }
         StartCoroutine(spawnArrow(cooldownTime, Random.Range(1, 4)));//隨機一種模式
@@ -56,14 +54,6 @@ public class CupidEvent : MonoBehaviour
                 UI.transform.Find("blue").gameObject.SetActive(true);
             }
             this.transform.parent.gameObject.SetActive(false);
-        }
-        else if (totalPlayer > FightManager.Instance.plist.Count)
-        {
-            for (int i = 0; i < FightManager.Instance.plist.Count; i++)
-            {
-                FightManager.Instance.plist[i].GetComponent<arenaPlayer>().p_index = i;
-            }
-            totalPlayer = FightManager.Instance.plist.Count;
         }
     }
     //移動
@@ -213,7 +203,7 @@ public class CupidEvent : MonoBehaviour
         arr.transform.rotation = Quaternion.AngleAxis(rotate, Vector3.forward);
         arr.SetActive(true);
         arr.GetComponent<CupidArrowMove>().speed = speed;
-        arr.GetComponent<CupidArrowMove>().Pos = newpos;
+        arr.GetComponent<CupidArrowMove>().pos = newpos;
         return arr;
     }
     //返回物件池
@@ -221,7 +211,6 @@ public class CupidEvent : MonoBehaviour
     {
         arrow_Store.Add(arr);
         arr.transform.position = this.transform.position;
-        arr.transform.rotation = Quaternion.identity;
         arr.transform.SetParent(this.transform);
         arr.SetActive(false);
     }

@@ -10,13 +10,13 @@ public class redPoint : MonoBehaviour
     {
         if (other.gameObject.CompareTag("arrow"))
         {
-            scoreADD.GetComponent<FootEvent>().blue_Score();
+            scoreADD.GetComponent<FootEvent>().B_Score();
             StartCoroutine(other.gameObject.GetComponent<football>().waitBall());
         }
         else if (other.gameObject.layer == 10)
         {
             if (other.gameObject.GetComponent<arenaPlayer>().red)
-                scoreADD.GetComponent<FootEvent>().blue_Score();
+                scoreADD.GetComponent<FootEvent>().B_Score();
         }
     }
 }

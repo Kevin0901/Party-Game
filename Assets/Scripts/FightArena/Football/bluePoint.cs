@@ -10,13 +10,13 @@ public class bluePoint : MonoBehaviour
     {
         if (other.gameObject.CompareTag("arrow"))
         {
-            scoreADD.GetComponent<FootEvent>().red_Score();
+            scoreADD.GetComponent<FootEvent>().R_Score();
             StartCoroutine(other.gameObject.GetComponent<football>().waitBall());
         }
         else if (other.gameObject.layer == 10)
         {
             if (!other.gameObject.GetComponent<arenaPlayer>().red)
-                scoreADD.GetComponent<FootEvent>().red_Score();
+                scoreADD.GetComponent<FootEvent>().R_Score();
         }
     }
 }

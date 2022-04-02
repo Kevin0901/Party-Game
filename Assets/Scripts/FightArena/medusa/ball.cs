@@ -7,10 +7,10 @@ public class ball : MonoBehaviour
     [HideInInspector] public float speed, damage;
     private Rigidbody2D rb;
     private float cnt; //速度計數器
-    void Start()
+    private void OnEnable()
     {
         cnt = 1.5f;
-        rb = this.GetComponent<Rigidbody2D>();
+        rb = this.gameObject.GetComponent<Rigidbody2D>();
     }
     //旋轉跟刪除物件
     void FixedUpdate()
@@ -29,7 +29,7 @@ public class ball : MonoBehaviour
     public void move(int num)
     {
         Vector2 pos = (FightManager.Instance.plist[num].transform.position - this.transform.position).normalized;
-        rb.AddForce(pos * speed, ForceMode2D.Impulse);
+        rb.AddForce(pos * speed, ForceMode2D.Force);
     }
     //碰撞判定
     private void OnCollisionEnter2D(Collision2D other)

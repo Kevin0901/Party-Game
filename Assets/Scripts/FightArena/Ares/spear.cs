@@ -22,8 +22,10 @@ public class spear : MonoBehaviour
             mAnimator.SetTrigger("rotate");
         }
     }
-    public void LateUpdate()
+    private void LateUpdate()
     {
         transform.position = player.transform.position;
     }
+
+    
 }

@@ -5,15 +5,14 @@ using UnityEngine;
 public class helmet : MonoBehaviour
 {
     public bool isArens;
-    public float aresT;
+    public float aresTime;
     private void OnTriggerStay2D(Collider2D other)
     {
         if (other.gameObject.layer == 10 && Input.GetKey(KeyCode.Space))
         {
             if (isArens)
             {
-
-                other.GetComponent<arenaPlayer>().StartCoroutine("ChangeARES", aresT);
+                other.GetComponent<arenaPlayer>().StartCoroutine("ChangeARES", aresTime);
                 this.transform.parent.gameObject.SetActive(false);
                 this.transform.parent.GetComponentInParent<AresEvent>().StartCoroutine("reset");
             }

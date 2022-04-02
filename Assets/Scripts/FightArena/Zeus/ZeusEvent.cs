@@ -20,7 +20,7 @@ public class ZeusEvent : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (FightManager.Instance.plist.Count == 1)
+        if (FightManager.Instance.plist.Count <= 1)
         {
             UI.SetActive(true);
             if (FightManager.Instance.plist[0].GetComponent<arenaPlayer>().red)

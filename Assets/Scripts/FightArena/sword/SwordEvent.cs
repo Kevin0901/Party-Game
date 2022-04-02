@@ -5,11 +5,11 @@ using UnityEngine;
 public class SwordEvent : MonoBehaviour
 {
     [SerializeField] private GameObject UI;
-    [SerializeField] private float rotateSpeed, waitToSword, hurtTime, waitTime;
+    [SerializeField] private float rotateSpeed, waitToSword, hurtTime, waitTitleTime;
     private int totalPlayer;
     private void OnEnable()
     {
-        transform.Rotate(0, 0, Random.Range(0, 360));
+        transform.Rotate(0, 0, Random.Range(0f, 360f));
         totalPlayer = FightManager.Instance.plist.Count;
     }
     public void StartGame()
@@ -57,6 +57,6 @@ public class SwordEvent : MonoBehaviour
         int num = Random.Range(0, FightManager.Instance.plist.Count);
         FightManager.Instance.plist[num].transform.Find("sword").gameObject.SetActive(true);
         FightManager.Instance.plist[num].transform.Find("sword").GetComponent<sword>().hurtTime = hurtTime;
-        FightManager.Instance.plist[num].transform.Find("sword").GetComponent<sword>().waitTime = waitTime;
+        FightManager.Instance.plist[num].transform.Find("sword").GetComponent<sword>().waitTime = waitTitleTime;
     }
 }

@@ -32,7 +32,8 @@ public class arenaPlayer : MonoBehaviour
     public int love_index;
     [Header("宙斯")]
     [SerializeField] private GameObject lighting;
-    [SerializeField] private float powerTime;
+    [SerializeField] private float maxPowerTime;
+    private float powerTime;
     public bool isPress;
     [Header("荷米斯")]
     public float turboSpeed;
@@ -125,12 +126,13 @@ public class arenaPlayer : MonoBehaviour
     {
         mAnimator.SetTrigger("change");
         yield return new WaitForSeconds(1f);
-
+        speed *= 1.2f;
         mAnimator.GetComponent<arenaPlayer>().currentState = ArenaState.ares;
         GameObject s = Instantiate(spear);
         s.GetComponent<spear>().player = this.gameObject;
 
         yield return new WaitForSeconds(time);
+        speed /= 1.2f;
         mAnimator.GetComponent<arenaPlayer>().currentState = ArenaState.walk;
         mAnimator.GetComponent<Animator>().SetTrigger("change");
         Destroy(s);
@@ -187,8 +189,8 @@ public class arenaPlayer : MonoBehaviour
             isPress = true;
             mrigibody.velocity = Vector2.zero;
             powerTime += Time.deltaTime;
-            if (powerTime < 2.5)
-                titleColor.color = new Color(1, 1 - (powerTime * 0.128f), 1 - (powerTime * 0.348f));
+            if (powerTime < maxPowerTime)
+                titleColor.color = new Color(1, 1 - (0.5f / maxPowerTime) * powerTime, 0);
             else
             {
                 titleColor.color = Color.red;
@@ -199,19 +201,19 @@ public class arenaPlayer : MonoBehaviour
             isPress = false;
             GameObject a = Instantiate(lighting, transform.position,
             lighting.transform.rotation * this.transform.rotation);
-            if (powerTime < 2.5)
+            if (powerTime < maxPowerTime)
             {
-                a.transform.localScale += new Vector3(a.transform.localScale.x * 2 * powerTime, 0, 0);
+                a.transform.localScale += new Vector3(a.transform.localScale.x * powerTime, 0, 0);
                 a.GetComponent<shootflash>().damege = 0.5f;
             }
             else
             {
-                a.transform.localScale += new Vector3(a.transform.localScale.x * 8, 0, 0);
-                a.GetComponent<shootflash>().damege = 1f;
+                a.transform.localScale += new Vector3(a.transform.localScale.x * 10, 0, 0);
+                a.GetComponent<shootflash>().damege = 1.5f;
 
             }
-            titleColor.color = Color.white;
             a.GetComponent<shootflash>().shooter = this.gameObject;
+            titleColor.color = Color.white;
             currentState = ArenaState.walk;
             powerTime = 0;
         }

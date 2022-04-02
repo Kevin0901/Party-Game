@@ -10,20 +10,11 @@ public class HammerEvent : MonoBehaviour
     {
         SetPlayer();
     }
-    public void StartGame()
+    private void SetPlayer()
     {
         for (int i = 0; i < FightManager.Instance.plist.Count; i++)
         {
-            FightManager.Instance.plist[i].GetComponentInChildren<strike>().enabled = true;
-        }
-    }
-    public void SetPlayer()
-    {
-        for (int i = 0; i < FightManager.Instance.plist.Count; i++)
-        {
-            FightManager.Instance.plist[i].GetComponent<Animator>().enabled = false;
             FightManager.Instance.plist[i].GetComponent<arenaPlayer>().enabled = false;
-            FightManager.Instance.plist[i].transform.localScale = new Vector3(2.8f, 2.8f, 0);
             FightManager.Instance.plist[i].transform.rotation = Quaternion.Euler(0, 0, -180);
             switch (i)
             {
@@ -40,8 +31,17 @@ public class HammerEvent : MonoBehaviour
                     FightManager.Instance.plist[i].GetComponent<arenaPlayer>().SpawnPoint(new Vector3(45, 28, 0));
                     break;
             }
-            GameObject a = Instantiate(_hammer, FightManager.Instance.plist[i].transform);
-            a.GetComponent<strike>()._event = this.gameObject.GetComponent<HammerEvent>();
+            GameObject a = Instantiate(_hammer, FightManager.Instance.plist[i].transform.position,
+            FightManager.Instance.plist[i].transform.rotation);
+            a.transform.SetParent(FightManager.Instance.plist[i].transform);
+            a.transform.GetChild(0).GetComponent<strike>()._event = this.gameObject.GetComponent<HammerEvent>();
+        }
+    }
+    public void StartGame()
+    {
+        for (int i = 0; i < FightManager.Instance.plist.Count; i++)
+        {
+            FightManager.Instance.plist[i].GetComponentInChildren<strike>().enabled = true;
         }
     }
     public IEnumerator EndGame(GameObject winner)

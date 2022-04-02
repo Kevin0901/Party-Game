@@ -8,7 +8,7 @@ public class strike : MonoBehaviour
     [SerializeField] private float all_dis;
     [SerializeField] private int cnt;
     private float move_dis;
-    [HideInInspector]public HammerEvent _event;
+    [HideInInspector] public HammerEvent _event;
     private void Start()
     {
         move_dis = all_dis / max;
@@ -19,10 +19,11 @@ public class strike : MonoBehaviour
         {
             cnt++;
             this.transform.GetChild(0).localPosition += new Vector3(0, -move_dis, 0);
-        }
-        if (cnt >= max)
-        {
-            StartCoroutine(_event.EndGame(this.transform.parent.gameObject));
+            if (cnt >= max)
+            {
+                this.GetComponent<SpriteRenderer>().color = new Color(1, 0.3f, 0.47f);
+                StartCoroutine(_event.EndGame(this.transform.parent.parent.gameObject));
+            }
         }
     }
 }

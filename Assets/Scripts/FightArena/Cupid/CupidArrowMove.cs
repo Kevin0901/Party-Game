@@ -4,9 +4,9 @@ using UnityEngine;
 
 public class CupidArrowMove : MonoBehaviour
 {
-    public float speed = 20;
-    public Vector3 Pos;
-    [HideInInspector]public GameObject parent;
+    [HideInInspector]public float speed;
+    public Vector3 pos;
+    [HideInInspector] public GameObject Cupid_parent;
     void Update()
     {
         if (FightManager.Instance.plist.Count == 1)
@@ -14,7 +14,7 @@ public class CupidArrowMove : MonoBehaviour
             this.gameObject.SetActive(false);
         }
         //箭矢射擊方向
-        transform.position += Pos.normalized * Time.deltaTime * speed;
+        transform.position += pos.normalized * Time.deltaTime * speed;
     }
     //碰撞設定
     private void OnTriggerEnter2D(Collider2D other)
@@ -25,20 +25,20 @@ public class CupidArrowMove : MonoBehaviour
             //隨機追蹤玩家
             int r = Random.Range(0, FightManager.Instance.plist.Count);
             //如果等於自己或是玩家剩一位的話
-            while (r == curPlayer.p_index)
+            while (FightManager.Instance.plist[r] == other.gameObject)
             {
                 if (FightManager.Instance.plist.Count == 1)
                 {
-                    break;
+                    Destroy(this.gameObject);
                 }
                 r = Random.Range(0, FightManager.Instance.plist.Count);
             }
             //給玩家設定
-            curPlayer.love_index = r;
+            curPlayer.love_index = FightManager.Instance.plist[r].GetComponent<arenaPlayer>().p_index;
             curPlayer.titleColor.color = new Color32(255, 0, 255, 255);
             curPlayer.currentState = ArenaState.love;
             //回去物件池
-            parent.GetComponent<CupidEvent>().BackToPool(this.gameObject);
+            Cupid_parent.GetComponent<CupidEvent>().BackToPool(this.gameObject);
         }
     }
     //碰撞設定
@@ -48,7 +48,7 @@ public class CupidArrowMove : MonoBehaviour
         if (other.CompareTag("background") && this.gameObject.activeSelf)
         {
             //回去物件池
-            parent.GetComponent<CupidEvent>().BackToPool(this.gameObject);
+            Cupid_parent.GetComponent<CupidEvent>().BackToPool(this.gameObject);
         }
     }
 }

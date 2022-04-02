@@ -4,31 +4,33 @@ using UnityEngine;
 using UnityEngine.UI;
 public class FootEvent : MonoBehaviour
 {
-    [SerializeField] private GameObject ball, UI, fist;
-    [HideInInspector] public float redScore, blueScore;
-    public int _time;
+    [SerializeField] private GameObject ball, UI;
+    [HideInInspector] public int redScore, blueScore;
+    [SerializeField] private int GameTime;
+    [SerializeField] private float maxSpeed;
     void OnEnable()
     {
         SetPos();
     }
     public void StartGame()
     {
-        Instantiate(ball, Vector3.zero, ball.transform.rotation);
+        GameObject a = Instantiate(ball, Vector3.zero, ball.transform.rotation);
+        a.GetComponent<football>().maxSpeed = maxSpeed;
         for (int i = 0; i < FightManager.Instance.plist.Count; i++)
         {
-            FightManager.Instance.plist[i].GetComponent<arenaPlayer>().currentState = ArenaState.punch;
             FightManager.Instance.plist[i].transform.Find("fist").gameObject.SetActive(true);
+            FightManager.Instance.plist[i].GetComponent<arenaPlayer>().currentState = ArenaState.punch;
         }
         StartCoroutine(timeCount());
     }
     void Update()
     {
-        if (_time < 0 || (redScore == 3) || (blueScore == 3))
+        if (GameTime < 0 || (redScore == 3) || (blueScore == 3))
         {
             StartCoroutine(EndGame());
         }
     }
-    //設定位置
+    //設定玩家位置
     private void SetPos()
     {
         int redcnt = 0, bluecnt = 0;
@@ -43,10 +45,10 @@ public class FootEvent : MonoBehaviour
                         FightManager.Instance.plist[i].GetComponent<arenaPlayer>().SpawnPoint(new Vector3(20, 0, 0));
                         break;
                     case 2:
-                        FightManager.Instance.plist[i].GetComponent<arenaPlayer>().SpawnPoint(new Vector3(40, 0, 0));
+                        FightManager.Instance.plist[i].GetComponent<arenaPlayer>().SpawnPoint(new Vector3(30, 0, 0));
                         break;
                     case 3:
-                        FightManager.Instance.plist[i].GetComponent<arenaPlayer>().SpawnPoint(new Vector3(30, 0, 0));
+                        FightManager.Instance.plist[i].GetComponent<arenaPlayer>().SpawnPoint(new Vector3(40, 0, 0));
                         break;
                 }
             }
@@ -59,10 +61,10 @@ public class FootEvent : MonoBehaviour
                         FightManager.Instance.plist[i].GetComponent<arenaPlayer>().SpawnPoint(new Vector3(-20, 0, 0));
                         break;
                     case 2:
-                        FightManager.Instance.plist[i].GetComponent<arenaPlayer>().SpawnPoint(new Vector3(-40, 0, 0));
+                        FightManager.Instance.plist[i].GetComponent<arenaPlayer>().SpawnPoint(new Vector3(-30, 0, 0));
                         break;
                     case 3:
-                        FightManager.Instance.plist[i].GetComponent<arenaPlayer>().SpawnPoint(new Vector3(-30, 0, 0));
+                        FightManager.Instance.plist[i].GetComponent<arenaPlayer>().SpawnPoint(new Vector3(-40, 0, 0));
                         break;
                 }
             }
@@ -75,9 +77,10 @@ public class FootEvent : MonoBehaviour
         for (int i = 0; i < FightManager.Instance.plist.Count; i++)
         {
             FightManager.Instance.plist[i].GetComponent<arenaPlayer>().currentState = ArenaState.idle;
+            FightManager.Instance.plist[i].transform.Find("fist").gameObject.SetActive(false);
         }
         this.transform.Find("GameUI").Find("score").gameObject.SetActive(true);
-        yield return new WaitForSeconds(0.5f);
+        yield return new WaitForSeconds(0.35f);
 
         this.transform.Find("GameUI").Find("score").GetComponent<Text>().text = blueScore.ToString() + " : " + redScore.ToString();
         yield return new WaitForSeconds(2.5f);
@@ -89,11 +92,14 @@ public class FootEvent : MonoBehaviour
         }
 
         GameObject a = Instantiate(ball, Vector3.zero, ball.transform.rotation);
-        yield return new WaitForSeconds(1f);
+        a.GetComponent<football>().maxSpeed = maxSpeed;
+        yield return new WaitForSeconds(0.5f);
+        StartCoroutine(timeCount());
 
         for (int i = 0; i < FightManager.Instance.plist.Count; i++)
         {
             FightManager.Instance.plist[i].GetComponent<arenaPlayer>().currentState = ArenaState.punch;
+            FightManager.Instance.plist[i].transform.Find("fist").gameObject.SetActive(true);
         }
     }
     //結束判定
@@ -103,15 +109,16 @@ public class FootEvent : MonoBehaviour
         for (int i = 0; i < FightManager.Instance.plist.Count; i++)
         {
             FightManager.Instance.plist[i].GetComponent<arenaPlayer>().currentState = ArenaState.idle;
+            FightManager.Instance.plist[i].transform.Find("fist").gameObject.SetActive(false);
         }
         this.transform.Find("GameUI").Find("score").gameObject.SetActive(true);
-        yield return new WaitForSeconds(0.5f);
+        yield return new WaitForSeconds(0.35f);
 
         this.transform.Find("GameUI").Find("score").GetComponent<Text>().text = blueScore.ToString() + " : " + redScore.ToString();
-        yield return new WaitForSeconds(1f);
+        yield return new WaitForSeconds(1.5f);
 
         this.transform.Find("GameUI").Find("score").GetComponent<Text>().text = "遊戲結束";
-        yield return new WaitForSeconds(3f);
+        yield return new WaitForSeconds(2.5f);
 
         UI.SetActive(true);
         if (redScore > blueScore)
@@ -126,31 +133,25 @@ public class FootEvent : MonoBehaviour
         {
             UI.transform.Find("draw").gameObject.SetActive(true);
         }
-        for (int i = 0; i < FightManager.Instance.plist.Count; i++)
-        {
-            FightManager.Instance.plist[i].SetActive(false);
-        }
         this.gameObject.SetActive(false);
     }
     //紅隊加分
-    public void red_Score()
+    public void R_Score()
     {
         redScore++;
         StartCoroutine(pointGet());
-        this.transform.Find("GameUI").Find("red").GetComponent<Text>().text = "Score:" + redScore.ToString();
     }
     //藍隊加分
-    public void blue_Score()
+    public void B_Score()
     {
         blueScore++;
         StartCoroutine(pointGet());
-        this.transform.Find("GameUI").Find("blue").GetComponent<Text>().text = "Score:" + blueScore.ToString();
     }
     //計時器
     IEnumerator timeCount()
     {
         yield return new WaitForSeconds(1f);
-        this.transform.Find("GameUI").Find("time").GetComponent<Text>().text = (--_time).ToString();
+        this.transform.Find("GameUI").Find("time").GetComponent<Text>().text = (--GameTime).ToString();
         StartCoroutine(timeCount());
     }
 }

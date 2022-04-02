@@ -22,7 +22,7 @@ public class AresEvent : MonoBehaviour
         transform.Find("helmets").gameObject.SetActive(true);
         int r = Random.Range(0, helmet.Count);
         helmet[r].GetComponent<helmet>().isArens = true;
-        helmet[r].GetComponent<helmet>().aresT = aresTime;
+        helmet[r].GetComponent<helmet>().aresTime = aresTime;
     }
     public IEnumerator reset()
     {

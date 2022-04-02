@@ -316,9 +316,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ball: {fileID: 3338618263098886804, guid: 7c45fa9a774e5a445b407c7234a3a1c7, type: 3}
-  changeRate: 1.25
-  hurtRate: 2.75
+  changeRate: 2.75
+  hurtRate: 0.5
   M_speed: 1.5
   M_damage: 0.5
-  B_speed: 5
+  B_speed: 27.5
   B_damege: 0.5
