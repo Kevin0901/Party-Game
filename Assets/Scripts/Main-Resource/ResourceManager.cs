@@ -17,6 +17,7 @@ public class ResourceManager : MonoBehaviour
     private float timerMax = 1f;
     private int c = 0;
     public DatabaseReference reference;
+    private int RedresourceAmount, BlueresourceAmount;
     private void Awake()
     {
         Instance = this;
@@ -73,7 +74,6 @@ public class ResourceManager : MonoBehaviour
             reference.Child("GameRoom").Child("123456").Child("BlueResource").Child(resourceType.ToString()).SetValueAsync(BlueresValue + amount);
             Debug.Log(Blueinfo.Child(resourceType.ToString()).Value);
         }));
-
         OnResourceAmountChanged?.Invoke(this, EventArgs.Empty);
     }
 
@@ -110,12 +110,23 @@ public class ResourceManager : MonoBehaviour
 
     public int RedGetResourceAmount(ResourceTypeSo resourceType)
     {
-        return RedresourceAmountDictionary[resourceType];
+        StartCoroutine(GetTeamResourceData((DataSnapshot Redinfo) =>
+        {
+            RedresourceAmount = Convert.ToInt32(Redinfo.Child(resourceType.ToString()).Value);
+        }, (DataSnapshot Blueinfo) => { }));
+        Debug.Log(RedresourceAmount);
+        return RedresourceAmount;
     }
 
     public int BlueGetResourceAmount(ResourceTypeSo resourceType)
     {
-        return BlueresourceAmountDictionary[resourceType];
+        StartCoroutine(GetTeamResourceData((DataSnapshot Redinfo) => { }, (DataSnapshot Blueinfo) =>
+        {
+            BlueresourceAmount = Convert.ToInt32(Blueinfo.Child(resourceType.ToString()).Value);
+        }));
+        Debug.Log(BlueresourceAmount);
+        return BlueresourceAmount;
+
     }
 
     public bool RedCanAfford(ResourceAmount[] resourceAmountsArray)
@@ -146,18 +157,28 @@ public class ResourceManager : MonoBehaviour
     {
         foreach (ResourceAmount resourceAmount in resourceAmountsArray)
         {
-            RedresourceAmountDictionary[resourceAmount.resourceType] -= resourceAmount.amount;
+            StartCoroutine(GetTeamResourceData((DataSnapshot Redinfo) =>
+            {
+                int RedresValue = Convert.ToInt32(Redinfo.Child(resourceAmount.resourceType.ToString()).Value);
+                reference.Child("GameRoom").Child("123456").Child("RedResource").Child(resourceAmount.resourceType.ToString()).SetValueAsync(RedresValue - resourceAmount.amount);
+                Debug.Log(Redinfo.Child(resourceAmount.resourceType.ToString()).Value);
+            }, (DataSnapshot Blueinfo) => { }));
         }
     }
     public void BlueSpendResources(ResourceAmount[] resourceAmountsArray)
     {
         foreach (ResourceAmount resourceAmount in resourceAmountsArray)
         {
-            BlueresourceAmountDictionary[resourceAmount.resourceType] -= resourceAmount.amount;
+            StartCoroutine(GetTeamResourceData((DataSnapshot Redinfo) => { }, (DataSnapshot Blueinfo) =>
+           {
+               int BlueresValue = Convert.ToInt32(Blueinfo.Child(resourceAmount.resourceType.ToString()).Value);
+               reference.Child("GameRoom").Child("123456").Child("BlueResource").Child(resourceAmount.resourceType.ToString()).SetValueAsync(BlueresValue - resourceAmount.amount);
+               Debug.Log(Blueinfo.Child(resourceAmount.resourceType.ToString()).Value);
+           }));
         }
     }
 
-    IEnumerator GetTeamResourceData(System.Action<DataSnapshot> RedonCallbacks, System.Action<DataSnapshot> BlueonCallbacks)  //從資料庫抓取此房間的所有資料
+    public IEnumerator GetTeamResourceData(System.Action<DataSnapshot> RedonCallbacks, System.Action<DataSnapshot> BlueonCallbacks)  //從資料庫抓取此房間的所有資料
     {
         var RedresData = reference.Child("GameRoom").GetValueAsync();
         RedresData = reference.Child("GameRoom").Child("123456").Child("RedResource").GetValueAsync();

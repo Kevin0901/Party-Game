@@ -1,15 +1,16 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using Firebase.Database;
 
 public class ResourceUI : MonoBehaviour
 {
     public string Playertag;
     private ResourceTypeListSO resourceTypeList;
     private Dictionary<ResourceTypeSo, Transform> resourceTypeTransformDictionary;
-
 
     private void Awake()
     {
@@ -55,13 +56,19 @@ public class ResourceUI : MonoBehaviour
             Transform resourceTransform = resourceTypeTransformDictionary[resourceType];
             if (Playertag == "red")
             {
-                int resourceAmount = ResourceManager.Instance.RedGetResourceAmount(resourceType);
-                resourceTransform.Find("text").GetComponent<TextMeshProUGUI>().SetText(resourceAmount.ToString());
+                StartCoroutine(ResourceManager.Instance.GetTeamResourceData((DataSnapshot Redinfo) =>
+                {
+                    int resourceAmount = Convert.ToInt32(Redinfo.Child(resourceType.ToString()).Value);
+                    resourceTransform.Find("text").GetComponent<TextMeshProUGUI>().SetText(resourceAmount.ToString());
+                }, (DataSnapshot Blueinfo) => { }));
             }
             else if (Playertag == "blue")
             {
-                int resourceAmount = ResourceManager.Instance.BlueGetResourceAmount(resourceType);
-                resourceTransform.Find("text").GetComponent<TextMeshProUGUI>().SetText(resourceAmount.ToString());
+                StartCoroutine(ResourceManager.Instance.GetTeamResourceData((DataSnapshot Redinfo) => { }, (DataSnapshot Blueinfo) =>
+                {
+                    int resourceAmount = Convert.ToInt32(Blueinfo.Child(resourceType.ToString()).Value);
+                    resourceTransform.Find("text").GetComponent<TextMeshProUGUI>().SetText(resourceAmount.ToString());
+                }));
             }
         }
     }
