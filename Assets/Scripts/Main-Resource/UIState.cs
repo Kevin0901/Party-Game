@@ -5,7 +5,6 @@ using UnityEngine;
 public class UIState : MonoBehaviour
 {
     public static UIState Instance;
-    // [SerializeField] private GameObject hover;
     [SerializeField] private GameObject ResourceUI;
     [SerializeField] private GameObject BuildUI;
     [SerializeField] private GameObject MonsterUI;
@@ -37,6 +36,8 @@ public class UIState : MonoBehaviour
         {
             Instance = this;
         }
+        MonsterUI.SetActive(false);
+        BuildUI.SetActive(false);
     }
     void Update()
     {
