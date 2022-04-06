@@ -102,6 +102,8 @@ public class Effect : MonoBehaviour
             {
                 orgindamage = this.GetComponent<PlayerMovement>().attackDamage;
                 this.GetComponent<PlayerMovement>().attackDamage = (int)(orgindamage * PowMagnification);
+                Debug.Log(transform.parent.Find("EffectUI").gameObject);
+                // this.transform.Find("EffectUI").transform.GetChild(0).transform.Find("Power").gameObject.SetActive(true);
                 yield return new WaitForSeconds(PowDuration);
                 this.GetComponent<PlayerMovement>().attackDamage = (int)orgindamage;
                 PowerUpStatus = false;

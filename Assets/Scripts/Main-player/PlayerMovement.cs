@@ -87,7 +87,6 @@ public class PlayerMovement : MonoBehaviour
         //     return;
         // }
         UiandInventoryGet();
-        // spawnUI();
     }
     private void OnEnable()
     {
@@ -139,6 +138,10 @@ public class PlayerMovement : MonoBehaviour
         Playerthrow();
         PlayerItemUse();
         PlayerBulid();
+        if (Input.GetKeyDown(KeyCode.J))
+        {
+            StartCoroutine(this.GetComponent<Effect>().PowerUPEffect());
+        }
         if (Input.GetKeyDown(KeyCode.E))
         {
             inventory.AddItem(new Item { itemType = Item.ItemType.Medusaeye, amount = 1 });
@@ -494,64 +497,6 @@ public class PlayerMovement : MonoBehaviour
     {
         return inventorysign;
     }
-    // void spawnUI()
-    // {
-    //     switch (order)
-    //     {
-    //         case 1:
-    //             for (int i = 0; i < generateUI.Length; i++)
-    //             {
-    //                 GameObject resource = Instantiate(generateUI[i]);
-    //                 resource.transform.parent = GameObject.Find("P" + order + "UI").gameObject.transform;
-    //                 Canvas canvas = resource.GetComponent<Canvas>();
-    //                 canvas.renderMode = RenderMode.ScreenSpaceCamera;
-    //                 canvas.worldCamera = this.transform.GetChild(0).gameObject.GetComponent<Camera>();
-    //                 canvas.sortingLayerName = "UI";
-    //                 canvas.sortingOrder = 1;
-    //             }
-    //             UiandInventoryGet();
-    //             break;
-    //         case 2:
-    //             for (int i = 0; i < generateUI.Length; i++)
-    //             {
-    //                 GameObject resource = Instantiate(generateUI[i]);
-    //                 resource.transform.parent = GameObject.Find("P" + order + "UI").gameObject.transform;
-    //                 Canvas canvas = resource.GetComponent<Canvas>();
-    //                 canvas.renderMode = RenderMode.ScreenSpaceCamera;
-    //                 canvas.worldCamera = this.transform.GetChild(0).gameObject.GetComponent<Camera>();
-    //                 canvas.sortingLayerName = "UI";
-    //                 canvas.sortingOrder = 1;
-    //             }
-    //             UiandInventoryGet();
-    //             break;
-    //         case 3:
-    //             for (int i = 0; i < generateUI.Length; i++)
-    //             {
-    //                 GameObject resource = Instantiate(generateUI[i]);
-    //                 resource.transform.parent = GameObject.Find("P" + order + "UI").gameObject.transform;
-    //                 Canvas canvas = resource.GetComponent<Canvas>();
-    //                 canvas.renderMode = RenderMode.ScreenSpaceCamera;
-    //                 canvas.worldCamera = this.transform.GetChild(0).gameObject.GetComponent<Camera>();
-    //                 canvas.sortingLayerName = "UI";
-    //                 canvas.sortingOrder = 1;
-    //             }
-    //             UiandInventoryGet();
-    //             break;
-    //         case 4:
-    //             for (int i = 0; i < generateUI.Length; i++)
-    //             {
-    //                 GameObject resource = Instantiate(generateUI[i]);
-    //                 resource.transform.parent = GameObject.Find("P" + order + "UI").gameObject.transform;
-    //                 Canvas canvas = resource.GetComponent<Canvas>();
-    //                 canvas.renderMode = RenderMode.ScreenSpaceCamera;
-    //                 canvas.worldCamera = this.transform.GetChild(0).gameObject.GetComponent<Camera>();
-    //                 canvas.sortingLayerName = "UI";
-    //                 canvas.sortingOrder = 1;
-    //             }
-    //             UiandInventoryGet();
-    //             break;
-    //     }
-    // }
     void UiandInventoryGet()
     {
         UI = this.GetComponent<UIState>();
