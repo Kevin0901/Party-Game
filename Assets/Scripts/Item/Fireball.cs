@@ -36,7 +36,7 @@ public class Fireball : MonoBehaviour
     {
         foreach (GameObject enemy in enemyinlist)
         {
-            enemy.GetComponentInChildren<health>().burnhurt(sec, secdamage);
+            StartCoroutine(enemy.GetComponent<Effect>().BurnEffect());
         }
     }
 

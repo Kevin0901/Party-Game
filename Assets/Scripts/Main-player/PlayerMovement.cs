@@ -15,7 +15,7 @@ public class PlayerMovement : MonoBehaviour
     private SpriteRenderer spriteRenderer;
     [Header("玩家參數")]
     [SerializeField] private PlayerState currentState;
-    [SerializeField] private float speed;
+    public float speed;
     [SerializeField] private int MaxHealth, CurHealth;
     [SerializeField] private float dir;
     public int attackDamage;
@@ -28,7 +28,7 @@ public class PlayerMovement : MonoBehaviour
     private Animator animator;
     private Rigidbody2D mrigibody;
     private Vector3 change;
-    private health health;
+    public health health;
     [Header("控制器控制")]
     public string joynum;//控制器
     [Header("玩家登入排序")]
@@ -57,7 +57,9 @@ public class PlayerMovement : MonoBehaviour
     private UIState UI;
     private int getallinv = 0;
     private static int spriteNum = 0;
-    private float orginspeed, nextfire;
+    public float orginspeed;
+    private float nextfire;
+    public int ProjectileCost = 1;
     // Start is called before the first frame update
     public PhotonView PV;
     public MultiPlayerManager MultiPlayerManager;
@@ -159,51 +161,6 @@ public class PlayerMovement : MonoBehaviour
             this.gameObject.SetActive(true);
             // this.transform.SetParent(null);
         }
-    }
-    private IEnumerator HermisEffect()
-    {
-        inventory.RemoveItem(new Item { itemType = Item.ItemType.Hermisboots, amount = 1 });
-        speed = orginspeed * 2;
-        yield return new WaitForSeconds(10);
-        speed = orginspeed;
-    }
-
-    private IEnumerator PowerEffect()
-    {
-        inventory.RemoveItem(new Item { itemType = Item.ItemType.PowerPotion, amount = 1 });
-        attackDamage *= 2;
-        yield return new WaitForSeconds(10);
-        attackDamage /= 2;
-    }
-    private IEnumerator WineEffect()
-    {
-        inventory.RemoveItem(new Item { itemType = Item.ItemType.Wine, amount = 1 });
-        speed /= 2;
-        for (int i = 0; i < 6; i++)
-        {
-            int reheal = (int)((health.maxH * 0.4f) / 6);
-            if (health.curH < health.maxH)
-            {
-                if (health.curH + reheal > health.maxH)
-                {
-                    health.curH = health.maxH;
-                }
-                else
-                {
-                    health.curH += reheal;
-                }
-            }
-            yield return new WaitForSeconds(0.5f);
-        }
-        speed *= 2;
-    }
-    public IEnumerator StoneEffect()
-    {
-        speed = 0;
-        this.GetComponent<SpriteRenderer>().color = new Color32(89, 89, 89, 255);
-        yield return new WaitForSeconds(5);
-        this.GetComponent<SpriteRenderer>().color = new Color32(255, 255, 255, 255);
-        speed = orginspeed;
     }
     void PlayerMove()
     {
@@ -458,19 +415,24 @@ public class PlayerMovement : MonoBehaviour
                 case "Hermisboots":
                     if (inventorysign.GetComponent<InventorySign>().signitemamount() != 0)
                     {
-                        StartCoroutine(HermisEffect());
+                        inventory.RemoveItem(new Item { itemType = Item.ItemType.Hermisboots, amount = 1 });
+                        StartCoroutine(this.GetComponent<Effect>().SpeedUpEffect());
+
                     }
                     break;
                 case "Wine":
                     if (inventorysign.GetComponent<InventorySign>().signitemamount() != 0)
                     {
-                        StartCoroutine(WineEffect());
+                        inventory.RemoveItem(new Item { itemType = Item.ItemType.Wine, amount = 1 });
+                        StartCoroutine(this.GetComponent<Effect>().PotionHealEffect());
+
                     }
                     break;
                 case "PowerPotion":
                     if (inventorysign.GetComponent<InventorySign>().signitemamount() != 0)
                     {
-                        StartCoroutine(PowerEffect());
+                        inventory.RemoveItem(new Item { itemType = Item.ItemType.PowerPotion, amount = 1 });
+                        StartCoroutine(this.GetComponent<Effect>().PowerUPEffect());
                     }
                     break;
             }
@@ -483,19 +445,22 @@ public class PlayerMovement : MonoBehaviour
                 case "Hermisboots":
                     if (inventorysign.GetComponent<InventorySign>().signitemamount() != 0)
                     {
-                        StartCoroutine(HermisEffect());
+                        inventory.RemoveItem(new Item { itemType = Item.ItemType.Hermisboots, amount = 1 });
+                        StartCoroutine(this.GetComponent<Effect>().SpeedUpEffect());
                     }
                     break;
                 case "Wine":
                     if (inventorysign.GetComponent<InventorySign>().signitemamount() != 0)
                     {
-                        StartCoroutine(WineEffect());
+                        inventory.RemoveItem(new Item { itemType = Item.ItemType.Wine, amount = 1 });
+                        StartCoroutine(this.GetComponent<Effect>().PotionHealEffect());
                     }
                     break;
                 case "PowerPotion":
                     if (inventorysign.GetComponent<InventorySign>().signitemamount() != 0)
                     {
-                        StartCoroutine(PowerEffect());
+                        inventory.RemoveItem(new Item { itemType = Item.ItemType.PowerPotion, amount = 1 });
+                        StartCoroutine(this.GetComponent<Effect>().PowerUPEffect());
                     }
                     break;
             }
