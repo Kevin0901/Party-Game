@@ -102,10 +102,11 @@ public class Effect : MonoBehaviour
             {
                 orgindamage = this.GetComponent<PlayerMovement>().attackDamage;
                 this.GetComponent<PlayerMovement>().attackDamage = (int)(orgindamage * PowMagnification);
-                Debug.Log(transform.parent.Find("EffectUI").gameObject);
+                transform.parent.Find("EffectUI").GetChild(0).Find("Power").gameObject.SetActive(true);
                 // this.transform.Find("EffectUI").transform.GetChild(0).transform.Find("Power").gameObject.SetActive(true);
                 yield return new WaitForSeconds(PowDuration);
                 this.GetComponent<PlayerMovement>().attackDamage = (int)orgindamage;
+                transform.parent.Find("EffectUI").GetChild(0).Find("Power").gameObject.SetActive(false);
                 PowerUpStatus = false;
             }
             else
@@ -130,7 +131,9 @@ public class Effect : MonoBehaviour
             {
                 orginspeed = this.GetComponent<PlayerMovement>().orginspeed;
                 this.GetComponent<PlayerMovement>().speed = orginspeed * SpeedMagnification;
+                transform.parent.Find("EffectUI").GetChild(0).Find("Fast").gameObject.SetActive(true);
                 yield return new WaitForSeconds(SpeedDuration);
+                transform.parent.Find("EffectUI").GetChild(0).Find("Fast").gameObject.SetActive(false);
                 this.GetComponent<PlayerMovement>().speed = orginspeed;
                 SpeedUpStatus = false;
             }
@@ -156,7 +159,7 @@ public class Effect : MonoBehaviour
             {
                 orginspeed = this.GetComponent<PlayerMovement>().orginspeed;
                 health targetheal = this.GetComponentInChildren<health>();
-
+                transform.parent.Find("EffectUI").GetChild(0).Find("Heal").gameObject.SetActive(true);
                 this.GetComponent<PlayerMovement>().speed = orginspeed / 2;
                 float times = PHDuration / PHPreSec;
                 for (int i = 0; i < times; i++)
@@ -177,6 +180,7 @@ public class Effect : MonoBehaviour
                     yield return new WaitForSeconds(PHPreSec);
                 }
                 this.GetComponent<PlayerMovement>().speed = orginspeed;
+                transform.parent.Find("EffectUI").GetChild(0).Find("Heal").gameObject.SetActive(false);
                 PotionHealStatus = false;
             }
             else
@@ -220,10 +224,16 @@ public class Effect : MonoBehaviour
                 orginspeed = this.GetComponent<PlayerMovement>().orginspeed;
                 this.GetComponent<PlayerMovement>().speed = 0;
                 this.GetComponent<SpriteRenderer>().color = new Color32(89, 89, 89, 255);
+                transform.parent.Find("EffectUI").GetChild(0).Find("Stone").gameObject.SetActive(true);
                 yield return new WaitForSeconds(StoneDuration);
+                transform.parent.Find("EffectUI").GetChild(0).Find("Stone").gameObject.SetActive(false);
                 this.GetComponent<SpriteRenderer>().color = new Color32(255, 255, 255, 255);
                 this.GetComponent<PlayerMovement>().speed = orginspeed;
                 StoneStatus = false;
+                if (SpeedUpStatus)
+                {
+                    this.GetComponent<PlayerMovement>().speed = orginspeed * SpeedMagnification;
+                }
             }
             else
             {
@@ -257,6 +267,14 @@ public class Effect : MonoBehaviour
                     yield return new WaitForSeconds(BurnPreSec);
                     this.GetComponent<SpriteRenderer>().color = new Color32(255, 255, 255, 255);
                 }
+                if (targetheal.transform.parent.gameObject.layer == 10)
+                {
+                    transform.parent.Find("EffectUI").GetChild(0).Find("Burn").gameObject.SetActive(true);
+                }
+            }
+            if (targetheal.transform.parent.gameObject.layer == 10)
+            {
+                transform.parent.Find("EffectUI").GetChild(0).Find("Burn").gameObject.SetActive(false);
             }
             BurnStatus = false;
         }
@@ -269,7 +287,15 @@ public class Effect : MonoBehaviour
             Debug.Log("widi!");
             health targetstatus = this.GetComponentInChildren<health>();
             targetstatus.iswudi = true;
+            if (targetstatus.transform.parent.gameObject.layer == 10)
+            {
+                transform.parent.Find("EffectUI").GetChild(0).Find("Wudi").gameObject.SetActive(true);
+            }
             yield return new WaitForSeconds(InvincibleDuration);
+            if (targetstatus.transform.parent.gameObject.layer == 10)
+            {
+                transform.parent.Find("EffectUI").GetChild(0).Find("Wudi").gameObject.SetActive(false);
+            }
             targetstatus.iswudi = false;
         }
     }
@@ -280,7 +306,9 @@ public class Effect : MonoBehaviour
         {
             Debug.Log("infinite!");
             this.GetComponentInChildren<PlayerMovement>().ProjectileCost = 0;
+            transform.parent.Find("EffectUI").GetChild(0).Find("Infinite").gameObject.SetActive(true);
             yield return new WaitForSeconds(ProjectileInfiniteDuration);
+            transform.parent.Find("EffectUI").GetChild(0).Find("Infinite").gameObject.SetActive(false);
             this.GetComponentInChildren<PlayerMovement>().ProjectileCost = 1;
 
         }

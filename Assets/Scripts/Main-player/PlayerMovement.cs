@@ -140,7 +140,7 @@ public class PlayerMovement : MonoBehaviour
         PlayerBulid();
         if (Input.GetKeyDown(KeyCode.J))
         {
-            StartCoroutine(this.GetComponent<Effect>().PowerUPEffect());
+            StartCoroutine(this.GetComponent<Effect>().RandGiveEffect());
         }
         if (Input.GetKeyDown(KeyCode.E))
         {
