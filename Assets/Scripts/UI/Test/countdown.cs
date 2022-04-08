@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 public class countdown : MonoBehaviour
 {
-    private arenaController ac;
+    // private arenaController ac;
     public int countdownTime;
     private int saveTime;
     public Text countdownDisplay;
@@ -29,8 +29,8 @@ public class countdown : MonoBehaviour
         if (countdownTime == 0)
         {
             countdownTime = saveTime;
-            ac = GameObject.Find("FightGameManager").GetComponent<arenaController>();
-            ac.nowgame = game;
+            // ac = GameObject.Find("FightGameManager").GetComponent<arenaController>();
+            // ac.nowgame = game;
             Instantiate(game, new Vector3(0, 0, 0), Quaternion.identity);
             this.gameObject.SetActive(false);
         }

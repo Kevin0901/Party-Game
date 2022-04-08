@@ -122,8 +122,8 @@ public class PlayerManager : MonoBehaviour
         for (int i = 0; i < plist.Length; i++)
         {
             GameObject p = Instantiate(fightplayer, this.transform.position, player.transform.rotation);
-            p.GetComponent<arenaPlayer>().joynum = plist[i].joynum;
-            p.GetComponent<arenaPlayer>().order = plist[i].sort;
+            // p.GetComponent<arenaPlayer>().joynum = plist[i].joynum;
+            // p.GetComponent<arenaPlayer>().order = plist[i].sort;
             switch (plist[i].sort)
             {
                 case 1:
