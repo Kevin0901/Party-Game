@@ -214,25 +214,25 @@ public class ChoosePlayer : MonoBehaviour
         GameObject.Find("TranPageAnimation").transform.Find("Image").gameObject.SetActive(false);
         GameObject.Find("LoadingCircle").transform.Find("Image").gameObject.SetActive(false);
 
-        PlayerManager.Instance.initializations(playerlist.Count - 1); //建構子初始化陣列
+        // PlayerManager.Instance.initializations(playerlist.Count - 1); //建構子初始化陣列
 
-        for (int i = 1; i < playerlist.Count; i++) //將值輸入進陣列裡
-        {
-            Transform p = transform.Find("P" + i);
-            UIplayerManager UIp = p.GetComponent<UIplayerManager>();
-            if (UIp.red)
-            {
-                PlayerManager.Instance.plist[i - 1].team = "red";
-            }
-            else
-            {
-                PlayerManager.Instance.plist[i - 1].team = "blue";
-            }
-            PlayerManager.Instance.plist[i - 1].joynum = UIp.Joysticknum;
-            PlayerManager.Instance.plist[i - 1].sort = UIp.playersort;
+        // for (int i = 1; i < playerlist.Count; i++) //將值輸入進陣列裡
+        // {
+        //     Transform p = transform.Find("P" + i);
+        //     UIplayerManager UIp = p.GetComponent<UIplayerManager>();
+        //     if (UIp.red)
+        //     {
+        //         PlayerManager.Instance.plist[i - 1].team = "red";
+        //     }
+        //     else
+        //     {
+        //         PlayerManager.Instance.plist[i - 1].team = "blue";
+        //     }
+        //     PlayerManager.Instance.plist[i - 1].joynum = UIp.Joysticknum;
+        //     PlayerManager.Instance.plist[i - 1].sort = UIp.playersort;
 
-        }
-        SceneManager.LoadSceneAsync("MainScene");           //載入場景
-        StartCoroutine(PlayerManager.Instance.waitSceneLoad("MainScene"));//生成玩家
+        // }
+        // SceneManager.LoadSceneAsync("MainScene");           //載入場景
+        // StartCoroutine(PlayerManager.Instance.waitSceneLoad("MainScene"));//生成玩家
     }
 }
