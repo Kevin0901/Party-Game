@@ -19,7 +19,7 @@ MonoBehaviour:
     AppIdVoice: 
     AppVersion: 
     UseNameServer: 1
-    FixedRegion: usw
+    FixedRegion: 
     Server: 
     Port: 0
     ProxyServer: 
@@ -28,7 +28,7 @@ MonoBehaviour:
     AuthMode: 0
     EnableLobbyStatistics: 0
     NetworkLogging: 1
-  DevRegion: jp
+  DevRegion: 
   PunLogging: 0
   EnableSupportLogger: 0
   RunInBackground: 1
@@ -41,15 +41,6 @@ MonoBehaviour:
   - RespawnSpaceship
   - RPC_RefreshTeam
   - RPC_SetArryList
-  - RPC_SetGame_Num
-  - RPC_SetFightManager
-  - RPC_Setplist
-  - RPC_StartGame
-  - RPC_SetOther_Arrow
-  - RPC_StartGame_Football
-  - RPC_Hurt
-  - RPC_randomSword
-  - RPC_SpawnArrow
   DisableAutoOpenWizard: 1
-  ShowSettings: 1
-  DevRegionSetOnce: 1
+  ShowSettings: 0
+  DevRegionSetOnce: 0

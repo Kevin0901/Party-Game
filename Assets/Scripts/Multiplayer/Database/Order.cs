@@ -1,12 +1,12 @@
 public class Order
 {
-    public string A, B, C, D;
+    public string One, Two, Three, Four;
 
-    public Order(string A, string B, string C, string D)
+    public Order(string One, string Two, string Three, string Four)
     {
-        this.A = A;
-        this.B = B;
-        this.C = C;
-        this.D = D;
+        this.One = One;
+        this.Two = Two;
+        this.Three = Three;
+        this.Four = Four;
     }
 }

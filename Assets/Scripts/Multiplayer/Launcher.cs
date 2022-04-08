@@ -87,7 +87,7 @@ public class Launcher : MonoBehaviourPunCallbacks
 
         Player[] players = PhotonNetwork.PlayerList;  //取得已加入房間的玩家陣列
 
-        PlayerName = PhotonNetwork.NickName;  //取得自身名字
+        PlayerName = players[players.Length - 1].NickName;  //取得自身名字
 
         if (PhotonNetwork.IsMasterClient)  //如果是房主(第一位進到房間的)
         {
