@@ -1,7 +1,11 @@
 fileFormatVersion: 2
+<<<<<<< Updated upstream:Assets/FirebaseCppApp-8_8_0.so.meta
 guid: 0931079547ef9e5458b5052b5e15ceb5
+=======
+guid: 7f1fe8e6e1621d046b8e31b166fd4ae2
 labels:
 - gvh
+>>>>>>> Stashed changes:Assets/Firebase/Plugins/x86_64/FirebaseCppApp-8_8_0.so.meta
 PluginImporter:
   externalObjects: {}
   serializedVersion: 2
