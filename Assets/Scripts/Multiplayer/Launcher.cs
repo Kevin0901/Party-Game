@@ -87,7 +87,7 @@ public class Launcher : MonoBehaviourPunCallbacks
 
         Player[] players = PhotonNetwork.PlayerList;  //取得已加入房間的玩家陣列
 
-        PlayerName = players[players.Length - 1].NickName;  //取得自身名字
+        PlayerName = PhotonNetwork.NickName;  //取得自身名字
 
         if (PhotonNetwork.IsMasterClient)  //如果是房主(第一位進到房間的)
         {
@@ -187,6 +187,7 @@ public class Launcher : MonoBehaviourPunCallbacks
                         string team = "";  //臨時儲存 team 
                         for (int i = 0; i < PName.Length; i++)
                         {
+                            Debug.Log(item.Key.ToString());
                             if (item.Key.ToString().Equals(PName[i]))  //抓取 [PlayerName] 內的 team
                             {
                                 foreach (var Pinfo in item.Children)
@@ -315,7 +316,7 @@ public class Launcher : MonoBehaviourPunCallbacks
 
     public IEnumerator AddNewPlayerUI(Player newPlayer)  //新增新玩家的 UI
     {
-        yield return new WaitForSeconds(0.3f);
+        yield return new WaitForSeconds(1f);
 
         Player[] players = PhotonNetwork.PlayerList;  //取得已加入房間的玩家陣列
 

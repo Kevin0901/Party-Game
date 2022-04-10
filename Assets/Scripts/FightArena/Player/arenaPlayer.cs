@@ -1,7 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using Photon.Pun;
+using Photon.Realtime;
 public enum ArenaState
 {
     idle,
@@ -48,18 +49,30 @@ public class arenaPlayer : MonoBehaviour
     [HideInInspector] public SpriteRenderer titleColor;
     private heart lifeUI;
     private Vector2 movement;
+    PhotonView PV;
     void Start()
     {
+        PV = GetComponent<PhotonView>();
         mrigibody = this.GetComponent<Rigidbody2D>();
         mAnimator = this.GetComponent<Animator>();
         nextlove = loveTime;
         nextfire = 0;
         curH = 3f;
         isCenter = false;
+
+        FightManager FM = FightManager.Instance;
+        FM.plist.Add(this.gameObject);
+        p_index = FM.plist.Count - 1;
+        red = FM.redOrBlue[p_index];
+        setUI();
     }
     //偵測按鍵輸入
     private void Update()
     {
+        if (!PV.IsMine)
+        {
+            return;
+        }
         if (currentState == ArenaState.lighting)
         {
             ShootLight();
@@ -77,6 +90,10 @@ public class arenaPlayer : MonoBehaviour
     //玩家狀態更新
     void FixedUpdate()
     {
+        if (!PV.IsMine)
+        {
+            return;
+        }
         if (currentState == ArenaState.love)
         {
             Lover();
@@ -100,6 +117,10 @@ public class arenaPlayer : MonoBehaviour
     }
     private void LateUpdate()
     {
+        if (!PV.IsMine)
+        {
+            return;
+        }
         mouseRotate();
     }
     //滑鼠旋轉玩家
@@ -236,13 +257,36 @@ public class arenaPlayer : MonoBehaviour
     //玩家受到傷害
     public void hurt(float damege)
     {
+        if (!PV.IsMine)
+        {
+            return;
+        }
         curH -= damege;
         lifeUI.hurt(curH);
+        PV.RPC("", RpcTarget.All, damege, PV.Owner.NickName);
         if (curH <= 0)
         {
             this.gameObject.SetActive(false);
         }
         mAnimator.SetTrigger("hurt");
+    }
+    [PunRPC]
+    void RPC_ArenaPlayer_Hurt(float dam, string who)
+    {
+        if (PV.IsMine)
+        {
+            return;
+        }
+        if (PV.Owner.NickName.Equals(who))
+        {
+            curH -= dam;
+            lifeUI.hurt(curH);
+            if (curH <= 0)
+            {
+                this.gameObject.SetActive(false);
+            }
+            mAnimator.SetTrigger("hurt");
+        }
     }
     public void setUI()
     {

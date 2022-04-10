@@ -2,14 +2,16 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-
+using Photon.Pun;
+using System.IO;
 public class FightManager : MonoBehaviour
 {
     public static FightManager Instance;
     [SerializeField] private int game_num;
     public List<GameObject> plist;
-    [SerializeField] private List<bool> redOrBlue; //紀錄是紅隊還是藍隊
+    public List<bool> redOrBlue; //紀錄是紅隊還是藍隊
     [SerializeField] private GameObject _player;
+    PhotonView PV;
     //靜態實例基本宣告
     private void Awake()
     {
@@ -19,22 +21,56 @@ public class FightManager : MonoBehaviour
             return;
         }
         Instance = this;
-        DontDestroyOnLoad(gameObject);
+        //DontDestroyOnLoad(gameObject);
     }
     private void Start()
     {
+        PV = GetComponent<PhotonView>();
         redOrBlue = new List<bool>();
         plist = new List<GameObject>();
+        RoomManager RM = GameObject.Find("RoomManager").GetComponent<RoomManager>();
+        for (int i = 0; i < RM.PlayerTeam.Length; i++)
+        {
+            if (RM.PlayerTeam[i].Equals("red"))
+            {
+                redOrBlue.Add(true);
+            }
+            else
+            {
+                redOrBlue.Add(false);
+            }
+        }
+        if (PV.IsMine)
+        {
+            playerSet();
+        }
+        StartCoroutine(Wait_plist());
     }
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.O) && redOrBlue.Count < 3)
-        {
-            redOrBlue.Add(false);
-            GameObject.Find("ChoosePlayer").transform.Find("P" + redOrBlue.Count).gameObject.SetActive(true);
-        }
+        // if (Input.GetKeyDown(KeyCode.O) && redOrBlue.Count < 3)
+        // {
+        //     redOrBlue.Add(false);
+        //     GameObject.Find("ChoosePlayer").transform.Find("P" + redOrBlue.Count).gameObject.SetActive(true);
+        // }
 
     }
+
+    IEnumerator Wait_plist()
+    {
+        if (redOrBlue.Count == plist.Count)
+        {
+            RoomManager RM = GameObject.Find("RoomManager").GetComponent<RoomManager>();
+            game_num = RM.Game_num;
+            GameObject.Find("EventManager").transform.GetChild(game_num).gameObject.SetActive(true);//開啟該場景
+        }
+        else
+        {
+            yield return new WaitForSeconds(0.1f);
+            StartCoroutine(Wait_plist());
+        }
+    }
+
     //開始遊戲(點擊事件)
     public void joinGame()
     {
@@ -87,35 +123,35 @@ public class FightManager : MonoBehaviour
     public void waitLoad(Scene scene, LoadSceneMode mode)
     {
         SceneManager.sceneLoaded -= waitLoad;
-        playerSet();
+        // playerSet();
     }
-    void playerSet()
+    public void playerSet()
     {
-        plist.Clear(); 
+        plist.Clear();
         for (int i = 0; i < redOrBlue.Count; i++)//生成玩家
         {
-            GameObject a = Instantiate(_player);
-            plist.Add(a);
-            a.GetComponent<arenaPlayer>().p_index = plist.Count - 1;
-            a.GetComponent<arenaPlayer>().red = redOrBlue[i];
-            a.GetComponent<arenaPlayer>().setUI();
+            GameObject a = PhotonNetwork.Instantiate(Path.Combine("PhotonPrefabs", "arena/arenaPlayer"), Vector3.zero, Quaternion.identity);
+            a.GetComponent<PhotonView>().TransferOwnership(PhotonNetwork.PlayerList[i]);
+            // plist.Add(a);
+            // a.GetComponent<arenaPlayer>().p_index = plist.Count - 1;
+            // a.GetComponent<arenaPlayer>().red = redOrBlue[i];
+            // a.GetComponent<arenaPlayer>().setUI();
             switch (i) //初始位置
             {
                 case 0:
-                    plist[i].GetComponent<arenaPlayer>().SpawnPoint(new Vector3(-10, 0, 0));
+                    a.GetComponent<arenaPlayer>().SpawnPoint(new Vector3(-10, 0, 0));
                     break;
                 case 1:
-                    plist[i].GetComponent<arenaPlayer>().SpawnPoint(new Vector3(0, 10, 0));
+                    a.GetComponent<arenaPlayer>().SpawnPoint(new Vector3(0, 10, 0));
                     break;
                 case 2:
-                    plist[i].GetComponent<arenaPlayer>().SpawnPoint(new Vector3(10, 0, 0));
+                    a.GetComponent<arenaPlayer>().SpawnPoint(new Vector3(10, 0, 0));
                     break;
                 case 3:
-                    plist[i].GetComponent<arenaPlayer>().SpawnPoint(new Vector3(0, -10, 0));
+                    a.GetComponent<arenaPlayer>().SpawnPoint(new Vector3(0, -10, 0));
                     break;
             }
         }
-        GameObject.Find("EventManager").transform.GetChild(game_num).gameObject.SetActive(true);//開啟該場景
     }
     //inputSystm 的加入玩家函式
     // private void OnPlayerJoined(PlayerInput player)
