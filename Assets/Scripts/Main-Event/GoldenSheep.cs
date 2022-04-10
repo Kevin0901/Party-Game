@@ -6,6 +6,7 @@ using UnityEngine;
 
 public class GoldenSheep : MonoBehaviour
 {
+    private Animator animator;
     [SerializeField]
     private string bonusteam;   //加成隊伍
     [SerializeField]
@@ -19,6 +20,10 @@ public class GoldenSheep : MonoBehaviour
     private List<Vector3> playerposlist = new List<Vector3>(); //玩家位置
     private GameObject bonusUI;
 
+    private void Start()
+    {
+        animator = this.gameObject.GetComponent<Animator>();
+    }
     private void Update()
     {
 
@@ -47,7 +52,10 @@ public class GoldenSheep : MonoBehaviour
                 if (playerposlist.Count > 30)
                 {
                     playerposlist.RemoveAt(0);
+                    Vector2 direction = playerposlist[0] - transform.position;
                     transform.position = playerposlist[0];
+                    animator.SetFloat("moveX", Mathf.RoundToInt(direction.x));
+                    animator.SetFloat("moveY", Mathf.RoundToInt(direction.y));
                 }
             }
         }
@@ -63,7 +71,11 @@ public class GoldenSheep : MonoBehaviour
                     float y = Random.Range(-11, 11);
                     targetpos = new Vector3(x, y, 0);
                 }
+                Vector2 direction = targetpos - transform.position;
                 transform.position = Vector3.MoveTowards(transform.position, targetpos, Time.deltaTime * speed);
+                Debug.Log(direction);
+                animator.SetFloat("moveX", direction.x);
+                animator.SetFloat("moveY", direction.y);
                 if (transform.position == targetpos)
                 {
                     mc = 1;
@@ -85,10 +97,7 @@ public class GoldenSheep : MonoBehaviour
     IEnumerator gobackcolddown()
     {
         mc = 1;
-        // float orginspeed = speed;
-        // speed = 0;
         yield return new WaitForSeconds(10);
-        // speed = orginspeed;
         mc = 0;
     }
 
@@ -100,7 +109,7 @@ public class GoldenSheep : MonoBehaviour
             player = other.gameObject;
             bonusteam = player.tag;
             player.GetComponent<PlayerMovement>().health.playercatchsheeponhit = 0;
-            bonusUI = player.GetComponent<UIState>().NoticeUI.transform.GetChild(2).gameObject;
+            bonusUI = player.transform.parent.Find("EffectUI").GetChild(0).Find("ResourceUp").gameObject;
             bonusUI.SetActive(true);
             playoncatheal = player.GetComponent<PlayerMovement>().health.playercatchsheeponhit;
             if (bonusteam == "blue")

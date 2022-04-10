@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 4869883648273752857}
   - component: {fileID: 4869883648273752869}
   - component: {fileID: 4869883648273752870}
+  - component: {fileID: -5855889267534004114}
   m_Layer: 0
   m_Name: CrystalThief
   m_TagString: monster
@@ -75,7 +76,7 @@ SpriteRenderer:
   m_SortingLayerID: -1645489201
   m_SortingLayer: 1
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 6c09bb7ca923ea04fbb9935c0e603aa7, type: 3}
+  m_Sprite: {fileID: 21300000, guid: a0ab8c4849e368540b8725fe52f472c8, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -142,6 +143,25 @@ MonoBehaviour:
   - {fileID: 8017277022069749896, guid: 4b01f02e3bab8444cb5a15c54fd5fb41, type: 3}
   - {fileID: 8017277022069749896, guid: 64b8fa7e91642394f9aff7e366a5976f, type: 3}
   speed: 3
+--- !u!95 &-5855889267534004114
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4869883648273752858}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 0a0e34ff6cab90742801876026c0d368, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1001 &1386404710345001372
 PrefabInstance:
   m_ObjectHideFlags: 0
