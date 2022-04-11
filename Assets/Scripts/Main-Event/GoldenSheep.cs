@@ -52,10 +52,16 @@ public class GoldenSheep : MonoBehaviour
                 if (playerposlist.Count > 30)
                 {
                     playerposlist.RemoveAt(0);
-                    Vector2 direction = playerposlist[0] - transform.position;
-                    transform.position = playerposlist[0];
-                    animator.SetFloat("moveX", Mathf.RoundToInt(direction.x));
-                    animator.SetFloat("moveY", Mathf.RoundToInt(direction.y));
+                    Vector3 direction = (playerposlist[0] - transform.position);
+                    Debug.Log(direction.magnitude);
+                    if (direction.magnitude > 2)
+                    {
+                        transform.position += direction.normalized * 8  * Time.fixedDeltaTime;
+                        Debug.Log(direction);
+                        animator.SetFloat("moveX", Mathf.RoundToInt(direction.normalized.x));
+                        animator.SetFloat("moveY", Mathf.RoundToInt(direction.normalized.y));
+                    }
+
                 }
             }
         }
@@ -73,7 +79,6 @@ public class GoldenSheep : MonoBehaviour
                 }
                 Vector2 direction = targetpos - transform.position;
                 transform.position = Vector3.MoveTowards(transform.position, targetpos, Time.deltaTime * speed);
-                Debug.Log(direction);
                 animator.SetFloat("moveX", direction.x);
                 animator.SetFloat("moveY", direction.y);
                 if (transform.position == targetpos)
@@ -103,7 +108,7 @@ public class GoldenSheep : MonoBehaviour
 
     private void OnTriggerStay2D(Collider2D other)
     {
-        if (other.gameObject.layer == 10 && Input.GetKeyDown(KeyCode.P) && nowtstatic == true)
+        if (other.gameObject.layer == 10 && Input.GetKey(KeyCode.P) && nowtstatic == true)
         {
             nowtstatic = false;
             player = other.gameObject;
