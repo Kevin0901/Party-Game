@@ -1,26 +1,48 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using Photon.Pun;
+using Photon.Realtime;
 public class SwordEvent : MonoBehaviour
 {
     [SerializeField] private GameObject UI;
     [SerializeField] private float rotateSpeed, waitToSword, hurtTime, waitTitleTime;
     private int totalPlayer;
+    [SerializeField] GameObject StartButton;
+    [SerializeField] GameObject UIBackGround;
+    PhotonView PV;
     private void OnEnable()
     {
+        PV = GetComponent<PhotonView>();
         transform.Rotate(0, 0, Random.Range(0f, 360f));
         totalPlayer = FightManager.Instance.plist.Count;
     }
+    void Start()
+    {
+        if (!PhotonNetwork.IsMasterClient)
+        {
+            StartButton.SetActive(false);
+        }
+    }
     public void StartGame()
     {
+        PV.RPC("RPC_StartGame", RpcTarget.All);
+    }
+    [PunRPC]
+    public void RPC_StartGame()
+    {
+        UIBackGround.SetActive(false);
         for (int i = 0; i < FightManager.Instance.plist.Count; i++)
         {
             GameObject.Find("HealthUI").transform.GetChild(i).gameObject.SetActive(true);
             FightManager.Instance.plist[i].GetComponent<arenaPlayer>().currentState = ArenaState.walk;
         }
-        StartCoroutine(randomSword(waitToSword));
-        StartCoroutine(changeBG());
+        if (PV.IsMine)
+        {
+            StartCoroutine(randomSword(waitToSword));
+            StartCoroutine(changeBG());
+        }
+
     }
     //地圖懸轉
     private IEnumerator changeBG()
@@ -55,8 +77,13 @@ public class SwordEvent : MonoBehaviour
     {
         yield return new WaitForSeconds(time);
         int num = Random.Range(0, FightManager.Instance.plist.Count);
-        FightManager.Instance.plist[num].transform.Find("sword").gameObject.SetActive(true);
-        FightManager.Instance.plist[num].transform.Find("sword").GetComponent<sword>().hurtTime = hurtTime;
-        FightManager.Instance.plist[num].transform.Find("sword").GetComponent<sword>().waitTime = waitTitleTime;
+        PV.RPC("RPC_randomSword",RpcTarget.All,num);
+    }
+    [PunRPC]
+    void RPC_randomSword(int pnum)
+    {
+        FightManager.Instance.plist[pnum].transform.Find("sword").gameObject.SetActive(true);
+        FightManager.Instance.plist[pnum].transform.Find("sword").GetComponent<sword>().hurtTime = hurtTime;
+        FightManager.Instance.plist[pnum].transform.Find("sword").GetComponent<sword>().waitTime = waitTitleTime;
     }
 }

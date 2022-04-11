@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Photon.Pun;
 using Photon.Realtime;
+using System.IO;
 public enum ArenaState
 {
     idle,
@@ -145,18 +146,24 @@ public class arenaPlayer : MonoBehaviour
     }
     public IEnumerator ChangeARES(float time)
     {
+        GameObject s = null;
         mAnimator.SetTrigger("change");
         yield return new WaitForSeconds(1f);
-        speed *= 1.2f;
         mAnimator.GetComponent<arenaPlayer>().currentState = ArenaState.ares;
-        GameObject s = Instantiate(spear);
-        s.GetComponent<spear>().player = this.gameObject;
-
+        speed *= 1.2f;
+        if (PV.IsMine)
+        {
+            s = PhotonNetwork.Instantiate(Path.Combine("PhotonPrefabs", "arena/Ares/rotateSpear"), this.transform.position, this.transform.rotation);
+            s.GetComponent<spear>().player = this.gameObject;
+        }
         yield return new WaitForSeconds(time);
         speed /= 1.2f;
         mAnimator.GetComponent<arenaPlayer>().currentState = ArenaState.walk;
         mAnimator.GetComponent<Animator>().SetTrigger("change");
-        Destroy(s);
+        if(PV.IsMine)
+        {
+            PhotonNetwork.Destroy(s);
+        }
     }
     //魅惑
     private void Lover()
@@ -184,23 +191,29 @@ public class arenaPlayer : MonoBehaviour
     {
         if (Input.GetMouseButtonDown(0) && Time.time > nextfire)
         {
-            GameObject arr = Instantiate(item, transform.position, transform.rotation);
-            arr.GetComponent<SunMoonArrowMove>().shooter = this.gameObject;
-            if (isCenter) //如果在正中心發射的話
-            {
-                arr.GetComponent<SpriteRenderer>().color = new Color32(0, 0, 0, 255);
-                arr.GetComponent<SunMoonArrowMove>().speed = Arrowspeed * 1.5f;
-                arr.GetComponent<SunMoonArrowMove>().power = power * 1.25f;
-                arr.transform.localScale *= 1.25f;
-            }
-            else
-            {
-                arr.GetComponent<SunMoonArrowMove>().speed = Arrowspeed;
-                arr.GetComponent<SunMoonArrowMove>().power = power;
-            }
-            arr.GetComponent<SunMoonArrowMove>().setArrow();
+            GameObject arr = PhotonNetwork.Instantiate(Path.Combine("PhotonPrefabs", "arena/SunMoon/Arrow"), transform.position, transform.rotation);
+            PV.RPC("RPC_ShootArrow", RpcTarget.All, isCenter, arr.GetComponent<PhotonView>().ViewID, PV.ViewID);
             nextfire = Time.time + fireRate; //下次發射的時間
         }
+    }
+    [PunRPC]
+    void RPC_ShootArrow(bool center, int PVID, int ShooterID)
+    {
+        GameObject Arrow = PhotonView.Find(PVID).gameObject;
+        Arrow.GetComponent<SunMoonArrowMove>().shooter = PhotonView.Find(ShooterID).gameObject;
+        if (center) //如果在正中心發射的話
+        {
+            Arrow.GetComponent<SpriteRenderer>().color = new Color32(0, 0, 0, 255);
+            Arrow.GetComponent<SunMoonArrowMove>().speed = Arrowspeed * 1.5f;
+            Arrow.GetComponent<SunMoonArrowMove>().power = power * 1.25f;
+            Arrow.transform.localScale *= 1.25f;
+        }
+        else
+        {
+            Arrow.GetComponent<SunMoonArrowMove>().speed = Arrowspeed;
+            Arrow.GetComponent<SunMoonArrowMove>().power = power;
+        }
+        Arrow.GetComponent<SunMoonArrowMove>().setArrow();
     }
     //閃電發射
     private void ShootLight()
@@ -220,19 +233,23 @@ public class arenaPlayer : MonoBehaviour
         else if (Input.GetMouseButtonUp(0))
         {
             isPress = false;
-            GameObject a = Instantiate(lighting, transform.position,
+            float damage;
+            GameObject a = PhotonNetwork.Instantiate(Path.Combine("PhotonPrefabs", "arena/Zeus/lightShoot"), transform.position,
             lighting.transform.rotation * this.transform.rotation);
             if (powerTime < maxPowerTime)
             {
                 a.transform.localScale += new Vector3(a.transform.localScale.x * powerTime, 0, 0);
                 a.GetComponent<shootflash>().damege = 0.5f;
+                damage = 0.5f;
             }
             else
             {
                 a.transform.localScale += new Vector3(a.transform.localScale.x * 10, 0, 0);
                 a.GetComponent<shootflash>().damege = 1.5f;
+                damage = 1.5f;
 
             }
+            PV.RPC("RPC_lightShoot", RpcTarget.All, a.GetComponent<PhotonView>().ViewID, damage);
             a.GetComponent<shootflash>().shooter = this.gameObject;
             titleColor.color = Color.white;
             currentState = ArenaState.walk;
@@ -243,6 +260,11 @@ public class arenaPlayer : MonoBehaviour
             mrigibody.AddForce(movement * speed * 0.85f, ForceMode2D.Impulse);
             currentState = ArenaState.walk;
         }
+    }
+    [PunRPC]
+    void RPC_lightShoot(int lightID, float dam)
+    {
+        PhotonView.Find(lightID).gameObject.GetComponent<shootflash>().damege = dam;
     }
     //重生點
     public void SpawnPoint(Vector3 pos)
@@ -263,7 +285,8 @@ public class arenaPlayer : MonoBehaviour
         }
         curH -= damege;
         lifeUI.hurt(curH);
-        PV.RPC("", RpcTarget.All, damege, PV.Owner.NickName);
+        Debug.Log(curH);
+        PV.RPC("RPC_ArenaPlayer_Hurt", RpcTarget.All, damege, PV.Owner.NickName);
         if (curH <= 0)
         {
             this.gameObject.SetActive(false);

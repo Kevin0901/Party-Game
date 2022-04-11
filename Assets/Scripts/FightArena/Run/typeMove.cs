@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 using UnityEngine.UI;
+using Photon.Pun;
 public class typeMove : MonoBehaviour
 {
     [SerializeField] private List<string> strAry;//打字機器
@@ -11,8 +12,14 @@ public class typeMove : MonoBehaviour
     [SerializeField] private float move = 15; //移動距離
     private bool canEnter, isRight;
     private int num;
+    PhotonView PV;
     private void Start()
     {
+        PV = GetComponentInParent<PhotonView>();
+        if(!PV.IsMine)
+        {
+            Destroy(this.gameObject);
+        }
         canEnter = true;
         isRight = false;
         StartCoroutine(changeType());

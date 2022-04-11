@@ -1,7 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using Photon.Pun;
+using Photon.Realtime;
 public class CupidEvent : MonoBehaviour
 {
     [SerializeField] private GameObject arrow;
@@ -14,8 +15,16 @@ public class CupidEvent : MonoBehaviour
     private Rigidbody2D mrigibody;
     private Vector3 firstpos, newpos;
     private Vector3 cupidPos;
+    [SerializeField] GameObject StartButton;
+    [SerializeField] GameObject UIBackGround;
+    PhotonView PV;
     void Awake()
     {
+        PV = GetComponent<PhotonView>();
+        if (!PhotonNetwork.IsMasterClient)
+        {
+            StartButton.SetActive(false);
+        }
         mrigibody = this.GetComponent<Rigidbody2D>();
         arrow_Store = new List<GameObject>();
         arrow_limit = 45;
@@ -33,12 +42,21 @@ public class CupidEvent : MonoBehaviour
     //開始遊戲
     public void StartGame()
     {
+        PV.RPC("RPC_StartGame", RpcTarget.All);
+    }
+    [PunRPC]
+    public void RPC_StartGame()
+    {
+        UIBackGround.SetActive(false);
         for (int i = 0; i < FightManager.Instance.plist.Count; i++)
         {
             FightManager.Instance.plist[i].GetComponent<arenaPlayer>().currentState = ArenaState.walk;
         }
-        StartCoroutine(spawnArrow(cooldownTime, Random.Range(1, 4)));//隨機一種模式
-        StartCoroutine(Move(cooldownTime));
+        if (PV.IsMine)
+        {
+            StartCoroutine(spawnArrow(cooldownTime, Random.Range(1, 4)));//隨機一種模式
+            StartCoroutine(Move(cooldownTime));
+        }
     }
     private void Update()
     {
@@ -75,8 +93,16 @@ public class CupidEvent : MonoBehaviour
     IEnumerator spawnArrow(float time, int type)
     {
         yield return new WaitForSeconds(time);
+        if(PV.IsMine)
+        {
+            PV.RPC("RPC_spawnArrow",RpcTarget.All,type,Random.Range(1,3));
+        }
+    }
+    [PunRPC]
+    void RPC_spawnArrow(int type,int attackloop)
+    {
         string FunName = "FireType_" + type;
-        StartCoroutine(FunName, Random.Range(1, 3)); //總共幾波攻擊
+        StartCoroutine(FunName,attackloop); //總共幾波攻擊
     }
     //攻擊模式_1
     IEnumerator FireType_1(int number)

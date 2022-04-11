@@ -245,6 +245,28 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 3192076713425180699}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &33771021
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 33771020}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aa584fbee541324448dd18d8409c7a41, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ObservedComponentsFoldoutOpen: 1
+  Group: 0
+  prefixField: -1
+  Synchronization: 3
+  OwnershipTransfer: 0
+  observableSearch: 2
+  ObservedComponents: []
+  sceneViewId: 302
+  InstantiationId: 0
+  isRuntimeInstantiated: 0
 --- !u!4 &33771024 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 3192076713391707659, guid: b8ec3fcf780bedc4583cc05d26a7f68b,
@@ -4342,6 +4364,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: helmet (11)
       objectReference: {fileID: 0}
+    - target: {fileID: 6435624485425629849, guid: b8ec3fcf780bedc4583cc05d26a7f68b,
+        type: 3}
+      propertyPath: m_ColliderPaths.Array.size
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b8ec3fcf780bedc4583cc05d26a7f68b, type: 3}
 --- !u!4 &211506957 stripped
@@ -4356,6 +4383,28 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 211506956}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &211506959
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 211506958}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aa584fbee541324448dd18d8409c7a41, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ObservedComponentsFoldoutOpen: 1
+  Group: 0
+  prefixField: -1
+  Synchronization: 3
+  OwnershipTransfer: 0
+  observableSearch: 2
+  ObservedComponents: []
+  sceneViewId: 312
+  InstantiationId: 0
+  isRuntimeInstantiated: 0
 --- !u!1001 &215972348
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -7813,6 +7862,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: helmet (3)
       objectReference: {fileID: 0}
+    - target: {fileID: 6435624485425629849, guid: b8ec3fcf780bedc4583cc05d26a7f68b,
+        type: 3}
+      propertyPath: m_ColliderPaths.Array.size
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b8ec3fcf780bedc4583cc05d26a7f68b, type: 3}
 --- !u!4 &215972349 stripped
@@ -7827,6 +7881,28 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 215972348}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &215972351
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 215972350}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aa584fbee541324448dd18d8409c7a41, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ObservedComponentsFoldoutOpen: 1
+  Group: 0
+  prefixField: -1
+  Synchronization: 3
+  OwnershipTransfer: 0
+  observableSearch: 2
+  ObservedComponents: []
+  sceneViewId: 305
+  InstantiationId: 0
+  isRuntimeInstantiated: 0
 --- !u!1001 &244117566
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -7894,8 +7970,77 @@ PrefabInstance:
       propertyPath: m_Name
       value: monster
       objectReference: {fileID: 0}
+    - target: {fileID: 5824149159706520575, guid: 100f5248df1852d438e603a7bc105553,
+        type: 3}
+      propertyPath: m_Layer
+      value: 13
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 100f5248df1852d438e603a7bc105553, type: 3}
+--- !u!1 &244117567 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5824149159706520575, guid: 100f5248df1852d438e603a7bc105553,
+    type: 3}
+  m_PrefabInstance: {fileID: 244117566}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &244117568
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 244117567}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 627855c7f81362d41938ffe0b1475957, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_SynchronizePosition: 1
+  m_SynchronizeRotation: 1
+  m_SynchronizeScale: 1
+  m_UseLocal: 1
+--- !u!114 &244117569
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 244117567}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9b8c4a61274f60b4ea5fb4299cfdbf14, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ShowLayerWeightsInspector: 1
+  ShowParameterInspector: 1
+  m_SynchronizeParameters: []
+  m_SynchronizeLayers:
+  - SynchronizeType: 2
+    LayerIndex: 0
+--- !u!114 &244117570
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 244117567}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aa584fbee541324448dd18d8409c7a41, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ObservedComponentsFoldoutOpen: 1
+  Group: 0
+  prefixField: -1
+  Synchronization: 3
+  OwnershipTransfer: 0
+  observableSearch: 2
+  ObservedComponents:
+  - {fileID: 244117568}
+  - {fileID: 244117569}
+  sceneViewId: 300
+  InstantiationId: 0
+  isRuntimeInstantiated: 0
 --- !u!1 &245189251
 GameObject:
   m_ObjectHideFlags: 0
@@ -8103,6 +8248,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   UI: {fileID: 832589408}
   waitToMove: 1
+  StartButton: {fileID: 724758431}
+  UIBackGround: {fileID: 1936511091}
 --- !u!114 &256348858
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8244,6 +8391,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: helmet (2)
       objectReference: {fileID: 0}
+    - target: {fileID: 6435624485425629849, guid: b8ec3fcf780bedc4583cc05d26a7f68b,
+        type: 3}
+      propertyPath: m_ColliderPaths.Array.size
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b8ec3fcf780bedc4583cc05d26a7f68b, type: 3}
 --- !u!4 &278878363 stripped
@@ -8258,6 +8410,28 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 278878362}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &278878365
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 278878364}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aa584fbee541324448dd18d8409c7a41, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ObservedComponentsFoldoutOpen: 1
+  Group: 0
+  prefixField: -1
+  Synchronization: 3
+  OwnershipTransfer: 0
+  observableSearch: 2
+  ObservedComponents: []
+  sceneViewId: 304
+  InstantiationId: 0
+  isRuntimeInstantiated: 0
 --- !u!1 &284584613
 GameObject:
   m_ObjectHideFlags: 0
@@ -11860,6 +12034,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: helmet (7)
       objectReference: {fileID: 0}
+    - target: {fileID: 6435624485425629849, guid: b8ec3fcf780bedc4583cc05d26a7f68b,
+        type: 3}
+      propertyPath: m_ColliderPaths.Array.size
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b8ec3fcf780bedc4583cc05d26a7f68b, type: 3}
 --- !u!4 &303155634 stripped
@@ -11874,6 +12053,28 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 303155633}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &303155636
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 303155635}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aa584fbee541324448dd18d8409c7a41, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ObservedComponentsFoldoutOpen: 1
+  Group: 0
+  prefixField: -1
+  Synchronization: 3
+  OwnershipTransfer: 0
+  observableSearch: 2
+  ObservedComponents: []
+  sceneViewId: 308
+  InstantiationId: 0
+  isRuntimeInstantiated: 0
 --- !u!1 &325640526
 GameObject:
   m_ObjectHideFlags: 0
@@ -15608,6 +15809,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: helmet (9)
       objectReference: {fileID: 0}
+    - target: {fileID: 6435624485425629849, guid: b8ec3fcf780bedc4583cc05d26a7f68b,
+        type: 3}
+      propertyPath: m_ColliderPaths.Array.size
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b8ec3fcf780bedc4583cc05d26a7f68b, type: 3}
 --- !u!4 &431649884 stripped
@@ -15622,6 +15828,28 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 431649883}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &431649886
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 431649885}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aa584fbee541324448dd18d8409c7a41, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ObservedComponentsFoldoutOpen: 1
+  Group: 0
+  prefixField: -1
+  Synchronization: 3
+  OwnershipTransfer: 0
+  observableSearch: 2
+  ObservedComponents: []
+  sceneViewId: 310
+  InstantiationId: 0
+  isRuntimeInstantiated: 0
 --- !u!1 &442621644
 GameObject:
   m_ObjectHideFlags: 0
@@ -19636,6 +19864,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: helmet (12)
       objectReference: {fileID: 0}
+    - target: {fileID: 6435624485425629849, guid: b8ec3fcf780bedc4583cc05d26a7f68b,
+        type: 3}
+      propertyPath: m_ColliderPaths.Array.size
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b8ec3fcf780bedc4583cc05d26a7f68b, type: 3}
 --- !u!4 &518378402 stripped
@@ -19650,6 +19883,28 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 518378401}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &518378404
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 518378403}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aa584fbee541324448dd18d8409c7a41, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ObservedComponentsFoldoutOpen: 1
+  Group: 0
+  prefixField: -1
+  Synchronization: 3
+  OwnershipTransfer: 0
+  observableSearch: 2
+  ObservedComponents: []
+  sceneViewId: 313
+  InstantiationId: 0
+  isRuntimeInstantiated: 0
 --- !u!1 &523912868
 GameObject:
   m_ObjectHideFlags: 0
@@ -24140,6 +24395,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: helmet (6)
       objectReference: {fileID: 0}
+    - target: {fileID: 6435624485425629849, guid: b8ec3fcf780bedc4583cc05d26a7f68b,
+        type: 3}
+      propertyPath: m_ColliderPaths.Array.size
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b8ec3fcf780bedc4583cc05d26a7f68b, type: 3}
 --- !u!4 &819071594 stripped
@@ -24154,6 +24414,28 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 819071593}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &819071596
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 819071595}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aa584fbee541324448dd18d8409c7a41, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ObservedComponentsFoldoutOpen: 1
+  Group: 0
+  prefixField: -1
+  Synchronization: 3
+  OwnershipTransfer: 0
+  observableSearch: 2
+  ObservedComponents: []
+  sceneViewId: 307
+  InstantiationId: 0
+  isRuntimeInstantiated: 0
 --- !u!1 &832589408
 GameObject:
   m_ObjectHideFlags: 0
@@ -24168,6 +24450,7 @@ GameObject:
   - component: {fileID: 832589409}
   - component: {fileID: 832589413}
   - component: {fileID: 832589414}
+  - component: {fileID: 832589415}
   m_Layer: 5
   m_Name: EndGameUI
   m_TagString: Untagged
@@ -24286,6 +24569,28 @@ CanvasGroup:
   m_Interactable: 1
   m_BlocksRaycasts: 0
   m_IgnoreParentGroups: 1
+--- !u!114 &832589415
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 832589408}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aa584fbee541324448dd18d8409c7a41, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ObservedComponentsFoldoutOpen: 1
+  Group: 0
+  prefixField: -1
+  Synchronization: 3
+  OwnershipTransfer: 0
+  observableSearch: 2
+  ObservedComponents: []
+  sceneViewId: 210
+  InstantiationId: 0
+  isRuntimeInstantiated: 0
 --- !u!4 &833964571 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 1774489941116927716, guid: 8d2c71634edc2f34e82b035a637567fe,
@@ -24740,6 +25045,8 @@ MonoBehaviour:
   UI: {fileID: 832589408}
   typeMachine: {fileID: 3839184305971200187, guid: 34a176e0b8b5bb743bec3ac8d39ed7db,
     type: 3}
+  StartButton: {fileID: 497610712}
+  UIBackGround: {fileID: 1445849213}
 --- !u!66 &988460419
 CompositeCollider2D:
   m_ObjectHideFlags: 0
@@ -25278,6 +25585,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: helmet (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 6435624485425629849, guid: b8ec3fcf780bedc4583cc05d26a7f68b,
+        type: 3}
+      propertyPath: m_ColliderPaths.Array.size
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b8ec3fcf780bedc4583cc05d26a7f68b, type: 3}
 --- !u!4 &1051046372 stripped
@@ -25292,6 +25604,28 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 1051046371}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1051046374
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1051046373}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aa584fbee541324448dd18d8409c7a41, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ObservedComponentsFoldoutOpen: 1
+  Group: 0
+  prefixField: -1
+  Synchronization: 3
+  OwnershipTransfer: 0
+  observableSearch: 2
+  ObservedComponents: []
+  sceneViewId: 303
+  InstantiationId: 0
+  isRuntimeInstantiated: 0
 --- !u!1 &1053964629
 GameObject:
   m_ObjectHideFlags: 0
@@ -25576,6 +25910,16 @@ PrefabInstance:
       propertyPath: UI
       value: 
       objectReference: {fileID: 832589408}
+    - target: {fileID: 7261282391864592178, guid: 9de9ff2fd4a274e40a929a534091d6de,
+        type: 3}
+      propertyPath: StartButton
+      value: 
+      objectReference: {fileID: 1247172088}
+    - target: {fileID: 7261282391864592178, guid: 9de9ff2fd4a274e40a929a534091d6de,
+        type: 3}
+      propertyPath: UIBackGround
+      value: 
+      objectReference: {fileID: 483839094}
     - target: {fileID: 7261282391864592181, guid: 9de9ff2fd4a274e40a929a534091d6de,
         type: 3}
       propertyPath: m_Name
@@ -25625,10 +25969,27 @@ MonoBehaviour:
   Synchronization: 3
   OwnershipTransfer: 0
   observableSearch: 2
-  ObservedComponents: []
+  ObservedComponents:
+  - {fileID: 1139063623}
   sceneViewId: 203
   InstantiationId: 0
   isRuntimeInstantiated: 0
+--- !u!114 &1139063623
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1139063621}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 627855c7f81362d41938ffe0b1475957, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_SynchronizePosition: 1
+  m_SynchronizeRotation: 1
+  m_SynchronizeScale: 1
+  m_UseLocal: 1
 --- !u!1 &1143244496
 GameObject:
   m_ObjectHideFlags: 0
@@ -25947,7 +26308,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: "\u63DB\u904A\u6232"
+  m_Text: "\u56DE\u4E3B\u904A\u6232"
 --- !u!222 &1200128145
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -30717,6 +31078,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: helmet (10)
       objectReference: {fileID: 0}
+    - target: {fileID: 6435624485425629849, guid: b8ec3fcf780bedc4583cc05d26a7f68b,
+        type: 3}
+      propertyPath: m_ColliderPaths.Array.size
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b8ec3fcf780bedc4583cc05d26a7f68b, type: 3}
 --- !u!4 &1487266078 stripped
@@ -30731,6 +31097,28 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 1487266077}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1487266080
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1487266079}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aa584fbee541324448dd18d8409c7a41, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ObservedComponentsFoldoutOpen: 1
+  Group: 0
+  prefixField: -1
+  Synchronization: 3
+  OwnershipTransfer: 0
+  observableSearch: 2
+  ObservedComponents: []
+  sceneViewId: 311
+  InstantiationId: 0
+  isRuntimeInstantiated: 0
 --- !u!1 &1510091447
 GameObject:
   m_ObjectHideFlags: 0
@@ -35731,6 +36119,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: helmet (8)
       objectReference: {fileID: 0}
+    - target: {fileID: 6435624485425629849, guid: b8ec3fcf780bedc4583cc05d26a7f68b,
+        type: 3}
+      propertyPath: m_ColliderPaths.Array.size
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b8ec3fcf780bedc4583cc05d26a7f68b, type: 3}
 --- !u!4 &1819564521 stripped
@@ -35745,6 +36138,28 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 1819564520}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1819564523
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1819564522}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aa584fbee541324448dd18d8409c7a41, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ObservedComponentsFoldoutOpen: 1
+  Group: 0
+  prefixField: -1
+  Synchronization: 3
+  OwnershipTransfer: 0
+  observableSearch: 2
+  ObservedComponents: []
+  sceneViewId: 309
+  InstantiationId: 0
+  isRuntimeInstantiated: 0
 --- !u!1 &1827230178
 GameObject:
   m_ObjectHideFlags: 0
@@ -39451,6 +39866,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: helmet (5)
       objectReference: {fileID: 0}
+    - target: {fileID: 6435624485425629849, guid: b8ec3fcf780bedc4583cc05d26a7f68b,
+        type: 3}
+      propertyPath: m_ColliderPaths.Array.size
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b8ec3fcf780bedc4583cc05d26a7f68b, type: 3}
 --- !u!4 &1872816168 stripped
@@ -39465,6 +39885,28 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 1872816167}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1872816170
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1872816169}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aa584fbee541324448dd18d8409c7a41, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ObservedComponentsFoldoutOpen: 1
+  Group: 0
+  prefixField: -1
+  Synchronization: 3
+  OwnershipTransfer: 0
+  observableSearch: 2
+  ObservedComponents: []
+  sceneViewId: 306
+  InstantiationId: 0
+  isRuntimeInstantiated: 0
 --- !u!1 &1915417335
 GameObject:
   m_ObjectHideFlags: 0
@@ -40919,6 +41361,16 @@ PrefabInstance:
       propertyPath: size
       value: 0.05
       objectReference: {fileID: 0}
+    - target: {fileID: 7876566248771343265, guid: e8533bf952997504b8fe81a453b99310,
+        type: 3}
+      propertyPath: StartButton
+      value: 
+      objectReference: {fileID: 1728451877}
+    - target: {fileID: 7876566248771343265, guid: e8533bf952997504b8fe81a453b99310,
+        type: 3}
+      propertyPath: UIBackGround
+      value: 
+      objectReference: {fileID: 1053964629}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e8533bf952997504b8fe81a453b99310, type: 3}
 --- !u!114 &2080250492 stripped
@@ -41145,6 +41597,8 @@ MonoBehaviour:
   UI: {fileID: 832589408}
   _hammer: {fileID: 527237506070392983, guid: de272396d638740439a2b4fbee594295, type: 3}
   isEnd: 0
+  StartButton: {fileID: 284584613}
+  UIBackGround: {fileID: 691390680}
 --- !u!66 &2124665735
 CompositeCollider2D:
   m_ObjectHideFlags: 0
@@ -41404,6 +41858,8 @@ MonoBehaviour:
   waitToSword: 1
   hurtTime: 1.5
   waitTitleTime: 1.25
+  StartButton: {fileID: 523912868}
+  UIBackGround: {fileID: 1274888955}
 --- !u!1 &1274259150265348529
 GameObject:
   m_ObjectHideFlags: 0
@@ -41442,6 +41898,8 @@ MonoBehaviour:
   theLight: {fileID: 5098201980595327359, guid: fbbc40b279f9b8a40bcdfc9ac1379d8b,
     type: 3}
   spawnTime: 1.5
+  StartButton: {fileID: 111952703}
+  UIBackGround: {fileID: 1247284307}
 --- !u!114 &1274259150265348531
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -42227,6 +42685,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: helmet
       objectReference: {fileID: 0}
+    - target: {fileID: 6435624485425629849, guid: b8ec3fcf780bedc4583cc05d26a7f68b,
+        type: 3}
+      propertyPath: m_ColliderPaths.Array.size
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b8ec3fcf780bedc4583cc05d26a7f68b, type: 3}
 --- !u!1001 &3349509520872057683
@@ -42891,6 +43354,8 @@ MonoBehaviour:
   - {fileID: 211506958}
   - {fileID: 518378403}
   aresTime: 10
+  StartButton: {fileID: 1664492489}
+  UIBackGround: {fileID: 1059697286}
 --- !u!114 &4119797321953422561
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -42989,6 +43454,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: bg
+      objectReference: {fileID: 0}
+    - target: {fileID: 1503489086913257658, guid: 025890af83b4e60408433680cd13d79b,
+        type: 3}
+      propertyPath: m_Layer
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1503489086913257658, guid: 025890af83b4e60408433680cd13d79b,
         type: 3}
@@ -46224,6 +46694,8 @@ MonoBehaviour:
   Normal_max: 1.75
   Gold_mix: 7
   Gold_max: 10
+  StartButton: {fileID: 1725617298}
+  UIBackGround: {fileID: 1592452558}
 --- !u!4 &6098514309496663828
 Transform:
   m_ObjectHideFlags: 0
@@ -46690,7 +47162,7 @@ GameObject:
   - component: {fileID: 6098514309496663834}
   - component: {fileID: 6098514309496663833}
   - component: {fileID: 6098514309496663832}
-  m_Layer: 6
+  m_Layer: 8
   m_Name: bg
   m_TagString: background
   m_Icon: {fileID: 0}
@@ -50314,6 +50786,7 @@ GameObject:
   - component: {fileID: 9016245958236011387}
   - component: {fileID: 798526609925835844}
   - component: {fileID: 9016245958236011389}
+  - component: {fileID: 9016245958236011390}
   m_Layer: 0
   m_Name: event
   m_TagString: background
@@ -50339,10 +50812,27 @@ MonoBehaviour:
   Synchronization: 3
   OwnershipTransfer: 0
   observableSearch: 2
-  ObservedComponents: []
+  ObservedComponents:
+  - {fileID: 9016245958236011390}
   sceneViewId: 202
   InstantiationId: 0
   isRuntimeInstantiated: 0
+--- !u!114 &9016245958236011390
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9016245958236011388}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 627855c7f81362d41938ffe0b1475957, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_SynchronizePosition: 1
+  m_SynchronizeRotation: 1
+  m_SynchronizeScale: 1
+  m_UseLocal: 1
 --- !u!212 &9071744603547028753
 SpriteRenderer:
   m_ObjectHideFlags: 0

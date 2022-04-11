@@ -172,9 +172,11 @@ public class Launcher : MonoBehaviourPunCallbacks
                 {
                     if (item.ChildrenCount == 0)  //只有 Order 的 A，B，C，D 進入以下程式碼
                     {
+                        Debug.Log(item.Value.ToString());
                         if (!item.Value.ToString().Equals("Empty"))  //如果不是空的，就把該玩家名字加入 PName[]
                         {
                             PName[cnt] = item.Value.ToString();
+                            Debug.Log(PName[cnt]);
                             cnt++;
                         }
                         else
@@ -187,7 +189,6 @@ public class Launcher : MonoBehaviourPunCallbacks
                         string team = "";  //臨時儲存 team 
                         for (int i = 0; i < PName.Length; i++)
                         {
-                            Debug.Log(item.Key.ToString());
                             if (item.Key.ToString().Equals(PName[i]))  //抓取 [PlayerName] 內的 team
                             {
                                 foreach (var Pinfo in item.Children)

@@ -1,12 +1,17 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using Photon.Pun;
 public class ball : MonoBehaviour
 {
     [HideInInspector] public float speed, damage;
     private Rigidbody2D rb;
     private float cnt; //速度計數器
+    PhotonView PV;
+    void Start()
+    {
+        PV = GetComponent<PhotonView>();
+    }
     private void OnEnable()
     {
         cnt = 1.5f;
@@ -15,12 +20,15 @@ public class ball : MonoBehaviour
     //旋轉跟刪除物件
     void FixedUpdate()
     {
-        this.transform.Rotate(0, 0, 3f);
+        if(PV.IsMine)
+        {
+            this.transform.Rotate(0, 0, 3f);
+        }
         if (FightManager.Instance.plist.Count <= 1)
         {
             Destroy(this.gameObject);
         }
-        else if (Vector3.Distance(Vector3.zero, this.transform.position) > 45)
+        else if (Vector3.Distance(Vector3.zero, this.transform.position) > 42)
         {
             Destroy(this.gameObject);
         }

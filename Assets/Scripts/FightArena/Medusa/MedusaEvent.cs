@@ -1,12 +1,16 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using Photon.Pun;
+using Photon.Realtime;
 public class MedusaEvent : MonoBehaviour
 {
     [SerializeField] private GameObject UI;
     [SerializeField] private float waitToMove;
     private GameObject mirror, monster;
+    [SerializeField] GameObject StartButton;
+    [SerializeField] GameObject UIBackGround;
+    PhotonView PV;
     private void OnEnable()
     {
         for (int i = 0; i < FightManager.Instance.plist.Count; i++)
@@ -16,6 +20,11 @@ public class MedusaEvent : MonoBehaviour
     }
     void Start()
     {
+        PV = GetComponent<PhotonView>();
+        if (!PhotonNetwork.IsMasterClient)
+        {
+            StartButton.SetActive(false);
+        }
         mirror = this.transform.Find("mirror").gameObject;
         monster = this.transform.Find("monster").gameObject;
     }
@@ -38,6 +47,12 @@ public class MedusaEvent : MonoBehaviour
     //開始遊戲
     public void StartGame()
     {
+        PV.RPC("RPC_StartGame",RpcTarget.All);
+    }
+    [PunRPC]
+    public void RPC_StartGame()
+    {
+        UIBackGround.SetActive(false);
         for (int i = 0; i < FightManager.Instance.plist.Count; i++)
         {
             GameObject.Find("HealthUI").transform.GetChild(i).gameObject.SetActive(true);

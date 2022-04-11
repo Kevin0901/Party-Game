@@ -42,6 +42,16 @@ MonoBehaviour:
   - RPC_RefreshTeam
   - RPC_SetArryList
   - RPC_ArenaPlayer_Hurt
+  - RPC_StartGame
+  - RPC_ShootArrow
+  - RPC_randomSword
+  - RPC_spawnArrow
+  - RPC_lightShoot
+  - RPC_End
+  - RPC_SetHammer
+  - Pun_SetArens
+  - RPC_IsArens
+  - RPC_NoArens
   DisableAutoOpenWizard: 1
   ShowSettings: 1
   DevRegionSetOnce: 1

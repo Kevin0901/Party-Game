@@ -1,10 +1,16 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using Photon.Pun;
 public class pickcow : MonoBehaviour
 {
-    [HideInInspector]public int cowScore;
+    public int cowScore;
+    PhotonView PV;
+    void Start()
+    {
+        PV = GetComponent<PhotonView>();  //定義PhotonView
+        this.transform.parent = PhotonView.Find((int)PV.InstantiationData[0]).transform;
+    }
     private void OnTriggerStay2D(Collider2D other)
     {
         if (other.gameObject.layer == 10)

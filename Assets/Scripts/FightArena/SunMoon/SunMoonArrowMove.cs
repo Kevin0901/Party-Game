@@ -1,7 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using Photon.Pun;
 public class SunMoonArrowMove : MonoBehaviour
 {
     public bool isSun, noEffect;
@@ -9,9 +9,13 @@ public class SunMoonArrowMove : MonoBehaviour
     private Vector3 dir;
     private Rigidbody2D mrigibody2D;
     public GameObject shooter;
+    BoxCollider2D BC2D;
+    PhotonView PV;
     private void Start()
     {
+        BC2D = GetComponent<BoxCollider2D>();
         mrigibody2D = this.GetComponent<Rigidbody2D>();
+        PV = GetComponent<PhotonView>();
     }
     //箭矢速度
     void FixedUpdate()
@@ -34,7 +38,10 @@ public class SunMoonArrowMove : MonoBehaviour
     {
         if (other.gameObject.layer == 10 && other.gameObject != shooter)
         {
-            other.GetComponent<Rigidbody2D>().AddForce(dir.normalized * power, ForceMode2D.Impulse);
+            if(!PV.IsMine)
+            {
+                other.GetComponent<Rigidbody2D>().AddForce(dir.normalized * power, ForceMode2D.Impulse);
+            }
             Destroy(this.gameObject);
         }
     }

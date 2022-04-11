@@ -16,7 +16,6 @@ public class RoomManager : MonoBehaviourPunCallbacks
     [Header("玩家隊伍陣列")]
     public string[] PlayerTeam;
     PhotonView PV;
-    Hashtable hash;
     public int Game_num;
     void Awake()
     {
@@ -27,7 +26,6 @@ public class RoomManager : MonoBehaviourPunCallbacks
         // }
         DontDestroyOnLoad(gameObject);
         PV = GetComponent<PhotonView>();  //定義PhotonView
-        hash = new Hashtable();
         // Instance = this;
     }
 
@@ -72,6 +70,7 @@ public class RoomManager : MonoBehaviourPunCallbacks
                     Game_num = 9;
                     break;
             }
+            Hashtable hash = new Hashtable();
             hash.Add("GameNum", Game_num);
             PhotonNetwork.LocalPlayer.SetCustomProperties(hash);
             PhotonNetwork.LoadLevel(2);

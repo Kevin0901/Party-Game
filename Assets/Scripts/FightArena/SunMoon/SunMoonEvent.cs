@@ -1,15 +1,33 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using Photon.Pun;
+using Photon.Realtime;
 public class SunMoonEvent : MonoBehaviour
 {
     // Start is called before the first frame update
     [SerializeField] private float size = 0.05f;
     [SerializeField] private GameObject UI;
+    [SerializeField] GameObject StartButton;
+    [SerializeField] GameObject UIBackGround;
+    PhotonView PV;
+    void Start()
+    {
+        PV = GetComponent<PhotonView>();
+        if (!PhotonNetwork.IsMasterClient)
+        {
+            StartButton.SetActive(false);
+        }
+    }
     //開始遊戲
     public void StartGame()
     {
+        PV.RPC("RPC_StartGame",RpcTarget.All);
+    }
+    [PunRPC]
+    public void RPC_StartGame()
+    {
+        UIBackGround.SetActive(false);
         StartCoroutine(changeBG());
         for (int i = 0; i < FightManager.Instance.plist.Count; i++)
         {

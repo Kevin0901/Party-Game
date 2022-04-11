@@ -46,7 +46,7 @@ public class MultiPlayerManager : MonoBehaviour
     IEnumerator WaitRPCValue()  //等待 RPC_SetArryList() 完成
     {
         RoomManager = GameObject.Find("RoomManager").gameObject;
-        if (RoomManager.GetComponent<RoomManager>().PlayerNames.Length != 0)  //如果完成，就生成自己
+        if (RoomManager.GetComponent<RoomManager>().PlayerNames.Length == PhotonNetwork.PlayerList.Length)  //如果完成，就生成自己
         {
             GetValue();
             CreatController();
