@@ -30,7 +30,7 @@ public class InventorySign : MonoBehaviour
         float itemSlotCellSize = 85f;
         if (checkinventory())
         {
-            this.GetComponent<Image>().enabled = true;  
+            this.GetComponent<Image>().enabled = true;
         }
         if (UIState.Instance.getall == 1)
         {

@@ -16,71 +16,71 @@ public class PlaceTower : MonoBehaviour
         tc = 0;
     }
 
-    private void OnMouseDown()
-    {
-        orgin = territory.transform.position;
-        if (GameManager.a != 0 && UIState.Instance.b != 0)
-        {
-            tower = GameManager.perfab;
-            if (this.tag == "red")
-            {
-                if (ResourceManager.Instance.RedCanAfford(tower.GetComponent<TowerData>().CostArray) != false)
-                {
-                    ResourceManager.Instance.RedSpendResources(tower.GetComponent<TowerData>().CostArray);
-                    placetower(tower);
-                }
-                else
-                {
-                    Debug.Log("can't spawn");
-                }
-            }
-            else if (this.tag == "blue")
-            {
-                if (ResourceManager.Instance.BlueCanAfford(tower.GetComponent<TowerData>().CostArray) != false)
-                {
-                    ResourceManager.Instance.BlueSpendResources(tower.GetComponent<TowerData>().CostArray);
-                    placetower(tower);
-                }
-                else
-                {
-                    Debug.Log("can't spawn");
-                }
-            }
+    // private void OnMouseDown()
+    // {
+    //     orgin = territory.transform.position;
+    //     if (GameManager.a != 0 && UIState.Instance.b != 0)
+    //     {
+    //         tower = GameManager.perfab;
+    //         if (this.tag == "red")
+    //         {
+    //             if (ResourceManager.Instance.RedCanAfford(tower.GetComponent<TowerData>().CostArray) != false)
+    //             {
+    //                 ResourceManager.Instance.RedSpendResources(tower.GetComponent<TowerData>().CostArray);
+    //                 placetower(tower);
+    //             }
+    //             else
+    //             {
+    //                 Debug.Log("can't spawn");
+    //             }
+    //         }
+    //         else if (this.tag == "blue")
+    //         {
+    //             if (ResourceManager.Instance.BlueCanAfford(tower.GetComponent<TowerData>().CostArray) != false)
+    //             {
+    //                 ResourceManager.Instance.BlueSpendResources(tower.GetComponent<TowerData>().CostArray);
+    //                 placetower(tower);
+    //             }
+    //             else
+    //             {
+    //                 Debug.Log("can't spawn");
+    //             }
+    //         }
 
-        }
+    //     }
 
-        if (GameManager.a != 0 && UIState.Instance.m != 0)
-        {
-            monster = GameManager.perfab;
-            if (this.tag == "red")
-            {
-                if (ResourceManager.Instance.RedCanAfford(monster.GetComponent<monsterMove>().CostArray) != false)
-                {
-                    ResourceManager.Instance.RedSpendResources(monster.GetComponent<monsterMove>().CostArray);
-                    placetower(monster);
-                }
-                else
-                {
-                    Debug.Log("can't spawn");
-                }
-            }
-            else if (this.tag == "blue")
-            {
-                if (ResourceManager.Instance.BlueCanAfford(monster.GetComponent<monsterMove>().CostArray) != false)
-                {
-                    ResourceManager.Instance.BlueSpendResources(monster.GetComponent<monsterMove>().CostArray);
-                    placetower(monster);
-                }
-                else
-                {
-                    Debug.Log("can't spawn");
-                }
-            }
+    //     if (GameManager.a != 0 && UIState.Instance.m != 0)
+    //     {
+    //         monster = GameManager.perfab;
+    //         if (this.tag == "red")
+    //         {
+    //             if (ResourceManager.Instance.RedCanAfford(monster.GetComponent<monsterMove>().CostArray) != false)
+    //             {
+    //                 ResourceManager.Instance.RedSpendResources(monster.GetComponent<monsterMove>().CostArray);
+    //                 placetower(monster);
+    //             }
+    //             else
+    //             {
+    //                 Debug.Log("can't spawn");
+    //             }
+    //         }
+    //         else if (this.tag == "blue")
+    //         {
+    //             if (ResourceManager.Instance.BlueCanAfford(monster.GetComponent<monsterMove>().CostArray) != false)
+    //             {
+    //                 ResourceManager.Instance.BlueSpendResources(monster.GetComponent<monsterMove>().CostArray);
+    //                 placetower(monster);
+    //             }
+    //             else
+    //             {
+    //                 Debug.Log("can't spawn");
+    //             }
+    //         }
 
-        }
+    //     }
 
 
-    }
+    // }
 
     public void placetower(GameObject spawnobject)
     {
@@ -93,14 +93,14 @@ public class PlaceTower : MonoBehaviour
 
     private void OnTriggerStay2D(Collider2D other)
     {
-        if (other.gameObject.layer == 10 && other.gameObject.tag+this.tag == this.gameObject.name)
+        if (other.gameObject.layer == 10 && other.gameObject.tag + this.tag == this.gameObject.name)
         {
             other.GetComponent<PlayerMovement>().interritory = 1;
         }
     }
     private void OnTriggerExit2D(Collider2D other)
     {
-        if (other.gameObject.layer == 10 && other.gameObject.tag+this.tag == this.gameObject.name)
+        if (other.gameObject.layer == 10 && other.gameObject.tag + this.tag == this.gameObject.name)
         {
             other.GetComponent<PlayerMovement>().interritory = 0;
         }

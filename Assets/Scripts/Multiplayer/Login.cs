@@ -54,6 +54,7 @@ public class Login : MonoBehaviour
         bool isRightPass = false;
         StartCoroutine(GetAcc((DataSnapshot Acc) =>  //從資料庫抓取所有玩家帳號密碼
         {
+            Debug.Log("a");
             foreach (var rules in Acc.Children)  //逐筆檢視
             {
                 if (Name.text.Equals(rules.Key.ToString()))  //如果帳號已在資料庫裡
@@ -126,9 +127,9 @@ public class Login : MonoBehaviour
     IEnumerator GetAcc(System.Action<DataSnapshot> onCallbacks) //從資料庫讀取所有玩家 Account
     {
         var userData = reference.Child("Account").GetValueAsync();
-
+        Debug.Log("b");
         yield return new WaitUntil(predicate: () => userData.IsCompleted);
-
+        Debug.Log("c");
         if (userData != null)
         {
             DataSnapshot snapshot = userData.Result;
