@@ -6,11 +6,11 @@ using UnityEngine.SceneManagement;
 public class hurt : MonoBehaviour
 {
     private Team t;
-    private int damageToGive = 10;
+    private int damageToGive;
     void Start()
     {
-        t = this.gameObject.GetComponentInParent<Team>();
-        if (gameObject.transform.parent.gameObject.layer == 10)
+        t = this.GetComponentInParent<Team>();
+        if (this.transform.parent.gameObject.layer == 10)
         {
             damageToGive = this.gameObject.GetComponentInParent<PlayerMovement>().attackDamage;
         }

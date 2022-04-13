@@ -11,15 +11,15 @@ public class archerArrowMove : MonoBehaviour
     private Vector2 line;
     private void Start()
     {
-        if (this.GetComponentInParent<monsterMove>().EnemyList.Count == 0)
-        {
-            Destroy(this.gameObject);
-        }
-        else
-        {
-            enemy = this.GetComponentInParent<monsterMove>().EnemyList[0];
-            this.gameObject.transform.SetParent(null);
-        }
+        // if (this.GetComponentInParent<monsterMove>().EnemyList.Count == 0)
+        // {
+        //     Destroy(this.gameObject);
+        // }
+        // else
+        // {
+        //     enemy = this.GetComponentInParent<monsterMove>().EnemyList[0];
+        //     this.gameObject.transform.SetParent(null);
+        // }
     }
     // Update is called once per frame
     void Update()

@@ -19,37 +19,37 @@ public class detectRange : MonoBehaviour
     //進入trigger
     private void OnTriggerStay2D(Collider2D other)
     {
-        if (other.CompareTag(t.Enemyteam) && m.currentState != MonsterState.idle)
-        {
-            if (m.EnemyList.Count == 0)
-            {
-                m.EnemyList.Add(other.gameObject);
+        // if (other.CompareTag(t.Enemyteam) && m.currentState != MonsterState.idle)
+        // {
+        //     if (m.EnemyList.Count == 0)
+        //     {
+        //         m.EnemyList.Add(other.gameObject);
 
-            }
-            else if (other.gameObject == m.EnemyList[0])
-            {
-                dis = Vector3.Distance(parent.transform.position, other.transform.position); //兩座標之間的距離長度
-                if (dis <= m.attackRange)
-                {
-                    m.currentState = MonsterState.attack;
-                }
-                else if (m.currentState != MonsterState.attack)
-                {
-                    m.currentState = MonsterState.track;
-                }
-                m.enemyPos = other.transform.position;
-            }
-        }
+        //     }
+        //     else if (other.gameObject == m.EnemyList[0])
+        //     {
+        //         dis = Vector3.Distance(parent.transform.position, other.transform.position); //兩座標之間的距離長度
+        //         if (dis <= m.attackRange)
+        //         {
+        //             m.currentState = MonsterState.attack;
+        //         }
+        //         else if (m.currentState != MonsterState.attack)
+        //         {
+        //             m.currentState = MonsterState.track;
+        //         }
+        //         m.enemyPos = other.transform.position;
+        //     }
+        // }
     }
     private void OnTriggerExit2D(Collider2D other)
     {
-        if (other.CompareTag(t.Enemyteam))
-        {
-            if ((m.EnemyList.Count > 0 && other.gameObject == m.EnemyList[0]))
-            {
-                m.currentState = MonsterState.walk;
-                m.EnemyList.Remove(other.gameObject);
-            }
-        }
+        // if (other.CompareTag(t.Enemyteam))
+        // {
+        //     if ((m.EnemyList.Count > 0 && other.gameObject == m.EnemyList[0]))
+        //     {
+        //         m.currentState = MonsterState.walk;
+        //         m.EnemyList.Remove(other.gameObject);
+        //     }
+        // }
     }
 }

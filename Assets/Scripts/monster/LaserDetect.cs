@@ -5,15 +5,12 @@ using UnityEngine;
 public class LaserDetect : MonoBehaviour
 {
     private monsterMove m;
-    RaycastHit2D[] h = new RaycastHit2D[3]; //雷射
+    RaycastHit2D[] raycast2D = new RaycastHit2D[3]; //雷射
     LayerMask mask;  //遮罩
+    private float angle;
     [Header("發射長度")]
-    [SerializeField] private float dis = 1.5f; //發射長度
-    private float x, y;
-    private Vector3 enemyPos, Left, Right;
-    private float rotate, angle;
+    [SerializeField] private float dis; //發射長度
     public bool isfix; //是否修正
-
     void Start()
     {
         m = this.gameObject.GetComponent<monsterMove>();
@@ -22,7 +19,7 @@ public class LaserDetect : MonoBehaviour
         angle = 35;
         isfix = false;
     }
-    void Update()
+    void fixedUpdate()
     {
         if (m.currentState == MonsterState.track || m.currentState == MonsterState.walk)
         {
@@ -32,25 +29,24 @@ public class LaserDetect : MonoBehaviour
     // Update is called once per frame
     void fixPosition()
     {
-        x = m.animator.GetFloat("moveX");
-        y = m.animator.GetFloat("moveY");
-
-        enemyPos = new Vector2(x, y);
-        Vector2 line = Vector3.zero - enemyPos;
-        rotate = Mathf.Atan2(line.y, line.x) * Mathf.Rad2Deg;
+        float x = m.animator.GetFloat("moveX");
+        float y = m.animator.GetFloat("moveY");
+        Vector2 enemyPos = new Vector2(x, y);
+        var line = Vector2.zero - enemyPos;
+        float rotate = Mathf.Atan2(line.y, line.x) * Mathf.Rad2Deg;
         Quaternion k = Quaternion.AngleAxis(angle, Vector3.forward);
-        Left = k * enemyPos;
+        Vector3 Left = k * enemyPos;
         k = Quaternion.AngleAxis(-angle, Vector3.forward);
-        Right = k * enemyPos;
+        Vector3 Right = k * enemyPos;
 
-        h[0] = Physics2D.Raycast(transform.position, Left, dis, mask);
-        h[1] = Physics2D.Raycast(transform.position, enemyPos, dis, mask);
-        h[2] = Physics2D.Raycast(transform.position, Right, dis, mask);
+        raycast2D[0] = Physics2D.Raycast(transform.position, Left, dis, mask);
+        raycast2D[1] = Physics2D.Raycast(transform.position, enemyPos, dis, mask);
+        raycast2D[2] = Physics2D.Raycast(transform.position, Right, dis, mask);
         Debug.DrawRay(transform.position, enemyPos * dis, Color.black);
         Debug.DrawRay(transform.position, Left * dis, Color.black);
         Debug.DrawRay(transform.position, Right * dis, Color.black);
 
-        foreach (RaycastHit2D i in h)
+        foreach (RaycastHit2D i in raycast2D)
         {
             if ((i.collider != null) && (i.collider.tag == this.gameObject.tag))
             {
