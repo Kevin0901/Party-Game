@@ -12,7 +12,6 @@ public class health : MonoBehaviour
     private RectTransform proportion;
     private float newScale, baseScale;
     private Slider bar;
-    private int burnstack = 0;
     public bool iswudi;//無敵
     public int playercatchsheeponhit = 0;
     private void Awake()

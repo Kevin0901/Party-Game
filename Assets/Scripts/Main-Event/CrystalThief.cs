@@ -11,21 +11,23 @@ public class CrystalThief : MonoBehaviour
     public float speed = 3;
     private int curh, bfhurth;
     private int havespeedupyet = 0;
+    private Animator animator;
 
     private void Start()
     {
         curh = this.GetComponentInChildren<health>().curH;
         bfhurth = curh;
-
+        animator = this.gameObject.GetComponent<Animator>();
     }
 
     private void Update()
     {
         curh = this.GetComponentInChildren<health>().curH;
         Vector3 endPosition = waypoints[curwaypoint].transform.position;
-        // 2 
+        Vector2 direction = endPosition - transform.position;
+        animator.SetFloat("moveX", direction.x);
+        animator.SetFloat("moveY", direction.y);
         transform.position = Vector3.MoveTowards(transform.position, endPosition, Time.deltaTime * speed);
-        // 3 
         if (transform.position.Equals(endPosition))
         {
             if (curwaypoint < waypoints.Length - 1)

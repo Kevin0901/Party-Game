@@ -26,9 +26,11 @@ public class Login : MonoBehaviour
     [SerializeField] GameObject RegisterComplete;
     [Header("密碼不相配訊息")]
     [SerializeField] GameObject PassNotMatch;
+    [Header("已經註冊")]
+    [SerializeField] GameObject IsRegister;
     [Header("玩家名稱")]
     [SerializeField] TMP_Text UserName;
-    
+
     DatabaseReference reference;
     void Start()
     {
@@ -46,6 +48,7 @@ public class Login : MonoBehaviour
         WrongPass.SetActive(false);
         RegisterComplete.SetActive(false);
         PassNotMatch.SetActive(false);
+        IsRegister.SetActive(false);
 
         bool isRegister = false;
         bool isRightPass = false;
@@ -85,11 +88,13 @@ public class Login : MonoBehaviour
     }
     public void PlayerRegister()  //註冊，寫進資料庫
     {
+        bool isRegister = false;
         NoRegister.SetActive(false);
         WrongPass.SetActive(false);
         RegisterComplete.SetActive(false);
         PassNotMatch.SetActive(false);
-        if(!ConfirmPassword.gameObject.activeSelf)
+        IsRegister.SetActive(false);
+        if (!ConfirmPassword.gameObject.activeSelf)
         {
             ConfirmPassword.gameObject.SetActive(true);
             return;
@@ -99,8 +104,23 @@ public class Login : MonoBehaviour
             PassNotMatch.SetActive(true);
             return;
         }
-        reference.Child("Account").Child(Name.text).SetValueAsync(Password.text);
-        RegisterComplete.SetActive(true);
+        StartCoroutine(GetAcc((DataSnapshot Acc) =>  //從資料庫抓取所有玩家帳號密碼
+        {
+            foreach (var rules in Acc.Children)  //逐筆檢視
+            {
+                if (Name.text.Equals(rules.Key.ToString()))  //如果帳號已在資料庫裡
+                {
+                    IsRegister.SetActive(true);
+                    isRegister = true;
+                }
+            }
+            if (!isRegister)
+            {
+                reference.Child("Account").Child(Name.text).SetValueAsync(Password.text);
+                RegisterComplete.SetActive(true);
+            }
+
+        }));
     }
 
     IEnumerator GetAcc(System.Action<DataSnapshot> onCallbacks) //從資料庫讀取所有玩家 Account

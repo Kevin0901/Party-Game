@@ -15,11 +15,12 @@ public class ResourceManager : MonoBehaviour
     private Dictionary<ResourceTypeSo, int> BlueresourceAmountDictionary;
     public float Rrestimes = 1;
     public float Brestimes = 1;
-    private float timer;
+    public float timer;
     private float timerMax = 1f;
     private int c = 0;
     public DatabaseReference reference;
     private int RedresourceAmount, BlueresourceAmount;
+    PhotonView PV;
     private void Awake()
     {
         Instance = this;
@@ -43,15 +44,21 @@ public class ResourceManager : MonoBehaviour
 
         }
     }
+    private void Start()
+    {
+        PV = GetComponent<PhotonView>();
+        timer = 0;
+        StartCoroutine(Time_Count());
+    }
 
     private void Update()
     {
-        timer -= Time.deltaTime;
-        if (timer <= 0f)
-        {
-            timer += timerMax;
-            timeadd();
-        }
+        // timer -= Time.deltaTime;
+        // if (timer <= 0f)
+        // {
+        //     timer += timerMax;
+        //     timeadd();
+        // }
 
         // if (Input.GetKeyDown(KeyCode.T))
         // {
@@ -74,13 +81,22 @@ public class ResourceManager : MonoBehaviour
     //     }));
     //     OnResourceAmountChanged?.Invoke(this, EventArgs.Empty);
     // }
-
+    IEnumerator Time_Count()
+    {
+        timeadd();
+        yield return new WaitForSeconds(1f);
+        timer++;
+        StartCoroutine(Time_Count());
+    }
     public void RedAddResource(ResourceTypeSo resourceType, int amount)
     {
         StartCoroutine(GetTeamResourceData((DataSnapshot Redinfo) =>
         {
             int resValue = Convert.ToInt32(Redinfo.Child(resourceType.ToString()).Value);
-            reference.Child("GameRoom").Child("123456").Child("RedResource").Child(resourceType.ToString()).SetValueAsync(resValue + amount);
+            if(PV.IsMine)
+            {
+                reference.Child("GameRoom").Child("123456").Child("RedResource").Child(resourceType.ToString()).SetValueAsync(resValue + amount);
+            }
         }, (DataSnapshot Blueinfo) => { }));
         OnResourceAmountChanged?.Invoke(this, EventArgs.Empty);
     }
@@ -90,7 +106,10 @@ public class ResourceManager : MonoBehaviour
         StartCoroutine(GetTeamResourceData((DataSnapshot Redinfo) => { }, (DataSnapshot Blueinfo) =>
            {
                int resValue = Convert.ToInt32(Blueinfo.Child(resourceType.ToString()).Value);
-               reference.Child("GameRoom").Child("123456").Child("BlueResource").Child(resourceType.ToString()).SetValueAsync(resValue + amount);
+               if(PV.IsMine)
+               {
+                   reference.Child("GameRoom").Child("123456").Child("BlueResource").Child(resourceType.ToString()).SetValueAsync(resValue + amount);
+               }
            }
         ));
         OnResourceAmountChanged?.Invoke(this, EventArgs.Empty);
@@ -174,7 +193,7 @@ public class ResourceManager : MonoBehaviour
         }
     }
 
-    public IEnumerator GetTeamResourceData(System.Action<DataSnapshot> RedonCallbacks, System.Action<DataSnapshot> BlueonCallbacks)  //從資料庫抓取此房間的所有資料
+    public IEnumerator GetTeamResourceData(System.Action<DataSnapshot> RedonCallbacks, System.Action<DataSnapshot> BlueonCallbacks)  //從資料庫抓取
     {
         var RedresData = reference.Child("GameRoom").GetValueAsync();
         RedresData = reference.Child("GameRoom").Child("123456").Child("RedResource").GetValueAsync();

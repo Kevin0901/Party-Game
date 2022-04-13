@@ -85,7 +85,7 @@ GameObject:
   - component: {fileID: 7754934055589320719}
   - component: {fileID: 1976892295301908940}
   - component: {fileID: 6267341934887046346}
-  - component: {fileID: 8727661937479103651}
+  - component: {fileID: 6937349859206894463}
   m_Layer: 10
   m_Name: arenaPlayer
   m_TagString: Untagged
@@ -270,7 +270,7 @@ MonoBehaviour:
   observableSearch: 2
   ObservedComponents:
   - {fileID: 6267341934887046346}
-  - {fileID: 8727661937479103651}
+  - {fileID: 6937349859206894463}
   sceneViewId: 0
   InstantiationId: 0
   isRuntimeInstantiated: 0
@@ -290,7 +290,7 @@ MonoBehaviour:
   m_SynchronizeRotation: 1
   m_SynchronizeScale: 1
   m_UseLocal: 1
---- !u!114 &8727661937479103651
+--- !u!114 &6937349859206894463
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}

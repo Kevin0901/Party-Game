@@ -9,8 +9,6 @@ public class TowerBtn : MonoBehaviour
     private GameObject objectPrefab;
     private Sprite sprite;
 
-    [SerializeField]
-    private GameObject hover;
 
     public GameObject ObjectPrefab
     {

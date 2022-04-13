@@ -52,14 +52,14 @@ public class Effect : MonoBehaviour
         int[] nonre = new int[RandEffectTimes];
         for (int i = 0; i < RandEffectTimes; i++)
         {
-            nonre[i] = Random.Range(0, 5);
+            nonre[i] = Random.Range(0, 6);
 
             for (int j = 0; j < i; j++)
             {
                 while (nonre[j] == nonre[i])
                 {
                     j = 0;
-                    nonre[i] = Random.Range(0, 5);
+                    nonre[i] = Random.Range(0, 6);
                 }
             }
         }
@@ -164,7 +164,6 @@ public class Effect : MonoBehaviour
                 float times = PHDuration / PHPreSec;
                 for (int i = 0; i < times; i++)
                 {
-
                     int reheal = (int)((targetheal.maxH * (PHPersen / 100)) / times);
                     if (targetheal.curH < targetheal.maxH)
                     {
@@ -187,7 +186,6 @@ public class Effect : MonoBehaviour
             {
                 orginspeed = this.GetComponent<monsterMove>().speed;
                 health targetheal = this.GetComponentInChildren<health>();
-
                 this.GetComponent<monsterMove>().speed = orginspeed / 2;
                 float times = PHDuration / PHPreSec;
                 for (int i = 0; i < times; i++)

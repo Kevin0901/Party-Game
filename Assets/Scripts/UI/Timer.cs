@@ -9,16 +9,18 @@ public class Timer : MonoBehaviour
 {
     private GameControl t;
     public Text currenttimeText;
+    [SerializeField] float Time;
     // Start is called before the first frame update
     void Start()
     {
+        Time = ResourceManager.Instance.timer;
         // t = GameObject.Find("SceneManager").GetComponent<GameControl>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        // TimeSpan time= TimeSpan.FromSeconds(t.currentTime);
-        // currenttimeText.text = time.ToString(@"mm\:ss");
+        TimeSpan time= TimeSpan.FromSeconds(ResourceManager.Instance.timer);
+        currenttimeText.text = time.ToString(@"mm\:ss");
     }
 }

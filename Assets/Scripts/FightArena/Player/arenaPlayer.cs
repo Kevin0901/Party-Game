@@ -147,7 +147,10 @@ public class arenaPlayer : MonoBehaviour
     public IEnumerator ChangeARES(float time)
     {
         GameObject s = null;
-        mAnimator.SetTrigger("change");
+        if (PV.IsMine)
+        {
+            mAnimator.SetBool("change",true);
+        }
         yield return new WaitForSeconds(1f);
         mAnimator.GetComponent<arenaPlayer>().currentState = ArenaState.ares;
         speed *= 1.2f;
@@ -159,9 +162,10 @@ public class arenaPlayer : MonoBehaviour
         yield return new WaitForSeconds(time);
         speed /= 1.2f;
         mAnimator.GetComponent<arenaPlayer>().currentState = ArenaState.walk;
-        mAnimator.GetComponent<Animator>().SetTrigger("change");
-        if(PV.IsMine)
+        // mAnimator.GetComponent<Animator>().SetTrigger("change");
+        if (PV.IsMine)
         {
+            mAnimator.SetBool("change",false);
             PhotonNetwork.Destroy(s);
         }
     }
