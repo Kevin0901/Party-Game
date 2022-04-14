@@ -22,7 +22,6 @@ public class ResourceManager : MonoBehaviour
     private int RedresourceAmount, BlueresourceAmount;
     PhotonView PV;
     private ResourceTypeListSO resourceTypeList;
-    // [System.NonSerialized] ResourceTypeListSO resourceTypeList;
     private void Awake()
     {
         Instance = this;
@@ -102,6 +101,38 @@ public class ResourceManager : MonoBehaviour
             }
         }, (DataSnapshot Blueinfo) => { }));
     }
+    public void RedAddAllResource(int amount)
+    {
+        StartCoroutine(GetTeamResourceData((DataSnapshot Redinfo) =>
+        {
+            int resValue = Convert.ToInt32(Redinfo.Child(resourceTypeList.list[0].ToString()).Value);
+            int resValue1 = Convert.ToInt32(Redinfo.Child(resourceTypeList.list[1].ToString()).Value);
+            int resValue2 = Convert.ToInt32(Redinfo.Child(resourceTypeList.list[2].ToString()).Value);
+            // if (PV.IsMine)
+            // {
+            reference.Child("GameRoom").Child("123456").Child("RedResource").Child(resourceTypeList.list[0].ToString()).SetValueAsync(resValue + amount);
+            reference.Child("GameRoom").Child("123456").Child("RedResource").Child(resourceTypeList.list[1].ToString()).SetValueAsync(resValue1 + amount);
+            reference.Child("GameRoom").Child("123456").Child("RedResource").Child(resourceTypeList.list[2].ToString()).SetValueAsync(resValue2 + amount);
+            OnResourceAmountChanged?.Invoke(this, EventArgs.Empty);
+            // }
+        }, (DataSnapshot Blueinfo) => { }));
+    }
+    public void BlueAddAllResource(int amount)
+    {
+        StartCoroutine(GetTeamResourceData((DataSnapshot Redinfo) => { }, (DataSnapshot Blueinfo) =>
+           {
+               int resValue = Convert.ToInt32(Blueinfo.Child(resourceTypeList.list[0].ToString()).Value);
+               int resValue1 = Convert.ToInt32(Blueinfo.Child(resourceTypeList.list[1].ToString()).Value);
+               int resValue2 = Convert.ToInt32(Blueinfo.Child(resourceTypeList.list[2].ToString()).Value);
+               // if (PV.IsMine)
+               // {
+               reference.Child("GameRoom").Child("123456").Child("BlueResource").Child(resourceTypeList.list[0].ToString()).SetValueAsync(resValue + amount);
+               reference.Child("GameRoom").Child("123456").Child("BlueResource").Child(resourceTypeList.list[1].ToString()).SetValueAsync(resValue1 + amount);
+               reference.Child("GameRoom").Child("123456").Child("BlueResource").Child(resourceTypeList.list[2].ToString()).SetValueAsync(resValue2 + amount);
+               OnResourceAmountChanged?.Invoke(this, EventArgs.Empty);
+           }
+        )); ;
+    }
 
     public void BlueAddResource(ResourceTypeSo resourceType, int amount)
     {
@@ -119,12 +150,8 @@ public class ResourceManager : MonoBehaviour
 
     private void timeadd()
     {
-        // for (int i = 0; i <= 2; i++)
-        // {
-        //     RedAddResource(resourceTypeList.list[i], (int)(2 * Rrestimes));
-        //     // Debug.Log(resourceTypeList.list.Count);
-        //     BlueAddResource(resourceTypeList.list[i], (int)(2 * Brestimes));
-        // }
+        RedAddAllResource((int)(2 * Rrestimes));
+        BlueAddAllResource((int)(2 * Rrestimes));
     }
 
     public int RedGetResourceAmount(ResourceTypeSo resourceType)
