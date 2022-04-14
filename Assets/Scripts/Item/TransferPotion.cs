@@ -31,7 +31,7 @@ public class TransferPotion : MonoBehaviour
         {
             if (enemy.layer == 9)
             {
-                enemy.GetComponent<monsterMove>().pigeon = 1;
+                enemy.GetComponent<monsterMove>().StartCoroutine("PigeonChange", 5);
             }
         }
     }

@@ -35,7 +35,7 @@ public class monsterMove : MonoBehaviour
     private float angle;
     [Header("雷射發射長度")]
     [SerializeField] private float dis; //發射長度
-    private bool isfix; //是否修正
+    private bool isFix;
     private health health;
     private Team t;
     private SpriteRenderer spriteRenderer;
@@ -43,7 +43,6 @@ public class monsterMove : MonoBehaviour
     [SerializeField] private Sprite up;
     [Header("起始圖片_下")]
     [SerializeField] private Sprite down;
-    public int pigeon;
     private void Awake()
     {
         health = this.GetComponentInChildren<health>();
@@ -70,30 +69,33 @@ public class monsterMove : MonoBehaviour
     }
     void Start()
     {
-        t=this.GetComponent<Team>();
+        t = this.GetComponent<Team>();
         animator.SetFloat("attackSpeed", 1 / attackRate);
         nextAttack = 0;
         dis *= this.gameObject.transform.localScale.x;
         mask = 1 << 9 | 1 << 10 | 1 << 11;
         angle = 35;
-        isfix = false;
         // StartCoroutine(waitIdle(setTime));
     }
     void Update()
     {
         CurHealth = health.curH;
+        fixPosition();
         detectEnemy();
-        monsterMovement();
-        if (pigeon == 1)
-        {
-            StartCoroutine(Pigeonsec());
-        }
+        monsterState();
     }
     private IEnumerator waitIdle(float t)
     {
         yield return new WaitForSeconds(t);
         animator.SetFloat("moveY", walkDir_Y); //預設動畫方向
         currentState = MonsterState.walk;
+    }
+    void OnDrawGizmosSelected()//畫圖
+    {
+        Gizmos.color = Color.yellow;
+        Gizmos.DrawWireSphere(transform.position, detectRange);
+        Gizmos.color = Color.red;
+        Gizmos.DrawWireSphere(transform.position, attackRange);
     }
     void detectEnemy()
     {
@@ -125,37 +127,22 @@ public class monsterMove : MonoBehaviour
             }
         }
     }
-    void OnDrawGizmos()//畫圖
+    void monsterState()//怪物動作
     {
-        Gizmos.color = Color.yellow;
-        Gizmos.DrawWireSphere(transform.position, detectRange);
-        Gizmos.color = Color.red;
-        Gizmos.DrawWireSphere(transform.position, attackRange);
-    }
-    void monsterMovement()//怪物動作
-    {
-        if (currentState == MonsterState.attack)
+        if (nextAttack > 0)
+        {
+            nextAttack -= Time.deltaTime;
+        }
+        if (currentState == MonsterState.idle)
         {
             animator.SetBool("moving", false);
-            if (nextAttack > 0)
-            {
-                nextAttack -= Time.deltaTime;
-            }
-            else
-            {
-                Vector2 direction = enemy.transform.position - transform.position;
-                direction = direction.normalized;
-                animator.SetFloat("moveX", Mathf.RoundToInt(direction.x));
-                animator.SetFloat("moveY", Mathf.RoundToInt(direction.y));
-                StartCoroutine(attack());
-            }
         }
-        else if (currentState == MonsterState.track && (isfix != true) && currentState != MonsterState.attack)
+        else if (currentState == MonsterState.attack && nextAttack < 0)
         {
-            if (nextAttack > 0)
-            {
-                nextAttack -= Time.deltaTime;
-            }
+            StartCoroutine(attack());
+        }
+        else if ((currentState == MonsterState.track && !isFix) || currentState == MonsterState.pigeon)
+        {
             Vector2 direction = enemy.transform.position - transform.position;
             direction = direction.normalized;
             transform.position = Vector3.MoveTowards(transform.position, enemy.transform.position, Time.deltaTime * speed); //往敵人方向移動
@@ -163,90 +150,74 @@ public class monsterMove : MonoBehaviour
             animator.SetFloat("moveY", direction.y);
             animator.SetBool("moving", true);
         }
-        else if (currentState == MonsterState.walk)
+        else if (currentState == MonsterState.walk && currentState == MonsterState.pigeon)
         {
             transform.position += new Vector3(0, speed, 0) * Time.deltaTime * walkDir_Y; //持續往前進
             animator.SetFloat("moveX", 0);
             animator.SetFloat("moveY", walkDir_Y);
             animator.SetBool("moving", true);
-            nextAttack = 0;
         }
     }
-    void fixPosition()
+    bool fixPosition()
     {
-        float x = animator.GetFloat("moveX");
-        float y = animator.GetFloat("moveY");
-        Vector2 enemyPos = new Vector2(x, y);
-        var line = Vector2.zero - enemyPos;
-        float rotate = Mathf.Atan2(line.y, line.x) * Mathf.Rad2Deg;
-        Quaternion k = Quaternion.AngleAxis(angle, Vector3.forward);
-        Vector3 Left = k * enemyPos;
-        k = Quaternion.AngleAxis(-angle, Vector3.forward);
-        Vector3 Right = k * enemyPos;
-
-        raycast2D[0] = Physics2D.Raycast(transform.position, Left, dis, mask);
-        raycast2D[1] = Physics2D.Raycast(transform.position, enemyPos, dis, mask);
-        raycast2D[2] = Physics2D.Raycast(transform.position, Right, dis, mask);
-        Debug.DrawRay(transform.position, enemyPos * dis, Color.black);
-        Debug.DrawRay(transform.position, Left * dis, Color.black);
-        Debug.DrawRay(transform.position, Right * dis, Color.black);
-
-        foreach (RaycastHit2D i in raycast2D)
+        if (currentState == MonsterState.walk && currentState == MonsterState.track)
         {
-            if ((i.collider != null) && (i.collider.tag == this.gameObject.tag))
+            float x = animator.GetFloat("moveX");
+            float y = animator.GetFloat("moveY");
+            Vector2 enemyPos = new Vector2(x, y);
+            Vector3 line = Vector2.zero - enemyPos;
+            float rotate = Mathf.Atan2(line.y, line.x) * Mathf.Rad2Deg;
+            Quaternion k = Quaternion.AngleAxis(angle, Vector3.forward);
+            Vector3 Left = k * enemyPos;
+            k = Quaternion.AngleAxis(-angle, Vector3.forward);
+            Vector3 Right = k * enemyPos;
+
+            raycast2D[0] = Physics2D.Raycast(transform.position, Left, dis, mask);
+            raycast2D[1] = Physics2D.Raycast(transform.position, enemyPos, dis, mask);
+            raycast2D[2] = Physics2D.Raycast(transform.position, Right, dis, mask);
+            Debug.DrawRay(transform.position, enemyPos * dis, Color.black);
+            Debug.DrawRay(transform.position, Left * dis, Color.black);
+            Debug.DrawRay(transform.position, Right * dis, Color.black);
+
+            foreach (RaycastHit2D i in raycast2D)
             {
-                float posL = Vector3.Distance(i.collider.transform.position, transform.position + Left);
-                float posR = Vector3.Distance(i.collider.transform.position, transform.position + Right);
-                if (posL > posR)
+                if ((i.collider != null) && (i.collider.tag == this.gameObject.tag))
                 {
-                    transform.position += Left * speed * Time.deltaTime;
+                    float posL = Vector3.Distance(i.collider.transform.position, transform.position + Left);
+                    float posR = Vector3.Distance(i.collider.transform.position, transform.position + Right);
+                    if (posL > posR)
+                    {
+                        transform.position += Left * speed * Time.deltaTime;
+                    }
+                    else
+                    {
+                        transform.position += Right * speed * Time.deltaTime;
+                    }
+                    return isFix = true;
                 }
-                else
-                {
-                    transform.position += Right * speed * Time.deltaTime;
-                }
-                isfix = true;
-                break;
-            }
-            else
-            {
-                isfix = false;
             }
         }
+        return isFix = false;
     }
     private IEnumerator attack()
     {
+        Vector2 direction = enemy.transform.position - transform.position;
+        direction = direction.normalized;
+        animator.SetBool("moving", false);
+        animator.SetFloat("moveX", Mathf.RoundToInt(direction.x));
+        animator.SetFloat("moveY", Mathf.RoundToInt(direction.y));
         nextAttack = attackRate;
         animator.SetBool("attacking", true);
         currentState = MonsterState.attack;
         yield return null;
         animator.SetBool("attacking", false);
-        yield return new WaitForSeconds(attackRate);
     }
-    private IEnumerator Pigeonsec()
+    public IEnumerator PigeonChange(float t)
     {
-        animator.SetBool("moving", false);
-        animator.SetBool("attacking", false);
-        animator.SetBool("transform", true);
         currentState = MonsterState.pigeon;
-        yield return null;
-        animator.SetBool("transform", false);
-        yield return new WaitForSeconds(5);
-        animator.SetBool("moving", true);
-        currentState = MonsterState.walk;
-        pigeon = 0;
-    }
-    public IEnumerator MonsterStartStone()
-    {
-        StartCoroutine(MonsterStartStone(5));
-        yield return null;
-    }
-    public IEnumerator MonsterStartStone(int time)
-    {
-        this.currentState = MonsterState.idle;
-        this.GetComponent<SpriteRenderer>().color = new Color32(89, 89, 89, 255);
-        yield return new WaitForSeconds(time);
-        this.currentState = MonsterState.walk;
-        this.GetComponent<SpriteRenderer>().color = new Color32(255, 255, 255, 255);
+        animator.SetBool("moving", false);
+        animator.SetBool("pigeon", true);
+        yield return new WaitForSeconds(t);
+        animator.SetBool("pigeon", false);
     }
 }
