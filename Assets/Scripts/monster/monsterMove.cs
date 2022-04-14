@@ -15,10 +15,11 @@ public class monsterMove : MonoBehaviour
 {
     [HideInInspector] public static int redsort, bluesort;
     [HideInInspector] public Animator animator;//動畫
-    [Header("怪物數值設定")]
-    public MonsterState currentState;
+    [Header("初始數值")]
     [SerializeField] private float walkDir_Y;
     [SerializeField] private float setTime;
+    [Header("怪物數值")]
+    public MonsterState currentState;
     public float speed;
     [SerializeField] private int MaxHealth;
     private int CurHealth;
@@ -28,7 +29,8 @@ public class monsterMove : MonoBehaviour
     [SerializeField] private float detectRange;
     [Header("召喚消耗")]
     public ResourceAmount[] CostArray;
-    private GameObject enemy;
+    [Header("追蹤目標")]
+    public GameObject enemy;
     private float nextAttack;//下次攻擊時間
     RaycastHit2D[] raycast2D = new RaycastHit2D[3]; //雷射
     LayerMask mask;  //遮罩

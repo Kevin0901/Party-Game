@@ -14,9 +14,8 @@ GameObject:
   - component: {fileID: 310186246938401168}
   - component: {fileID: 310186246938401172}
   - component: {fileID: 310186246938401171}
-  - component: {fileID: 3073859328158297926}
   m_Layer: 12
-  m_Name: giant
+  m_Name: Giant
   m_TagString: blue
   m_Icon: {fileID: 7148428337604731935, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
@@ -89,7 +88,7 @@ SpriteRenderer:
   m_Size: {x: 2, y: 3.2}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 1
+  m_WasSpriteAssigned: 0
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
 --- !u!95 &310186246938401165
@@ -158,9 +157,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   animator: {fileID: 0}
-  currentState: 0
   walkDir_Y: 0
   setTime: 1
+  currentState: 0
   speed: 1.5
   MaxHealth: 100
   attackRate: 2
@@ -174,26 +173,10 @@ MonoBehaviour:
     amount: 15
   - resourceType: {fileID: 11400000, guid: bc734ecf5539a2f44a3703d03b6d384e, type: 2}
     amount: 10
+  enemy: {fileID: 0}
   dis: 0
   up: {fileID: 21300000, guid: 4bb3acfeca2056546b68a95d768dc69e, type: 3}
   down: {fileID: 21300000, guid: a044069cd0b7bcc429cb702ebed13ac3, type: 3}
-  pigeon: 0
---- !u!70 &3073859328158297926
-CapsuleCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 310186246938401164}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0.043363303, y: 0.023605347}
-  m_Size: {x: 0.8508702, y: 1.4532235}
-  m_Direction: 0
 --- !u!1 &4701234833728462302
 GameObject:
   m_ObjectHideFlags: 0

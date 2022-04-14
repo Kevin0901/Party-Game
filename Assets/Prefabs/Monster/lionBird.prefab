@@ -14,9 +14,8 @@ GameObject:
   - component: {fileID: 2891440172044450022}
   - component: {fileID: 2891440172044450026}
   - component: {fileID: 2891440172044450027}
-  - component: {fileID: 4709107289632110052}
   m_Layer: 12
-  m_Name: lionBird
+  m_Name: LionBird
   m_TagString: blue
   m_Icon: {fileID: 7148428337604731935, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
@@ -89,7 +88,7 @@ SpriteRenderer:
   m_Size: {x: 3.5, y: 2.8}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 1
+  m_WasSpriteAssigned: 0
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
 --- !u!95 &2891440172044450017
@@ -158,9 +157,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   animator: {fileID: 0}
-  currentState: 0
   walkDir_Y: 0
   setTime: 1
+  currentState: 0
   speed: 1.5
   MaxHealth: 100
   attackRate: 2
@@ -174,26 +173,10 @@ MonoBehaviour:
     amount: 15
   - resourceType: {fileID: 11400000, guid: bc734ecf5539a2f44a3703d03b6d384e, type: 2}
     amount: 10
+  enemy: {fileID: 0}
   dis: 0
   up: {fileID: 21300000, guid: b238b8d3896b15f47a0b5971ed7a6dbf, type: 3}
   down: {fileID: 21300000, guid: b7d41c6c0345fa8469fee409403f75cf, type: 3}
-  pigeon: 0
---- !u!70 &4709107289632110052
-CapsuleCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2891440172044450018}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0.01501172, y: -0.076331384}
-  m_Size: {x: 1.3172706, y: 1.1286904}
-  m_Direction: 1
 --- !u!1 &3270755277125721365
 GameObject:
   m_ObjectHideFlags: 0

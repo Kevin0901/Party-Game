@@ -417,9 +417,8 @@ GameObject:
   - component: {fileID: 5090142021535760878}
   - component: {fileID: 5090142021535760874}
   - component: {fileID: 5090142021535760873}
-  - component: {fileID: 2583057286932210124}
   m_Layer: 12
-  m_Name: fireBird
+  m_Name: FireBird
   m_TagString: blue
   m_Icon: {fileID: 7148428337604731935, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
@@ -492,7 +491,7 @@ SpriteRenderer:
   m_Size: {x: 3.5, y: 5}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 1
+  m_WasSpriteAssigned: 0
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
 --- !u!95 &5090142021535760851
@@ -561,9 +560,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   animator: {fileID: 0}
-  currentState: 0
   walkDir_Y: 0
   setTime: 1
+  currentState: 0
   speed: 1.5
   MaxHealth: 100
   attackRate: 2
@@ -577,26 +576,10 @@ MonoBehaviour:
     amount: 15
   - resourceType: {fileID: 11400000, guid: bc734ecf5539a2f44a3703d03b6d384e, type: 2}
     amount: 10
+  enemy: {fileID: 0}
   dis: 0
   up: {fileID: 21300000, guid: acb028ebc67c31d4c8323dc04e43da68, type: 3}
   down: {fileID: 21300000, guid: b4757bc3fdf918e4f9c70502269e25ae, type: 3}
-  pigeon: 0
---- !u!70 &2583057286932210124
-CapsuleCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5090142021535760850}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0.0377817, y: -0.018974066}
-  m_Size: {x: 1.0639884, y: 1.50318}
-  m_Direction: 0
 --- !u!1001 &37063086481970922
 PrefabInstance:
   m_ObjectHideFlags: 0

@@ -11,12 +11,11 @@ GameObject:
   - component: {fileID: 1309625769643247228}
   - component: {fileID: 1309625769643247227}
   - component: {fileID: 1309625769643247226}
-  - component: {fileID: 6530966277131186997}
   - component: {fileID: 1309625769643247229}
   - component: {fileID: 1309625769643247217}
   - component: {fileID: 1309625769643247216}
   m_Layer: 12
-  m_Name: threeDog
+  m_Name: ThreeDog
   m_TagString: blue
   m_Icon: {fileID: 7148428337604731935, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
@@ -89,7 +88,7 @@ SpriteRenderer:
   m_Size: {x: 3.6, y: 4.89}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 1
+  m_WasSpriteAssigned: 0
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
 --- !u!95 &1309625769643247226
@@ -111,22 +110,6 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
---- !u!70 &6530966277131186997
-CapsuleCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1309625769643247225}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0.0030162772, y: -0.13590814}
-  m_Size: {x: 1.4290204, y: 1.4028367}
-  m_Direction: 1
 --- !u!50 &1309625769643247229
 Rigidbody2D:
   serializedVersion: 4
@@ -174,9 +157,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   animator: {fileID: 0}
-  currentState: 0
   walkDir_Y: 0
   setTime: 1
+  currentState: 0
   speed: 1.5
   MaxHealth: 100
   attackRate: 2
@@ -190,10 +173,10 @@ MonoBehaviour:
     amount: 15
   - resourceType: {fileID: 11400000, guid: bc734ecf5539a2f44a3703d03b6d384e, type: 2}
     amount: 10
+  enemy: {fileID: 0}
   dis: 0
   up: {fileID: 21300000, guid: 2f182f93f0faa694f87162a936996b7f, type: 3}
   down: {fileID: 21300000, guid: 03a6135a17b213243b21526e72b943de, type: 3}
-  pigeon: 0
 --- !u!1 &1408413878742371731
 GameObject:
   m_ObjectHideFlags: 0
