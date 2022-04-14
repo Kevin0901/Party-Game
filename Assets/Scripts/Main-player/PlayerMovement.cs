@@ -46,8 +46,8 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private GameObject[] generateUI;
     [SerializeField] private GameObject[] towerlist;
     [SerializeField] private GameObject[] monsterlist;
-    [HideInInspector] public int intower;
-    [HideInInspector] public int interritory;
+     public int intower;
+     public int interritory;
     [SerializeField] private GameObject[] canthrowitem;
     [Header("總玩家數")]
     public int allplayercount;
@@ -67,6 +67,13 @@ public class PlayerMovement : MonoBehaviour
         animator = this.GetComponent<Animator>();
         health.maxH = MaxHealth;
         orginspeed = speed;
+<<<<<<< Updated upstream
+=======
+        UI=this.GetComponent<UIState>();
+        // PV = GetComponent<PhotonView>();  //定義PhotonView
+        // MultiPlayerManager = PhotonView.Find((int)PV.InstantiationData[0]).GetComponent<MultiPlayerManager>();  //設定自己的 PlayerManager
+        // MultiPlayerManager.OherPlayer = this.gameObject;  //設定 PlayerManager 中的 OherPlayer
+>>>>>>> Stashed changes
     }
     void Start()
     {
@@ -358,8 +365,10 @@ public class PlayerMovement : MonoBehaviour
                 {
                     if (Time.time > nextfire && this.tag == "red")
                     {
+                        Debug.Log("red");
                         if (ResourceManager.Instance.RedCanAfford(monsterlist[UI.mx].GetComponent<monsterMove>().CostArray) != false)
                         {
+                            Debug.Log("y");
                             ResourceManager.Instance.RedSpendResources(monsterlist[UI.mx].GetComponent<monsterMove>().CostArray);
                             monsterlist[UI.mx].gameObject.tag = this.tag;
                             GameObject monster = Instantiate(monsterlist[UI.mx], this.transform.position, Quaternion.identity);
@@ -368,6 +377,7 @@ public class PlayerMovement : MonoBehaviour
                         }
                         else
                         {
+                            Debug.Log("en");
                             StartCoroutine(ResuorceNotEnoughShow());
                         }
                     }
@@ -389,6 +399,7 @@ public class PlayerMovement : MonoBehaviour
                 }
                 else
                 {
+                    Debug.Log("ot");
                     StartCoroutine(Cantbuildshow());
                 }
             }
