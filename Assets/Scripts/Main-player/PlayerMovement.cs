@@ -335,7 +335,7 @@ public class PlayerMovement : MonoBehaviour
         }
         else
         {
-            if (Input.GetKey(KeyCode.Return))
+            if (Input.GetKeyDown(KeyCode.Return))
             {
                 if (UI.b != 0 && interritory == 1 && intower == 0)
                 {
@@ -372,18 +372,19 @@ public class PlayerMovement : MonoBehaviour
                 {
                     if (Time.time > nextfire && this.tag == "red")
                     {
-                        if (ResourceManager.Instance.RedCanAfford(monsterlist[UI.mx].GetComponent<monsterMove>().CostArray) != false)
-                        {
-                            ResourceManager.Instance.RedSpendResources(monsterlist[UI.mx].GetComponent<monsterMove>().CostArray);
-                            monsterlist[UI.mx].gameObject.tag = this.tag;
-                            GameObject monster = Instantiate(monsterlist[UI.mx], this.transform.position, Quaternion.identity);
-                            monster.transform.position += new Vector3(0, 2, 0);
-                            nextfire = Time.time + fireRate;
-                        }
-                        else
-                        {
-                            StartCoroutine(ResuorceNotEnoughShow());
-                        }
+                        ResourceManager.Instance.TestCanAfford(monsterlist[UI.mx].GetComponent<monsterMove>().CostArray);
+                        // if (ResourceManager.Instance.RedCanAfford(monsterlist[UI.mx].GetComponent<monsterMove>().CostArray) != false)
+                        // {
+                        //     ResourceManager.Instance.RedSpendResources(monsterlist[UI.mx].GetComponent<monsterMove>().CostArray);
+                        //     monsterlist[UI.mx].gameObject.tag = this.tag;
+                        //     GameObject monster = Instantiate(monsterlist[UI.mx], this.transform.position, Quaternion.identity);
+                        //     monster.transform.position += new Vector3(0, 2, 0);
+                        //     nextfire = Time.time + fireRate;
+                        // }
+                        // else
+                        // {
+                        //     StartCoroutine(ResuorceNotEnoughShow());
+                        // }
                     }
                     else if (Time.time > nextfire && this.tag == "blue")
                     {

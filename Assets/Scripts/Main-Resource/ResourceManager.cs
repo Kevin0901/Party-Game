@@ -17,9 +17,12 @@ public class ResourceManager : MonoBehaviour
     public float Brestimes = 1;
     public float timer;
     private float timerMax = 0.5f;
-    private int c = 0;
     public DatabaseReference reference;
-    private int RedresourceAmount, BlueresourceAmount;
+    private List<int> RedresourceAmount = new List<int>();
+    public bool getcheck = false;
+    public bool canafford = false;
+    private int n = 0;
+    private int BlueresourceAmount;
     PhotonView PV;
     private ResourceTypeListSO resourceTypeList;
     private void Awake()
@@ -154,13 +157,38 @@ public class ResourceManager : MonoBehaviour
         BlueAddAllResource((int)(2 * Rrestimes));
     }
 
-    public int RedGetResourceAmount(ResourceTypeSo resourceType)
+    public void RedGetResourceAmount(ResourceAmount[] resourceAmountsArray)
     {
+        int c = 0;
+        List<int> reslist = new List<int>();
+        getcheck = false;
         StartCoroutine(GetTeamResourceData((DataSnapshot Redinfo) =>
         {
-            RedresourceAmount = Convert.ToInt32(Redinfo.Child(resourceType.ToString()).Value);
+            if (Convert.ToInt32(Redinfo.Child(resourceAmountsArray[0].resourceType.ToString()).Value) > resourceAmountsArray[0].amount)
+            {
+                c++;
+            }
+            if (Convert.ToInt32(Redinfo.Child(resourceAmountsArray[1].resourceType.ToString()).Value) > resourceAmountsArray[1].amount)
+            {
+                c++;
+            }
+            if (Convert.ToInt32(Redinfo.Child(resourceAmountsArray[2].resourceType.ToString()).Value) > resourceAmountsArray[2].amount)
+            {
+                c++;
+            }
+            if (c == resourceAmountsArray.Length)
+            {
+                canafford = true;
+            }
+            getcheck = true;
+            c++;
+            // reslist.Add(Convert.ToInt32(Redinfo.Child(resourceAmountsArray[0].resourceType.ToString()).Value));
+            // reslist.Add(Convert.ToInt32(Redinfo.Child(resourceAmountsArray[1].resourceType.ToString()).Value));
+            // reslist.Add(Convert.ToInt32(Redinfo.Child(resourceAmountsArray[2].resourceType.ToString()).Value));
+            // RedresourceAmount = reslist;
         }, (DataSnapshot Blueinfo) => { }));
-        return RedresourceAmount;
+
+
     }
 
     public int BlueGetResourceAmount(ResourceTypeSo resourceType)
@@ -173,16 +201,41 @@ public class ResourceManager : MonoBehaviour
 
     }
 
+    public void TestCanAfford(ResourceAmount[] resourceAmountsArray)
+    {
+        RedGetResourceAmount(resourceAmountsArray);
+    }
+
     public bool RedCanAfford(ResourceAmount[] resourceAmountsArray)
     {
-        foreach (ResourceAmount resourceAmount in resourceAmountsArray)
+        Debug.Log(RedresourceAmount.Count);
+        RedGetResourceAmount(resourceAmountsArray);
+        if (getcheck)
         {
-            if (RedGetResourceAmount(resourceAmount.resourceType) < resourceAmount.amount)
-            {
-                return false;
-            }
+            Debug.Log(RedresourceAmount.Count);
         }
+        // Debug.Log(RedresourceAmount[0]);
+        Debug.Log(resourceAmountsArray[0].amount);
+        // Debug.Log(RedresourceAmount[0] + ":" + resourceAmountsArray[0].amount);
+        // Debug.Log(RedresourceAmount[1] + ":" + resourceAmountsArray[1].amount);
+        // Debug.Log(RedresourceAmount[2] + ":" + resourceAmountsArray[2].amount);
+        // for (int i = 0; i < RedresourceAmount.Count; i++)
+        // {
+        //     Debug.Log(RedresourceAmount[i] + ":" + resourceAmountsArray[i].amount);
+        //     if (RedresourceAmount[i] < resourceAmountsArray[i].amount)
+        //     {
+        //         return false;
+        //     }
+        // }
         return true;
+        // foreach (ResourceAmount resourceAmount in resourceAmountsArray)
+        // {
+        //     if (RedGetResourceAmount(resourceAmount.resourceType) < resourceAmount.amount)
+        //     {
+        //         return false;
+        //     }
+        // }
+        // return true;
     }
 
     public bool BlueCanAfford(ResourceAmount[] resourceAmountsArray)
