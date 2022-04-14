@@ -163,7 +163,7 @@ MonoBehaviour:
   speed: 1.5
   MaxHealth: 100
   attackRate: 2
-  attackDamage: 10
+  attackDamage: 30
   attackRange: 2
   detectRange: 5
   CostArray:
@@ -174,9 +174,9 @@ MonoBehaviour:
   - resourceType: {fileID: 11400000, guid: bc734ecf5539a2f44a3703d03b6d384e, type: 2}
     amount: 10
   enemy: {fileID: 0}
-  dis: 0
-  up: {fileID: 21300000, guid: 2f182f93f0faa694f87162a936996b7f, type: 3}
-  down: {fileID: 21300000, guid: 03a6135a17b213243b21526e72b943de, type: 3}
+  dis: 3
+  up: {fileID: 0}
+  down: {fileID: 0}
 --- !u!1 &1408413878742371731
 GameObject:
   m_ObjectHideFlags: 0
