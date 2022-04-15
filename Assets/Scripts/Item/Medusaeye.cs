@@ -34,7 +34,7 @@ public class Medusaeye : MonoBehaviour
         {
             if (enemy.GetComponent<monsterMove>() != null)
             {
-                StartCoroutine(enemy.GetComponent<Effect>().StoneEffect());
+                enemy.GetComponent<Effect>().StartCoroutine("StoneEffect");
             }
         }
     }

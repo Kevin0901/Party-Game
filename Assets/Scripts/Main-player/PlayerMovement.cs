@@ -146,7 +146,7 @@ public class PlayerMovement : MonoBehaviour
         }
         if (Input.GetKeyDown(KeyCode.E))
         {
-            inventory.AddItem(new Item { itemType = Item.ItemType.Medusaeye, amount = 1 });
+            inventory.AddItem(new Item { itemType = Item.ItemType.Medusaeye, amount = 10 });
         }
     }
     public void spawn()

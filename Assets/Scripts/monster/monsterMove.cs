@@ -174,17 +174,5 @@ public class monsterMove : MonoBehaviour
         pigeon = 0;
     }
 
-    public IEnumerator MonsterStartStone()
-    {
-        StartCoroutine(MonsterStartStone(5));
-        yield return null;
-    }
-    public IEnumerator MonsterStartStone(int time)
-    {
-        this.currentState = MonsterState.idle;
-        this.GetComponent<SpriteRenderer>().color = new Color32(89, 89, 89, 255);
-        yield return new WaitForSeconds(time);
-        this.currentState = MonsterState.walk;
-        this.GetComponent<SpriteRenderer>().color = new Color32(255, 255, 255, 255);
-    }
+
 }

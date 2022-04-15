@@ -206,6 +206,7 @@ GameObject:
   - component: {fileID: 1201061227223450830}
   - component: {fileID: 7708772306302746451}
   - component: {fileID: 8181099626777161877}
+  - component: {fileID: 3677939763619318937}
   m_Layer: 9
   m_Name: solider
   m_TagString: red
@@ -402,6 +403,32 @@ CapsuleCollider2D:
   m_Offset: {x: -0.021775305, y: -0.07023585}
   m_Size: {x: 0.8517879, y: 0.9600394}
   m_Direction: 0
+--- !u!114 &3677939763619318937
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8384147193368007409}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 60c601181f220ff4691a355dcb396533, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  PowDuration: 10
+  PowMagnification: 2
+  SpeedDuration: 10
+  SpeedMagnification: 2
+  PHPreSec: 0.5
+  PHDuration: 3
+  PHPersen: 30
+  StoneDuration: 3
+  BurnPreSec: 0.5
+  BurnDuration: 3
+  BurnPersen: 30
+  InvincibleDuration: 5
+  RandEffectTimes: 3
+  ProjectileInfiniteDuration: 5
 --- !u!1 &8659158266296150270
 GameObject:
   m_ObjectHideFlags: 0

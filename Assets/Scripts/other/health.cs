@@ -70,7 +70,7 @@ public class health : MonoBehaviour
                 return;
             }
             curH -= damageToGive;
-            PV.RPC("RPC_Hurt", RpcTarget.All, damageToGive, PV.Owner.NickName);
+            // PV.RPC("RPC_Hurt", RpcTarget.All, damageToGive, PV.Owner.NickName);
         }
     }
     [PunRPC]

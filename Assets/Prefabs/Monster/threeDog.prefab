@@ -16,6 +16,7 @@ GameObject:
   - component: {fileID: 1309625769643247216}
   - component: {fileID: 1309625769643247231}
   - component: {fileID: 6530966277131186997}
+  - component: {fileID: -1916121271458465451}
   m_Layer: 9
   m_Name: threeDog
   m_TagString: blue
@@ -59,6 +60,7 @@ SpriteRenderer:
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_RayTracingMode: 0
+  m_RayTraceProcedural: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -211,6 +213,32 @@ CapsuleCollider2D:
   m_Offset: {x: 0.0030162772, y: -0.13590814}
   m_Size: {x: 1.4290204, y: 1.4028367}
   m_Direction: 1
+--- !u!114 &-1916121271458465451
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1309625769643247225}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 60c601181f220ff4691a355dcb396533, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  PowDuration: 10
+  PowMagnification: 2
+  SpeedDuration: 10
+  SpeedMagnification: 2
+  PHPreSec: 0.5
+  PHDuration: 3
+  PHPersen: 30
+  StoneDuration: 3
+  BurnPreSec: 0.5
+  BurnDuration: 3
+  BurnPersen: 30
+  InvincibleDuration: 5
+  RandEffectTimes: 3
+  ProjectileInfiniteDuration: 5
 --- !u!1 &1408413878742371731
 GameObject:
   m_ObjectHideFlags: 0

@@ -36,7 +36,7 @@ public class Fireball : MonoBehaviour
     {
         foreach (GameObject enemy in enemyinlist)
         {
-            StartCoroutine(enemy.GetComponent<Effect>().BurnEffect());
+            enemy.GetComponent<Effect>().StartCoroutine("BurnEffect");
         }
     }
 

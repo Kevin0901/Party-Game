@@ -419,6 +419,7 @@ GameObject:
   - component: {fileID: 5090142021535760873}
   - component: {fileID: 5090142021535760872}
   - component: {fileID: 2583057286932210124}
+  - component: {fileID: 6220889297388550789}
   m_Layer: 9
   m_Name: fireBird
   m_TagString: blue
@@ -462,6 +463,7 @@ SpriteRenderer:
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_RayTracingMode: 0
+  m_RayTraceProcedural: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -614,6 +616,32 @@ CapsuleCollider2D:
   m_Offset: {x: 0.0377817, y: -0.018974066}
   m_Size: {x: 1.0639884, y: 1.50318}
   m_Direction: 0
+--- !u!114 &6220889297388550789
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5090142021535760850}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 60c601181f220ff4691a355dcb396533, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  PowDuration: 10
+  PowMagnification: 2
+  SpeedDuration: 10
+  SpeedMagnification: 2
+  PHPreSec: 0.5
+  PHDuration: 3
+  PHPersen: 30
+  StoneDuration: 3
+  BurnPreSec: 0.5
+  BurnDuration: 3
+  BurnPersen: 30
+  InvincibleDuration: 5
+  RandEffectTimes: 3
+  ProjectileInfiniteDuration: 5
 --- !u!1001 &37063086481970922
 PrefabInstance:
   m_ObjectHideFlags: 0
