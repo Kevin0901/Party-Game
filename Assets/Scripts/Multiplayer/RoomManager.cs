@@ -17,8 +17,11 @@ public class RoomManager : MonoBehaviourPunCallbacks
     public string[] PlayerTeam;
     PhotonView PV;
     public int Game_num;
+    bool EnteredGame;
+    GameObject PAPA;
     void Awake()
     {
+        EnteredGame = false;
         // if (Instance)
         // {
         //     Destroy(gameObject);
@@ -100,13 +103,28 @@ public class RoomManager : MonoBehaviourPunCallbacks
     {
         if (scene.buildIndex == 1) //如果在遊戲場景
         {
-            if (PV.IsMine)  //只有房主的 RoomManager 執行以下程式碼
+            if(!EnteredGame)
             {
-                PV.RPC("RPC_SetArryList", RpcTarget.All, PlayerNames, PlayerTeam);  //廣播到所有玩家的電腦，設定 PlayerNames[] 跟 PlayerTeam[]
+                if(PV.IsMine)
+                {
+                    PV.RPC("RPC_SetArryList", RpcTarget.All, PlayerNames, PlayerTeam);  //廣播到所有玩家的電腦，設定 PlayerNames[] 跟 PlayerTeam[]
+                }
+                EnteredGame = true;
+                PAPA = GameObject.Find("PAPA");
+                PAPA.GetComponent<PAPA>().OpenChild();
+            }
+            else
+            {
+                if(GameObject.Find("PAPA") != null)
+                {
+                    Destroy(GameObject.Find("PAPA"));
+                    PAPA.SetActive(true);
+                }
             }
         }
         else if (scene.buildIndex == 2)
         {
+            PAPA.SetActive(false);
             if (PV.IsMine)
             {
                 for (int i = 0; i < PhotonNetwork.PlayerList.Length; i++)
@@ -131,5 +149,11 @@ public class RoomManager : MonoBehaviourPunCallbacks
         PlayerTeam = PT;
         //每個玩家實例化自己的 PlayerManager
         GameObject Manager = PhotonNetwork.Instantiate(Path.Combine("PhotonPrefabs", "PlayerManager"), Vector3.zero, Quaternion.identity);
+    }
+
+    public void Back_To_Main()
+    {
+        Destroy(PAPA);
+        PhotonNetwork.LoadLevel(0);
     }
 }

@@ -210,6 +210,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemiesInRange: []
+  towerData: {fileID: 0}
   Arrow: {fileID: 6473821596328009027, guid: de44a6e73832e76459a136026ca60079, type: 3}
   ArrowSpeed: 50
 --- !u!1001 &2924336139300625687

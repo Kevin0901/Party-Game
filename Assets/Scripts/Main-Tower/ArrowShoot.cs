@@ -1,21 +1,25 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using Photon.Pun;
+using System.IO;
 public class ArrowShoot : MonoBehaviour
 {
     [SerializeField] private List<GameObject> enemiesInRange;
     private Animator animator;
     private float lastShotTime;
-    private TowerData towerData;
+    public TowerData towerData;
 
     private Team t;
 
     [SerializeField] private GameObject Arrow;
     [SerializeField] private float ArrowSpeed;
     private bool issave;
+    PhotonView PV;
     private void Awake()
     {
+        PV = GetComponent<PhotonView>();  //定義PhotonView
+        this.gameObject.tag = PhotonView.Find((int)PV.InstantiationData[0]).tag;
         t = this.GetComponent<Team>();
     }
 
@@ -120,7 +124,7 @@ public class ArrowShoot : MonoBehaviour
 
     private void Shoot(Collider2D target)
     {
-        if (target != null)
+        if (target != null && PV.IsMine)
         {
             Vector3 startPosition = gameObject.transform.position;
             Vector3 targetPosition = target.transform.position;
@@ -128,6 +132,9 @@ public class ArrowShoot : MonoBehaviour
             targetPosition.z = Arrow.transform.position.z;
 
             GameObject arrowbh = (GameObject)Instantiate(Arrow);
+            // GameObject arrowbh = PhotonNetwork.Instantiate(Path.Combine("PhotonPrefabs", "Main-tower/Towerchild/apolloArrow"),
+            // this.transform.position,this.transform.rotation, 0, new object[] { PV.ViewID });
+
             arrowbh.transform.position = startPosition;
             ArrowBehavior arrowComp = arrowbh.GetComponent<ArrowBehavior>();
             arrowComp.target = target.gameObject;

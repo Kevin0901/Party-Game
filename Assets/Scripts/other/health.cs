@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.UI;
-
+using Photon.Pun;
 public class health : MonoBehaviour
 {
     // Start is called before the first frame update
@@ -14,12 +14,14 @@ public class health : MonoBehaviour
     private Slider bar;
     public bool iswudi;//無敵
     public int playercatchsheeponhit = 0;
+    PhotonView PV;
     private void Awake()
     {
         ResourceTypeListSO resourceTypeList = Resources.Load<ResourceTypeListSO>(typeof(ResourceTypeListSO).Name);
     }
     void Start()
     {
+        PV = this.GetComponent<PhotonView>();
         iswudi = false;
         healthBarSet();
         curH = maxH;
@@ -29,7 +31,7 @@ public class health : MonoBehaviour
     }
     private void Update()
     {
-        if (curH <= 0)
+        if (curH <= 0 && parentSet.layer != 14)
         {
             ResourceTypeListSO resourceTypeList = Resources.Load<ResourceTypeListSO>(typeof(ResourceTypeListSO).Name); //死掉加對方資源
             if (parentSet.tag == "red")
@@ -63,7 +65,24 @@ public class health : MonoBehaviour
         }
         else if (!iswudi)
         {
+            if (!PV.IsMine)
+            {
+                return;
+            }
             curH -= damageToGive;
+            PV.RPC("RPC_Hurt", RpcTarget.All, damageToGive, PV.Owner.NickName);
+        }
+    }
+    [PunRPC]
+    void RPC_Hurt(int dam, string who)
+    {
+        if (PV.IsMine)
+        {
+            return;
+        }
+        if (PV.Owner.NickName.Equals(who))
+        {
+            curH -= dam;
         }
     }
     private IEnumerator phoenix(int t) //無敵

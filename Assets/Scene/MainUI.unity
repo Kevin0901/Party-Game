@@ -463,6 +463,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 080e130eaccd3044aa472884ca4354a0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  plist: []
+  player: {fileID: 0}
+  fightplayer: {fileID: 0}
+  EventGame: 
 --- !u!4 &588810394
 Transform:
   m_ObjectHideFlags: 0
@@ -2477,7 +2481,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &1739546515
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2523,7 +2527,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1739546514}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 1010.9491, y: 641.529, z: -296.959}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}

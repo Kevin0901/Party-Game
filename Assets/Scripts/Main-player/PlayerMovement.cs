@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using Photon.Pun;
 using Photon.Realtime;
+using System.IO;
 public enum PlayerState
 {
     walk,
@@ -60,7 +61,6 @@ public class PlayerMovement : MonoBehaviour
     public float orginspeed;
     private float nextfire;
     public int ProjectileCost = 1;
-    // Start is called before the first frame update
     public PhotonView PV;
     public MultiPlayerManager MultiPlayerManager;
     private void Awake()
@@ -70,24 +70,25 @@ public class PlayerMovement : MonoBehaviour
         animator = this.GetComponent<Animator>();
         health.maxH = MaxHealth;
         orginspeed = speed;
-        // PV = GetComponent<PhotonView>();  //定義PhotonView
-        // MultiPlayerManager = PhotonView.Find((int)PV.InstantiationData[0]).GetComponent<MultiPlayerManager>();  //設定自己的 PlayerManager
-        // MultiPlayerManager.OherPlayer = this.gameObject;  //設定 PlayerManager 中的 OherPlayer
+        PV = GetComponent<PhotonView>();  //定義PhotonView
+        MultiPlayerManager = PhotonView.Find((int)PV.InstantiationData[0]).GetComponent<MultiPlayerManager>();  //設定自己的 PlayerManager
+        MultiPlayerManager.OherPlayer = this.gameObject;  //設定 PlayerManager 中的 OherPlayer
     }
     void Start()
     {
+        this.transform.parent.SetParent(GameObject.Find("PAPA").transform);
         mouse = this.transform.parent.Find("mouseUI").gameObject;
         nextfire = 0;
         mrigibody = this.GetComponent<Rigidbody2D>();
         UiandInventoryGet();
-        // if (!PV.IsMine)  //如果此玩家 GameObject 是別人的鏡像，消除 UI 以及 Camera
-        // {
-        //     mouse.SetActive(false);
-        //     timer.SetActive(false);
-        //     playercamera.gameObject.SetActive(false);
+        if (!PV.IsMine)  //如果此玩家 GameObject 是別人的鏡像，消除 UI 以及 Camera
+        {
+            mouse.SetActive(false);
+            timer.SetActive(false);
+            playercamera.gameObject.SetActive(false);
 
-        //     return;
-        // }
+            return;
+        }
     }
     private void OnEnable()
     {
@@ -131,10 +132,10 @@ public class PlayerMovement : MonoBehaviour
             Invoke("spawn", 2);
             this.gameObject.SetActive(false);
         }
-        // if (!PV.IsMine)
-        // {
-        //     return;
-        // }
+        if (!PV.IsMine)
+        {
+            return;
+        }
         PlayerMove();
         Playerthrow();
         PlayerItemUse();
@@ -345,7 +346,8 @@ public class PlayerMovement : MonoBehaviour
                         {
                             ResourceManager.Instance.RedSpendResources(towerlist[UI.bx].GetComponent<TowerData>().CostArray);
                             towerlist[UI.bx].gameObject.tag = this.tag;
-                            Instantiate(towerlist[UI.bx], this.transform.position, Quaternion.identity);
+                            PhotonNetwork.Instantiate(Path.Combine("PhotonPrefabs", "Main-tower/"+towerlist[UI.bx].gameObject.name), this.transform.position, Quaternion.identity, 0, new object[] { PV.ViewID });
+                            // Instantiate(towerlist[UI.bx], this.transform.position, Quaternion.identity);
                             nextfire = Time.time + fireRate;
                         }
                         else
@@ -359,7 +361,8 @@ public class PlayerMovement : MonoBehaviour
                         {
                             ResourceManager.Instance.BlueSpendResources(towerlist[UI.bx].GetComponent<TowerData>().CostArray);
                             towerlist[UI.bx].gameObject.tag = this.tag;
-                            Instantiate(towerlist[UI.bx], this.transform.position, Quaternion.identity);
+                            PhotonNetwork.Instantiate(Path.Combine("PhotonPrefabs", "Main-tower/"+towerlist[UI.bx].gameObject.name), this.transform.position, Quaternion.identity, 0, new object[] { PV.ViewID });
+                            // Instantiate(towerlist[UI.bx], this.transform.position, Quaternion.identity);
                             nextfire = Time.time + fireRate;
                         }
                         else
@@ -502,14 +505,14 @@ public class PlayerMovement : MonoBehaviour
     void UiandInventoryGet()
     {
         UI = this.GetComponent<UIState>();
-        // if (!PV.IsMine)
-        // {
-        //     UI.enabled = false;
-        //     for (int i = 1; i < 10; i++)
-        //     {
-        //         this.gameObject.transform.parent.GetChild(i).gameObject.SetActive(false);
-        //     }
-        // }
+        if (!PV.IsMine)
+        {
+            UI.enabled = false;
+            for (int i = 1; i < 10; i++)
+            {
+                this.gameObject.transform.parent.GetChild(i).gameObject.SetActive(false);
+            }
+        }
         UI.GetGameobject();
         inventory = new Inventory();
         uiInventory = UI.GetInventory();

@@ -44,6 +44,18 @@ public class Launcher : MonoBehaviourPunCallbacks
     {
         isLogin = false;
         reference = FirebaseDatabase.DefaultInstance.RootReference;  //定義資料庫連接
+        if(GameObject.Find("RoomManager") != null)
+        {
+            Destroy(GameObject.Find("RoomManager"));
+        }
+        if(PhotonNetwork.InRoom)
+        {
+            PhotonNetwork.LeaveRoom();
+        }
+        if(PhotonNetwork.IsConnected)
+        {
+            PhotonNetwork.Disconnect();
+        }
         Debug.Log("Connecting to Master");
         PhotonNetwork.ConnectUsingSettings();  //開啟連線
     }
@@ -67,6 +79,7 @@ public class Launcher : MonoBehaviourPunCallbacks
         }
         
         Debug.Log("Joined Lobby");
+        RoomManager.gameObject.SetActive(true);
     }
 
     public void CreateRoom()  //創建房間(按鈕觸發)

@@ -34,6 +34,7 @@ public class MultiPlayerManager : MonoBehaviour
         {
             StartCoroutine(WaitOtherPlayer());
         }
+        this.transform.SetParent(GameObject.Find("PAPA").transform);
     }
 
     public void GetValue()  //從 RoomManager 抓取 PlayerNames[] 跟 PlayerTeam[]

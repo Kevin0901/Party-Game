@@ -34,8 +34,8 @@ public class ResourceManager : MonoBehaviour
         resourceTypeList = Resources.Load<ResourceTypeListSO>(typeof(ResourceTypeListSO).Name);
         foreach (ResourceTypeSo resourceType in resourceTypeList.list)
         {
-            reference.Child("GameRoom").Child("123456").Child("RedResource").Child(resourceType.ToString()).SetValueAsync(100);
-            reference.Child("GameRoom").Child("123456").Child("BlueResource").Child(resourceType.ToString()).SetValueAsync(100);
+            reference.Child("GameRoom").Child(PhotonNetwork.CurrentRoom.Name).Child("RedResource").Child(resourceType.ToString()).SetValueAsync(100);
+            reference.Child("GameRoom").Child(PhotonNetwork.CurrentRoom.Name).Child("BlueResource").Child(resourceType.ToString()).SetValueAsync(100);
             RedresourceAmountDictionary[resourceType] = 100;
             BlueresourceAmountDictionary[resourceType] = 100;
             // if (c == 4)
@@ -77,11 +77,11 @@ public class ResourceManager : MonoBehaviour
     //     StartCoroutine(GetTeamResourceData((DataSnapshot Redinfo) =>
     //     {
     //         int RedresValue = Convert.ToInt32(Redinfo.Child(resourceType.ToString()).Value);
-    //         reference.Child("GameRoom").Child("123456").Child("RedResource").Child(resourceType.ToString()).SetValueAsync(RedresValue + amount);
+    //         reference.Child("GameRoom").Child(PhotonNetwork.CurrentRoom.Name).Child("RedResource").Child(resourceType.ToString()).SetValueAsync(RedresValue + amount);
     //     }, (DataSnapshot Blueinfo) =>
     //     {
     //         int BlueresValue = Convert.ToInt32(Blueinfo.Child(resourceType.ToString()).Value);
-    //         reference.Child("GameRoom").Child("123456").Child("BlueResource").Child(resourceType.ToString()).SetValueAsync(BlueresValue + amount);
+    //         reference.Child("GameRoom").Child(PhotonNetwork.CurrentRoom.Name).Child("BlueResource").Child(resourceType.ToString()).SetValueAsync(BlueresValue + amount);
     //     }));
     //     OnResourceAmountChanged?.Invoke(this, EventArgs.Empty);
     // }
@@ -99,7 +99,7 @@ public class ResourceManager : MonoBehaviour
             int resValue = Convert.ToInt32(Redinfo.Child(resourceType.ToString()).Value);
             if (PV.IsMine)
             {
-                reference.Child("GameRoom").Child("123456").Child("RedResource").Child(resourceType.ToString()).SetValueAsync(resValue + amount);
+                reference.Child("GameRoom").Child(PhotonNetwork.CurrentRoom.Name).Child("RedResource").Child(resourceType.ToString()).SetValueAsync(resValue + amount);
                 OnResourceAmountChanged?.Invoke(this, EventArgs.Empty);
             }
         }, (DataSnapshot Blueinfo) => { }));
@@ -113,9 +113,9 @@ public class ResourceManager : MonoBehaviour
             int resValue2 = Convert.ToInt32(Redinfo.Child(resourceTypeList.list[2].ToString()).Value);
             // if (PV.IsMine)
             // {
-            reference.Child("GameRoom").Child("123456").Child("RedResource").Child(resourceTypeList.list[0].ToString()).SetValueAsync(resValue + amount);
-            reference.Child("GameRoom").Child("123456").Child("RedResource").Child(resourceTypeList.list[1].ToString()).SetValueAsync(resValue1 + amount);
-            reference.Child("GameRoom").Child("123456").Child("RedResource").Child(resourceTypeList.list[2].ToString()).SetValueAsync(resValue2 + amount);
+            reference.Child("GameRoom").Child(PhotonNetwork.CurrentRoom.Name).Child("RedResource").Child(resourceTypeList.list[0].ToString()).SetValueAsync(resValue + amount);
+            reference.Child("GameRoom").Child(PhotonNetwork.CurrentRoom.Name).Child("RedResource").Child(resourceTypeList.list[1].ToString()).SetValueAsync(resValue1 + amount);
+            reference.Child("GameRoom").Child(PhotonNetwork.CurrentRoom.Name).Child("RedResource").Child(resourceTypeList.list[2].ToString()).SetValueAsync(resValue2 + amount);
             OnResourceAmountChanged?.Invoke(this, EventArgs.Empty);
             // }
         }, (DataSnapshot Blueinfo) => { }));
@@ -129,9 +129,9 @@ public class ResourceManager : MonoBehaviour
                int resValue2 = Convert.ToInt32(Blueinfo.Child(resourceTypeList.list[2].ToString()).Value);
                // if (PV.IsMine)
                // {
-               reference.Child("GameRoom").Child("123456").Child("BlueResource").Child(resourceTypeList.list[0].ToString()).SetValueAsync(resValue + amount);
-               reference.Child("GameRoom").Child("123456").Child("BlueResource").Child(resourceTypeList.list[1].ToString()).SetValueAsync(resValue1 + amount);
-               reference.Child("GameRoom").Child("123456").Child("BlueResource").Child(resourceTypeList.list[2].ToString()).SetValueAsync(resValue2 + amount);
+               reference.Child("GameRoom").Child(PhotonNetwork.CurrentRoom.Name).Child("BlueResource").Child(resourceTypeList.list[0].ToString()).SetValueAsync(resValue + amount);
+               reference.Child("GameRoom").Child(PhotonNetwork.CurrentRoom.Name).Child("BlueResource").Child(resourceTypeList.list[1].ToString()).SetValueAsync(resValue1 + amount);
+               reference.Child("GameRoom").Child(PhotonNetwork.CurrentRoom.Name).Child("BlueResource").Child(resourceTypeList.list[2].ToString()).SetValueAsync(resValue2 + amount);
                OnResourceAmountChanged?.Invoke(this, EventArgs.Empty);
            }
         )); ;
@@ -144,7 +144,7 @@ public class ResourceManager : MonoBehaviour
                int resValue = Convert.ToInt32(Blueinfo.Child(resourceType.ToString()).Value);
                if (PV.IsMine)
                {
-                   reference.Child("GameRoom").Child("123456").Child("BlueResource").Child(resourceType.ToString()).SetValueAsync(resValue + amount);
+                   reference.Child("GameRoom").Child(PhotonNetwork.CurrentRoom.Name).Child("BlueResource").Child(resourceType.ToString()).SetValueAsync(resValue + amount);
                    OnResourceAmountChanged?.Invoke(this, EventArgs.Empty);
                }
            }
@@ -257,7 +257,7 @@ public class ResourceManager : MonoBehaviour
             StartCoroutine(GetTeamResourceData((DataSnapshot Redinfo) =>
             {
                 int RedresValue = Convert.ToInt32(Redinfo.Child(resourceAmount.resourceType.ToString()).Value);
-                reference.Child("GameRoom").Child("123456").Child("RedResource").Child(resourceAmount.resourceType.ToString()).SetValueAsync(RedresValue - resourceAmount.amount);
+                reference.Child("GameRoom").Child(PhotonNetwork.CurrentRoom.Name).Child("RedResource").Child(resourceAmount.resourceType.ToString()).SetValueAsync(RedresValue - resourceAmount.amount);
                 Debug.Log(Redinfo.Child(resourceAmount.resourceType.ToString()).Value);
             }, (DataSnapshot Blueinfo) => { }));
         }
@@ -269,7 +269,7 @@ public class ResourceManager : MonoBehaviour
             StartCoroutine(GetTeamResourceData((DataSnapshot Redinfo) => { }, (DataSnapshot Blueinfo) =>
            {
                int BlueresValue = Convert.ToInt32(Blueinfo.Child(resourceAmount.resourceType.ToString()).Value);
-               reference.Child("GameRoom").Child("123456").Child("BlueResource").Child(resourceAmount.resourceType.ToString()).SetValueAsync(BlueresValue - resourceAmount.amount);
+               reference.Child("GameRoom").Child(PhotonNetwork.CurrentRoom.Name).Child("BlueResource").Child(resourceAmount.resourceType.ToString()).SetValueAsync(BlueresValue - resourceAmount.amount);
                Debug.Log(Blueinfo.Child(resourceAmount.resourceType.ToString()).Value);
            }));
         }
@@ -278,9 +278,9 @@ public class ResourceManager : MonoBehaviour
     public IEnumerator GetTeamResourceData(System.Action<DataSnapshot> RedonCallbacks, System.Action<DataSnapshot> BlueonCallbacks)  //從資料庫抓取
     {
         var RedresData = reference.Child("GameRoom").GetValueAsync();
-        RedresData = reference.Child("GameRoom").Child("123456").Child("RedResource").GetValueAsync();
+        RedresData = reference.Child("GameRoom").Child(PhotonNetwork.CurrentRoom.Name).Child("RedResource").GetValueAsync();
         var BlueresData = reference.Child("GameRoom").GetValueAsync();
-        BlueresData = reference.Child("GameRoom").Child("123456").Child("BlueResource").GetValueAsync();
+        BlueresData = reference.Child("GameRoom").Child(PhotonNetwork.CurrentRoom.Name).Child("BlueResource").GetValueAsync();
         yield return new WaitUntil(predicate: () => RedresData.IsCompleted && BlueresData.IsCompleted);
         if (RedresData != null && BlueresData != null)
         {

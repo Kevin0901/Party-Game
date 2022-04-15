@@ -52,6 +52,8 @@ MonoBehaviour:
   - Pun_SetArens
   - RPC_IsArens
   - RPC_NoArens
+  - RPC_Player_Hurt
+  - RPC_Hurt
   DisableAutoOpenWizard: 1
   ShowSettings: 1
   DevRegionSetOnce: 1
