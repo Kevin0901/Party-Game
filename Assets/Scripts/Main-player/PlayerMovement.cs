@@ -68,8 +68,14 @@ public class PlayerMovement : MonoBehaviour
         health.maxH = MaxHealth;
         orginspeed = speed;
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
 =======
         UI=this.GetComponent<UIState>();
+        // PV = GetComponent<PhotonView>();  //定義PhotonView
+        // MultiPlayerManager = PhotonView.Find((int)PV.InstantiationData[0]).GetComponent<MultiPlayerManager>();  //設定自己的 PlayerManager
+        // MultiPlayerManager.OherPlayer = this.gameObject;  //設定 PlayerManager 中的 OherPlayer
+>>>>>>> Stashed changes
+=======
         // PV = GetComponent<PhotonView>();  //定義PhotonView
         // MultiPlayerManager = PhotonView.Find((int)PV.InstantiationData[0]).GetComponent<MultiPlayerManager>();  //設定自己的 PlayerManager
         // MultiPlayerManager.OherPlayer = this.gameObject;  //設定 PlayerManager 中的 OherPlayer
@@ -81,7 +87,18 @@ public class PlayerMovement : MonoBehaviour
         nextfire = 0;
         mrigibody = this.GetComponent<Rigidbody2D>();
         UiandInventoryGet();
+<<<<<<< Updated upstream
         // spawnUI();
+=======
+        // if (!PV.IsMine)  //如果此玩家 GameObject 是別人的鏡像，消除 UI 以及 Camera
+        // {
+        mouse.SetActive(false);
+        timer.SetActive(false);
+        // playercamera.gameObject.SetActive(false);
+
+        return;
+        // }
+>>>>>>> Stashed changes
     }
     private void OnEnable()
     {
@@ -125,6 +142,13 @@ public class PlayerMovement : MonoBehaviour
             Invoke("spawn", 2);
             this.gameObject.SetActive(false);
         }
+<<<<<<< Updated upstream
+=======
+        // if (!PV.IsMine)
+        // {
+        //     return;
+        // }
+>>>>>>> Stashed changes
         PlayerMove();
         Playerthrow();
         PlayerItemUse();
@@ -338,6 +362,10 @@ public class PlayerMovement : MonoBehaviour
                         {
                             ResourceManager.Instance.RedSpendResources(towerlist[UI.bx].GetComponent<TowerData>().CostArray);
                             towerlist[UI.bx].gameObject.tag = this.tag;
+<<<<<<< Updated upstream
+=======
+                            PhotonNetwork.Instantiate(Path.Combine("PhotonPrefabs", "Main-tower/" + towerlist[UI.bx].gameObject.name), this.transform.position, Quaternion.identity, 0, new object[] { PV.ViewID });
+>>>>>>> Stashed changes
                             Instantiate(towerlist[UI.bx], this.transform.position, Quaternion.identity);
                             nextfire = Time.time + fireRate;
                         }
@@ -352,6 +380,10 @@ public class PlayerMovement : MonoBehaviour
                         {
                             ResourceManager.Instance.BlueSpendResources(towerlist[UI.bx].GetComponent<TowerData>().CostArray);
                             towerlist[UI.bx].gameObject.tag = this.tag;
+<<<<<<< Updated upstream
+=======
+                            PhotonNetwork.Instantiate(Path.Combine("PhotonPrefabs", "Main-tower/" + towerlist[UI.bx].gameObject.name), this.transform.position, Quaternion.identity, 0, new object[] { PV.ViewID });
+>>>>>>> Stashed changes
                             Instantiate(towerlist[UI.bx], this.transform.position, Quaternion.identity);
                             nextfire = Time.time + fireRate;
                         }
@@ -365,10 +397,15 @@ public class PlayerMovement : MonoBehaviour
                 {
                     if (Time.time > nextfire && this.tag == "red")
                     {
+<<<<<<< Updated upstream
                         Debug.Log("red");
                         if (ResourceManager.Instance.RedCanAfford(monsterlist[UI.mx].GetComponent<monsterMove>().CostArray) != false)
                         {
                             Debug.Log("y");
+=======
+                        if (ResourceManager.Instance.RedCanAfford(monsterlist[UI.mx].GetComponent<monsterMove>().CostArray) != false)
+                        {
+>>>>>>> Stashed changes
                             ResourceManager.Instance.RedSpendResources(monsterlist[UI.mx].GetComponent<monsterMove>().CostArray);
                             monsterlist[UI.mx].gameObject.tag = this.tag;
                             GameObject monster = Instantiate(monsterlist[UI.mx], this.transform.position, Quaternion.identity);
@@ -377,7 +414,10 @@ public class PlayerMovement : MonoBehaviour
                         }
                         else
                         {
+<<<<<<< Updated upstream
                             Debug.Log("en");
+=======
+>>>>>>> Stashed changes
                             StartCoroutine(ResuorceNotEnoughShow());
                         }
                     }
@@ -498,6 +538,17 @@ public class PlayerMovement : MonoBehaviour
     void UiandInventoryGet()
     {
         UI = this.GetComponent<UIState>();
+<<<<<<< Updated upstream
+=======
+        // if (!PV.IsMine)
+        // {
+        // UI.enabled = false;
+        // for (int i = 1; i < 10; i++)
+        // {
+        //     this.gameObject.transform.parent.GetChild(i).gameObject.SetActive(false);
+        // }
+        // }
+>>>>>>> Stashed changes
         UI.GetGameobject();
         inventory = new Inventory();
         uiInventory = UI.GetInventory();

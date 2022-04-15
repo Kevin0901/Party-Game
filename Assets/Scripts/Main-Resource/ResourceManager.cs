@@ -31,18 +31,39 @@ public class ResourceManager : MonoBehaviour
     private int BlueresourceAmount;
     PhotonView PV;
     private ResourceTypeListSO resourceTypeList;
+<<<<<<< Updated upstream
     // [System.NonSerialized] ResourceTypeListSO resourceTypeList;
+>>>>>>> Stashed changes
+=======
+    [SerializeField] private bool testing;
+    private string roomname;
 >>>>>>> Stashed changes
     private void Awake()
     {
         Instance = this;
         RedresourceAmountDictionary = new Dictionary<ResourceTypeSo, int>();
         BlueresourceAmountDictionary = new Dictionary<ResourceTypeSo, int>();
+<<<<<<< Updated upstream
 
         ResourceTypeListSO resourceTypeList = Resources.Load<ResourceTypeListSO>(typeof(ResourceTypeListSO).Name);
 
         foreach (ResourceTypeSo resourceType in resourceTypeList.list)
         {
+=======
+        resourceTypeList = Resources.Load<ResourceTypeListSO>(typeof(ResourceTypeListSO).Name);
+        if (testing)
+        {
+            roomname = "123456";
+        }
+        else
+        {
+            roomname = PhotonNetwork.CurrentRoom.Name;
+        }
+        foreach (ResourceTypeSo resourceType in resourceTypeList.list)
+        {
+            reference.Child("GameRoom").Child(roomname).Child("RedResource").Child(resourceType.ToString()).SetValueAsync(100);
+            reference.Child("GameRoom").Child(roomname).Child("BlueResource").Child(resourceType.ToString()).SetValueAsync(100);
+>>>>>>> Stashed changes
             RedresourceAmountDictionary[resourceType] = 100;
             BlueresourceAmountDictionary[resourceType] = 100;
 
@@ -115,9 +136,15 @@ public class ResourceManager : MonoBehaviour
         StartCoroutine(GetTeamResourceData((DataSnapshot Redinfo) =>
         {
             int resValue = Convert.ToInt32(Redinfo.Child(resourceType.ToString()).Value);
+<<<<<<< Updated upstream
             // if (PV.IsMine)
             // {
                 reference.Child("GameRoom").Child("123456").Child("RedResource").Child(resourceType.ToString()).SetValueAsync(resValue + amount);
+=======
+            if (PV.IsMine)
+            {
+                reference.Child("GameRoom").Child(roomname).Child("RedResource").Child(resourceType.ToString()).SetValueAsync(resValue + amount);
+>>>>>>> Stashed changes
                 OnResourceAmountChanged?.Invoke(this, EventArgs.Empty);
             // }
         }, (DataSnapshot Blueinfo) => { }));
@@ -126,6 +153,7 @@ public class ResourceManager : MonoBehaviour
     {
         StartCoroutine(GetTeamResourceData((DataSnapshot Redinfo) =>
         {
+<<<<<<< Updated upstream
             int resValue1 = Convert.ToInt32(Redinfo.Child(resourceTypeList.list[0].ToString()).Value);
             int resValue2= Convert.ToInt32(Redinfo.Child(resourceTypeList.list[1].ToString()).Value);
             int resValue3 = Convert.ToInt32(Redinfo.Child(resourceTypeList.list[2].ToString()).Value);
@@ -135,6 +163,17 @@ public class ResourceManager : MonoBehaviour
                 reference.Child("GameRoom").Child("123456").Child("RedResource").Child(resourceTypeList.list[1].ToString()).SetValueAsync(resValue2 + amount);
                 reference.Child("GameRoom").Child("123456").Child("RedResource").Child(resourceTypeList.list[2].ToString()).SetValueAsync(resValue3 + amount);
                 OnResourceAmountChanged?.Invoke(this, EventArgs.Empty);
+=======
+            // if (PV.IsMine)
+            // {
+            for (int i = 0; i < resourceTypeList.list.Count - 1; i++)
+            {
+                int resValue = Convert.ToInt32(Redinfo.Child(resourceTypeList.list[i].ToString()).Value) + amount;
+                reference.Child("GameRoom").Child(roomname).Child("RedResource").Child(resourceTypeList.list[i].ToString()).SetValueAsync(resValue);
+                RedresourceAmountDictionary[resourceTypeList.list[i]] = resValue;
+            }
+            OnResourceAmountChanged?.Invoke(this, EventArgs.Empty);
+>>>>>>> Stashed changes
             // }
         }, (DataSnapshot Blueinfo) => { }));
 >>>>>>> Stashed changes
@@ -144,6 +183,7 @@ public class ResourceManager : MonoBehaviour
     {
         StartCoroutine(GetTeamResourceData((DataSnapshot Redinfo) => { }, (DataSnapshot Blueinfo) =>
            {
+<<<<<<< Updated upstream
                int resValue1 = Convert.ToInt32(Blueinfo.Child(resourceTypeList.list[0].ToString()).Value);
             int resValue2= Convert.ToInt32(Blueinfo.Child(resourceTypeList.list[1].ToString()).Value);
             int resValue3 = Convert.ToInt32(Blueinfo.Child(resourceTypeList.list[2].ToString()).Value);
@@ -154,6 +194,18 @@ public class ResourceManager : MonoBehaviour
                 reference.Child("GameRoom").Child("123456").Child("BlueResource").Child(resourceTypeList.list[2].ToString()).SetValueAsync(resValue3 + amount);
                 OnResourceAmountChanged?.Invoke(this, EventArgs.Empty);
             // }
+=======
+               // if (PV.IsMine)
+               // {
+               for (int i = 0; i < resourceTypeList.list.Count - 1; i++)
+               {
+                   int resValue = Convert.ToInt32(Blueinfo.Child(resourceTypeList.list[i].ToString()).Value) + amount;
+                   reference.Child("GameRoom").Child(roomname).Child("BlueResource").Child(resourceTypeList.list[i].ToString()).SetValueAsync(resValue);
+                   BlueresourceAmountDictionary[resourceTypeList.list[i]] = resValue;
+               }
+               OnResourceAmountChanged?.Invoke(this, EventArgs.Empty);
+               // }
+>>>>>>> Stashed changes
            }
         ));
     }
@@ -171,9 +223,15 @@ public class ResourceManager : MonoBehaviour
         StartCoroutine(GetTeamResourceData((DataSnapshot Redinfo) => { }, (DataSnapshot Blueinfo) =>
            {
                int resValue = Convert.ToInt32(Blueinfo.Child(resourceType.ToString()).Value);
+<<<<<<< Updated upstream
             //    if (PV.IsMine)
             //    {
                    reference.Child("GameRoom").Child("123456").Child("BlueResource").Child(resourceType.ToString()).SetValueAsync(resValue + amount);
+=======
+               if (PV.IsMine)
+               {
+                   reference.Child("GameRoom").Child(roomname).Child("BlueResource").Child(resourceType.ToString()).SetValueAsync(resValue + amount);
+>>>>>>> Stashed changes
                    OnResourceAmountChanged?.Invoke(this, EventArgs.Empty);
             //    }
            }
@@ -195,6 +253,7 @@ public class ResourceManager : MonoBehaviour
 >>>>>>> Stashed changes
     }
 
+<<<<<<< Updated upstream
     public int[] RedGetResourceAmount(ResourceAmount[] resourceType)
     {
 <<<<<<< Updated upstream
@@ -214,6 +273,11 @@ public class ResourceManager : MonoBehaviour
         }, (DataSnapshot Blueinfo) => { }));
         return RedresourceAmount;
 >>>>>>> Stashed changes
+=======
+    public int RedGetResourceAmount(ResourceTypeSo resourceType)
+    {
+        return RedresourceAmountDictionary[resourceType];
+>>>>>>> Stashed changes
     }
 
     public int BlueGetResourceAmount(ResourceTypeSo resourceType)
@@ -224,6 +288,7 @@ public class ResourceManager : MonoBehaviour
     public bool RedCanAfford(ResourceAmount[] resourceAmountsArray)
     {
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
         foreach (ResourceAmount resourceAmount in resourceAmountsArray)
         {
             if (RedGetResourceAmount(resourceAmount.resourceType) >= resourceAmount.amount)
@@ -231,11 +296,17 @@ public class ResourceManager : MonoBehaviour
 
             }
             else
+=======
+        foreach (ResourceAmount resname in resourceAmountsArray)
+        {
+            if (RedresourceAmountDictionary[resname.resourceType] < resname.amount)
+>>>>>>> Stashed changes
             {
                 return false;
             }
         }
         return true;
+<<<<<<< Updated upstream
 =======
        int[] reslist = RedGetResourceAmount(resourceAmountsArray);
     //    for(int i=0;i<reslist.Length;i++){
@@ -246,17 +317,23 @@ public class ResourceManager : MonoBehaviour
     //    }
        return true;
 >>>>>>> Stashed changes
+=======
+>>>>>>> Stashed changes
     }
 
     public bool BlueCanAfford(ResourceAmount[] resourceAmountsArray)
     {
-        foreach (ResourceAmount resourceAmount in resourceAmountsArray)
+        foreach (ResourceAmount resname in resourceAmountsArray)
         {
+<<<<<<< Updated upstream
             if (BlueGetResourceAmount(resourceAmount.resourceType) >= resourceAmount.amount)
             {
 
             }
             else
+=======
+            if (BlueresourceAmountDictionary[resname.resourceType] < resname.amount)
+>>>>>>> Stashed changes
             {
                 return false;
             }
@@ -266,8 +343,9 @@ public class ResourceManager : MonoBehaviour
 
     public void RedSpendResources(ResourceAmount[] resourceAmountsArray)
     {
-        foreach (ResourceAmount resourceAmount in resourceAmountsArray)
+        StartCoroutine(GetTeamResourceData((DataSnapshot Redinfo) =>
         {
+<<<<<<< Updated upstream
             RedresourceAmountDictionary[resourceAmount.resourceType] -= resourceAmount.amount;
         }
     }
@@ -279,4 +357,42 @@ public class ResourceManager : MonoBehaviour
         }
     }
 
+=======
+            foreach (ResourceAmount resourceAmount in resourceAmountsArray)
+            {
+                int RedresValue = Convert.ToInt32(Redinfo.Child(resourceAmount.resourceType.ToString()).Value);
+                reference.Child("GameRoom").Child(roomname).Child("RedResource").Child(resourceAmount.resourceType.ToString()).SetValueAsync(RedresValue - resourceAmount.amount);
+                Debug.Log(Redinfo.Child(resourceAmount.resourceType.ToString()).Value);
+            }
+        }, (DataSnapshot Blueinfo) => { }));
+    }
+    public void BlueSpendResources(ResourceAmount[] resourceAmountsArray)
+    {
+        StartCoroutine(GetTeamResourceData((DataSnapshot Redinfo) => { }, (DataSnapshot Blueinfo) =>
+       {
+           foreach (ResourceAmount resourceAmount in resourceAmountsArray)
+           {
+               int BlueresValue = Convert.ToInt32(Blueinfo.Child(resourceAmount.resourceType.ToString()).Value);
+               reference.Child("GameRoom").Child(roomname).Child("BlueResource").Child(resourceAmount.resourceType.ToString()).SetValueAsync(BlueresValue - resourceAmount.amount);
+               Debug.Log(Blueinfo.Child(resourceAmount.resourceType.ToString()).Value);
+           }
+       }));
+    }
+
+    public IEnumerator GetTeamResourceData(System.Action<DataSnapshot> RedonCallbacks, System.Action<DataSnapshot> BlueonCallbacks)  //從資料庫抓取
+    {
+        var RedresData = reference.Child("GameRoom").GetValueAsync();
+        RedresData = reference.Child("GameRoom").Child(roomname).Child("RedResource").GetValueAsync();
+        var BlueresData = reference.Child("GameRoom").GetValueAsync();
+        BlueresData = reference.Child("GameRoom").Child(roomname).Child("BlueResource").GetValueAsync();
+        yield return new WaitUntil(predicate: () => RedresData.IsCompleted && BlueresData.IsCompleted);
+        if (RedresData != null && BlueresData != null)
+        {
+            DataSnapshot Redsnapshot = RedresData.Result;
+            DataSnapshot Bluesnapshot = BlueresData.Result;
+            RedonCallbacks.Invoke(Redsnapshot);
+            BlueonCallbacks.Invoke(Bluesnapshot);
+        }
+    }
+>>>>>>> Stashed changes
 }
