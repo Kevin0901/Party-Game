@@ -50,7 +50,7 @@ public class PlayerListItem : MonoBehaviourPunCallbacks
             }
 
         }
-        MenuManger.Instance.OpenMenu("loading");
+        // MenuManger.Instance.OpenMenu("loading");
     }
 
     void CleanPlayerUI()  //清除玩家 UI

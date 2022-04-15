@@ -46,7 +46,8 @@ public class GameMenu : MonoBehaviour
     public void PlayGame()//點擊事件
     {
         StartCoroutine(fadeout());
-        GameObject.Find("ChoosePlayer").GetComponent<ChoosePlayer>().inChoosePlayer = true;
+        GameObject.Find("RoomMenu").GetComponent<RoomMenu>().inRoomMenu = true;
+        // GameObject.Find("ChoosePlayer").GetComponent<ChoosePlayer>().inChoosePlayer = true;
     }
     public void back()//點擊事件
     {

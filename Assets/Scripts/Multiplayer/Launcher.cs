@@ -71,11 +71,11 @@ public class Launcher : MonoBehaviourPunCallbacks
     {
         if(isLogin)
         {
-            MenuManger.Instance.OpenMenu("title");  //打開 TitleMenu UI
+            // MenuManger.Instance.OpenMenu("title");  //打開 TitleMenu UI
         }
         else
         {
-            MenuManger.Instance.OpenMenu("start");  //打開 StartMenu UI
+            // MenuManger.Instance.OpenMenu("start");  //打開 StartMenu UI
         }
         
         Debug.Log("Joined Lobby");
@@ -89,12 +89,12 @@ public class Launcher : MonoBehaviourPunCallbacks
             return;
         }
         PhotonNetwork.CreateRoom(roomNameInputField.text);  //創建房間
-        MenuManger.Instance.OpenMenu("loading");  //打開 LoadingMenu UI
+        // MenuManger.Instance.OpenMenu("loading");  //打開 LoadingMenu UI
     }
 
     public override void OnJoinedRoom()  //進入房間後執行以下程式碼
     {
-        MenuManger.Instance.OpenMenu("room");  //打開 Room UI (ChoosePlayer)
+        // MenuManger.Instance.OpenMenu("room");  //打開 Room UI (ChoosePlayer)
         Room = PhotonNetwork.CurrentRoom;
         roomNameText.text = PhotonNetwork.CurrentRoom.Name;  //設定房間名稱
 
@@ -260,7 +260,7 @@ public class Launcher : MonoBehaviourPunCallbacks
     public override void OnCreateRoomFailed(short returnCode, string message)  //如果創建房間錯誤
     {
         errorText.text = "Room Creation Failed:" + message;
-        MenuManger.Instance.OpenMenu("error");
+        // MenuManger.Instance.OpenMenu("error");
     }
 
     public void StartGame()  //開始遊戲 (按鈕觸發)
@@ -299,11 +299,11 @@ public class Launcher : MonoBehaviourPunCallbacks
     public void JoinRoom(RoomInfo info)  //加入房間
     {
         PhotonNetwork.JoinRoom(info.Name);
-        MenuManger.Instance.OpenMenu("loading");
+        // MenuManger.Instance.OpenMenu("loading");
     }
     public override void OnLeftRoom()  //離開房間觸發
     {
-        MenuManger.Instance.OpenMenu("title");
+        // MenuManger.Instance.OpenMenu("title");
     }
 
     public override void OnRoomListUpdate(List<RoomInfo> roomList)  //房間列表更新
