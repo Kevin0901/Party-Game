@@ -20,7 +20,7 @@ public class Timer : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        TimeSpan time= TimeSpan.FromSeconds(ResourceManager.Instance.timer);
+        TimeSpan time = TimeSpan.FromSeconds(ResourceManager.Instance.timer);
         currenttimeText.text = time.ToString(@"mm\:ss");
     }
 }
