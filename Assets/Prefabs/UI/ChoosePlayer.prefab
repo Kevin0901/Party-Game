@@ -181,12 +181,12 @@ GameObject:
   - component: {fileID: 2060107840556392331}
   - component: {fileID: 2060107840556392328}
   m_Layer: 5
-  m_Name: P4
+  m_Name: P4Join
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &2060107840556392331
 RectTransform:
   m_ObjectHideFlags: 0
@@ -226,11 +226,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 50d98cf1527c7ca46ac01900765633d8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  iconjudge: 0
   red: 0
   blue: 0
-  playersort: 0
-  Joysticknum: 
 --- !u!1 &2060107840590630298
 GameObject:
   m_ObjectHideFlags: 0
@@ -242,12 +239,12 @@ GameObject:
   - component: {fileID: 2060107840590630299}
   - component: {fileID: 2060107840590630296}
   m_Layer: 5
-  m_Name: P1
+  m_Name: P1Join
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &2060107840590630299
 RectTransform:
   m_ObjectHideFlags: 0
@@ -287,11 +284,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 50d98cf1527c7ca46ac01900765633d8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  iconjudge: 0
   red: 0
   blue: 0
-  playersort: 0
-  Joysticknum: 
 --- !u!1 &2060107840845560180
 GameObject:
   m_ObjectHideFlags: 0
@@ -1214,7 +1208,6 @@ GameObject:
   - component: {fileID: 2060107841247128586}
   - component: {fileID: 2060107841247128564}
   - component: {fileID: 2060107841247128567}
-  - component: {fileID: 2060107841247128566}
   m_Layer: 5
   m_Name: ChoosePlayer
   m_TagString: Untagged
@@ -1272,7 +1265,7 @@ Canvas:
   m_SortingBucketNormalizedSize: 0
   m_AdditionalShaderChannelsFlag: 0
   m_SortingLayerID: 0
-  m_SortingOrder: 17
+  m_SortingOrder: 16
   m_TargetDisplay: 0
 --- !u!114 &2060107841247128587
 MonoBehaviour:
@@ -1340,27 +1333,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   inChoosePlayer: 0
   CanvasGroup: {fileID: 0}
-  playerCount: 0
-  playerlist: []
---- !u!95 &2060107841247128566
-Animator:
-  serializedVersion: 3
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2060107841247128589}
-  m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 28bd6405f41125c4786f2b7e3c2f6c9d, type: 2}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &2060107841309234726
 GameObject:
   m_ObjectHideFlags: 0
@@ -2251,19 +2223,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 2060107841785225067}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 2060107841247128567}
-        m_TargetAssemblyTypeName: 
-        m_MethodName: StartGame
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
 --- !u!114 &2060107841785225065
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3709,12 +3669,12 @@ GameObject:
   - component: {fileID: 2060107842237851164}
   - component: {fileID: 2060107842237851165}
   m_Layer: 5
-  m_Name: P2
+  m_Name: P2Join
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &2060107842237851164
 RectTransform:
   m_ObjectHideFlags: 0
@@ -3754,11 +3714,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 50d98cf1527c7ca46ac01900765633d8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  iconjudge: 0
   red: 0
   blue: 0
-  playersort: 0
-  Joysticknum: 
 --- !u!1 &2060107842238233800
 GameObject:
   m_ObjectHideFlags: 0
@@ -4165,12 +4122,12 @@ GameObject:
   - component: {fileID: 2060107842486838986}
   - component: {fileID: 2060107842486838987}
   m_Layer: 5
-  m_Name: P3
+  m_Name: P3Join
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &2060107842486838986
 RectTransform:
   m_ObjectHideFlags: 0
@@ -4210,11 +4167,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 50d98cf1527c7ca46ac01900765633d8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  iconjudge: 0
   red: 0
   blue: 0
-  playersort: 0
-  Joysticknum: 
 --- !u!1 &2060107842528577548
 GameObject:
   m_ObjectHideFlags: 0
@@ -4814,7 +4768,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &5671120596211570368
 RectTransform:
   m_ObjectHideFlags: 0
@@ -5014,7 +4968,7 @@ GameObject:
   m_Component:
   - component: {fileID: 9214395228266772608}
   m_Layer: 5
-  m_Name: PlayerBar
+  m_Name: PlayerBorder
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

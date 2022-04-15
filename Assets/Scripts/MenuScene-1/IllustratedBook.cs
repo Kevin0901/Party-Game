@@ -18,10 +18,9 @@ public class IllustratedBook : MonoBehaviour  //圖鑑
     // Update is called once per frame
     void Update()
     {
-        if (inIllustratedBookMenu)
+        if (inIllustratedBookMenu) //判斷是否切換畫面
         {
-            StartCoroutine(fadein());
-            inIllustratedBookMenu = false;
+            fadein();
         }
     }
     public void biology() //怪物
@@ -51,31 +50,25 @@ public class IllustratedBook : MonoBehaviour  //圖鑑
     {
         StartCoroutine(fadeout());
     }
-    private IEnumerator fadein()
+    private void fadein() //淡入畫面
     {
-        IllustratedBookAnimator.SetBool("fadein", true);
-        yield return null;
-        IllustratedBookAnimator.SetBool("fadein", false);
-        GameObject.Find("LoadingCircle").transform.Find("Image").gameObject.SetActive(false);
-        yield return new WaitForSeconds(1f);
-        GameObject.Find("TranPageAnimation").transform.Find("Image").gameObject.SetActive(false);
         CanvasGroup.blocksRaycasts = true;
+        CanvasGroup.alpha = 1;
+        inIllustratedBookMenu = false;
     }
-    private IEnumerator fadeout()
+    private IEnumerator fadeout() //淡出畫面
     {
         bool button1 = transform.Find("biology").gameObject.activeSelf;
         bool button2 = transform.Find("item").gameObject.activeSelf;
         bool button3 = transform.Find("god").gameObject.activeSelf;
 
-        if (button1 && button2 && button3)
+        if (button1 && button2 && button3) //如果按鈕開著
         {
             CanvasGroup.blocksRaycasts = false;
-            IllustratedBookAnimator.SetBool("fadeout", true);
-            GameObject.Find("LoadingCircle").transform.Find("Image").gameObject.SetActive(true);
-            GameObject.Find("TranPageAnimation").transform.Find("Image").gameObject.SetActive(true);
-            yield return null;
-            IllustratedBookAnimator.SetBool("fadeout", false);
+            GameObject.Find("TranPageAnimation").GetComponent<Animator>().SetTrigger("change");
+            yield return new WaitForSeconds(0.5f);
             GameObject.Find("GameMenu").GetComponent<GameMenu>().inGameMenu = true;
+            CanvasGroup.alpha = 0;
         }
         else
         {
@@ -87,7 +80,6 @@ public class IllustratedBook : MonoBehaviour  //圖鑑
             transform.Find("biologyPage").gameObject.SetActive(false);
             transform.Find("itemPage").gameObject.SetActive(false);
             transform.Find("godPage").gameObject.SetActive(false);
-            
             // transform.Find("slide").gameObject.SetActive(false);
             // transform.Find("slide2").gameObject.SetActive(false);
         }

@@ -16,34 +16,27 @@ public class Noviceteaching : MonoBehaviour //新手教學
     }
 
     // Update is called once per frame
-    void Update()
+    void Update() //判斷是否切換畫面
     {
         if (inTeachingMenu)
         {
-            StartCoroutine(fadein());
-            inTeachingMenu = false;
+            fadein();
         }
     }
-    private IEnumerator fadein()//淡入畫面
+    public void fadein()//淡入畫面
     {
-        TeachingAnimator.SetBool("fadein", true);
-        yield return null;
-        TeachingAnimator.SetBool("fadein", false);
-        GameObject.Find("LoadingCircle").transform.Find("Image").gameObject.SetActive(false);
-        yield return new WaitForSeconds(1f);
-        GameObject.Find("TranPageAnimation").transform.Find("Image").gameObject.SetActive(false);
         CanvasGroup.blocksRaycasts = true;
+        CanvasGroup.alpha = 1;
+        inTeachingMenu = false;
     }
 
     private IEnumerator fadeout()//淡出畫面  
     {
         CanvasGroup.blocksRaycasts = false;
-        TeachingAnimator.SetBool("fadeout", true);
-        GameObject.Find("LoadingCircle").transform.Find("Image").gameObject.SetActive(true);
-        GameObject.Find("TranPageAnimation").transform.Find("Image").gameObject.SetActive(true);
-        yield return null;
-        TeachingAnimator.SetBool("fadeout", false);
+        GameObject.Find("TranPageAnimation").GetComponent<Animator>().SetTrigger("change");
+        yield return new WaitForSeconds(0.5f);
         GameObject.Find("GameMenu").GetComponent<GameMenu>().inGameMenu = true;
+        CanvasGroup.alpha = 0;
     }
     public void back() //點擊事件
     {
