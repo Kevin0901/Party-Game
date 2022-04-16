@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using Photon.Pun;
 #if UNITY_EDITOR
 using UnityEditor;
 #endif
@@ -26,7 +27,7 @@ public class StartMenu : MonoBehaviour
         }
         if (Input.GetKeyDown(KeyCode.Space) && CanvasGroup.blocksRaycasts)
         {
-            StartCoroutine(fadeout());
+            StartCoroutine(Connected());
         }
     }
     private IEnumerator fadein() //淡入畫面
@@ -43,13 +44,40 @@ public class StartMenu : MonoBehaviour
         MainAnimator.SetTrigger("fade");
         GameObject.Find("TranPageAnimation").GetComponent<Animator>().SetTrigger("change");
         yield return new WaitForSeconds(0.5f);
-        GameObject.Find("GameMenu").GetComponent<GameMenu>().inGameMenu = true;
+        if (PlayerPrefs.HasKey("username") && PlayerPrefs.HasKey("password"))
+        {
+            GameObject.Find("GameMenu").GetComponent<GameMenu>().inGameMenu = true;
+        }
+        else
+        {
+            GameObject.Find("LoginMenu").GetComponent<Login>().inLoginMenu = true;
+        }
+
+    }
+
+    IEnumerator Connected()
+    {
+        if (PhotonNetwork.IsConnected)
+        {
+            GameObject.Find("LoadingMenu").GetComponent<CanvasGroup>().alpha = 0;
+            StartCoroutine(fadeout());
+        }
+        else
+        {
+            if (GameObject.Find("LoadingMenu").GetComponent<CanvasGroup>().alpha == 0)
+            {
+                GameObject.Find("LoadingMenu").GetComponent<CanvasGroup>().alpha = 1;
+            }
+            yield return new WaitForSeconds(0.01f);
+            //PhotonNetwork.ConnectUsingSettings();  //開啟連線
+            StartCoroutine(Connected());
+        }
     }
     public void PlayGame() //如果點擊畫面
     {
         if (CanvasGroup.blocksRaycasts)
         {
-            StartCoroutine(fadeout());
+            StartCoroutine(Connected());
         }
     }
     public void QuitGame() //如果按離開按鈕

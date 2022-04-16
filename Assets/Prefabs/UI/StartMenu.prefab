@@ -133,18 +133,6 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 507133703341478173}
-        m_TargetAssemblyTypeName: StartMenu, Assembly-CSharp
-        m_MethodName: PlayGame
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
 --- !u!95 &3842510062990561103
 Animator:
   serializedVersion: 3
@@ -331,8 +319,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -0.00012684, y: 6.3}
-  m_SizeDelta: {x: 1919.9996, y: 1068.0144}
+  m_AnchoredPosition: {x: 14.625, y: 267.112}
+  m_SizeDelta: {x: 1616.761, y: 378.041}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &2969034955237075780
 CanvasRenderer:
@@ -362,7 +350,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 9512aaaf241ec03498b9eb4031c947f6, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 614a827fb834b6b4abb69ffec066ec44, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1

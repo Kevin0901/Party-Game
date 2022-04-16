@@ -28,12 +28,15 @@ public class RoomMenu : MonoBehaviour
         CanvasGroup.alpha = 1;
         inRoomMenu = false;
     }
-    private IEnumerator fadeout() //淡出畫面
+    private IEnumerator fadeout(string UIName) //淡出畫面
     {
         CanvasGroup.blocksRaycasts = false;
         GameObject.Find("TranPageAnimation").GetComponent<Animator>().SetTrigger("change");
         yield return new WaitForSeconds(0.5f);
-        GameObject.Find("GameMenu").GetComponent<GameMenu>().inGameMenu = true;
+        if(UIName.Equals("GameMenu"))
+        {
+            GameObject.Find("GameMenu").GetComponent<GameMenu>().inGameMenu = true;
+        }
         CanvasGroup.alpha = 0;
     }
     public void back()//點擊事件
@@ -45,8 +48,7 @@ public class RoomMenu : MonoBehaviour
         }
         else
         {
-            CanvasGroup.blocksRaycasts = false;
-            StartCoroutine(fadeout());
+            StartCoroutine(fadeout("GameMenu"));
         }
     }
 
@@ -68,7 +70,7 @@ public class RoomMenu : MonoBehaviour
         }
         transform.Find("Create").gameObject.SetActive(false);
         transform.Find("RoomList").gameObject.SetActive(false);
-        StartCoroutine(fadeout());
+        StartCoroutine(fadeout("ChoosePlayer"));
         GameObject.Find("ChoosePlayer").GetComponent<ChoosePlayer>().inChoosePlayer = true;
     }
 }
