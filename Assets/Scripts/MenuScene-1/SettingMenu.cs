@@ -39,6 +39,12 @@ public class SettingMenu : MonoBehaviour
         {
             audios.volume = volume;
         }
+        if (transform.Find("Settings").gameObject.activeSelf &&
+        GameObject.Find("GameMenu").GetComponent<CanvasGroup>().blocksRaycasts &&
+        !transform.Find("Settings").Find("LoginOut").gameObject.activeSelf)
+        {
+            transform.Find("Settings").Find("LoginOut").gameObject.SetActive(true);
+        }
     }
 
     public void updateVolume(float musicVolume) //音量調節
@@ -56,6 +62,20 @@ public class SettingMenu : MonoBehaviour
     }
     public void Back() //關閉設定
     {
+        transform.Find("Settings").Find("LoginOut").gameObject.SetActive(false);
         transform.Find("Settings").gameObject.SetActive(false);
+    }
+
+    public void LoginOut()
+    {
+        PlayerPrefs.DeleteKey("password");
+        transform.Find("Settings").gameObject.SetActive(false);
+        StartCoroutine(fadeout());
+    }
+    private IEnumerator fadeout() //淡出畫面       
+    {
+        GameObject.Find("TranPageAnimation").GetComponent<Animator>().SetTrigger("change");
+        yield return new WaitForSeconds(0.5f);
+        GameObject.Find("LoginMenu").GetComponent<Login>().inLoginMenu = true;
     }
 }

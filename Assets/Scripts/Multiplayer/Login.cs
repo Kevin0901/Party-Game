@@ -190,6 +190,7 @@ public class Login : MonoBehaviour
 
                 PlayerPrefs.SetString("username", LoginName.text);
                 PlayerPrefs.SetString("password", LoginPassword.text);
+                LoginPassword.text = "";
                 StartCoroutine(fadeout());
                 GameObject.Find("GameMenu").GetComponent<GameMenu>().inGameMenu = true;
                 // MenuManger.Instance.OpenMenu("title");

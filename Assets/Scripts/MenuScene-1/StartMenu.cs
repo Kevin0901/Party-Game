@@ -12,6 +12,7 @@ public class StartMenu : MonoBehaviour
     public bool inMainMenu;
     private Animator MainAnimator;
     private CanvasGroup CanvasGroup;
+    float waitTime = 0;
     void Start()
     {
         inMainMenu = false;
@@ -57,21 +58,33 @@ public class StartMenu : MonoBehaviour
 
     IEnumerator Connected()
     {
+        GameObject LM = GameObject.Find("LoadingMenu");
         if (PhotonNetwork.IsConnected)
         {
-            GameObject.Find("LoadingMenu").GetComponent<CanvasGroup>().alpha = 0;
+            LM.GetComponent<CanvasGroup>().alpha = 0;
+            LM.GetComponent<CanvasGroup>().blocksRaycasts = false;
             StartCoroutine(fadeout());
         }
         else
         {
-            if (GameObject.Find("LoadingMenu").GetComponent<CanvasGroup>().alpha == 0)
+            if (LM.GetComponent<CanvasGroup>().alpha == 0)
             {
-                GameObject.Find("LoadingMenu").GetComponent<CanvasGroup>().alpha = 1;
+                LM.GetComponent<CanvasGroup>().alpha = 1;
             }
-            yield return new WaitForSeconds(0.01f);
+            yield return new WaitForSeconds(0.1f);
+            waitTime += 0.1f;
+            if(waitTime > 10f && !LM.transform.Find("Reload").gameObject.activeSelf)
+            {
+                LM.transform.Find("Reload").gameObject.SetActive(true);
+                LM.GetComponent<CanvasGroup>().blocksRaycasts = true;
+            }
             //PhotonNetwork.ConnectUsingSettings();  //開啟連線
             StartCoroutine(Connected());
         }
+    }
+    public void Reload()
+    {
+        SceneManager.LoadScene(0);
     }
     public void PlayGame() //如果點擊畫面
     {
