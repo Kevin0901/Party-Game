@@ -16,8 +16,8 @@ public class archerArrowMove : MonoBehaviour
         }
         else
         {
-            Vector3 enemyPos = target.transform.position;
-            Vector3 line = this.transform.position - target.transform.position;
+            Vector3 enemyPos = target.GetComponent<Collider2D>().bounds.center;
+            Vector3 line = this.transform.position - enemyPos;
             float rotate = Mathf.Atan2(line.y, line.x) * Mathf.Rad2Deg;
             this.transform.rotation = Quaternion.AngleAxis(rotate, Vector3.forward);
             this.transform.position = Vector3.MoveTowards(transform.position, enemyPos, Time.deltaTime * speed); //往敵人方向移動

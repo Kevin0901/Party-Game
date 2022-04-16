@@ -16,6 +16,7 @@ TagManager:
   - red
   - blue
   - wave
+  - Wave
   layers:
   - Default
   - TransparentFX
@@ -56,14 +57,14 @@ TagManager:
   - name: Player
     uniqueID: 2649478095
     locked: 0
-  - name: RedMonster
-    uniqueID: 1356649547
-    locked: 0
   - name: Tower
     uniqueID: 567531287
     locked: 0
   - name: BlueMonster
     uniqueID: 4079072067
+    locked: 0
+  - name: RedMonster
+    uniqueID: 1356649547
     locked: 0
   - name: Healthbar
     uniqueID: 3337878221

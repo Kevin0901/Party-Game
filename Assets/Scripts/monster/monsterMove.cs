@@ -92,7 +92,7 @@ public class monsterMove : MonoBehaviour
         animator.SetFloat("moveY", walkDir_Y); //預設動畫方向
         currentState = MonsterState.walk;
     }
-    void OnDrawGizmosSelected()//畫圖
+    void OnDrawGizmos()//畫圖
     {
         Gizmos.color = Color.yellow;
         Gizmos.DrawWireSphere(transform.position, detectRange);
@@ -103,29 +103,30 @@ public class monsterMove : MonoBehaviour
     {
         if (currentState != MonsterState.idle)
         {
-            Collider2D collider2D = Physics2D.OverlapCircle(this.transform.position, detectRange);
-            if (collider2D != null)
+            Collider2D[] collider2D = Physics2D.OverlapCircleAll(this.transform.position, detectRange);
+            foreach (var k in collider2D)
             {
-                if (enemy == null && collider2D.CompareTag(t.Enemyteam))
+                if (k.gameObject != this.gameObject || !k.CompareTag(this.tag))
                 {
-                    enemy = collider2D.gameObject;
-                }
-                else if (collider2D.gameObject == enemy)
-                {
-                    float dis = Vector3.Distance(this.transform.position, enemy.transform.position);
-                    if (dis <= attackRange)
+                    if (enemy == null)
                     {
-                        currentState = MonsterState.attack;
+                        enemy = k.gameObject;
                     }
-                    else if (dis <= detectRange)
+                    else if (k.gameObject == enemy)
                     {
-                        currentState = MonsterState.track;
+                        // float dis = Vector3.Distance(this.transform.position, enemy.GetComponent<Collider2D>().bounds.center);
+                        float dis = Vector3.Distance(this.transform.position, enemy.transform.position);
+                        Debug.Log(dis);
+                        if (dis <= attackRange)
+                        {
+                            currentState = MonsterState.attack;
+                        }
+                        else if (dis <= detectRange)
+                        {
+                            currentState = MonsterState.track;
+                        }
                     }
                 }
-            }
-            else
-            {
-                enemy = null;
             }
         }
     }
@@ -135,24 +136,29 @@ public class monsterMove : MonoBehaviour
         {
             nextAttack -= Time.deltaTime;
         }
+        if (enemy != null && Vector3.Distance(enemy.transform.position, transform.position) > detectRange)
+        {
+            enemy = null;
+            currentState = MonsterState.walk;
+        }
         if (currentState == MonsterState.idle)
         {
             animator.SetBool("moving", false);
         }
-        else if (currentState == MonsterState.attack && nextAttack < 0)
+        else if (currentState == MonsterState.attack && nextAttack <= 0)
         {
             StartCoroutine(attack());
         }
         else if ((currentState == MonsterState.track && !isFix) || currentState == MonsterState.pigeon)
         {
-            Vector2 direction = enemy.transform.position - transform.position;
+            Vector2 direction = enemy.GetComponent<Collider2D>().bounds.center - transform.position;
             direction = direction.normalized;
             transform.position = Vector3.MoveTowards(transform.position, enemy.transform.position, Time.deltaTime * speed); //往敵人方向移動
             animator.SetFloat("moveX", direction.x);
             animator.SetFloat("moveY", direction.y);
             animator.SetBool("moving", true);
         }
-        else if (currentState == MonsterState.walk && currentState == MonsterState.pigeon)
+        else if (currentState == MonsterState.walk || currentState == MonsterState.pigeon)
         {
             transform.position += new Vector3(0, speed, 0) * Time.deltaTime * walkDir_Y; //持續往前進
             animator.SetFloat("moveX", 0);
@@ -203,11 +209,11 @@ public class monsterMove : MonoBehaviour
     }
     private IEnumerator attack()
     {
-        Vector2 direction = enemy.transform.position - transform.position;
-        direction = direction.normalized;
+        Vector2 dir = enemy.transform.position - transform.position;
+        dir = dir.normalized;
         animator.SetBool("moving", false);
-        animator.SetFloat("moveX", Mathf.RoundToInt(direction.x));
-        animator.SetFloat("moveY", Mathf.RoundToInt(direction.y));
+        animator.SetFloat("moveX", Mathf.RoundToInt(dir.x));
+        animator.SetFloat("moveY", Mathf.RoundToInt(dir.y));
         nextAttack = attackRate;
         animator.SetBool("attacking", true);
         currentState = MonsterState.attack;
