@@ -8,6 +8,8 @@ using System;
 using System.Linq;
 using Photon.Realtime;
 using Hashtable = ExitGames.Client.Photon.Hashtable;
+using TMPro;
+using UnityEngine.UI;
 public class RoomManager : MonoBehaviourPunCallbacks
 {
     // public static RoomManager Instance;
@@ -17,11 +19,21 @@ public class RoomManager : MonoBehaviourPunCallbacks
     public string[] PlayerTeam;
     PhotonView PV;
     public int Game_num;
-    bool EnteredGame;
+    public float GameTime, ReadyTime;
+    bool EnteredGame, StartCount;
     GameObject PAPA;
+    GameObject Black, Event;
+    TMP_Text Count;
+    [SerializeField] Image EventPicture;
+    [SerializeField] Sprite[] EventSprite;
     void Awake()
     {
+        ReadyTime = 5f;
         EnteredGame = false;
+        StartCount = false;
+        GameTime = 0f;
+        Black = transform.Find("Black").gameObject;
+        Event = transform.Find("Event").gameObject;
         // if (Instance)
         // {
         //     Destroy(gameObject);
@@ -38,45 +50,118 @@ public class RoomManager : MonoBehaviourPunCallbacks
         {
             return;
         }
-        if (SceneManager.GetActiveScene().name.Equals("MainScene") && Input.inputString.Length > 0 && Input.inputString.All(char.IsDigit))
+        // if (SceneManager.GetActiveScene().name.Equals("MainScene") && Input.inputString.Length > 0 && Input.inputString.All(char.IsDigit))
+        // {
+        //     switch (Input.inputString)
+        //     {
+        //         case "0":
+        //             Game_num = 0;
+        //             break;
+        //         case "1":
+        //             Game_num = 1;
+        //             break;
+        //         case "2":
+        //             Game_num = 2;
+        //             break;
+        //         case "3":
+        //             Game_num = 3;
+        //             break;
+        //         case "4":
+        //             Game_num = 4;
+        //             break;
+        //         case "5":
+        //             Game_num = 5;
+        //             break;
+        //         case "6":
+        //             Game_num = 6;
+        //             break;
+        //         case "7":
+        //             Game_num = 7;
+        //             break;
+        //         case "8":
+        //             Game_num = 8;
+        //             break;
+        //         case "9":
+        //             Game_num = 9;
+        //             break;
+        //     }
+        //     Hashtable hash = new Hashtable();
+        //     hash.Add("GameNum", Game_num);
+        //     PhotonNetwork.LocalPlayer.SetCustomProperties(hash);
+        //     PhotonNetwork.LoadLevel(2);
+        // }
+    }
+    IEnumerator TimeManager()
+    {
+        yield return new WaitForSeconds(1f);
+        if (StartCount && ReadyTime <= 0)
         {
-            switch (Input.inputString)
+            if (Count.gameObject.activeSelf)
             {
-                case "0":
-                    Game_num = 0;
-                    break;
-                case "1":
-                    Game_num = 1;
-                    break;
-                case "2":
-                    Game_num = 2;
-                    break;
-                case "3":
-                    Game_num = 3;
-                    break;
-                case "4":
-                    Game_num = 4;
-                    break;
-                case "5":
-                    Game_num = 5;
-                    break;
-                case "6":
-                    Game_num = 6;
-                    break;
-                case "7":
-                    Game_num = 7;
-                    break;
-                case "8":
-                    Game_num = 8;
-                    break;
-                case "9":
-                    Game_num = 9;
-                    break;
+                StartCoroutine(Wait_OneSec());
+                Count.gameObject.SetActive(false);
             }
-            Hashtable hash = new Hashtable();
-            hash.Add("GameNum", Game_num);
-            PhotonNetwork.LocalPlayer.SetCustomProperties(hash);
-            PhotonNetwork.LoadLevel(2);
+            GameTime += 1f;
+            if ((int)GameTime % 180 == 0 && (int)GameTime != 1260f)
+            {
+                if (PV.IsMine)
+                {
+                    Game_num = UnityEngine.Random.Range(0, EventSprite.Length);
+                    EventPicture.sprite = EventSprite[Game_num];
+                    EventPicture.gameObject.transform.parent.gameObject.SetActive(true);
+                    Hashtable hash = new Hashtable();
+                    hash.Add("GameNum", Game_num);
+                    PhotonNetwork.LocalPlayer.SetCustomProperties(hash);
+                }
+            }
+            else if ((int)GameTime % 210 == 5)
+            {
+                if (!Count.gameObject.activeSelf)
+                {
+                    Count.gameObject.SetActive(true);
+                }
+                TimeSpan time = TimeSpan.FromSeconds((int)GameTime % 210);
+                Count.text = time.ToString(@"s");
+            }
+            else if ((int)GameTime % 210 == 0)
+            {
+                Count.gameObject.SetActive(false);
+                StartCoroutine(Black_fadein());
+            }
+        }
+        else if (ReadyTime > 0)
+        {
+            ReadyTime -= 1f;
+            if (!Count.gameObject.activeSelf)
+            {
+                Count.gameObject.SetActive(true);
+            }
+            TimeSpan time = TimeSpan.FromSeconds(ReadyTime);
+            Count.text = time.ToString(@"s");
+        }
+        StartCoroutine(TimeManager());
+    }
+    IEnumerator Wait_OneSec()
+    {
+        yield return new WaitForSeconds(1f);
+        Black.GetComponentInChildren<Animator>().SetTrigger("fadeout");
+        yield return new WaitForSeconds(1f);
+        Black.SetActive(false);
+    }
+    IEnumerator Black_fadein()
+    {
+        Black.GetComponentInChildren<Animator>().SetTrigger("fadein");
+        yield return new WaitForSeconds(1f);
+        if (PV.IsMine)
+        {
+            if (SceneManager.GetActiveScene().name.Equals("MainScene"))
+            {
+                PhotonNetwork.LoadLevel(2);
+            }
+            else if (SceneManager.GetActiveScene().name.Equals("FightScene"))
+            {
+                PhotonNetwork.LoadLevel(1);
+            }
         }
     }
     public override void OnPlayerPropertiesUpdate(Player targetPlayer, Hashtable changedProps)
@@ -84,9 +169,10 @@ public class RoomManager : MonoBehaviourPunCallbacks
         if (!PV.IsMine)
         {
             Game_num = (int)changedProps["GameNum"];
+            EventPicture.sprite = EventSprite[Game_num];
+            EventPicture.gameObject.transform.parent.gameObject.SetActive(true);
         }
     }
-
     public override void OnEnable()
     {
         base.OnEnable();
@@ -103,19 +189,27 @@ public class RoomManager : MonoBehaviourPunCallbacks
     {
         if (scene.buildIndex == 1) //如果在遊戲場景
         {
-            if(!EnteredGame)
+            StartCount = true;
+            StartCoroutine(TimeManager());
+            if (!EnteredGame)
             {
-                if(PV.IsMine)
+                if (PV.IsMine)
                 {
+                    for (int i = 0; i < PhotonNetwork.PlayerList.Length; i++)
+                    {
+                        PhotonNetwork.RemoveRPCs(PhotonNetwork.PlayerList[i]);
+                    }
                     PV.RPC("RPC_SetArryList", RpcTarget.All, PlayerNames, PlayerTeam);  //廣播到所有玩家的電腦，設定 PlayerNames[] 跟 PlayerTeam[]
                 }
+                Black.SetActive(true);
                 EnteredGame = true;
                 PAPA = GameObject.Find("PAPA");
                 PAPA.GetComponent<PAPA>().OpenChild();
             }
             else
             {
-                if(GameObject.Find("PAPA") != null)
+                StartCoroutine(Wait_OneSec());
+                if (GameObject.Find("PAPA") != null)
                 {
                     Destroy(GameObject.Find("PAPA"));
                     PAPA.SetActive(true);
@@ -124,6 +218,9 @@ public class RoomManager : MonoBehaviourPunCallbacks
         }
         else if (scene.buildIndex == 2)
         {
+            StartCount = false;
+            StopCoroutine(TimeManager());
+            StartCoroutine(Wait_OneSec());
             PAPA.SetActive(false);
             if (PV.IsMine)
             {

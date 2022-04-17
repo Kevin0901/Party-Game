@@ -35,6 +35,7 @@ public class Launcher : MonoBehaviourPunCallbacks
     [SerializeField] RoomManager RoomManager;
     [Header("是否已經登入")]
     public bool isLogin;
+    PhotonView PV;
     void Awake()
     {
         Instance = this;
@@ -42,17 +43,18 @@ public class Launcher : MonoBehaviourPunCallbacks
 
     void Start()
     {
+        PV = GetComponent<PhotonView>();
         isLogin = false;
         reference = FirebaseDatabase.DefaultInstance.RootReference;  //定義資料庫連接
-        if(GameObject.Find("RoomManager") != null)
+        if (GameObject.Find("RoomManager") != null)
         {
             Destroy(GameObject.Find("RoomManager"));
         }
-        if(PhotonNetwork.InRoom)
+        if (PhotonNetwork.InRoom)
         {
             PhotonNetwork.LeaveRoom();
         }
-        if(PhotonNetwork.IsConnected)
+        if (PhotonNetwork.IsConnected)
         {
             PhotonNetwork.Disconnect();
         }
@@ -69,7 +71,7 @@ public class Launcher : MonoBehaviourPunCallbacks
 
     public override void OnJoinedLobby()  //已加入大廳
     {
-        if(isLogin)
+        if (isLogin)
         {
             // MenuManger.Instance.OpenMenu("title");  //打開 TitleMenu UI
         }
@@ -77,7 +79,7 @@ public class Launcher : MonoBehaviourPunCallbacks
         {
             // MenuManger.Instance.OpenMenu("start");  //打開 StartMenu UI
         }
-        
+
         Debug.Log("Joined Lobby");
         RoomManager.gameObject.SetActive(true);
     }
@@ -266,11 +268,12 @@ public class Launcher : MonoBehaviourPunCallbacks
     public void StartGame()  //開始遊戲 (按鈕觸發)
     {
         SavePlayer_And_Team();
-        PhotonNetwork.LoadLevel(1);
     }
 
     void SavePlayer_And_Team()  //傳所有玩家的名字以及隊伍，到 RoomManager
     {
+        bool HaveRed = false;
+        bool HaveBlue = false;
         Player[] players = PhotonNetwork.PlayerList;
         RoomManager.PlayerNames = new string[players.Length];
         RoomManager.PlayerTeam = new string[players.Length];
@@ -283,11 +286,39 @@ public class Launcher : MonoBehaviourPunCallbacks
             if (pUI.GetComponent<TeamSelect>().red)
             {
                 PlayerTeam[i] = "red";
+                HaveRed = true;
             }
             else if (pUI.GetComponent<TeamSelect>().blue)
             {
                 PlayerTeam[i] = "blue";
+                HaveBlue = true;
             }
+        }
+        if (HaveRed && HaveBlue)
+        {
+            Room.IsVisible = false;
+            PV.RPC("RPC_fadeout", RpcTarget.All);
+        }
+        else
+        {
+            GameObject.Find("ChoosePlayer").GetComponent<ChoosePlayer>().StartCoroutine("Warning");
+        }
+    }
+    [PunRPC]
+    void RPC_fadeout()
+    {
+        StartCoroutine(fadeout());
+    }
+    private IEnumerator fadeout() //淡出畫面
+    {
+        GameObject.Find("ChoosePlayer").GetComponent<CanvasGroup>().blocksRaycasts = false;
+        GameObject.Find("TranPageAnimation").GetComponent<Animator>().SetTrigger("change");
+        yield return new WaitForSeconds(0.5f);
+        GameObject.Find("ChoosePlayer").GetComponent<CanvasGroup>().alpha = 0;
+        yield return new WaitForSeconds(1f);
+        if (PV.IsMine)
+        {
+            PhotonNetwork.LoadLevel(1);
         }
     }
 

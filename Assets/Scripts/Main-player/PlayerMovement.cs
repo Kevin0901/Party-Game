@@ -9,6 +9,7 @@ public enum PlayerState
 {
     walk,
     attack,
+    idle,
 }
 
 public class PlayerMovement : MonoBehaviour
@@ -81,6 +82,7 @@ public class PlayerMovement : MonoBehaviour
         nextfire = 0;
         mrigibody = this.GetComponent<Rigidbody2D>();
         UiandInventoryGet();
+        StartCoroutine(Wait_Game_Start());
         // if (!PV.IsMine)  //如果此玩家 GameObject 是別人的鏡像，消除 UI 以及 Camera
         // {
         //     mouse.SetActive(false);
@@ -89,6 +91,19 @@ public class PlayerMovement : MonoBehaviour
 
         //     return;
         // }
+    }
+    IEnumerator Wait_Game_Start()
+    {
+        if (GameObject.Find("RoomManager").GetComponent<RoomManager>().ReadyTime <= 0)
+        {
+            currentState = PlayerState.walk;
+        }
+        else
+        {
+            currentState = PlayerState.idle;
+            yield return new WaitForSeconds(0.1f);
+            StartCoroutine(Wait_Game_Start());
+        }
     }
     private void OnEnable()
     {

@@ -35,7 +35,7 @@ public class ChoosePlayer : MonoBehaviour
         CanvasGroup.blocksRaycasts = false;
         GameObject.Find("TranPageAnimation").GetComponent<Animator>().SetTrigger("change");
         yield return new WaitForSeconds(0.5f);
-        GameObject.Find("GameMenu").GetComponent<GameMenu>().inGameMenu = true;
+        GameObject.Find("RoomMenu").GetComponent<RoomMenu>().inRoomMenu = true;
         CanvasGroup.alpha = 0;
     }
     public void back() //點擊事件
@@ -46,10 +46,13 @@ public class ChoosePlayer : MonoBehaviour
     {
         GameObject.Find("SettingMenu").transform.Find("Settings").gameObject.SetActive(true);
     }
-    private IEnumerator Warning() //配置不符警告
+    public IEnumerator Warning() //配置不符警告
     {
-        transform.Find("PlayerWaring").gameObject.SetActive(true);
-        yield return new WaitForSeconds(1.5f);
-        transform.Find("PlayerWaring").gameObject.SetActive(false);
+        if (!transform.Find("PlayerWaring").gameObject.activeSelf)
+        {
+            transform.Find("PlayerWaring").gameObject.SetActive(true);
+            yield return new WaitForSeconds(1.5f);
+            transform.Find("PlayerWaring").gameObject.SetActive(false);
+        }
     }
 }

@@ -54,6 +54,7 @@ MonoBehaviour:
   - RPC_NoArens
   - RPC_Player_Hurt
   - RPC_Hurt
+  - RPC_fadeout
   DisableAutoOpenWizard: 1
   ShowSettings: 1
   DevRegionSetOnce: 1
