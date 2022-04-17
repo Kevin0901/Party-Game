@@ -136,12 +136,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5f18dfc1dec86494d83726053d869859, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  waypoints: []
+  waypoints:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
   genres:
-  - {fileID: 8017277022069749896, guid: 55f375b2faf559c48ac1e51569435835, type: 3}
+  - {fileID: 8017277022069749896, guid: ffebccb9a25febc4b953838d6865ddb4, type: 3}
   - {fileID: 8017277022069749896, guid: 472eb70e64822ef4ea7d2df1e972f91e, type: 3}
-  - {fileID: 8017277022069749896, guid: 4b01f02e3bab8444cb5a15c54fd5fb41, type: 3}
-  - {fileID: 8017277022069749896, guid: 64b8fa7e91642394f9aff7e366a5976f, type: 3}
+  - {fileID: 8017277022069749896, guid: e643b24a1534ee243a36d4a98827326d, type: 3}
+  - {fileID: 8017277022069749896, guid: 448af0e2c3ee1f84fb68ac67f5a56f78, type: 3}
   speed: 3
 --- !u!95 &-5855889267534004114
 Animator:

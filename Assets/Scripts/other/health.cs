@@ -65,10 +65,10 @@ public class health : MonoBehaviour
         }
         else if (!iswudi)
         {
-            if (!PV.IsMine)
-            {
-                return;
-            }
+            // if (!PV.IsMine)
+            // {
+            //     return;
+            // }
             curH -= damageToGive;
             // PV.RPC("RPC_Hurt", RpcTarget.All, damageToGive, PV.Owner.NickName);
         }

@@ -18,6 +18,12 @@ public class CrystalThief : MonoBehaviour
         curh = this.GetComponentInChildren<health>().curH;
         bfhurth = curh;
         animator = this.gameObject.GetComponent<Animator>();
+        GameObject road = GameObject.Find("Road").gameObject;
+        waypoints = new GameObject[road.transform.childCount];
+        for (int i = 0; i < road.transform.childCount; i++)
+        {
+            waypoints[i] = road.transform.GetChild(i).gameObject;
+        }
     }
 
     private void Update()
