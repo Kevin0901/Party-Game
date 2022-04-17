@@ -1,51 +1,5 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &1995442253117766193
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 6379335948082995669}
-  - component: {fileID: 5447998825202065399}
-  m_Layer: 0
-  m_Name: spawnArrow
-  m_TagString: Untagged
-  m_Icon: {fileID: -5397416234189338067, guid: 0000000000000000d000000000000000, type: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &6379335948082995669
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1995442253117766193}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 6830410797998897957}
-  m_RootOrder: 1
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &5447998825202065399
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1995442253117766193}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 88d1ff15bc2c36047914b90e53efdee3, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Arrow: {fileID: 895660676678449530, guid: bf2c05a415f5c6246b7810c8b222baa4, type: 3}
-  speed: 5
-  damege: 10
 --- !u!1 &6830410797998897958
 GameObject:
   m_ObjectHideFlags: 0
@@ -61,7 +15,8 @@ GameObject:
   - component: {fileID: 2148705935134626710}
   - component: {fileID: 6830410797998897950}
   - component: {fileID: 6830410797998897945}
-  m_Layer: 12
+  - component: {fileID: 5708780241531286930}
+  m_Layer: 9
   m_Name: Archer
   m_TagString: blue
   m_Icon: {fileID: 7148428337604731935, guid: 0000000000000000d000000000000000, type: 0}
@@ -80,7 +35,6 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 2493514978124730182}
-  - {fileID: 6379335948082995669}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -122,7 +76,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -215895229
-  m_SortingLayer: 4
+  m_SortingLayer: 3
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: beb9c9e3a746d224ab644c64791736a3, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -228,12 +182,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   animator: {fileID: 0}
   walkDir_Y: 0
-  setTime: 1
+  setTime: 0.5
   currentState: 0
   speed: 1.5
   MaxHealth: 100
-  attackRate: 2
-  attackDamage: 30
+  attackRate: 1
+  attackDamage: 0
   attackRange: 5
   detectRange: 5
   CostArray:
@@ -244,9 +198,23 @@ MonoBehaviour:
   - resourceType: {fileID: 11400000, guid: bc734ecf5539a2f44a3703d03b6d384e, type: 2}
     amount: 10
   enemy: {fileID: 0}
-  dis: 3
   up: {fileID: 21300000, guid: 11f682031297a744ba33c45b7ed8ff99, type: 3}
   down: {fileID: 21300000, guid: beb9c9e3a746d224ab644c64791736a3, type: 3}
+--- !u!114 &5708780241531286930
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6830410797998897958}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 88d1ff15bc2c36047914b90e53efdee3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Arrow: {fileID: 895660676678449530, guid: bf2c05a415f5c6246b7810c8b222baa4, type: 3}
+  ArrowSpeed: 5
+  damege: 10
 --- !u!1001 &414661950972893124
 PrefabInstance:
   m_ObjectHideFlags: 0

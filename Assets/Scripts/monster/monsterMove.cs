@@ -35,8 +35,6 @@ public class monsterMove : MonoBehaviour
     RaycastHit2D[] raycast2D = new RaycastHit2D[3]; //雷射
     LayerMask mask;  //遮罩
     private float angle;
-    [Header("雷射發射長度")]
-    [SerializeField] private float dis; //發射長度
     private bool isFix;
     private health health;
     private Team t;
@@ -74,10 +72,10 @@ public class monsterMove : MonoBehaviour
         t = this.GetComponent<Team>();
         animator.SetFloat("attackSpeed", 1 / attackRate);
         nextAttack = 0;
-        dis *= this.gameObject.transform.localScale.x;
+        attackRange *= this.gameObject.transform.localScale.x;
         mask = 1 << 9 | 1 << 10 | 1 << 11;
         angle = 35;
-        // StartCoroutine(waitIdle(setTime));
+        StartCoroutine(waitIdle(setTime));
     }
     void Update()
     {
@@ -106,7 +104,7 @@ public class monsterMove : MonoBehaviour
             Collider2D[] collider2D = Physics2D.OverlapCircleAll(this.transform.position, detectRange);
             foreach (var k in collider2D)
             {
-                if (k.gameObject != this.gameObject || !k.CompareTag(this.tag))
+                if (k.gameObject != this.gameObject && !k.CompareTag(this.tag))
                 {
                     if (enemy == null)
                     {
@@ -168,7 +166,7 @@ public class monsterMove : MonoBehaviour
     }
     bool fixPosition()
     {
-        if (currentState == MonsterState.walk && currentState == MonsterState.track)
+        if (currentState == MonsterState.walk || currentState == MonsterState.track)
         {
             float x = animator.GetFloat("moveX");
             float y = animator.GetFloat("moveY");
@@ -180,12 +178,12 @@ public class monsterMove : MonoBehaviour
             k = Quaternion.AngleAxis(-angle, Vector3.forward);
             Vector3 Right = k * enemyPos;
 
-            raycast2D[0] = Physics2D.Raycast(transform.position, Left, dis, mask);
-            raycast2D[1] = Physics2D.Raycast(transform.position, enemyPos, dis, mask);
-            raycast2D[2] = Physics2D.Raycast(transform.position, Right, dis, mask);
-            Debug.DrawRay(transform.position, enemyPos * dis, Color.black);
-            Debug.DrawRay(transform.position, Left * dis, Color.black);
-            Debug.DrawRay(transform.position, Right * dis, Color.black);
+            raycast2D[0] = Physics2D.Raycast(transform.position, Left, attackRange, mask);
+            raycast2D[1] = Physics2D.Raycast(transform.position, enemyPos, attackRange, mask);
+            raycast2D[2] = Physics2D.Raycast(transform.position, Right, attackRange, mask);
+            Debug.DrawRay(transform.position, enemyPos * attackRange, Color.black);
+            Debug.DrawRay(transform.position, Left * attackRange, Color.black);
+            Debug.DrawRay(transform.position, Right * attackRange, Color.black);
 
             foreach (RaycastHit2D i in raycast2D)
             {

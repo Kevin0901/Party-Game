@@ -6,7 +6,8 @@ public class archerArrowMove : MonoBehaviour
 {
     // Start is called before the first frame update
     [HideInInspector] public GameObject target;
-    [HideInInspector] public float speed, damege;
+    [HideInInspector] public float speed;
+    [HideInInspector] public int damege;
     // Update is called once per frame
     void Update()
     {

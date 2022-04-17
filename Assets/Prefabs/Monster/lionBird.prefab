@@ -91,7 +91,7 @@ GameObject:
   - component: {fileID: 2891440172044450026}
   - component: {fileID: 2891440172044450027}
   - component: {fileID: 4422358413635501724}
-  m_Layer: 12
+  m_Layer: 9
   m_Name: LionBird
   m_TagString: blue
   m_Icon: {fileID: 7148428337604731935, guid: 0000000000000000d000000000000000, type: 0}
@@ -235,11 +235,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   animator: {fileID: 0}
   walkDir_Y: 0
-  setTime: 1
+  setTime: 0.5
   currentState: 0
   speed: 1.5
   MaxHealth: 100
-  attackRate: 2
+  attackRate: 1
   attackDamage: 30
   attackRange: 1.66
   detectRange: 5
@@ -251,7 +251,6 @@ MonoBehaviour:
   - resourceType: {fileID: 11400000, guid: bc734ecf5539a2f44a3703d03b6d384e, type: 2}
     amount: 10
   enemy: {fileID: 0}
-  dis: 3
   up: {fileID: 21300000, guid: 3720d4243ab29e54db0a891c991ba13b, type: 3}
   down: {fileID: 21300000, guid: d54b9f1ae00691f439c2c724a9c8bc16, type: 3}
 --- !u!61 &4422358413635501724

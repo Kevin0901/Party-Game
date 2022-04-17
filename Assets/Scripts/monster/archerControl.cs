@@ -5,7 +5,8 @@ using UnityEngine;
 public class archerControl : MonoBehaviour
 {
     [SerializeField] private GameObject Arrow;
-    [SerializeField] private float speed, damege;
+    [SerializeField] private float ArrowSpeed;
+    [SerializeField] private int damege;
     private Animator animator;
     private void Awake()
     {
@@ -33,7 +34,7 @@ public class archerControl : MonoBehaviour
         {
             arr.transform.position += new Vector3(-1.48f, 0.24f, 0);
         }
-        arr.GetComponent<archerArrowMove>().speed = speed;
+        arr.GetComponent<archerArrowMove>().speed = ArrowSpeed;
         arr.GetComponent<archerArrowMove>().damege = damege;
         arr.GetComponent<archerArrowMove>().target = this.GetComponentInParent<monsterMove>().enemy;
     }
