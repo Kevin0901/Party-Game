@@ -131,7 +131,7 @@ public class WaveShoot : MonoBehaviour
 
     void OnTriggerExit2D(Collider2D other)
     {
-        if (other.CompareTag(t.Enemyteam) )
+        if (other.CompareTag(t.Enemyteam))
         {
             enemiesInRange.Remove(other.gameObject);
         }

@@ -142,11 +142,12 @@ public class PlayerMovement : MonoBehaviour
         PlayerBulid();
         if (Input.GetKeyDown(KeyCode.J))
         {
-            StartCoroutine(this.GetComponent<Effect>().RandGiveEffect());
+            // StartCoroutine(this.GetComponent<Effect>().RandGiveEffect());
         }
         if (Input.GetKeyDown(KeyCode.E))
         {
-            inventory.AddItem(new Item { itemType = Item.ItemType.Medusaeye, amount = 10 });
+            // inventory.AddItem(new Item { itemType = Item.ItemType.Medusaeye, amount = 10 });
+
         }
     }
     public void spawn()
