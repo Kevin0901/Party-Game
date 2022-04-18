@@ -23,8 +23,8 @@ public class EndGame : MonoBehaviour
     {
         this.GetComponent<CanvasGroup>().alpha = 1;
         this.GetComponent<CanvasGroup>().blocksRaycasts = true;
-        PW.GetComponent<TMP_Text>().text = FightManager.Instance.plist[0].GetComponent<arenaPlayer>().p_index.ToString() + " P WIN！";
-        PW.SetActive(true);
+        // PW.GetComponent<TMP_Text>().text = FightManager.Instance.plist[0].GetComponent<arenaPlayer>().p_index.ToString() + " P WIN！";
+        // PW.SetActive(true);
         Time.gameObject.SetActive(true);
         StartCoroutine(CountDown());
     }

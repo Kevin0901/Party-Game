@@ -17,6 +17,9 @@ public class RoomListItem : MonoBehaviour
     public void OnClick()
     {
         Launcher.Instance.JoinRoom(info);
-        
+        GameObject.Find("RoomMenu").transform.Find("Create").gameObject.SetActive(false);
+        GameObject.Find("RoomMenu").transform.Find("RoomList").gameObject.SetActive(false);
+        GameObject.Find("RoomMenu").GetComponent<RoomMenu>().StartCoroutine("fadeout","ChoosePlayer");
+        GameObject.Find("ChoosePlayer").GetComponent<ChoosePlayer>().inChoosePlayer = true;
     }
 }

@@ -19,19 +19,18 @@ public class RoomManager : MonoBehaviourPunCallbacks
     public string[] PlayerTeam;
     PhotonView PV;
     public int Game_num;
-    public float GameTime, ReadyTime;
-    bool EnteredGame, StartCount;
+    public int TotalTime, ReadyTime = 5, EventTime;
+    private int nextEvent;
+    bool EnteredGame;
     GameObject PAPA;
     GameObject Black, Event;
-    TMP_Text Count;
+    [SerializeField] TMP_Text Count;
     [SerializeField] Image EventPicture;
     [SerializeField] Sprite[] EventSprite;
     void Awake()
     {
-        ReadyTime = 5f;
         EnteredGame = false;
-        StartCount = false;
-        GameTime = 0f;
+        TotalTime = 0;
         Black = transform.Find("Black").gameObject;
         Event = transform.Find("Event").gameObject;
         // if (Instance)
@@ -43,7 +42,10 @@ public class RoomManager : MonoBehaviourPunCallbacks
         PV = GetComponent<PhotonView>();  //定義PhotonView
         // Instance = this;
     }
-
+    private void Start()
+    {
+        nextEvent = EventTime;
+    }
     void Update()
     {
         if (!PV.IsMine)
@@ -52,106 +54,94 @@ public class RoomManager : MonoBehaviourPunCallbacks
         }
         // if (SceneManager.GetActiveScene().name.Equals("MainScene") && Input.inputString.Length > 0 && Input.inputString.All(char.IsDigit))
         // {
-        //     switch (Input.inputString)
-        //     {
-        //         case "0":
-        //             Game_num = 0;
-        //             break;
-        //         case "1":
-        //             Game_num = 1;
-        //             break;
-        //         case "2":
-        //             Game_num = 2;
-        //             break;
-        //         case "3":
-        //             Game_num = 3;
-        //             break;
-        //         case "4":
-        //             Game_num = 4;
-        //             break;
-        //         case "5":
-        //             Game_num = 5;
-        //             break;
-        //         case "6":
-        //             Game_num = 6;
-        //             break;
-        //         case "7":
-        //             Game_num = 7;
-        //             break;
-        //         case "8":
-        //             Game_num = 8;
-        //             break;
-        //         case "9":
-        //             Game_num = 9;
-        //             break;
-        //     }
         //     Hashtable hash = new Hashtable();
         //     hash.Add("GameNum", Game_num);
         //     PhotonNetwork.LocalPlayer.SetCustomProperties(hash);
         //     PhotonNetwork.LoadLevel(2);
         // }
     }
-    IEnumerator TimeManager()
+    IEnumerator ready()
     {
-        yield return new WaitForSeconds(1f);
-        if (StartCount && ReadyTime <= 0)
+        if (ReadyTime == 0)
         {
-            if (Count.gameObject.activeSelf)
-            {
-                StartCoroutine(Wait_OneSec());
-                Count.gameObject.SetActive(false);
-            }
-            GameTime += 1f;
-            if ((int)GameTime % 180 == 0 && (int)GameTime != 1260f)
-            {
-                if (PV.IsMine)
-                {
-                    Game_num = UnityEngine.Random.Range(0, EventSprite.Length);
-                    EventPicture.sprite = EventSprite[Game_num];
-                    EventPicture.gameObject.transform.parent.gameObject.SetActive(true);
-                    Hashtable hash = new Hashtable();
-                    hash.Add("GameNum", Game_num);
-                    PhotonNetwork.LocalPlayer.SetCustomProperties(hash);
-                }
-            }
-            else if ((int)GameTime % 210 == 5)
-            {
-                if (!Count.gameObject.activeSelf)
-                {
-                    Count.gameObject.SetActive(true);
-                }
-                TimeSpan time = TimeSpan.FromSeconds((int)GameTime % 210);
-                Count.text = time.ToString(@"s");
-            }
-            else if ((int)GameTime % 210 == 0)
-            {
-                Count.gameObject.SetActive(false);
-                StartCoroutine(Black_fadein());
-            }
+            Count.text = "Start!!!";
+            yield return new WaitForSeconds(0.5f);
+            Count.gameObject.SetActive(false);
+            StartCoroutine(TimeCount());
         }
-        else if (ReadyTime > 0)
+        else
         {
-            ReadyTime -= 1f;
-            if (!Count.gameObject.activeSelf)
-            {
-                Count.gameObject.SetActive(true);
-            }
-            TimeSpan time = TimeSpan.FromSeconds(ReadyTime);
-            Count.text = time.ToString(@"s");
+            Count.gameObject.SetActive(true);
+            Count.text = ReadyTime.ToString();
+            ReadyTime--;
+            yield return new WaitForSeconds(1f);
+            StartCoroutine(ready());
         }
-        StartCoroutine(TimeManager());
     }
-    IEnumerator Wait_OneSec()
+    IEnumerator TimeCount()
     {
         yield return new WaitForSeconds(1f);
+        TotalTime++;
+        if (TotalTime == nextEvent)
+        {
+            if (PV.IsMine)
+            {
+                Game_num = UnityEngine.Random.Range(0, EventSprite.Length);
+                EventPicture.sprite = EventSprite[Game_num];
+                EventPicture.gameObject.transform.parent.gameObject.SetActive(true);
+                Hashtable hash = new Hashtable();
+                hash.Add("GameNum", Game_num);
+                PhotonNetwork.LocalPlayer.SetCustomProperties(hash);
+            }
+            StartCoroutine(startEvent(30));
+        }
+        if (SceneManager.GetActiveScene().name.Equals("MainScene"))
+        {
+            StartCoroutine(TimeCount());
+        }
+    }
+    IEnumerator startEvent(float t)
+    {
+        if (t > 5)
+        {
+            t--;
+            yield return new WaitForSeconds(1f);
+            StartCoroutine(startEvent(t));
+        }
+        else if (t == 0)
+        {
+            Count.gameObject.SetActive(false);
+            nextEvent += EventTime;
+            StartCoroutine(Black_fadein());
+        }
+        else
+        {
+            Black.SetActive(true);
+            Count.gameObject.SetActive(true);
+            Debug.Log(t);
+            Count.text = t.ToString();
+            t--;
+            yield return new WaitForSeconds(1f);
+            StartCoroutine(startEvent(t));
+        }
+    }
+    IEnumerator Black_fadeout(bool FirstEnter)
+    {
+        Black.SetActive(true);
         Black.GetComponentInChildren<Animator>().SetTrigger("fadeout");
         yield return new WaitForSeconds(1f);
-        Black.SetActive(false);
+        if (SceneManager.GetActiveScene().name.Equals("FightScene") || !FirstEnter)
+        {
+            Black.SetActive(false);
+        }
+        // Black.SetActive(false);
     }
     IEnumerator Black_fadein()
     {
+        Black.SetActive(true);
         Black.GetComponentInChildren<Animator>().SetTrigger("fadein");
         yield return new WaitForSeconds(1f);
+        EventPicture.gameObject.transform.parent.gameObject.SetActive(false);
         if (PV.IsMine)
         {
             if (SceneManager.GetActiveScene().name.Equals("MainScene"))
@@ -189,10 +179,11 @@ public class RoomManager : MonoBehaviourPunCallbacks
     {
         if (scene.buildIndex == 1) //如果在遊戲場景
         {
-            StartCount = true;
-            StartCoroutine(TimeManager());
+            Cursor.visible = false;
             if (!EnteredGame)
             {
+                StartCoroutine(Black_fadeout(true));
+                StartCoroutine(ready());
                 if (PV.IsMine)
                 {
                     for (int i = 0; i < PhotonNetwork.PlayerList.Length; i++)
@@ -208,7 +199,8 @@ public class RoomManager : MonoBehaviourPunCallbacks
             }
             else
             {
-                StartCoroutine(Wait_OneSec());
+                StartCoroutine(Black_fadeout(false));
+                StartCoroutine(TimeCount());
                 if (GameObject.Find("PAPA") != null)
                 {
                     Destroy(GameObject.Find("PAPA"));
@@ -218,9 +210,9 @@ public class RoomManager : MonoBehaviourPunCallbacks
         }
         else if (scene.buildIndex == 2)
         {
-            StartCount = false;
-            StopCoroutine(TimeManager());
-            StartCoroutine(Wait_OneSec());
+            Cursor.visible = true;
+            StopCoroutine(TimeCount());
+            StartCoroutine(Black_fadeout(false));
             PAPA.SetActive(false);
             if (PV.IsMine)
             {
@@ -251,6 +243,8 @@ public class RoomManager : MonoBehaviourPunCallbacks
     public void Back_To_Main()
     {
         Destroy(PAPA);
-        PhotonNetwork.LoadLevel(0);
+        PhotonNetwork.LeaveRoom();
+        PhotonNetwork.Disconnect();
+        SceneManager.LoadScene(0);
     }
 }

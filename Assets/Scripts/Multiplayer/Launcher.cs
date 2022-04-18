@@ -315,7 +315,7 @@ public class Launcher : MonoBehaviourPunCallbacks
         GameObject.Find("TranPageAnimation").GetComponent<Animator>().SetTrigger("change");
         yield return new WaitForSeconds(0.5f);
         GameObject.Find("ChoosePlayer").GetComponent<CanvasGroup>().alpha = 0;
-        yield return new WaitForSeconds(1f);
+        yield return new WaitForSeconds(0.5f);
         if (PV.IsMine)
         {
             PhotonNetwork.LoadLevel(1);
@@ -330,6 +330,7 @@ public class Launcher : MonoBehaviourPunCallbacks
     public void JoinRoom(RoomInfo info)  //加入房間
     {
         PhotonNetwork.JoinRoom(info.Name);
+        Debug.Log("Join");
         // MenuManger.Instance.OpenMenu("loading");
     }
     public override void OnLeftRoom()  //離開房間觸發

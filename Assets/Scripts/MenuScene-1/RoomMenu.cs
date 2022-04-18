@@ -28,7 +28,7 @@ public class RoomMenu : MonoBehaviour
         CanvasGroup.alpha = 1;
         inRoomMenu = false;
     }
-    private IEnumerator fadeout(string UIName) //淡出畫面
+    public IEnumerator fadeout(string UIName) //淡出畫面
     {
         CanvasGroup.blocksRaycasts = false;
         GameObject.Find("TranPageAnimation").GetComponent<Animator>().SetTrigger("change");

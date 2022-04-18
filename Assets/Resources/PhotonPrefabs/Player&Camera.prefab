@@ -3932,4 +3932,4 @@ MonoBehaviour:
   shaketime: 1
   level: 2
   player: {fileID: 8015736549751910584}
-  SandEffect: {fileID: 0}
+  SandEffect: {fileID: 2046083488}
