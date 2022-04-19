@@ -6,7 +6,7 @@ using Photon.Realtime;
 using System.IO;
 public class HammerEvent : MonoBehaviour
 {
-    [SerializeField] private GameObject UI, _hammer;
+    [SerializeField] private GameObject UI;
     public bool isEnd;
     [SerializeField] GameObject StartButton;
     [SerializeField] GameObject UIBackGround;
@@ -65,7 +65,7 @@ public class HammerEvent : MonoBehaviour
         GameObject Ham = PhotonView.Find(HamID).gameObject;
         GameObject p = PhotonView.Find(iswho).gameObject;
         Ham.transform.SetParent(p.transform);
-        Ham.transform.GetChild(0).GetComponent<strike>()._event = this.gameObject.GetComponent<HammerEvent>();
+        Ham.transform.GetComponentInChildren<strike>()._event = this.gameObject.GetComponent<HammerEvent>();
     }
     public void StartGame()
     {

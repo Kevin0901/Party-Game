@@ -377,6 +377,26 @@ PrefabInstance:
       propertyPath: m_Name
       value: ChoosePlayer
       objectReference: {fileID: 0}
+    - target: {fileID: 2304934983819231161, guid: ed9b805a4c50c6e458228a4dd58572b0,
+        type: 3}
+      propertyPath: sceneViewId
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2518014559152912504, guid: ed9b805a4c50c6e458228a4dd58572b0,
+        type: 3}
+      propertyPath: sceneViewId
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 2981623805691362402, guid: ed9b805a4c50c6e458228a4dd58572b0,
+        type: 3}
+      propertyPath: sceneViewId
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 6422138166732487254, guid: ed9b805a4c50c6e458228a4dd58572b0,
+        type: 3}
+      propertyPath: sceneViewId
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ed9b805a4c50c6e458228a4dd58572b0, type: 3}
 --- !u!1 &588810392
@@ -408,11 +428,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 080e130eaccd3044aa472884ca4354a0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  plist: []
   player: {fileID: 4733032340008112295, guid: 39e21d00039060149bc52201b908a616, type: 3}
-  fightplayer: {fileID: 2028814211212845501, guid: c775dd2b651076e4695745b131227a23,
-    type: 3}
-  EventGame: 
 --- !u!4 &588810394
 Transform:
   m_ObjectHideFlags: 0

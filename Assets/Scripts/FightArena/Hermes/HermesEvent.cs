@@ -57,7 +57,7 @@ public class HermesEvent : MonoBehaviour
             FightManager.Instance.plist[i].GetComponent<arenaPlayer>().currentState = ArenaState.idle;
         }
         this.transform.Find("GameUI").Find("end").GetComponent<Text>().text =
-        "遊戲結束\n" + blueScore.ToString() + "  ：  " + redScore.ToString();
+        "遊戲結束\n" + blueScore.ToString() + "  :  " + redScore.ToString();
         yield return new WaitForSeconds(3f);
 
         UI.SetActive(true);

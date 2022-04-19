@@ -7,6 +7,7 @@ public class strike : MonoBehaviour
     [SerializeField] private int max;
     [SerializeField] private float all_dis;
     [SerializeField] private int cnt;
+    public SpriteRenderer lightSword;
     private float move_dis;
     [HideInInspector] public HammerEvent _event;
     private void Start()
@@ -18,10 +19,10 @@ public class strike : MonoBehaviour
         if (!_event.isEnd && Input.GetKeyDown(KeyCode.Space))
         {
             cnt++;
-            this.transform.GetChild(0).localPosition += new Vector3(0, -move_dis, 0);
+            this.transform.localPosition += new Vector3(0, -move_dis, 0);
             if (cnt >= max)
             {
-                this.GetComponent<SpriteRenderer>().color = new Color(1, 0.3f, 0.47f);
+                lightSword.enabled = true;
                 StartCoroutine(_event.EndGame(this.transform.parent.parent.gameObject));
             }
         }

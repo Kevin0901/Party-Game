@@ -3,176 +3,238 @@ using System.Collections.Generic;
 using UnityEngine;
 public enum MonsterState
 {
-    walk,
-    attack,
-    track,
     idle,
+    walk,
+    track,
+    attack,
     pigeon
 }
 [RequireComponent(typeof(monsterMove))]
-[RequireComponent(typeof(LaserDetect))]
 [RequireComponent(typeof(Team))]
 public class monsterMove : MonoBehaviour
 {
-    private static int redsort, bluesort;
+    [HideInInspector] public static int redsort, bluesort;
     [HideInInspector] public Animator animator;//動畫
-    [HideInInspector] public Vector3 enemyPos;//敵人位置
-
-    [Header("怪物數值設定")]
-    [SerializeField] private float dir = 1f;//走路方向
-    [SerializeField] private float setTime = 1f;//放置時間
-    public float attackRange = 2f;//攻擊範圍
-    public int attackDamage;
-    public float speed = 1.5f;//走路速度
-    [SerializeField] private int MaxHealth, CurHealth;
-
-    [Header("每幾秒攻擊一次")]
-    [SerializeField] private float attackRate = 1f; //攻擊間隔
+    [Header("初始數值")]
+    [SerializeField] private float walkDir_Y;
+    [SerializeField] private float setTime;
+    [Header("怪物數值")]
+    public MonsterState currentState;
+    public float speed;
+    [SerializeField] private int MaxHealth;
+    private int CurHealth;
+    [SerializeField] private float attackRate;
+    [SerializeField] public int attackDamage;
+    [SerializeField] private float attackRange;
+    [SerializeField] private float detectRange;
     [Header("召喚消耗")]
     public ResourceAmount[] CostArray;
-
-    [Header("怪物狀態")]
-    public MonsterState currentState;//角色狀態
-
-    [Header("偵測清單上的怪物")]
-    public List<GameObject> EnemyList = new List<GameObject>();//進偵測範圍的第一個人寫進陣列裡
+    [Header("追蹤目標")]
+    public GameObject enemy;
     private float nextAttack;//下次攻擊時間
-    private bool fix; //是否修正方向.
+    RaycastHit2D[] raycast2D = new RaycastHit2D[3]; //雷射
+    LayerMask mask;  //遮罩
+    private float angle;
+    private bool isFix;
     private health health;
-    private Rigidbody2D rigi;
+    private Team t;
     private SpriteRenderer spriteRenderer;
-    [Header("往上的圖")]
+    [Header("起始圖片_上")]
     [SerializeField] private Sprite up;
-    [Header("往下的圖")]
+    [Header("起始圖片_下")]
     [SerializeField] private Sprite down;
-    public int pigeon;
-    //喚醒設定
     private void Awake()
     {
-        currentState = MonsterState.idle;
         health = this.GetComponentInChildren<health>();
-        health.maxH = MaxHealth;
+        animator = this.gameObject.GetComponent<Animator>();
         spriteRenderer = this.GetComponent<SpriteRenderer>();
-        if (this.gameObject.tag == "red")
+        health.maxH = MaxHealth;
+
+        if (this.gameObject.tag == "red") //如果是紅隊
         {
             redsort++;
             spriteRenderer.sprite = up;
             spriteRenderer.sortingLayerName = "RedMonster";
             spriteRenderer.sortingOrder = redsort;
-            dir = 1f;
+            walkDir_Y = 1f;
         }
-        else
+        else if (this.gameObject.tag == "blue")
         {
             bluesort++;
             spriteRenderer.sprite = down;
             spriteRenderer.sortingLayerName = "BlueMonster";
             spriteRenderer.sortingOrder = bluesort;
-            dir = -1f;
+            walkDir_Y = -1f;
         }
-        this.gameObject.GetComponent<LaserDetect>().enabled = false;
-        animator = this.gameObject.GetComponent<Animator>();
-        animator.enabled = false;
     }
-    //開始設定
     void Start()
     {
-        rigi = this.GetComponent<Rigidbody2D>();
+        t = this.GetComponent<Team>();
         animator.SetFloat("attackSpeed", 1 / attackRate);
         nextAttack = 0;
         attackRange *= this.gameObject.transform.localScale.x;
-        currentState = MonsterState.idle;
+        mask = 1 << 9 | 1 << 10 | 1 << 11;
+        angle = 35;
         StartCoroutine(waitIdle(setTime));
     }
-    //等待時間
+    void Update()
+    {
+        CurHealth = health.curH;
+        fixPosition();
+        detectEnemy();
+        monsterState();
+    }
     private IEnumerator waitIdle(float t)
     {
         yield return new WaitForSeconds(t);
-        animator.enabled = true;
-        this.gameObject.GetComponent<LaserDetect>().enabled = true;
-        animator.SetFloat("moveY", dir); //預設動畫方向
+        animator.SetFloat("moveY", walkDir_Y); //預設動畫方向
         currentState = MonsterState.walk;
     }
-    //更新
-    void Update()
+    void OnDrawGizmos()//畫圖
     {
-        fix = this.gameObject.GetComponent<LaserDetect>().isfix;
-        CurHealth = health.curH;
-        monsterBehavior();
-        if (pigeon == 1)
+        Gizmos.color = Color.yellow;
+        Gizmos.DrawWireSphere(transform.position, detectRange);
+        Gizmos.color = Color.red;
+        Gizmos.DrawWireSphere(transform.position, attackRange);
+    }
+    void detectEnemy()
+    {
+        if (currentState != MonsterState.idle)
         {
-            StartCoroutine(Pigeonsec());
+            Collider2D[] collider2D = Physics2D.OverlapCircleAll(this.transform.position, detectRange);
+            foreach (var k in collider2D)
+            {
+                if (enemy == null && !k.CompareTag(this.tag) &&
+                Vector3.Distance(k.transform.position, transform.position) <= detectRange)
+                {
+                    enemy = k.gameObject;
+                }
+            }
+            if (enemy != null)
+            {
+                // float dis = Vector3.Distance(this.transform.position, enemy.GetComponent<Collider2D>().bounds.center);
+                float dis = Vector3.Distance(this.transform.position, enemy.transform.position);
+                if (dis <= attackRange && currentState != MonsterState.pigeon)
+                {
+                    currentState = MonsterState.attack;
+                }
+                else if (dis <= detectRange)
+                {
+                    currentState = MonsterState.track;
+                }
+                else if (dis > detectRange)
+                {
+                    currentState = MonsterState.walk;
+                    enemy = null;
+                }
+            }
         }
     }
-    private void OnEnable()
+    void monsterState()//怪物動作
     {
-        animator.SetFloat("attackSpeed", 1 / attackRate);
-    }
-    //怪物動作
-    void monsterBehavior()
-    {
-        if (currentState == MonsterState.attack)
+        if (nextAttack > 0)
+        {
+            nextAttack -= Time.deltaTime;
+        }
+        if (currentState == MonsterState.idle)
         {
             animator.SetBool("moving", false);
-            if (nextAttack > 0)
+        }
+        else if (currentState == MonsterState.attack && nextAttack <= 0)
+        {
+            if (enemy == null)
             {
-                nextAttack -= Time.deltaTime;
+                currentState = MonsterState.walk;
             }
             else
             {
-                Vector2 direction = enemyPos - transform.position;
-                direction = direction.normalized;
-                animator.SetFloat("moveX", Mathf.RoundToInt(direction.x));
-                animator.SetFloat("moveY", Mathf.RoundToInt(direction.y));
-                StartCoroutine(AttackCo());
+                StartCoroutine(attack());
             }
         }
-        else if (currentState == MonsterState.track && (fix != true) && currentState != MonsterState.attack)
+        else if ((currentState == MonsterState.track && !isFix) || currentState == MonsterState.pigeon)
         {
-            if (nextAttack > 0)
+            if (enemy == null)
             {
-                nextAttack -= Time.deltaTime;
+                currentState = MonsterState.walk;
             }
-            Vector2 direction = enemyPos - transform.position;
-            direction = direction.normalized;
-            transform.position = Vector3.MoveTowards(transform.position, enemyPos, Time.deltaTime * speed); //往敵人方向移動
-            animator.SetFloat("moveX", direction.x);
-            animator.SetFloat("moveY", direction.y);
-            animator.SetBool("moving", true);
+            else
+            {
+                Vector2 direction = enemy.GetComponent<Collider2D>().bounds.center - transform.position;
+                direction = direction.normalized;
+                transform.position = Vector3.MoveTowards(transform.position, enemy.transform.position, Time.deltaTime * speed); //往敵人方向移動
+                animator.SetFloat("moveX", direction.x);
+                animator.SetFloat("moveY", direction.y);
+                animator.SetBool("moving", true);
+            }
         }
-        else if (currentState == MonsterState.walk)
+        else if (currentState == MonsterState.walk || currentState == MonsterState.pigeon)
         {
-            transform.position += new Vector3(0, speed, 0) * Time.deltaTime * dir; //持續往前進
+            transform.position += new Vector3(0, speed, 0) * Time.deltaTime * walkDir_Y; //持續往前進
             animator.SetFloat("moveX", 0);
-            animator.SetFloat("moveY", dir);
+            animator.SetFloat("moveY", walkDir_Y);
             animator.SetBool("moving", true);
-            nextAttack = 0;
         }
     }
-    //攻擊
-    private IEnumerator AttackCo()
+    bool fixPosition()
     {
-        rigi.mass -= 200f;
+        if (currentState == MonsterState.walk || currentState == MonsterState.track)
+        {
+            float x = animator.GetFloat("moveX");
+            float y = animator.GetFloat("moveY");
+            Vector2 enemyPos = new Vector2(x, y);
+            Vector3 line = Vector2.zero - enemyPos;
+            float rotate = Mathf.Atan2(line.y, line.x) * Mathf.Rad2Deg;
+            Quaternion k = Quaternion.AngleAxis(angle, Vector3.forward);
+            Vector3 Left = k * enemyPos;
+            k = Quaternion.AngleAxis(-angle, Vector3.forward);
+            Vector3 Right = k * enemyPos;
+
+            raycast2D[0] = Physics2D.Raycast(transform.position, Left, attackRange, mask);
+            raycast2D[1] = Physics2D.Raycast(transform.position, enemyPos, attackRange, mask);
+            raycast2D[2] = Physics2D.Raycast(transform.position, Right, attackRange, mask);
+            Debug.DrawRay(transform.position, enemyPos * attackRange, Color.black);
+            Debug.DrawRay(transform.position, Left * attackRange, Color.black);
+            Debug.DrawRay(transform.position, Right * attackRange, Color.black);
+
+            foreach (RaycastHit2D i in raycast2D)
+            {
+                if ((i.collider != null) && (i.collider.tag == this.gameObject.tag))
+                {
+                    float posL = Vector3.Distance(i.collider.transform.position, transform.position + Left);
+                    float posR = Vector3.Distance(i.collider.transform.position, transform.position + Right);
+                    if (posL > posR)
+                    {
+                        transform.position += Left * speed * Time.deltaTime;
+                    }
+                    else
+                    {
+                        transform.position += Right * speed * Time.deltaTime;
+                    }
+                    return isFix = true;
+                }
+            }
+        }
+        return isFix = false;
+    }
+    private IEnumerator attack()
+    {
+        Vector2 dir = enemy.transform.position - transform.position;
+        dir = dir.normalized;
+        animator.SetBool("moving", false);
+        animator.SetFloat("moveX", Mathf.RoundToInt(dir.x));
+        animator.SetFloat("moveY", Mathf.RoundToInt(dir.y));
         nextAttack = attackRate;
         animator.SetBool("attacking", true);
         currentState = MonsterState.attack;
         yield return null;
         animator.SetBool("attacking", false);
-        yield return new WaitForSeconds(attackRate);
-        rigi.mass += 200f;
     }
-    private IEnumerator Pigeonsec()
+    public IEnumerator PigeonChange()
     {
-        animator.SetBool("moving", false);
-        animator.SetBool("attacking", false);
-        animator.SetBool("transform", true);
         currentState = MonsterState.pigeon;
-        yield return null;
-        animator.SetBool("transform", false);
-        yield return new WaitForSeconds(5);
-        animator.SetBool("moving", true);
-        currentState = MonsterState.walk;
-        pigeon = 0;
+        animator.SetBool("moving", false);
+        animator.SetBool("pigeon", true);
+        yield return new WaitForSeconds(3);
+        animator.SetBool("pigeon", false);
     }
-
-
 }
