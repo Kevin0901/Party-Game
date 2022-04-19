@@ -2093,6 +2093,23 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 624684391}
     m_Modifications:
+    - target: {fileID: 43592486141163520, guid: 483d77fb7faa9b2449e7502224d6d81e,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 668037748111280565, guid: 483d77fb7faa9b2449e7502224d6d81e,
+        type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 39305ea198cf04e4b958882300b66053,
+        type: 3}
+    - target: {fileID: 1820694061247763436, guid: 483d77fb7faa9b2449e7502224d6d81e,
+        type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 21f4c42fd7d4bd64084b461403d846fe,
+        type: 3}
     - target: {fileID: 2493688648149832423, guid: 483d77fb7faa9b2449e7502224d6d81e,
         type: 3}
       propertyPath: m_CollisionDetection
@@ -2152,6 +2169,17 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2493688648149832427, guid: 483d77fb7faa9b2449e7502224d6d81e,
+        type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: eba524ef186093247a5f9eb718fdb49e,
+        type: 3}
+    - target: {fileID: 2493688648149832427, guid: 483d77fb7faa9b2449e7502224d6d81e,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2493688648149832428, guid: 483d77fb7faa9b2449e7502224d6d81e,
         type: 3}
