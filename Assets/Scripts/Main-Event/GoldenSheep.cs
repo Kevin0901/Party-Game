@@ -56,7 +56,7 @@ public class GoldenSheep : MonoBehaviour
                     Debug.Log(direction.magnitude);
                     if (direction.magnitude > 2)
                     {
-                        transform.position += direction.normalized * 8  * Time.fixedDeltaTime;
+                        transform.position += direction.normalized * 8 * Time.fixedDeltaTime;
                         Debug.Log(direction);
                         animator.SetFloat("moveX", Mathf.RoundToInt(direction.normalized.x));
                         animator.SetFloat("moveY", Mathf.RoundToInt(direction.normalized.y));
@@ -108,7 +108,7 @@ public class GoldenSheep : MonoBehaviour
 
     private void OnTriggerStay2D(Collider2D other)
     {
-        if (other.gameObject.layer == 10 && Input.GetKey(KeyCode.P) && nowtstatic == true)
+        if (other.gameObject.layer == 10 && Input.GetKey(KeyCode.E) && nowtstatic == true)
         {
             nowtstatic = false;
             player = other.gameObject;

@@ -320,8 +320,8 @@ GameObject:
   - component: {fileID: 5090142021535760873}
   - component: {fileID: 9099964079005442442}
   m_Layer: 9
-  m_Name: FireBird
-  m_TagString: blue
+  m_Name: fireBird
+  m_TagString: red
   m_Icon: {fileID: 7148428337604731935, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

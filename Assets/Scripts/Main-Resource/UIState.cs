@@ -45,7 +45,7 @@ public class UIState : MonoBehaviour
         {
             if (int.Parse(player.GetComponent<PlayerMovement>().joynum) == 0)
             {
-                if (Input.GetKeyDown(KeyCode.B))
+                if (Input.GetKeyDown(KeyCode.Alpha1))
                 {
                     if (b == 0)
                     {
@@ -65,7 +65,7 @@ public class UIState : MonoBehaviour
                         escc = 0;
                     }
                 }
-                if (Input.GetKeyDown(KeyCode.M))
+                if (Input.GetKeyDown(KeyCode.Alpha2))
                 {
                     if (m == 0)
                     {

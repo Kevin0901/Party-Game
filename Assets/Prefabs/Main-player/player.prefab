@@ -246,6 +246,7 @@ GameObject:
   - component: {fileID: 6393788232031153227}
   - component: {fileID: 1880484670933552159}
   - component: {fileID: 2487867761034585202}
+  - component: {fileID: 3964830216918630096}
   m_Layer: 10
   m_Name: player
   m_TagString: red
@@ -388,7 +389,7 @@ MonoBehaviour:
   BluespawnPoint: {x: -20, y: 35, z: 0}
   health: {fileID: 0}
   joynum: 0
-  order: 0
+  order: 1
   playercamera: {fileID: 0}
   mouse: {fileID: 0}
   timer: {fileID: 0}
@@ -493,6 +494,32 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1.0404778, y: 0.6790795}
   m_EdgeRadius: 0
+--- !u!114 &3964830216918630096
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8151292538965709607}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 60c601181f220ff4691a355dcb396533, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  PowDuration: 10
+  PowMagnification: 2
+  SpeedDuration: 10
+  SpeedMagnification: 2
+  PHPreSec: 0.5
+  PHDuration: 3
+  PHPersen: 30
+  StoneDuration: 3
+  BurnPreSec: 0.5
+  BurnDuration: 3
+  BurnPersen: 30
+  InvincibleDuration: 5
+  RandEffectTimes: 3
+  ProjectileInfiniteDuration: 5
 --- !u!1 &8435505320395330504
 GameObject:
   m_ObjectHideFlags: 0

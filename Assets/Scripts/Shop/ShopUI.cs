@@ -30,7 +30,7 @@ public class ShopUI : MonoBehaviour
     {
         if (playerin == 1)
         {
-            if (int.Parse(joynum) == 0 && Input.GetKeyDown(KeyCode.P))
+            if (int.Parse(joynum) == 0 && Input.GetKeyDown(KeyCode.E))
             {
                 GetItemAssets();
                 GetItemAmount();

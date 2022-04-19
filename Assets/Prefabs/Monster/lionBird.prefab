@@ -92,8 +92,8 @@ GameObject:
   - component: {fileID: 2891440172044450027}
   - component: {fileID: 4422358413635501724}
   m_Layer: 9
-  m_Name: LionBird
-  m_TagString: blue
+  m_Name: lionBird
+  m_TagString: red
   m_Icon: {fileID: 7148428337604731935, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -155,7 +155,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -215895229
-  m_SortingLayer: 3
+  m_SortingLayer: 4
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: d54b9f1ae00691f439c2c724a9c8bc16, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
