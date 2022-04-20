@@ -71,9 +71,9 @@ public class PlayerMovement : MonoBehaviour
         animator = this.GetComponent<Animator>();
         health.maxH = MaxHealth;
         orginspeed = speed;
-        // PV = GetComponent<PhotonView>();  //定義PhotonView
-        // MultiPlayerManager = PhotonView.Find((int)PV.InstantiationData[0]).GetComponent<MultiPlayerManager>();  //設定自己的 PlayerManager
-        // MultiPlayerManager.OherPlayer = this.gameObject;  //設定 PlayerManager 中的 OherPlayer
+        PV = GetComponent<PhotonView>();  //定義PhotonView
+        MultiPlayerManager = PhotonView.Find((int)PV.InstantiationData[0]).GetComponent<MultiPlayerManager>();  //設定自己的 PlayerManager
+        MultiPlayerManager.OherPlayer = this.gameObject;  //設定 PlayerManager 中的 OherPlayer
     }
     void Start()
     {
@@ -83,14 +83,14 @@ public class PlayerMovement : MonoBehaviour
         mrigibody = this.GetComponent<Rigidbody2D>();
         UiandInventoryGet();
         // StartCoroutine(Wait_Game_Start());
-        // if (!PV.IsMine)  //如果此玩家 GameObject 是別人的鏡像，消除 UI 以及 Camera
-        // {
-        //     mouse.SetActive(false);
-        //     timer.SetActive(false);
-        //     playercamera.gameObject.SetActive(false);
+        if (!PV.IsMine)  //如果此玩家 GameObject 是別人的鏡像，消除 UI 以及 Camera
+        {
+            mouse.SetActive(false);
+            timer.SetActive(false);
+            playercamera.gameObject.SetActive(false);
 
-        //     return;
-        // }
+            return;
+        }
     }
     IEnumerator Wait_Game_Start()
     {
@@ -139,18 +139,18 @@ public class PlayerMovement : MonoBehaviour
         if (CurHealth <= 0)
         {
             animator.enabled = false;
-            transform.Find("down hitnox").gameObject.SetActive(false);
-            transform.Find("right hitnox").gameObject.SetActive(false);
-            transform.Find("up hitnox").gameObject.SetActive(false);
-            transform.Find("left hitnox").gameObject.SetActive(false);
+            transform.Find("down hitbox").gameObject.SetActive(false);
+            transform.Find("right hitbox").gameObject.SetActive(false);
+            transform.Find("up hitbox").gameObject.SetActive(false);
+            transform.Find("left hitbox").gameObject.SetActive(false);
             // this.transform.SetParent(GameObject.Find("PAPA").transform);
             Invoke("spawn", 2);
             this.gameObject.SetActive(false);
         }
-        // if (!PV.IsMine)
-        // {
-        //     return;
-        // }
+        if (!PV.IsMine)
+        {
+            return;
+        }
         PlayerMove();
         Playerthrow();
         PlayerItemUse();
@@ -395,8 +395,11 @@ public class PlayerMovement : MonoBehaviour
                         {
                             ResourceManager.Instance.RedSpendResources(monsterlist[UI.mx].GetComponent<monsterMove>().CostArray);
                             monsterlist[UI.mx].gameObject.tag = this.tag;
-                            GameObject monster = Instantiate(monsterlist[UI.mx], this.transform.position, Quaternion.identity);
-                            monster.transform.position += new Vector3(0, 2, 0);
+                            PhotonNetwork.Instantiate(Path.Combine("PhotonPrefabs", "Monster/" + monsterlist[UI.mx].gameObject.name),
+                            this.transform.position + new Vector3(0, 2, 0), Quaternion.identity,
+                            0, new object[] { PV.ViewID });
+                            // GameObject monster = Instantiate(monsterlist[UI.mx], this.transform.position, Quaternion.identity);
+                            // monster.transform.position += new Vector3(0, 2, 0);
                             nextfire = Time.time + fireRate;
                         }
                         else
@@ -410,8 +413,11 @@ public class PlayerMovement : MonoBehaviour
                         {
                             ResourceManager.Instance.BlueSpendResources(monsterlist[UI.mx].GetComponent<monsterMove>().CostArray);
                             monsterlist[UI.mx].gameObject.tag = this.tag;
-                            GameObject monster = Instantiate(monsterlist[UI.mx], this.transform.position, Quaternion.identity);
-                            monster.transform.position += new Vector3(0, -2, 0);
+                            PhotonNetwork.Instantiate(Path.Combine("PhotonPrefabs", "Monster/" + monsterlist[UI.mx].gameObject.name),
+                            this.transform.position + new Vector3(0, -2, 0), Quaternion.identity,
+                            0, new object[] { PV.ViewID });
+                            // GameObject monster = Instantiate(monsterlist[UI.mx], this.transform.position, Quaternion.identity);
+                            // monster.transform.position += new Vector3(0, -2, 0);
                             nextfire = Time.time + fireRate;
                         }
                         else
@@ -520,18 +526,18 @@ public class PlayerMovement : MonoBehaviour
     void UiandInventoryGet()
     {
         UI = this.GetComponent<UIState>();
-        // if (!PV.IsMine)
-        // {
-        //     UI.enabled = false;
-        //     for (int i = 1; i < 10; i++)
-        //     {
-        //         this.gameObject.transform.parent.GetChild(i).gameObject.SetActive(false);
-        //     }
-        // }
-        // else
-        // {
-        bornSet();
-        // }
+        if (!PV.IsMine)
+        {
+            UI.enabled = false;
+            for (int i = 1; i < 10; i++)
+            {
+                this.gameObject.transform.parent.GetChild(i).gameObject.SetActive(false);
+            }
+        }
+        else
+        {
+            bornSet();
+        }
         UI.GetGameobject();
         inventory = new Inventory();
         uiInventory = UI.GetInventory();

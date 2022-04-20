@@ -314,6 +314,9 @@ MonoBehaviour:
   - Type: 9
     SynchronizeType: 2
     Name: rotate
+  - Type: 9
+    SynchronizeType: 2
+    Name: change2
   m_SynchronizeLayers:
   - SynchronizeType: 2
     LayerIndex: 0

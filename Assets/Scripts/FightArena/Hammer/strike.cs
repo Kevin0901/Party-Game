@@ -1,7 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using Photon.Pun;
 public class strike : MonoBehaviour
 {
     [SerializeField] private int max;
@@ -10,13 +10,15 @@ public class strike : MonoBehaviour
     public SpriteRenderer lightSword;
     private float move_dis;
     [HideInInspector] public HammerEvent _event;
+    PhotonView PV;
     private void Start()
     {
+        PV = GetComponent<PhotonView>();
         move_dis = all_dis / max;
     }
     void Update()
     {
-        if (!_event.isEnd && Input.GetKeyDown(KeyCode.Space))
+        if (_event != null && !_event.isEnd && Input.GetKeyDown(KeyCode.Space) && PV.IsMine)
         {
             cnt++;
             this.transform.localPosition += new Vector3(0, -move_dis, 0);

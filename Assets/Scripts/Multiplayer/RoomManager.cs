@@ -52,13 +52,46 @@ public class RoomManager : MonoBehaviourPunCallbacks
         {
             return;
         }
-        // if (SceneManager.GetActiveScene().name.Equals("MainScene") && Input.inputString.Length > 0 && Input.inputString.All(char.IsDigit))
-        // {
-        //     Hashtable hash = new Hashtable();
-        //     hash.Add("GameNum", Game_num);
-        //     PhotonNetwork.LocalPlayer.SetCustomProperties(hash);
-        //     PhotonNetwork.LoadLevel(2);
-        // }
+        if (SceneManager.GetActiveScene().name.Equals("MainScene") && Input.inputString.Length > 0 && Input.inputString.All(char.IsDigit))
+        {
+            switch (Input.inputString)
+            {
+                case "0":
+                    Game_num = 0;
+                    break;
+                case "1":
+                    Game_num = 1;
+                    break;
+                case "2":
+                    Game_num = 2;
+                    break;
+                case "3":
+                    Game_num = 3;
+                    break;
+                case "4":
+                    Game_num = 4;
+                    break;
+                case "5":
+                    Game_num = 5;
+                    break;
+                case "6":
+                    Game_num = 6;
+                    break;
+                case "7":
+                    Game_num = 7;
+                    break;
+                case "8":
+                    Game_num = 8;
+                    break;
+                case "9":
+                    Game_num = 9;
+                    break;
+            }
+            Hashtable hash = new Hashtable();
+            hash.Add("GameNum", Game_num);
+            PhotonNetwork.LocalPlayer.SetCustomProperties(hash);
+            PhotonNetwork.LoadLevel(2);
+        }
     }
     IEnumerator ready()
     {
@@ -160,7 +193,7 @@ public class RoomManager : MonoBehaviourPunCallbacks
         {
             Game_num = (int)changedProps["GameNum"];
             EventPicture.sprite = EventSprite[Game_num];
-            EventPicture.gameObject.transform.parent.gameObject.SetActive(true);
+            //EventPicture.gameObject.transform.parent.gameObject.SetActive(true);
         }
     }
     public override void OnEnable()
@@ -183,7 +216,7 @@ public class RoomManager : MonoBehaviourPunCallbacks
             if (!EnteredGame)
             {
                 StartCoroutine(Black_fadeout(true));
-                StartCoroutine(ready());
+                // StartCoroutine(ready());
                 if (PV.IsMine)
                 {
                     for (int i = 0; i < PhotonNetwork.PlayerList.Length; i++)
@@ -200,7 +233,7 @@ public class RoomManager : MonoBehaviourPunCallbacks
             else
             {
                 StartCoroutine(Black_fadeout(false));
-                StartCoroutine(TimeCount());
+                // StartCoroutine(TimeCount());
                 if (GameObject.Find("PAPA") != null)
                 {
                     Destroy(GameObject.Find("PAPA"));
@@ -211,7 +244,7 @@ public class RoomManager : MonoBehaviourPunCallbacks
         else if (scene.buildIndex == 2)
         {
             Cursor.visible = true;
-            StopCoroutine(TimeCount());
+            // StopCoroutine(TimeCount());
             StartCoroutine(Black_fadeout(false));
             PAPA.SetActive(false);
             if (PV.IsMine)

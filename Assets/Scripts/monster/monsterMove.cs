@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Photon.Pun;
 public enum MonsterState
 {
     idle,
@@ -43,8 +44,12 @@ public class monsterMove : MonoBehaviour
     [SerializeField] private Sprite up;
     [Header("起始圖片_下")]
     [SerializeField] private Sprite down;
+    PhotonView PV;
     private void Awake()
     {
+        PV = GetComponent<PhotonView>();  //定義PhotonView
+        this.gameObject.tag = PhotonView.Find((int)PV.InstantiationData[0]).tag;
+
         health = this.GetComponentInChildren<health>();
         animator = this.gameObject.GetComponent<Animator>();
         spriteRenderer = this.GetComponent<SpriteRenderer>();
@@ -75,11 +80,18 @@ public class monsterMove : MonoBehaviour
         attackRange *= this.gameObject.transform.localScale.x;
         mask = 1 << 9 | 1 << 10 | 1 << 11;
         angle = 35;
-        StartCoroutine(waitIdle(setTime));
+        if (PV.IsMine)
+        {
+            StartCoroutine(waitIdle(setTime));
+        }
     }
     void Update()
     {
         CurHealth = health.curH;
+        if(!PV.IsMine)
+        {
+            return;
+        }
         fixPosition();
         detectEnemy();
         monsterState();

@@ -400,7 +400,7 @@ PrefabInstance:
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 1510091447}
+      objectReference: {fileID: 691390680}
     - target: {fileID: 5325757842996137282, guid: 66ff04014ce438b42bbaa14ee763ac3d,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Target
@@ -431,6 +431,12 @@ PrefabInstance:
 --- !u!224 &74342068 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 5325757842996137281, guid: 66ff04014ce438b42bbaa14ee763ac3d,
+    type: 3}
+  m_PrefabInstance: {fileID: 74342067}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &74342069 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5325757842996137280, guid: 66ff04014ce438b42bbaa14ee763ac3d,
     type: 3}
   m_PrefabInstance: {fileID: 74342067}
   m_PrefabAsset: {fileID: 0}
@@ -10485,7 +10491,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   UI: {fileID: 832589408}
   waitToMove: 1
-  StartButton: {fileID: 0}
+  StartButton: {fileID: 325270982}
   UIBackGround: {fileID: 1936511091}
 --- !u!114 &256348858
 MonoBehaviour:
@@ -16942,6 +16948,12 @@ RectTransform:
     type: 3}
   m_PrefabInstance: {fileID: 325270980}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &325270982 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5325757842996137280, guid: 66ff04014ce438b42bbaa14ee763ac3d,
+    type: 3}
+  m_PrefabInstance: {fileID: 325270980}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &325640526
 GameObject:
   m_ObjectHideFlags: 0
@@ -22239,6 +22251,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2875346672301613327, guid: ffc9ceda96594d94281c8e11a713269e,
+        type: 3}
+      propertyPath: m_IsTrigger
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ffc9ceda96594d94281c8e11a713269e, type: 3}
@@ -27634,6 +27651,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4940157949876806759, guid: 8d2c71634edc2f34e82b035a637567fe,
+        type: 3}
+      propertyPath: m_IsTrigger
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8800304489823639862, guid: 8d2c71634edc2f34e82b035a637567fe,
         type: 3}
@@ -33394,6 +33416,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4940157949876806759, guid: 8d2c71634edc2f34e82b035a637567fe,
+        type: 3}
+      propertyPath: m_IsTrigger
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 8800304489823639862, guid: 8d2c71634edc2f34e82b035a637567fe,
         type: 3}
       propertyPath: m_Name
@@ -33444,7 +33471,7 @@ MonoBehaviour:
   UI: {fileID: 832589408}
   typeMachine: {fileID: 3839184305971200187, guid: 34a176e0b8b5bb743bec3ac8d39ed7db,
     type: 3}
-  StartButton: {fileID: 0}
+  StartButton: {fileID: 1280395225}
   UIBackGround: {fileID: 1445849213}
 --- !u!66 &988460419
 CompositeCollider2D:
@@ -33669,6 +33696,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4940157949876806759, guid: 8d2c71634edc2f34e82b035a637567fe,
+        type: 3}
+      propertyPath: m_IsTrigger
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8800304489823639862, guid: 8d2c71634edc2f34e82b035a637567fe,
         type: 3}
@@ -35694,6 +35726,12 @@ RectTransform:
     type: 3}
   m_PrefabInstance: {fileID: 1074602560}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1074602562 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5325757842996137280, guid: 66ff04014ce438b42bbaa14ee763ac3d,
+    type: 3}
+  m_PrefabInstance: {fileID: 1074602560}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1095502957
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -35849,6 +35887,12 @@ RectTransform:
     type: 3}
   m_PrefabInstance: {fileID: 1095502957}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1095502959 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5325757842996137280, guid: 66ff04014ce438b42bbaa14ee763ac3d,
+    type: 3}
+  m_PrefabInstance: {fileID: 1095502957}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1139063618
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -35935,7 +35979,7 @@ PrefabInstance:
         type: 3}
       propertyPath: StartButton
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 1245702423}
     - target: {fileID: 7261282391864592178, guid: 9de9ff2fd4a274e40a929a534091d6de,
         type: 3}
       propertyPath: UIBackGround
@@ -36762,6 +36806,12 @@ RectTransform:
     type: 3}
   m_PrefabInstance: {fileID: 1245702421}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1245702423 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5325757842996137280, guid: 66ff04014ce438b42bbaa14ee763ac3d,
+    type: 3}
+  m_PrefabInstance: {fileID: 1245702421}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1247284307
 GameObject:
   m_ObjectHideFlags: 0
@@ -36925,6 +36975,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4940157949876806759, guid: 8d2c71634edc2f34e82b035a637567fe,
+        type: 3}
+      propertyPath: m_IsTrigger
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8800304489823639862, guid: 8d2c71634edc2f34e82b035a637567fe,
         type: 3}
@@ -37299,6 +37354,12 @@ RectTransform:
     type: 3}
   m_PrefabInstance: {fileID: 1280395223}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1280395225 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5325757842996137280, guid: 66ff04014ce438b42bbaa14ee763ac3d,
+    type: 3}
+  m_PrefabInstance: {fileID: 1280395223}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1304341479
 GameObject:
   m_ObjectHideFlags: 0
@@ -37670,6 +37731,12 @@ RectTransform:
     type: 3}
   m_PrefabInstance: {fileID: 1346253098}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1346253100 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5325757842996137280, guid: 66ff04014ce438b42bbaa14ee763ac3d,
+    type: 3}
+  m_PrefabInstance: {fileID: 1346253098}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1364061688
 GameObject:
   m_ObjectHideFlags: 0
@@ -37980,6 +38047,12 @@ PrefabInstance:
 --- !u!224 &1444056164 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 5325757842996137281, guid: 66ff04014ce438b42bbaa14ee763ac3d,
+    type: 3}
+  m_PrefabInstance: {fileID: 1444056163}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &1444056165 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5325757842996137280, guid: 66ff04014ce438b42bbaa14ee763ac3d,
     type: 3}
   m_PrefabInstance: {fileID: 1444056163}
   m_PrefabAsset: {fileID: 0}
@@ -43386,6 +43459,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4940157949876806759, guid: 8d2c71634edc2f34e82b035a637567fe,
+        type: 3}
+      propertyPath: m_IsTrigger
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 8800304489823639862, guid: 8d2c71634edc2f34e82b035a637567fe,
         type: 3}
       propertyPath: m_Name
@@ -43707,6 +43785,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2875346672301613327, guid: ffc9ceda96594d94281c8e11a713269e,
+        type: 3}
+      propertyPath: m_IsTrigger
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ffc9ceda96594d94281c8e11a713269e, type: 3}
@@ -54589,7 +54672,7 @@ PrefabInstance:
         type: 3}
       propertyPath: StartButton
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 5325757842990749913}
     - target: {fileID: 7876566248771343265, guid: e8533bf952997504b8fe81a453b99310,
         type: 3}
       propertyPath: UIBackGround
@@ -54820,7 +54903,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   UI: {fileID: 832589408}
   isEnd: 0
-  StartButton: {fileID: 0}
+  StartButton: {fileID: 74342069}
   UIBackGround: {fileID: 691390680}
 --- !u!66 &2124665735
 CompositeCollider2D:
@@ -55081,7 +55164,7 @@ MonoBehaviour:
   waitToSword: 1
   hurtTime: 1.5
   waitTitleTime: 1.25
-  StartButton: {fileID: 0}
+  StartButton: {fileID: 1074602562}
   UIBackGround: {fileID: 1274888955}
 --- !u!1 &1274259150265348529
 GameObject:
@@ -55121,7 +55204,7 @@ MonoBehaviour:
   theLight: {fileID: 5098201980595327359, guid: fbbc40b279f9b8a40bcdfc9ac1379d8b,
     type: 3}
   spawnTime: 1.5
-  StartButton: {fileID: 0}
+  StartButton: {fileID: 1444056165}
   UIBackGround: {fileID: 1247284307}
 --- !u!114 &1274259150265348531
 MonoBehaviour:
@@ -55592,6 +55675,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2875346672301613327, guid: ffc9ceda96594d94281c8e11a713269e,
+        type: 3}
+      propertyPath: m_IsTrigger
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ffc9ceda96594d94281c8e11a713269e, type: 3}
@@ -57288,6 +57376,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4940157949876806759, guid: 8d2c71634edc2f34e82b035a637567fe,
+        type: 3}
+      propertyPath: m_IsTrigger
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 8800304489823639862, guid: 8d2c71634edc2f34e82b035a637567fe,
         type: 3}
       propertyPath: m_Name
@@ -57798,7 +57891,7 @@ MonoBehaviour:
   - {fileID: 211506958}
   - {fileID: 518378403}
   aresTime: 10
-  StartButton: {fileID: 0}
+  StartButton: {fileID: 1346253100}
   UIBackGround: {fileID: 1059697286}
 --- !u!114 &4119797321953422561
 MonoBehaviour:
@@ -58265,6 +58358,12 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 66ff04014ce438b42bbaa14ee763ac3d, type: 3}
+--- !u!1 &5325757842990749913 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5325757842996137280, guid: 66ff04014ce438b42bbaa14ee763ac3d,
+    type: 3}
+  m_PrefabInstance: {fileID: 5325757842990749912}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &5446389733484215496
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -61256,7 +61355,7 @@ MonoBehaviour:
   Normal_max: 1.75
   Gold_mix: 7
   Gold_max: 10
-  StartButton: {fileID: 0}
+  StartButton: {fileID: 1095502959}
   UIBackGround: {fileID: 1592452558}
 --- !u!4 &6098514309496663828
 Transform:

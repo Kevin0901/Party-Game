@@ -49,7 +49,7 @@ public class HammerEvent : MonoBehaviour
                         break;
                 }
                 GameObject a = PhotonNetwork.Instantiate(Path.Combine("PhotonPrefabs", "arena/Hammer/hammer"), FightManager.Instance.plist[i].transform.position,
-                FightManager.Instance.plist[i].transform.rotation);
+                FightManager.Instance.plist[i].transform.rotation, 0, new object[] { PV.ViewID });
                 PV.RPC("RPC_SetHammer", RpcTarget.All, a.GetComponent<PhotonView>().ViewID, FightManager.Instance.plist[i].GetComponent<PhotonView>().ViewID);
             }
         }
@@ -65,6 +65,7 @@ public class HammerEvent : MonoBehaviour
         GameObject Ham = PhotonView.Find(HamID).gameObject;
         GameObject p = PhotonView.Find(iswho).gameObject;
         Ham.transform.SetParent(p.transform);
+        Ham.GetComponentInChildren<PhotonView>().TransferOwnership(iswho);
         Ham.transform.GetComponentInChildren<strike>()._event = this.gameObject.GetComponent<HammerEvent>();
     }
     public void StartGame()

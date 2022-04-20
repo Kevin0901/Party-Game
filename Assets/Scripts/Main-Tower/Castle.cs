@@ -5,7 +5,7 @@ using Photon.Pun;
 public class Castle : MonoBehaviour
 {
     [SerializeField] public int MaxHealth, CurHealth;
-    private health health;
+    public health health;
 
     [SerializeField] GameObject RedEndScreen, BlueEndScreen;
     [SerializeField] GameObject BackButton;
@@ -18,11 +18,18 @@ public class Castle : MonoBehaviour
     }
     private void Update()
     {
-        CurHealth = health.curH;
-        if (!IsEnd && CurHealth <= 0)
+        if (health != null)
         {
-            End();
-            IsEnd = true;
+            CurHealth = health.curH;
+            if (!IsEnd && CurHealth <= 0)
+            {
+                End();
+                IsEnd = true;
+            }
+        }
+        else
+        {
+            Debug.Log(this.transform.childCount);
         }
     }
     void End()
@@ -48,7 +55,7 @@ public class Castle : MonoBehaviour
         for (int i = 0; i < this.transform.parent.childCount; i++)
         {
             string name = transform.parent.GetChild(i).gameObject.name;
-            if (!name.Equals("background") && !name.Equals("Canvas") && transform.parent.GetChild(i).gameObject.layer != 10
+            if (!name.Equals("background") && !name.Equals("Canvas") && name.Equals("Player&Camera (Clone)")
             && this.gameObject && !name.Equals("EventSystem"))
             {
                 transform.parent.GetChild(i).gameObject.SetActive(false);

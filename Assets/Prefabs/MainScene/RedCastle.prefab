@@ -127,6 +127,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   MaxHealth: 100
   CurHealth: 0
+  health: {fileID: 1667008457230431915}
   RedEndScreen: {fileID: 0}
   BlueEndScreen: {fileID: 0}
   BackButton: {fileID: 0}
@@ -325,6 +326,18 @@ RectTransform:
     type: 3}
   m_PrefabInstance: {fileID: 6687672305833216527}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1667008457230431915 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 5471035562924358820, guid: 677a5437033343a4cb499601d72c41de,
+    type: 3}
+  m_PrefabInstance: {fileID: 6687672305833216527}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8905007303171347084}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7468832cdf93ccc47b41b93bd7d83260, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &2067878814
 MonoBehaviour:
   m_ObjectHideFlags: 0
