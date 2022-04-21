@@ -1,7 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using Photon.Pun;
 public class StoneShoot : MonoBehaviour
 {
     [SerializeField] private List<GameObject> enemiesInRange;
@@ -14,11 +14,15 @@ public class StoneShoot : MonoBehaviour
     private Team t;
     private float firstshoot = 0;
     private bool issave;
+    PhotonView PV;
 
     // Use this for initialization
     void Start()
     {
+        PV = GetComponent<PhotonView>();  //定義PhotonView
+        this.gameObject.tag = PhotonView.Find((int)PV.InstantiationData[0]).tag;
         t = GetComponent<Team>();
+        t.SetEnemy();
         animator = GetComponent<Animator>();
         enemiesInRange = new List<GameObject>();
         lastShotTime = Time.time;

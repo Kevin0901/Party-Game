@@ -15,6 +15,14 @@ public class Castle : MonoBehaviour
         IsEnd = false;
         health = transform.Find("HealthBar").GetComponent<health>();
         health.maxH = MaxHealth;
+        this.transform.SetParent(GameObject.Find("PAPA").transform);
+    }
+    void Start()
+    {
+        GameObject UI = GameObject.Find("PAPA").transform.Find("Canvas").gameObject;
+        RedEndScreen = UI.transform.Find("Red").gameObject;
+        BlueEndScreen = UI.transform.Find("Blue").gameObject;
+        BackButton = UI.transform.Find("Button").gameObject;
     }
     private void Update()
     {
@@ -34,6 +42,7 @@ public class Castle : MonoBehaviour
     }
     void End()
     {
+        Cursor.visible = true;
         if (CurHealth <= 0 && this.tag.Equals("blue"))
         {
             if (!RedEndScreen.activeSelf)
@@ -55,9 +64,14 @@ public class Castle : MonoBehaviour
         for (int i = 0; i < this.transform.parent.childCount; i++)
         {
             string name = transform.parent.GetChild(i).gameObject.name;
-            if (!name.Equals("background") && !name.Equals("Canvas") && name.Equals("Player&Camera (Clone)")
-            && this.gameObject && !name.Equals("EventSystem"))
+            if (name.Equals("background") || name.Equals("Canvas") || name.Equals("Player&Camera(Clone)")
+            || name.Equals("EventSystem"))
             {
+
+            }
+            else
+            {
+                Debug.Log(transform.parent.GetChild(i).gameObject.name);
                 transform.parent.GetChild(i).gameObject.SetActive(false);
             }
         }

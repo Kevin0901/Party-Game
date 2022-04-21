@@ -294,6 +294,8 @@ public class Launcher : MonoBehaviourPunCallbacks
                 HaveBlue = true;
             }
         }
+        HaveRed = true;
+        HaveBlue = true;
         if (HaveRed && HaveBlue)
         {
             Room.IsVisible = false;

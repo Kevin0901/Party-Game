@@ -27,6 +27,7 @@ public class RoomManager : MonoBehaviourPunCallbacks
     [SerializeField] TMP_Text Count;
     [SerializeField] Image EventPicture;
     [SerializeField] Sprite[] EventSprite;
+    [SerializeField] GameObject BlueCastle, RedCastle;
     void Awake()
     {
         EnteredGame = false;
@@ -54,43 +55,43 @@ public class RoomManager : MonoBehaviourPunCallbacks
         }
         if (SceneManager.GetActiveScene().name.Equals("MainScene") && Input.inputString.Length > 0 && Input.inputString.All(char.IsDigit))
         {
-            switch (Input.inputString)
-            {
-                case "0":
-                    Game_num = 0;
-                    break;
-                case "1":
-                    Game_num = 1;
-                    break;
-                case "2":
-                    Game_num = 2;
-                    break;
-                case "3":
-                    Game_num = 3;
-                    break;
-                case "4":
-                    Game_num = 4;
-                    break;
-                case "5":
-                    Game_num = 5;
-                    break;
-                case "6":
-                    Game_num = 6;
-                    break;
-                case "7":
-                    Game_num = 7;
-                    break;
-                case "8":
-                    Game_num = 8;
-                    break;
-                case "9":
-                    Game_num = 9;
-                    break;
-            }
-            Hashtable hash = new Hashtable();
-            hash.Add("GameNum", Game_num);
-            PhotonNetwork.LocalPlayer.SetCustomProperties(hash);
-            PhotonNetwork.LoadLevel(2);
+            // switch (Input.inputString)
+            // {
+            //     case "0":
+            //         Game_num = 0;
+            //         break;
+            //     case "1":
+            //         Game_num = 1;
+            //         break;
+            //     case "2":
+            //         Game_num = 2;
+            //         break;
+            //     case "3":
+            //         Game_num = 3;
+            //         break;
+            //     case "4":
+            //         Game_num = 4;
+            //         break;
+            //     case "5":
+            //         Game_num = 5;
+            //         break;
+            //     case "6":
+            //         Game_num = 6;
+            //         break;
+            //     case "7":
+            //         Game_num = 7;
+            //         break;
+            //     case "8":
+            //         Game_num = 8;
+            //         break;
+            //     case "9":
+            //         Game_num = 9;
+            //         break;
+            // }
+            // Hashtable hash = new Hashtable();
+            // hash.Add("GameNum", Game_num);
+            // PhotonNetwork.LocalPlayer.SetCustomProperties(hash);
+            // PhotonNetwork.LoadLevel(2);
         }
     }
     IEnumerator ready()
@@ -216,7 +217,8 @@ public class RoomManager : MonoBehaviourPunCallbacks
             if (!EnteredGame)
             {
                 StartCoroutine(Black_fadeout(true));
-                // StartCoroutine(ready());
+                StartCoroutine(ready());
+                PAPA = GameObject.Find("PAPA");
                 if (PV.IsMine)
                 {
                     for (int i = 0; i < PhotonNetwork.PlayerList.Length; i++)
@@ -224,16 +226,17 @@ public class RoomManager : MonoBehaviourPunCallbacks
                         PhotonNetwork.RemoveRPCs(PhotonNetwork.PlayerList[i]);
                     }
                     PV.RPC("RPC_SetArryList", RpcTarget.All, PlayerNames, PlayerTeam);  //廣播到所有玩家的電腦，設定 PlayerNames[] 跟 PlayerTeam[]
+                    GameObject Red = PhotonNetwork.Instantiate(Path.Combine("PhotonPrefabs", "RedCastle"), new Vector3(-20.4f, -45.49f, 0), this.transform.rotation);
+                    GameObject Blue = PhotonNetwork.Instantiate(Path.Combine("PhotonPrefabs", "BlueCastle"), new Vector3(-20.4f, 45.49f, 0), this.transform.rotation);
                 }
                 Black.SetActive(true);
                 EnteredGame = true;
-                PAPA = GameObject.Find("PAPA");
                 PAPA.GetComponent<PAPA>().OpenChild();
             }
             else
             {
                 StartCoroutine(Black_fadeout(false));
-                // StartCoroutine(TimeCount());
+                StartCoroutine(TimeCount());
                 if (GameObject.Find("PAPA") != null)
                 {
                     Destroy(GameObject.Find("PAPA"));
@@ -244,7 +247,7 @@ public class RoomManager : MonoBehaviourPunCallbacks
         else if (scene.buildIndex == 2)
         {
             Cursor.visible = true;
-            // StopCoroutine(TimeCount());
+            StopCoroutine(TimeCount());
             StartCoroutine(Black_fadeout(false));
             PAPA.SetActive(false);
             if (PV.IsMine)

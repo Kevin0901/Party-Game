@@ -156,6 +156,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemiesInRange: []
+  attackeffect: {fileID: 0}
 --- !u!95 &-6678083213743160592
 Animator:
   serializedVersion: 3
@@ -234,6 +235,7 @@ MonoBehaviour:
   observableSearch: 2
   ObservedComponents:
   - {fileID: 254168175808369991}
+  - {fileID: 635259291464988728}
   sceneViewId: 0
   InstantiationId: 0
   isRuntimeInstantiated: 0
@@ -267,8 +269,22 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ShowLayerWeightsInspector: 1
   ShowParameterInspector: 1
-  m_SynchronizeParameters: []
-  m_SynchronizeLayers: []
+  m_SynchronizeParameters:
+  - Type: 4
+    SynchronizeType: 2
+    Name: BlueAttack
+  - Type: 4
+    SynchronizeType: 2
+    Name: RedAttack
+  - Type: 4
+    SynchronizeType: 2
+    Name: RedIdle
+  - Type: 4
+    SynchronizeType: 2
+    Name: BlueIdle
+  m_SynchronizeLayers:
+  - SynchronizeType: 2
+    LayerIndex: 0
 --- !u!1 &5813422063232856550
 GameObject:
   m_ObjectHideFlags: 0
@@ -529,12 +545,12 @@ PrefabInstance:
     - target: {fileID: 2836021408057283444, guid: 677a5437033343a4cb499601d72c41de,
         type: 3}
       propertyPath: m_AnchorMax.x
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2836021408057283444, guid: 677a5437033343a4cb499601d72c41de,
         type: 3}
       propertyPath: m_AnchorMax.y
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 677a5437033343a4cb499601d72c41de, type: 3}

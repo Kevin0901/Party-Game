@@ -14,8 +14,9 @@ public class MagicShoot : MonoBehaviour
     private void Awake()
     {
         PV = GetComponent<PhotonView>();  //定義PhotonView
-        // this.gameObject.tag = PhotonView.Find((int)PV.InstantiationData[0]).tag;
+        this.gameObject.tag = PhotonView.Find((int)PV.InstantiationData[0]).tag;
         t = this.GetComponent<Team>();
+        t.SetEnemy();
         attackeffect.SetActive(false);
     }
 

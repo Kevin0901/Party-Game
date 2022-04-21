@@ -82,7 +82,7 @@ public class PlayerMovement : MonoBehaviour
         nextfire = 0;
         mrigibody = this.GetComponent<Rigidbody2D>();
         UiandInventoryGet();
-        // StartCoroutine(Wait_Game_Start());
+        StartCoroutine(Wait_Game_Start());
         if (!PV.IsMine)  //如果此玩家 GameObject 是別人的鏡像，消除 UI 以及 Camera
         {
             mouse.SetActive(false);

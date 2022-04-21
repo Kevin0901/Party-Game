@@ -21,6 +21,7 @@ public class ArrowShoot : MonoBehaviour
         PV = GetComponent<PhotonView>();  //定義PhotonView
         this.gameObject.tag = PhotonView.Find((int)PV.InstantiationData[0]).tag;
         t = this.GetComponent<Team>();
+        t.SetEnemy();
     }
 
     void Start()
@@ -124,7 +125,7 @@ public class ArrowShoot : MonoBehaviour
 
     private void Shoot(Collider2D target)
     {
-        if (target != null && PV.IsMine)
+        if (target != null)
         {
             Vector3 startPosition = gameObject.transform.position;
             Vector3 targetPosition = target.transform.position;

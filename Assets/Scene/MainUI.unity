@@ -6739,19 +6739,23 @@ MonoBehaviour:
   Game_num: 0
   TotalTime: 0
   ReadyTime: 5
-  EventTime: 10
+  EventTime: 180
   Count: {fileID: 485002820}
   EventPicture: {fileID: 2062829505}
   EventSprite:
-  - {fileID: 21300000, guid: 20a19f3b2b0e4d148936b3f5726007cf, type: 3}
-  - {fileID: 21300000, guid: d5a4d7d9414a85d4ea443e57d3cb17c9, type: 3}
-  - {fileID: 21300000, guid: dc4d53f0d0cd11a489b6f585dac71f5b, type: 3}
-  - {fileID: 21300000, guid: 1f4d34475983bf74e98caddaa77783bf, type: 3}
-  - {fileID: 21300000, guid: b00387a558146a946925bd9dfe8142c3, type: 3}
-  - {fileID: 21300000, guid: cda6d77484d2f8e49858db6b1111bb82, type: 3}
-  - {fileID: 21300000, guid: 5abacd3baca1c524a91b14a31beee694, type: 3}
-  - {fileID: 21300000, guid: c24e1d1456ddd1145922616c76080cda, type: 3}
-  - {fileID: 21300000, guid: 3d5f1c61970331a4e8e71c4b370fbfb9, type: 3}
+  - {fileID: 21300000, guid: 7aeedc5450286cd4f9ef577997cfdc8b, type: 3}
+  - {fileID: 21300000, guid: bbc40e2c7f6ded449972650e97f7a6cc, type: 3}
+  - {fileID: 21300000, guid: 7a1bc692d2c68cb41ba933123ec218ed, type: 3}
+  - {fileID: 21300000, guid: 0ea9ea95f6779534b84f97f1096662c6, type: 3}
+  - {fileID: 21300000, guid: af4bea079e7f64945b7329efca8fa80b, type: 3}
+  - {fileID: 21300000, guid: 31fabba3ea959f34d9274e27b125fabd, type: 3}
+  - {fileID: 21300000, guid: 2032e855e804af74d8fb9f00d8257677, type: 3}
+  - {fileID: 21300000, guid: d91e85f191e3bd845aff6297f2ce035c, type: 3}
+  - {fileID: 21300000, guid: b9e289a0dd8ebfd4f8ca8fef359b7ba4, type: 3}
+  BlueCastle: {fileID: 4430006006634354294, guid: 1d72796d476bf134eb4b04ebb9608451,
+    type: 3}
+  RedCastle: {fileID: 8961850176589369621, guid: 4b8afc096df32454d988c9220a000752,
+    type: 3}
 --- !u!4 &1739546517
 Transform:
   m_ObjectHideFlags: 0

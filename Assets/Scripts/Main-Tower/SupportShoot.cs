@@ -1,18 +1,22 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using Photon.Pun;
 public class SupportShoot : MonoBehaviour
 {
     public List<GameObject> TowerInRange;
     private Animator animator;
     private Team t;
     // Use this for initialization
+    PhotonView PV;
     void Start()
     {
+        PV = GetComponent<PhotonView>();  //定義PhotonView
+        this.gameObject.tag = PhotonView.Find((int)PV.InstantiationData[0]).tag;
         TowerInRange = new List<GameObject>();
         animator = GetComponent<Animator>();
         t = GetComponent<Team>();
+        t.SetEnemy();
         animator = GetComponent<Animator>();
     }
 

@@ -1,7 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using Photon.Pun;
 public class WaveShoot : MonoBehaviour
 {
     public List<GameObject> enemiesInRange;
@@ -13,10 +13,14 @@ public class WaveShoot : MonoBehaviour
     private int firstshoot = 0;
     private Animator animator;
     // Use this for initialization
+    PhotonView PV;
 
     private void Awake()
     {
+        PV = GetComponent<PhotonView>();  //定義PhotonView
+        this.gameObject.tag = PhotonView.Find((int)PV.InstantiationData[0]).tag;
         t = GetComponent<Team>();
+        t.SetEnemy();
         GameObject boxCollider2DUp = this.transform.Find("detectUp").gameObject;
         GameObject boxCollider2DDown = this.transform.Find("detectDown").gameObject;
         if (t.Enemyteam == "red")

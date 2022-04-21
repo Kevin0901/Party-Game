@@ -28,6 +28,12 @@ public class TowerData : MonoBehaviour
     {
         spriteRenderer = this.gameObject.GetComponent<SpriteRenderer>();
         animator = this.gameObject.GetComponent<Animator>();
+        SetAnimeIdle();
+        health = this.GetComponentInChildren<health>();
+
+    }
+    public void SetAnimeIdle()
+    {
         if (this.gameObject.tag == "red")
         {
             animator.SetBool("RedIdle", true);
@@ -38,8 +44,6 @@ public class TowerData : MonoBehaviour
             animator.SetBool("BlueIdle", true);
             spriteRenderer.sprite = down;
         }
-        health = this.GetComponentInChildren<health>();
-
     }
     public TowerLevel CurrentLevel
     {
