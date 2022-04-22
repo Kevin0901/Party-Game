@@ -89,7 +89,7 @@ public class monsterMove : MonoBehaviour
     void Update()
     {
         CurHealth = health.curH;
-        if(!PV.IsMine)
+        if (!PV.IsMine)
         {
             return;
         }
@@ -123,10 +123,11 @@ public class monsterMove : MonoBehaviour
                     enemy = k.gameObject;
                 }
             }
-            if (enemy != null)
+            if (enemy != null && enemy.layer != 14)
             {
-                // float dis = Vector3.Distance(this.transform.position, enemy.GetComponent<Collider2D>().bounds.center);
+
                 float dis = Vector3.Distance(this.transform.position, enemy.transform.position);
+
                 if (dis <= attackRange && currentState != MonsterState.pigeon)
                 {
                     currentState = MonsterState.attack;
@@ -249,5 +250,14 @@ public class monsterMove : MonoBehaviour
         animator.SetBool("pigeon", true);
         yield return new WaitForSeconds(3);
         animator.SetBool("pigeon", false);
+    }
+
+    private void OnCollisionEnter2D(Collision2D other)
+    {
+        if (enemy == null && other.gameObject.layer == 14)
+        {
+            enemy = other.gameObject;
+            currentState = MonsterState.attack;
+        }
     }
 }

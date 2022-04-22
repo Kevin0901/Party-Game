@@ -21,7 +21,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &6968802443965169730
 Transform:
   m_ObjectHideFlags: 0
@@ -112,7 +112,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 9.986061, y: 2.9533587}
+  m_Size: {x: 13.6, y: 2.9533587}
   m_EdgeRadius: 0
 --- !u!114 &8581941995095397258
 MonoBehaviour:
@@ -332,12 +332,12 @@ PrefabInstance:
     - target: {fileID: 2836021408057283444, guid: 677a5437033343a4cb499601d72c41de,
         type: 3}
       propertyPath: m_AnchorMax.x
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2836021408057283444, guid: 677a5437033343a4cb499601d72c41de,
         type: 3}
       propertyPath: m_AnchorMax.y
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2836021408057283447, guid: 677a5437033343a4cb499601d72c41de,
         type: 3}

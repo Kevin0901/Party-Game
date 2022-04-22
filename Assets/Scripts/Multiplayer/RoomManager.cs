@@ -28,6 +28,7 @@ public class RoomManager : MonoBehaviourPunCallbacks
     [SerializeField] Image EventPicture;
     [SerializeField] Sprite[] EventSprite;
     [SerializeField] GameObject BlueCastle, RedCastle;
+    [SerializeField] GameObject Teaching;
     void Awake()
     {
         EnteredGame = false;
@@ -52,6 +53,19 @@ public class RoomManager : MonoBehaviourPunCallbacks
         if (!PV.IsMine)
         {
             return;
+        }
+        if (Teaching != null && Input.GetKeyDown(KeyCode.Escape))
+        {
+            if (Teaching.activeSelf)
+            {
+                Cursor.visible = false;
+                Teaching.SetActive(false);
+            }
+            else
+            {
+                Cursor.visible = true;
+                Teaching.SetActive(true);
+            }
         }
         if (SceneManager.GetActiveScene().name.Equals("MainScene") && Input.inputString.Length > 0 && Input.inputString.All(char.IsDigit))
         {
@@ -121,10 +135,10 @@ public class RoomManager : MonoBehaviourPunCallbacks
             if (PV.IsMine)
             {
                 Game_num = UnityEngine.Random.Range(0, EventSprite.Length);
-                if(Game_num == 7)
-                {
-                    Game_num --;
-                }
+                // if (Game_num == 7)
+                // {
+                //     Game_num--;
+                // }
                 EventPicture.sprite = EventSprite[Game_num];
                 EventPicture.gameObject.transform.parent.gameObject.SetActive(true);
                 Hashtable hash = new Hashtable();
@@ -198,7 +212,7 @@ public class RoomManager : MonoBehaviourPunCallbacks
         {
             Game_num = (int)changedProps["GameNum"];
             EventPicture.sprite = EventSprite[Game_num];
-            //EventPicture.gameObject.transform.parent.gameObject.SetActive(true);
+            EventPicture.gameObject.transform.parent.gameObject.SetActive(true);
         }
     }
     public override void OnEnable()
@@ -223,6 +237,7 @@ public class RoomManager : MonoBehaviourPunCallbacks
                 StartCoroutine(Black_fadeout(true));
                 StartCoroutine(ready());
                 PAPA = GameObject.Find("PAPA");
+                Teaching = PAPA.transform.Find("Teaching").gameObject;
                 if (PV.IsMine)
                 {
                     for (int i = 0; i < PhotonNetwork.PlayerList.Length; i++)

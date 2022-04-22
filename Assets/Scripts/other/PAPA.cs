@@ -12,7 +12,13 @@ public class PAPA : MonoBehaviour
     {
         for (int i = 0; i < this.transform.childCount; i++)
         {
-            this.transform.GetChild(i).gameObject.SetActive(true);
+            if(this.transform.GetChild(i).gameObject.name.Equals("Teaching"))
+            {
+
+            }else
+            {
+                this.transform.GetChild(i).gameObject.SetActive(true);
+            }
         }
     }
 }

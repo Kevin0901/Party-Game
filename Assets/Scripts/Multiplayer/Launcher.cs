@@ -48,6 +48,7 @@ public class Launcher : MonoBehaviourPunCallbacks
         reference = FirebaseDatabase.DefaultInstance.RootReference;  //定義資料庫連接
         if (GameObject.Find("RoomManager") != null)
         {
+            Debug.Log("111111111111111111111111111111111");
             Destroy(GameObject.Find("RoomManager"));
         }
         if (PhotonNetwork.InRoom)
@@ -83,7 +84,7 @@ public class Launcher : MonoBehaviourPunCallbacks
         Debug.Log("Joined Lobby");
         RoomManager.gameObject.SetActive(true);
     }
-
+    
     public void CreateRoom()  //創建房間(按鈕觸發)
     {
         if (string.IsNullOrEmpty(roomNameInputField.text))  //如果沒輸入房間名稱則不給創建

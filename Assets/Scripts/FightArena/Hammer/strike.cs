@@ -11,6 +11,7 @@ public class strike : MonoBehaviour
     private float move_dis;
     [HideInInspector] public HammerEvent _event;
     PhotonView PV;
+    bool SetPos = false;
     private void Start()
     {
         PV = GetComponent<PhotonView>();
@@ -18,6 +19,11 @@ public class strike : MonoBehaviour
     }
     void Update()
     {
+        if (_event != null && !SetPos)
+        {
+            this.transform.parent.position += new Vector3(0, -20, 0);
+            SetPos = true;
+        }
         if (_event != null && !_event.isEnd && Input.GetKeyDown(KeyCode.Space) && PV.IsMine)
         {
             cnt++;

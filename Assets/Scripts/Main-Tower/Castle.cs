@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using Photon.Pun;
+using Photon.Realtime;
 public class Castle : MonoBehaviour
 {
     [SerializeField] public int MaxHealth, CurHealth;
@@ -61,20 +62,14 @@ public class Castle : MonoBehaviour
                 BlueEndScreen.transform.Find("Image").GetComponent<Animator>().SetTrigger("BlueWin");
             }
         }
-        for (int i = 0; i < this.transform.parent.childCount; i++)
-        {
-            string name = transform.parent.GetChild(i).gameObject.name;
-            if (name.Equals("background") || name.Equals("Canvas") || name.Equals("Player&Camera(Clone)")
-            || name.Equals("EventSystem"))
-            {
+        StartCoroutine(StopALL());
+    }
 
-            }
-            else
-            {
-                Debug.Log(transform.parent.GetChild(i).gameObject.name);
-                transform.parent.GetChild(i).gameObject.SetActive(false);
-            }
-        }
+    IEnumerator StopALL()
+    {
+        yield return new WaitForSeconds(1f);
+        PhotonNetwork.MinimalTimeScaleToDispatchInFixedUpdate = 1f;
+        Time.timeScale = 0;
     }
     private IEnumerator bluewin()
     {
@@ -89,9 +84,5 @@ public class Castle : MonoBehaviour
         animator.SetBool("RedWin", true);
         yield return null;
         animator.SetBool("RedWin", false);
-    }
-    public void Back()
-    {
-        GameObject.Find("RoomManager").GetComponent<RoomManager>().Back_To_Main();
     }
 }

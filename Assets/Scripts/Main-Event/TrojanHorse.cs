@@ -6,6 +6,7 @@ public class TrojanHorse : MonoBehaviour
 {
     public string TargetTeam = "red";
     [SerializeField] private GameObject TargetBlue, TargetRed;
+    [SerializeField] private Sprite TargetUp, TargetDown;
     private GameObject SoliderGenerator;
     public float speed = 5f;
     private health health;
@@ -22,11 +23,13 @@ public class TrojanHorse : MonoBehaviour
         {
             dir = -1f;
             SoliderGenerator = TargetRed;
+            this.GetComponent<SpriteRenderer>().sprite = TargetDown;
         }
         else if (TargetTeam == "blue")
         {
             dir = 1f;
             SoliderGenerator = TargetBlue;
+            this.GetComponent<SpriteRenderer>().sprite = TargetUp;
         }
     }
 

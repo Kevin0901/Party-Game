@@ -128,10 +128,21 @@ public class FightManager : MonoBehaviour
     public void playerSet()
     {
         plist.Clear();
+        if (redOrBlue.Count == 1)
+        {
+            redOrBlue.Add(redOrBlue[0]);
+        }
         for (int i = 0; i < redOrBlue.Count; i++)//生成玩家
         {
             GameObject a = PhotonNetwork.Instantiate(Path.Combine("PhotonPrefabs", "arena/arenaPlayer"), Vector3.zero, Quaternion.identity);
-            a.GetComponent<PhotonView>().TransferOwnership(PhotonNetwork.PlayerList[i]);
+            if (PhotonNetwork.PlayerList.Length == 1 && i == 1)
+            {
+                a.GetComponent<PhotonView>().TransferOwnership(PhotonNetwork.PlayerList[0]);
+            }
+            else
+            {
+                a.GetComponent<PhotonView>().TransferOwnership(PhotonNetwork.PlayerList[i]);
+            }
             // plist.Add(a);
             // a.GetComponent<arenaPlayer>().p_index = plist.Count - 1;
             // a.GetComponent<arenaPlayer>().red = redOrBlue[i];

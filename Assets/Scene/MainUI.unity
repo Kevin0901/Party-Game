@@ -6739,7 +6739,7 @@ MonoBehaviour:
   Game_num: 0
   TotalTime: 0
   ReadyTime: 5
-  EventTime: 10
+  EventTime: 180
   Count: {fileID: 485002820}
   EventPicture: {fileID: 2062829505}
   EventSprite:
@@ -6756,6 +6756,7 @@ MonoBehaviour:
     type: 3}
   RedCastle: {fileID: 8961850176589369621, guid: 4b8afc096df32454d988c9220a000752,
     type: 3}
+  Teaching: {fileID: 0}
 --- !u!4 &1739546517
 Transform:
   m_ObjectHideFlags: 0
