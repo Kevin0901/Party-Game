@@ -19,6 +19,7 @@ public class StoneShoot : MonoBehaviour
     // Use this for initialization
     void Start()
     {
+        this.transform.SetParent(GameObject.Find("PAPA").transform);
         PV = GetComponent<PhotonView>();  //定義PhotonView
         this.gameObject.tag = PhotonView.Find((int)PV.InstantiationData[0]).tag;
         t = GetComponent<Team>();

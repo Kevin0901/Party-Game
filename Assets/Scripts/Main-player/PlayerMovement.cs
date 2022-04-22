@@ -64,6 +64,7 @@ public class PlayerMovement : MonoBehaviour
     public int ProjectileCost = 1;
     public PhotonView PV;
     public MultiPlayerManager MultiPlayerManager;
+    public GameObject PAPA;
     private void Awake()
     {
         spriteRenderer = this.GetComponent<SpriteRenderer>();
@@ -77,7 +78,8 @@ public class PlayerMovement : MonoBehaviour
     }
     void Start()
     {
-        this.transform.parent.SetParent(GameObject.Find("PAPA").transform);
+        PAPA = GameObject.Find("PAPA");
+        this.transform.parent.SetParent(PAPA.transform);
         mouse = this.transform.parent.Find("mouseUI").gameObject;
         nextfire = 0;
         mrigibody = this.GetComponent<Rigidbody2D>();

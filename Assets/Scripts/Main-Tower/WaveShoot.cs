@@ -37,6 +37,7 @@ public class WaveShoot : MonoBehaviour
 
     void Start()
     {
+        this.transform.SetParent(GameObject.Find("PAPA").transform);
         enemiesInRange = new List<GameObject>();
         lastShotTime = Time.time;
         towerData = gameObject.GetComponentInChildren<TowerData>();

@@ -74,6 +74,7 @@ public class monsterMove : MonoBehaviour
     }
     void Start()
     {
+        this.transform.SetParent(GameObject.Find("PAPA").transform);
         t = this.GetComponent<Team>();
         animator.SetFloat("attackSpeed", 1 / attackRate);
         nextAttack = 0;

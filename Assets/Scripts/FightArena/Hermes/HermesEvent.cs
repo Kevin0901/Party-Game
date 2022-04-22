@@ -15,6 +15,7 @@ public class HermesEvent : MonoBehaviour
     [SerializeField] GameObject StartButton;
     [SerializeField] GameObject UIBackGround;
     PhotonView PV;
+    bool isEnd = false;
     void Start()
     {
         PV = GetComponent<PhotonView>();
@@ -44,10 +45,11 @@ public class HermesEvent : MonoBehaviour
     }
     private void Update()
     {
-        if (GameTime < 0)
+        if (GameTime <= 0 && !isEnd)
         {
             StopAllCoroutines();
             StartCoroutine(endGame());
+            isEnd = true;
         }
     }
     IEnumerator endGame()
@@ -59,7 +61,6 @@ public class HermesEvent : MonoBehaviour
         this.transform.Find("GameUI").Find("end").GetComponent<Text>().text =
         "遊戲結束\n" + blueScore.ToString() + "  :  " + redScore.ToString();
         yield return new WaitForSeconds(3f);
-
         UI.SetActive(true);
         if (redScore > blueScore)
         {

@@ -17,12 +17,13 @@ public class MagicShoot : MonoBehaviour
         this.gameObject.tag = PhotonView.Find((int)PV.InstantiationData[0]).tag;
         t = this.GetComponent<Team>();
         t.SetEnemy();
-        attackeffect.SetActive(false);
+        //attackeffect.SetActive(false);
     }
 
     // Use this for initialization
     void Start()
     {
+        this.transform.SetParent(GameObject.Find("PAPA").transform);
         enemiesInRange = new List<GameObject>();
         animator = GetComponent<Animator>();
         lastShotTime = Time.time;
@@ -51,7 +52,7 @@ public class MagicShoot : MonoBehaviour
             if (Time.time - lastShotTime > towerData.CurrentLevel.fireRate)
             {
                 attackteamchange(enemiesInRange);
-                attackeffect.SetActive(true);
+                //attackeffect.SetActive(true);
                 lastShotTime = Time.time;
             }
             // 3
@@ -59,7 +60,7 @@ public class MagicShoot : MonoBehaviour
         }
         else
         {
-            attackeffect.SetActive(false);
+            //ttackeffect.SetActive(false);
         }
     }
 

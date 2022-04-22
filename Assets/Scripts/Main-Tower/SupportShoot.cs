@@ -11,6 +11,7 @@ public class SupportShoot : MonoBehaviour
     PhotonView PV;
     void Start()
     {
+        this.transform.SetParent(GameObject.Find("PAPA").transform);
         PV = GetComponent<PhotonView>();  //定義PhotonView
         this.gameObject.tag = PhotonView.Find((int)PV.InstantiationData[0]).tag;
         TowerInRange = new List<GameObject>();

@@ -121,6 +121,10 @@ public class RoomManager : MonoBehaviourPunCallbacks
             if (PV.IsMine)
             {
                 Game_num = UnityEngine.Random.Range(0, EventSprite.Length);
+                if(Game_num == 7)
+                {
+                    Game_num --;
+                }
                 EventPicture.sprite = EventSprite[Game_num];
                 EventPicture.gameObject.transform.parent.gameObject.SetActive(true);
                 Hashtable hash = new Hashtable();

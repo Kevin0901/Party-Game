@@ -26,7 +26,7 @@ public class ArrowShoot : MonoBehaviour
 
     void Start()
     {
-
+        this.transform.SetParent(GameObject.Find("PAPA").transform);
         animator = GetComponent<Animator>();
         enemiesInRange = new List<GameObject>();
         lastShotTime = Time.time;
