@@ -10,8 +10,6 @@ public class Launcher : MonoBehaviourPunCallbacks
 {
     public static Launcher Instance;
     string PlayerName;
-    [Header("玩家英文代號( A 代表 P1 )")]
-    [SerializeField] string[] OrderList;
     [Header("創建房間名字輸入")]
     [SerializeField] TMP_InputField roomNameInputField;
     [Header("玩家名字顯示")]
@@ -48,7 +46,6 @@ public class Launcher : MonoBehaviourPunCallbacks
         reference = FirebaseDatabase.DefaultInstance.RootReference;  //定義資料庫連接
         if (GameObject.Find("RoomManager") != null)
         {
-            Debug.Log("111111111111111111111111111111111");
             Destroy(GameObject.Find("RoomManager"));
         }
         if (PhotonNetwork.InRoom)
@@ -173,6 +170,12 @@ public class Launcher : MonoBehaviourPunCallbacks
         reference.Child("GameRoom").Child(PhotonNetwork.CurrentRoom.Name).Child("PlayerList").Child(PlayerName).SetRawJsonValueAsync(Json);
     }
 
+    IEnumerator FiveSec_CatchDataBase()
+    {
+        yield return new WaitForSeconds(5);
+        SetPlayerUI();
+    }
+
     public void SetPlayerUI()
     {
         Player[] players = PhotonNetwork.PlayerList;  //取得已加入房間的玩家陣列
@@ -240,6 +243,7 @@ public class Launcher : MonoBehaviourPunCallbacks
                     }
                 }
             }
+            StartCoroutine(FiveSec_CatchDataBase());
         }));
     }
     IEnumerator GetRoomInfo(System.Action<DataSnapshot> onCallbacks)  //從資料庫抓取此房間的所有資料
@@ -295,8 +299,6 @@ public class Launcher : MonoBehaviourPunCallbacks
                 HaveBlue = true;
             }
         }
-        HaveRed = true;
-        HaveBlue = true;
         if (HaveRed && HaveBlue)
         {
             Room.IsVisible = false;
@@ -366,7 +368,7 @@ public class Launcher : MonoBehaviourPunCallbacks
     public IEnumerator AddNewPlayerUI(Player newPlayer)  //新增新玩家的 UI
     {
         yield return new WaitForSeconds(1f);
-
+        bool isAdd_NewPlayer = false;
         Player[] players = PhotonNetwork.PlayerList;  //取得已加入房間的玩家陣列
 
         StartCoroutine(GetRoomInfo((DataSnapshot info) =>  //從資料庫抓取此房間內的所有資料
@@ -402,6 +404,7 @@ public class Launcher : MonoBehaviourPunCallbacks
                             PlayerUI.GetComponent<TeamSelect>().red = true;
                             PlayerUI.GetComponent<TeamSelect>().blue = false;
                             PlayerUI.GetComponent<TeamSelect>().ArrowStart();
+                            isAdd_NewPlayer = true;
                         }
                         else
                         {
@@ -413,6 +416,11 @@ public class Launcher : MonoBehaviourPunCallbacks
                         break;
                     }
                 }
+            }
+
+            if(!isAdd_NewPlayer)
+            {
+                StartCoroutine(AddNewPlayerUI(newPlayer));
             }
         }));
     }
