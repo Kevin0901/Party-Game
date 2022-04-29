@@ -87,7 +87,7 @@ public class ArrowShoot : MonoBehaviour
 
     void OnTriggerStay2D(Collider2D other)
     {
-       t = GetComponent<Team>();
+        t = GetComponent<Team>();
         if (other.CompareTag(t.Enemyteam) && other.gameObject.layer != 11)
         {
             if (enemiesInRange.Count == 0)

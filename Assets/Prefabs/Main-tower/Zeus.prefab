@@ -90,7 +90,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 567531287
   m_SortingLayer: 3
-  m_SortingOrder: 2
+  m_SortingOrder: 0
   m_Sprite: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -120,7 +120,7 @@ GameObject:
   - component: {fileID: -9201402252899892804}
   m_Layer: 11
   m_Name: Zeus
-  m_TagString: red
+  m_TagString: blue
   m_Icon: {fileID: 4422084297763085224, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -579,6 +579,11 @@ PrefabInstance:
     - target: {fileID: 2836021408057283444, guid: 677a5437033343a4cb499601d72c41de,
         type: 3}
       propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8101869671533842678, guid: 677a5437033343a4cb499601d72c41de,
+        type: 3}
+      propertyPath: sceneViewId
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []

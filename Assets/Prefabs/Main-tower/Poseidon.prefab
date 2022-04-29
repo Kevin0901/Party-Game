@@ -18,7 +18,7 @@ GameObject:
   - component: {fileID: -1800102160258737072}
   m_Layer: 11
   m_Name: Poseidon
-  m_TagString: red
+  m_TagString: blue
   m_Icon: {fileID: 3306451490063965843, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -394,7 +394,7 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.009502411, y: -3.4}
+  m_Offset: {x: -0.009502411, y: -3.8531582}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -405,7 +405,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 2, y: 7}
+  m_Size: {x: 2, y: 6.0936847}
   m_EdgeRadius: 0
 --- !u!1001 &2530184480458447163
 PrefabInstance:
@@ -656,6 +656,11 @@ PrefabInstance:
     - target: {fileID: 2836021408057283444, guid: 677a5437033343a4cb499601d72c41de,
         type: 3}
       propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8101869671533842678, guid: 677a5437033343a4cb499601d72c41de,
+        type: 3}
+      propertyPath: sceneViewId
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []

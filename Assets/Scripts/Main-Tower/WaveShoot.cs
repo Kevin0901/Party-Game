@@ -12,7 +12,7 @@ public class WaveShoot : MonoBehaviour
     private Team t;
     private int firstshoot = 0;
     private Animator animator;
-    // Use this for initialization
+    private bool issave;
     PhotonView PV;
 
     private void Awake()
@@ -108,13 +108,10 @@ public class WaveShoot : MonoBehaviour
         Shoot(enemiesInRange);
     }
 
-    private void OnEnemyDestroy(GameObject enemy)
-    {
-        enemiesInRange.Remove(enemy);
-    }
 
     void OnTriggerStay2D(Collider2D other)
     {
+        t = GetComponent<Team>();
         if (other.CompareTag(t.Enemyteam) && other.gameObject.layer != 11)
         {
             if (enemiesInRange.Count == 0)
@@ -123,12 +120,18 @@ public class WaveShoot : MonoBehaviour
             }
             else
             {
-                foreach (GameObject enemy in enemiesInRange)
+                for (int i = 0; i < enemiesInRange.Count; i++)
                 {
-                    if (enemy.name != other.gameObject.name)
+                    if (enemiesInRange[i].name == other.gameObject.name)
                     {
-                        enemiesInRange.Add(other.gameObject);
+                        issave = true;
+                        break;
                     }
+                }
+                if (!issave)
+                {
+                    enemiesInRange.Add(other.gameObject);
+                    issave = false;
                 }
             }
         }
