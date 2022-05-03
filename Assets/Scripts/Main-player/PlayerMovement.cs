@@ -540,12 +540,12 @@ public class PlayerMovement : MonoBehaviour
         {
             bornSet();
         }
-        UI.GetGameobject();
         inventory = new Inventory();
         uiInventory = UI.GetInventory();
         uiInventory.SetInventory(inventory);
         inventorysign = UI.GetInventorySign();
         inventorysign.GetComponent<InventorySign>().inventory = this.inventory;
+        UI.GetGameobject();
         getallinv = 1;
     }
     void UpdateAnimationAndMove()

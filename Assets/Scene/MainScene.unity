@@ -911,7 +911,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &743320746
 Transform:
   m_ObjectHideFlags: 0
@@ -999,7 +999,7 @@ PrefabInstance:
     - target: {fileID: 1453858577549326518, guid: 68b2ebc4964119541987510949854859,
         type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1453858577549326518, guid: 68b2ebc4964119541987510949854859,
         type: 3}
@@ -2080,7 +2080,7 @@ PrefabInstance:
     - target: {fileID: 190076728074134734, guid: 1660b27440bf7ea4fb00cfbb96decc83,
         type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1660b27440bf7ea4fb00cfbb96decc83, type: 3}
@@ -2145,7 +2145,7 @@ PrefabInstance:
     - target: {fileID: 3098162054927255321, guid: 36bc5844a4d39f04bbe654afc0abfd17,
         type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3098162054927255322, guid: 36bc5844a4d39f04bbe654afc0abfd17,
         type: 3}
@@ -2423,12 +2423,12 @@ PrefabInstance:
     - target: {fileID: 2493688648149832428, guid: 483d77fb7faa9b2449e7502224d6d81e,
         type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4652306227862462269, guid: 483d77fb7faa9b2449e7502224d6d81e,
         type: 3}
       propertyPath: m_ColliderPaths.Array.size
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 483d77fb7faa9b2449e7502224d6d81e, type: 3}
@@ -2987,7 +2987,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!82 &2079012959
 AudioSource:
   m_ObjectHideFlags: 0
