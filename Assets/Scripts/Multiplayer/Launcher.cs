@@ -81,7 +81,7 @@ public class Launcher : MonoBehaviourPunCallbacks
         Debug.Log("Joined Lobby");
         RoomManager.gameObject.SetActive(true);
     }
-    
+
     public void CreateRoom()  //創建房間(按鈕觸發)
     {
         if (string.IsNullOrEmpty(roomNameInputField.text))  //如果沒輸入房間名稱則不給創建
@@ -172,7 +172,7 @@ public class Launcher : MonoBehaviourPunCallbacks
 
     IEnumerator FiveSec_CatchDataBase()
     {
-        yield return new WaitForSeconds(5);
+        yield return new WaitForSeconds(1);
         SetPlayerUI();
     }
 
@@ -301,6 +301,8 @@ public class Launcher : MonoBehaviourPunCallbacks
         }
         if (HaveRed && HaveBlue)
         {
+            StopCoroutine(FiveSec_CatchDataBase());
+            StopCoroutine(GetRoomInfo((DataSnapshot info) =>  {}));
             Room.IsVisible = false;
             PV.RPC("RPC_fadeout", RpcTarget.All);
         }
@@ -418,7 +420,7 @@ public class Launcher : MonoBehaviourPunCallbacks
                 }
             }
 
-            if(!isAdd_NewPlayer)
+            if (!isAdd_NewPlayer)
             {
                 StartCoroutine(AddNewPlayerUI(newPlayer));
             }

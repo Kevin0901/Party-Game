@@ -4,6 +4,9 @@ using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.UI;
 using Photon.Pun;
+using Firebase;
+using Firebase.Database;
+using System;
 public class health : MonoBehaviour
 {
     // Start is called before the first frame update
@@ -15,12 +18,24 @@ public class health : MonoBehaviour
     public bool iswudi;//無敵
     public int playercatchsheeponhit = 0;
     PhotonView PV;
+    bool isfirstload = true;
+    public DatabaseReference reference;
     private void Awake()
     {
         ResourceTypeListSO resourceTypeList = Resources.Load<ResourceTypeListSO>(typeof(ResourceTypeListSO).Name);
+        reference = FirebaseDatabase.DefaultInstance.RootReference;  //定義資料庫連接
+    }
+    private void OnEnable()
+    {
+        if (!isfirstload)
+        {
+            reference.Child("GameRoom").Child(PhotonNetwork.CurrentRoom.Name).Child("Health").Child(PV.ViewID.ToString()).SetValueAsync(curH);
+            StartCoroutine(Load_Health_From_Database());
+        }
     }
     void Start()
     {
+        isfirstload = true;
         PV = this.GetComponent<PhotonView>();
         iswudi = false;
         healthBarSet();
@@ -28,6 +43,12 @@ public class health : MonoBehaviour
         parentSet = this.transform.parent.gameObject;
         bar = this.gameObject.GetComponentInChildren<Slider>();
         bar.maxValue = maxH;
+        reference.Child("GameRoom").Child(PhotonNetwork.CurrentRoom.Name).Child("Health").Child(PV.ViewID.ToString()).SetValueAsync(curH);
+        if (isfirstload)
+        {
+            StartCoroutine(Load_Health_From_Database());
+            isfirstload = false;
+        }
     }
     private void Update()
     {
@@ -49,6 +70,7 @@ public class health : MonoBehaviour
         }
         if (curH <= 0 && parentSet.layer != 10 && parentSet.layer != 14)
         {
+            reference.Child("GameRoom").Child(PhotonNetwork.CurrentRoom.Name).Child("Health").Child(PV.ViewID.ToString()).SetValueAsync(null);
             Destroy(parentSet);
         }
         bar.value = curH;
@@ -70,21 +92,54 @@ public class health : MonoBehaviour
                 return;
             }
             curH -= damageToGive;
-            PV.RPC("RPC_Hurt", RpcTarget.All, damageToGive, PV.Owner.NickName);
+            reference.Child("GameRoom").Child(PhotonNetwork.CurrentRoom.Name).Child("Health").Child(PV.ViewID.ToString()).SetValueAsync(curH);
+            // PV.RPC("RPC_Hurt", RpcTarget.All, damageToGive, PV.Owner.NickName);
         }
     }
-    [PunRPC]
-    void RPC_Hurt(int dam, string who)
+    // [PunRPC]
+    // void RPC_Hurt(int dam, string who)
+    // {
+    //     if (PV.IsMine)
+    //     {
+    //         return;
+    //     }
+    //     if (PV.Owner.NickName.Equals(who))
+    //     {
+    //         curH -= dam;
+    //     }
+    // }
+
+    IEnumerator Load_Health_From_Database()
     {
-        if (PV.IsMine)
+        yield return new WaitForSeconds(1f);
+        StartCoroutine(GetHealthInfo((DataSnapshot info) =>  //從資料庫抓取此房間內的所有資料
         {
-            return;
-        }
-        if (PV.Owner.NickName.Equals(who))
+            foreach (var health in info.Children)
+            {
+                if (health.Key.Equals(PV.ViewID.ToString()))
+                {
+                    Debug.Log((int)Int64.Parse(health.Value.ToString()));
+                    curH = (int)Int64.Parse(health.Value.ToString());
+                    bar.value = curH;
+                }
+            }
+            StartCoroutine(Load_Health_From_Database());
+        }));
+    }
+
+    IEnumerator GetHealthInfo(System.Action<DataSnapshot> onCallbacks)  //從資料庫抓取此房間的所有資料
+    {
+        var userData = reference.Child("GameRoom").Child(PhotonNetwork.CurrentRoom.Name).Child("Health").GetValueAsync();
+
+        yield return new WaitUntil(predicate: () => userData.IsCompleted);
+
+        if (userData != null)
         {
-            curH -= dam;
+            DataSnapshot snapshot = userData.Result;
+            onCallbacks.Invoke(snapshot);
         }
     }
+
     private IEnumerator phoenix(int t) //無敵
     {
         parentSet.GetComponent<PlayerMovement>().phfeatheruse = 1;
