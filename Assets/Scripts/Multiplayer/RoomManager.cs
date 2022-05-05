@@ -10,6 +10,8 @@ using Photon.Realtime;
 using Hashtable = ExitGames.Client.Photon.Hashtable;
 using TMPro;
 using UnityEngine.UI;
+using Firebase;
+using Firebase.Database;
 public class RoomManager : MonoBehaviourPunCallbacks
 {
     // public static RoomManager Instance;
@@ -29,6 +31,7 @@ public class RoomManager : MonoBehaviourPunCallbacks
     [SerializeField] Sprite[] EventSprite;
     [SerializeField] GameObject BlueCastle, RedCastle;
     [SerializeField] GameObject Teaching;
+    DatabaseReference reference;
     void Awake()
     {
         EnteredGame = false;
@@ -43,6 +46,7 @@ public class RoomManager : MonoBehaviourPunCallbacks
         DontDestroyOnLoad(gameObject);
         PV = GetComponent<PhotonView>();  //定義PhotonView
         // Instance = this;
+        reference = FirebaseDatabase.DefaultInstance.RootReference;  //定義資料庫連接
     }
     private void Start()
     {
@@ -128,8 +132,30 @@ public class RoomManager : MonoBehaviourPunCallbacks
     }
     IEnumerator TimeCount()
     {
+        if (PV.IsMine)
+        {
+            TotalTime++;
+            reference.Child("GameRoom").Child(PhotonNetwork.CurrentRoom.Name).Child("Time").Child("TotalTime").SetValueAsync(TotalTime);
+        }
         yield return new WaitForSeconds(1f);
-        TotalTime++;
+        if (PV.IsMine)
+        {
+            NextEvent_Trigger();
+        }
+        else
+        {
+            StartCoroutine(GetTimeInfo((DataSnapshot info) =>  //從資料庫抓取此房間內的所有資料
+            {
+                foreach (var Time in info.Children)
+                {
+                    TotalTime = (int)Int64.Parse(Time.Value.ToString());
+                    NextEvent_Trigger();
+                }
+            }));
+        }
+    }
+    void NextEvent_Trigger()
+    {
         if (TotalTime == nextEvent)
         {
             if (PV.IsMine)
@@ -152,6 +178,20 @@ public class RoomManager : MonoBehaviourPunCallbacks
             StartCoroutine(TimeCount());
         }
     }
+
+    IEnumerator GetTimeInfo(System.Action<DataSnapshot> onCallbacks)  //從資料庫抓取此房間的所有資料
+    {
+        var userData = reference.Child("GameRoom").Child(PhotonNetwork.CurrentRoom.Name).Child("Time").GetValueAsync();
+
+        yield return new WaitUntil(predicate: () => userData.IsCompleted);
+
+        if (userData != null)
+        {
+            DataSnapshot snapshot = userData.Result;
+            onCallbacks.Invoke(snapshot);
+        }
+    }
+
     IEnumerator startEvent(float t)
     {
         if (t > 5)

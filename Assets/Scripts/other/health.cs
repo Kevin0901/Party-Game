@@ -118,7 +118,6 @@ public class health : MonoBehaviour
             {
                 if (health.Key.Equals(PV.ViewID.ToString()))
                 {
-                    Debug.Log((int)Int64.Parse(health.Value.ToString()));
                     curH = (int)Int64.Parse(health.Value.ToString());
                     bar.value = curH;
                 }

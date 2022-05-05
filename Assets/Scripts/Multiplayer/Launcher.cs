@@ -34,6 +34,7 @@ public class Launcher : MonoBehaviourPunCallbacks
     [Header("是否已經登入")]
     public bool isLogin;
     PhotonView PV;
+    bool isStart;
     void Awake()
     {
         Instance = this;
@@ -43,6 +44,7 @@ public class Launcher : MonoBehaviourPunCallbacks
     {
         PV = GetComponent<PhotonView>();
         isLogin = false;
+        isStart = false;
         reference = FirebaseDatabase.DefaultInstance.RootReference;  //定義資料庫連接
         if (GameObject.Find("RoomManager") != null)
         {
@@ -221,7 +223,7 @@ public class Launcher : MonoBehaviourPunCallbacks
                                 PlayerUI.transform.Find("Text (TMP)").gameObject.SetActive(true);  //打開玩家名稱 UI
                                 for (int j = 0; j < players.Length; j++)
                                 {
-                                    if (players[j].NickName.Equals(PName[i]))
+                                    if (players[j].NickName.Equals(PName[i]) && !isStart)
                                     {
                                         PlayerUI.GetComponent<PlayerListItem>().SetUp(players[j]);  //設定玩家名稱 UI
                                         PlayerUI.GetComponent<PhotonView>().TransferOwnership(players[j]);  //設定 PhotonView Owner (表示只有 XXX 有此 UI 的擁有權)
@@ -301,9 +303,11 @@ public class Launcher : MonoBehaviourPunCallbacks
         }
         if (HaveRed && HaveBlue)
         {
+            isStart = true;
             StopCoroutine(FiveSec_CatchDataBase());
             StopCoroutine(GetRoomInfo((DataSnapshot info) =>  {}));
             Room.IsVisible = false;
+            reference.Child("GameRoom").Child(PhotonNetwork.CurrentRoom.Name).Child("Time").Child("TotalTime").SetValueAsync(0);
             PV.RPC("RPC_fadeout", RpcTarget.All);
         }
         else
