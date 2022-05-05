@@ -172,7 +172,7 @@ public class Launcher : MonoBehaviourPunCallbacks
         reference.Child("GameRoom").Child(PhotonNetwork.CurrentRoom.Name).Child("PlayerList").Child(PlayerName).SetRawJsonValueAsync(Json);
     }
 
-    IEnumerator FiveSec_CatchDataBase()
+    IEnumerator OneSec_CatchDataBase()
     {
         yield return new WaitForSeconds(1);
         SetPlayerUI();
@@ -245,19 +245,22 @@ public class Launcher : MonoBehaviourPunCallbacks
                     }
                 }
             }
-            StartCoroutine(FiveSec_CatchDataBase());
+            StartCoroutine(OneSec_CatchDataBase());
         }));
     }
     IEnumerator GetRoomInfo(System.Action<DataSnapshot> onCallbacks)  //從資料庫抓取此房間的所有資料
     {
-        var userData = reference.Child("GameRoom").Child(PhotonNetwork.CurrentRoom.Name).GetValueAsync();
-
-        yield return new WaitUntil(predicate: () => userData.IsCompleted);
-
-        if (userData != null)
+        if (PhotonNetwork.CurrentRoom != null)
         {
-            DataSnapshot snapshot = userData.Result;
-            onCallbacks.Invoke(snapshot);
+            var userData = reference.Child("GameRoom").Child(PhotonNetwork.CurrentRoom.Name).GetValueAsync();
+
+            yield return new WaitUntil(predicate: () => userData.IsCompleted);
+
+            if (userData != null)
+            {
+                DataSnapshot snapshot = userData.Result;
+                onCallbacks.Invoke(snapshot);
+            }
         }
     }
 
@@ -304,8 +307,8 @@ public class Launcher : MonoBehaviourPunCallbacks
         if (HaveRed && HaveBlue)
         {
             isStart = true;
-            StopCoroutine(FiveSec_CatchDataBase());
-            StopCoroutine(GetRoomInfo((DataSnapshot info) =>  {}));
+            StopCoroutine(OneSec_CatchDataBase());
+            StopCoroutine(GetRoomInfo((DataSnapshot info) => { }));
             Room.IsVisible = false;
             reference.Child("GameRoom").Child(PhotonNetwork.CurrentRoom.Name).Child("Time").Child("TotalTime").SetValueAsync(0);
             PV.RPC("RPC_fadeout", RpcTarget.All);

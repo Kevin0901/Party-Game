@@ -39,11 +39,19 @@ public class SettingMenu : MonoBehaviour
         {
             audios.volume = volume;
         }
-        if (transform.Find("Settings").gameObject.activeSelf &&
-        GameObject.Find("GameMenu").GetComponent<CanvasGroup>().blocksRaycasts &&
-        !transform.Find("Settings").Find("LoginOut").gameObject.activeSelf)
+        // if (transform.Find("Settings").gameObject.activeSelf &&
+        // GameObject.Find("GameMenu").GetComponent<CanvasGroup>().blocksRaycasts &&
+        // !transform.Find("Settings").Find("LoginOut").gameObject.activeSelf)
+        // {
+        //      transform.Find("Settings").Find("LoginOut").gameObject.SetActive(true);
+        // }
+        if (!GameObject.Find("ChoosePlayer").GetComponent<CanvasGroup>().blocksRaycasts)
         {
-            transform.Find("Settings").Find("LoginOut").gameObject.SetActive(true);
+            transform.Find("Settings").Find("LoginOut").GetComponent<Image>().color = new Color(1,1,1,1);
+        }
+        else
+        {
+            transform.Find("Settings").Find("LoginOut").GetComponent<Image>().color = new Color(0.3f,0.3f,0.3f,1);
         }
     }
 
@@ -62,15 +70,17 @@ public class SettingMenu : MonoBehaviour
     }
     public void Back() //關閉設定
     {
-        transform.Find("Settings").Find("LoginOut").gameObject.SetActive(false);
         transform.Find("Settings").gameObject.SetActive(false);
     }
 
     public void LoginOut()
     {
-        PlayerPrefs.DeleteKey("password");
-        transform.Find("Settings").gameObject.SetActive(false);
-        StartCoroutine(fadeout());
+        if (!GameObject.Find("ChoosePlayer").GetComponent<CanvasGroup>().blocksRaycasts)
+        {
+            PlayerPrefs.DeleteKey("password");
+            transform.Find("Settings").gameObject.SetActive(false);
+            StartCoroutine(fadeout());
+        }
     }
     private IEnumerator fadeout() //淡出畫面       
     {
