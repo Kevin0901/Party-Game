@@ -208,7 +208,6 @@ public class RoomManager : MonoBehaviourPunCallbacks
         }
         else
         {
-            Black.SetActive(true);
             Count.gameObject.SetActive(true);
             Debug.Log(t);
             Count.text = t.ToString();
@@ -217,20 +216,12 @@ public class RoomManager : MonoBehaviourPunCallbacks
             StartCoroutine(startEvent(t));
         }
     }
-    IEnumerator Black_fadeout(bool FirstEnter)
+    void Black_fadeout() //離開黑色
     {
-        Black.SetActive(true);
         Black.GetComponentInChildren<Animator>().SetTrigger("fadeout");
-        yield return new WaitForSeconds(1f);
-        if (SceneManager.GetActiveScene().name.Equals("FightScene") || !FirstEnter)
-        {
-            Black.SetActive(false);
-        }
-        // Black.SetActive(false);
     }
-    IEnumerator Black_fadein()
+    IEnumerator Black_fadein() //變成黑色
     {
-        Black.SetActive(true);
         Black.GetComponentInChildren<Animator>().SetTrigger("fadein");
         yield return new WaitForSeconds(1f);
         EventPicture.gameObject.transform.parent.gameObject.SetActive(false);
@@ -274,7 +265,7 @@ public class RoomManager : MonoBehaviourPunCallbacks
             Cursor.visible = false;
             if (!EnteredGame)
             {
-                StartCoroutine(Black_fadeout(true));
+                Black_fadeout();
                 StartCoroutine(ready());
                 PAPA = GameObject.Find("PAPA");
                 Teaching = PAPA.transform.Find("Teaching").gameObject;
@@ -288,13 +279,12 @@ public class RoomManager : MonoBehaviourPunCallbacks
                     GameObject Red = PhotonNetwork.Instantiate(Path.Combine("PhotonPrefabs", "RedCastle"), new Vector3(-20.4f, -45.49f, 0), this.transform.rotation);
                     GameObject Blue = PhotonNetwork.Instantiate(Path.Combine("PhotonPrefabs", "BlueCastle"), new Vector3(-20.4f, 45.49f, 0), this.transform.rotation);
                 }
-                Black.SetActive(true);
                 EnteredGame = true;
                 PAPA.GetComponent<PAPA>().OpenChild();
             }
             else
             {
-                StartCoroutine(Black_fadeout(false));
+                Black_fadeout();
                 StartCoroutine(TimeCount());
                 if (GameObject.Find("PAPA") != null)
                 {
@@ -307,7 +297,7 @@ public class RoomManager : MonoBehaviourPunCallbacks
         {
             Cursor.visible = true;
             StopCoroutine(TimeCount());
-            StartCoroutine(Black_fadeout(false));
+            Black_fadeout();
             PAPA.SetActive(false);
             if (PV.IsMine)
             {
