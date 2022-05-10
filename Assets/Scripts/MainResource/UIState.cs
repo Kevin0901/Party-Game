@@ -160,16 +160,12 @@ public class UIState : MonoBehaviour
                             MonsterUI.SetActive(false);
                             BuildUI.SetActive(true);
                             BuildUI.transform.Find("SelectSlot").gameObject.SetActive(true);
-                            // hover.SetActive(false);
-                            // Hover.mhover = 0;
                             m = 0;
                             b = 1;
                         }
                         else
                         {
                             BuildUI.SetActive(false);
-                            // hover.SetActive(false);
-                            // Hover.bhover = 0;
                             b = 0;
                             escc = 0;
                         }
@@ -189,16 +185,12 @@ public class UIState : MonoBehaviour
                             MonsterUI.SetActive(true);
                             MonsterUI.transform.Find("SelectSlot").gameObject.SetActive(true);
                             BuildUI.SetActive(false);
-                            // hover.SetActive(false);
-                            // Hover.bhover = 0;
                             b = 0;
                             m = 1;
                         }
                         else
                         {
                             MonsterUI.SetActive(false);
-                            // hover.SetActive(false);
-                            // Hover.mhover = 0;
                             m = 0;
                             escc = 0;
                         }
@@ -274,8 +266,6 @@ public class UIState : MonoBehaviour
             {
                 if (escc == 0)
                 {
-                    // hover.SetActive(false);
-                    GameManager.a = 0;
                     escc = 1;
                 }
                 else if (escc == 1)
@@ -291,18 +281,8 @@ public class UIState : MonoBehaviour
 
     public void GetGameobject()
     {
-        // hover = this.transform.GetChild(0).gameObject;
-        // ResourceUI = this.transform.GetChild(1).gameObject;
-        // BuildUI = this.transform.GetChild(2).gameObject;
-        // MonsterUI = this.transform.GetChild(3).gameObject;
-        // InventoryUI = this.transform.GetChild(4).gameObject;
-        // NoticeUI = this.transform.GetChild(5).gameObject;
-        // Instantiate(gamemanager).transform.parent = this.transform;
-        // gamemanager.GetComponent<GameManager>().hover = hover;
         BuildUI.SetActive(false);
         MonsterUI.SetActive(false);
-        // hover.GetComponent<Hover>().thiscamera = playercamera;
-        // this.tag = player.tag;
         ResourceUI.GetComponentInChildren<ResourceUI>().Playertag = this.tag;
         InventoryUI.transform.Find("UI_Inventory").transform.GetChild(2).GetComponent<InventorySign>().player = player;
         getall = 1;

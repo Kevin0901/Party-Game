@@ -86,9 +86,9 @@ public class PlaceTower : MonoBehaviour
     {
         // transform.position = Camera.current.ScreenToWorldPoint(Input.mousePosition);
         // transform.position = new Vector3(transform.position.x, transform.position.y, 0);
-        Instantiate(spawnobject, Hover.hitpos, Quaternion.identity);
-        transform.position = orgin;
-        tc = 1;
+        // Instantiate(spawnobject, Hover.hitpos, Quaternion.identity);
+        // transform.position = orgin;
+        // tc = 1;
     }
 
     private void OnTriggerStay2D(Collider2D other)

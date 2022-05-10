@@ -16,11 +16,11 @@ public class ColliderCheck : MonoBehaviour
 
     private void Update()
     {
-        Vector3 mpos = Hover.hitpos;
-        if (Hover.bhover == 1)
-        {
-            CanSpawnBuilding(mpos);
-        }
+        // Vector3 mpos = Hover.hitpos;
+        // if (Hover.bhover == 1)
+        // {
+        //     CanSpawnBuilding(mpos);
+        // }
 
     }
 
