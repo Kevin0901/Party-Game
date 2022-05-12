@@ -114,7 +114,7 @@ MonoBehaviour:
     amount: 60
   levels:
   - visualization: {fileID: 6822871495253970992}
-    fireRate: 1
+    fireRate: 0.5
     damage: 15
     MaxHealth: 500
     CurHealth: 0
@@ -313,7 +313,7 @@ PrefabInstance:
     - target: {fileID: 2361779459162523089, guid: 0779dc39aee0348448b72518fece233b,
         type: 3}
       propertyPath: m_Radius
-      value: 8
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 3335244245303661303, guid: 0779dc39aee0348448b72518fece233b,
         type: 3}
