@@ -32,6 +32,7 @@ public class RoomManager : MonoBehaviourPunCallbacks
     [SerializeField] GameObject BlueCastle, RedCastle;
     [SerializeField] GameObject Teaching;
     DatabaseReference reference;
+    public string WinTeam ="";
     void Awake()
     {
         EnteredGame = false;
@@ -233,7 +234,7 @@ public class RoomManager : MonoBehaviourPunCallbacks
             }
             else if (SceneManager.GetActiveScene().name.Equals("FightScene"))
             {
-                string WinTeam = GameObject.Find("EndGameUI").GetComponent<EndGame>().WinTeam;
+                WinTeam = GameObject.Find("EndGameUI").GetComponent<EndGame>().WinTeam;
                 if(WinTeam != null)
                 {
                     PhotonNetwork.LoadLevel(1);
@@ -295,7 +296,20 @@ public class RoomManager : MonoBehaviourPunCallbacks
                 {
                     Destroy(GameObject.Find("PAPA"));
                     PAPA.SetActive(true);
+                    ResourceTypeListSO resourceTypeList = Resources.Load<ResourceTypeListSO>(typeof(ResourceTypeListSO).Name);
+                    if(WinTeam == "Red"){
+                        ResourceManager.Instance.RedAddResource(resourceTypeList.list[0],200);
+                        ResourceManager.Instance.RedAddResource(resourceTypeList.list[1],200);
+                        ResourceManager.Instance.RedAddResource(resourceTypeList.list[2],200);
+                    }else if(WinTeam == "Blue"){
+                        ResourceManager.Instance.BlueAddResource(resourceTypeList.list[0],200);
+                        ResourceManager.Instance.BlueAddResource(resourceTypeList.list[1],200);
+                        ResourceManager.Instance.BlueAddResource(resourceTypeList.list[2],200);
+                    }
+                    
+                    
                 }
+
             }
         }
         else if (scene.buildIndex == 2)

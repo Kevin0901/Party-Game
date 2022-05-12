@@ -139,7 +139,7 @@ public class ResourceManager : MonoBehaviour
     private void timeadd()
     {
         RedAddAllResource((int)(2 * Rrestimes));
-        BlueAddAllResource((int)(2 * Rrestimes));
+        BlueAddAllResource((int)(2 * Brestimes));
     }
 
     public int RedGetResourceAmount(ResourceTypeSo resourceType)
