@@ -16,12 +16,12 @@ GameObject:
   - component: {fileID: 4181538411883584075}
   - component: {fileID: -6678083213743160592}
   - component: {fileID: 3010635013881258992}
-  - component: {fileID: 4479736707472912620}
-  - component: {fileID: -439850871013899369}
-  - component: {fileID: 600137594365579767}
+  - component: {fileID: 8619332832328403054}
+  - component: {fileID: -4636744041208669549}
+  - component: {fileID: 8158147069679296396}
   m_Layer: 11
   m_Name: Hercules
-  m_TagString: blue
+  m_TagString: red
   m_Icon: {fileID: 4422084297763085224, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -215,7 +215,7 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1.407403, y: 1.4646139}
   m_EdgeRadius: 0
---- !u!114 &4479736707472912620
+--- !u!114 &8619332832328403054
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -234,12 +234,11 @@ MonoBehaviour:
   OwnershipTransfer: 0
   observableSearch: 2
   ObservedComponents:
-  - {fileID: -439850871013899369}
-  - {fileID: 600137594365579767}
+  - {fileID: -4636744041208669549}
   sceneViewId: 0
   InstantiationId: 0
   isRuntimeInstantiated: 0
---- !u!114 &-439850871013899369
+--- !u!114 &-4636744041208669549
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -255,7 +254,7 @@ MonoBehaviour:
   m_SynchronizeRotation: 1
   m_SynchronizeScale: 1
   m_UseLocal: 1
---- !u!114 &600137594365579767
+--- !u!114 &8158147069679296396
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -269,22 +268,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ShowLayerWeightsInspector: 1
   ShowParameterInspector: 1
-  m_SynchronizeParameters:
-  - Type: 4
-    SynchronizeType: 2
-    Name: RedAttack
-  - Type: 4
-    SynchronizeType: 2
-    Name: BlueAttack
-  - Type: 4
-    SynchronizeType: 2
-    Name: RedIdle
-  - Type: 4
-    SynchronizeType: 2
-    Name: BlueIdle
-  m_SynchronizeLayers:
-  - SynchronizeType: 2
-    LayerIndex: 0
+  m_SynchronizeParameters: []
+  m_SynchronizeLayers: []
 --- !u!1001 &3360512871981981748
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -515,7 +500,7 @@ PrefabInstance:
     - target: {fileID: 2361779459162523089, guid: 0779dc39aee0348448b72518fece233b,
         type: 3}
       propertyPath: m_Radius
-      value: 15
+      value: 13
       objectReference: {fileID: 0}
     - target: {fileID: 3335244245303661303, guid: 0779dc39aee0348448b72518fece233b,
         type: 3}

@@ -16,12 +16,12 @@ GameObject:
   - component: {fileID: -6678083213743160592}
   - component: {fileID: 971660292448251462}
   - component: {fileID: -7052821500305357397}
-  - component: {fileID: -4397804349267366011}
-  - component: {fileID: -1050964056877001901}
-  - component: {fileID: 3606655741780364020}
+  - component: {fileID: -337771525726639070}
+  - component: {fileID: 5073010708699121944}
+  - component: {fileID: -3807494819640957175}
   m_Layer: 11
   m_Name: Hestia
-  m_TagString: blue
+  m_TagString: red
   m_Icon: {fileID: 8418204508859773708, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -213,7 +213,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Enemyteam: 
---- !u!114 &-4397804349267366011
+--- !u!114 &-337771525726639070
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -232,12 +232,11 @@ MonoBehaviour:
   OwnershipTransfer: 0
   observableSearch: 2
   ObservedComponents:
-  - {fileID: -1050964056877001901}
-  - {fileID: 3606655741780364020}
+  - {fileID: 5073010708699121944}
   sceneViewId: 0
   InstantiationId: 0
   isRuntimeInstantiated: 0
---- !u!114 &-1050964056877001901
+--- !u!114 &5073010708699121944
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -253,7 +252,7 @@ MonoBehaviour:
   m_SynchronizeRotation: 1
   m_SynchronizeScale: 1
   m_UseLocal: 1
---- !u!114 &3606655741780364020
+--- !u!114 &-3807494819640957175
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -267,22 +266,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ShowLayerWeightsInspector: 1
   ShowParameterInspector: 1
-  m_SynchronizeParameters:
-  - Type: 4
-    SynchronizeType: 2
-    Name: RedAttack
-  - Type: 4
-    SynchronizeType: 2
-    Name: BlueAttack
-  - Type: 4
-    SynchronizeType: 2
-    Name: RedIdle
-  - Type: 4
-    SynchronizeType: 2
-    Name: BlueIdle
-  m_SynchronizeLayers:
-  - SynchronizeType: 2
-    LayerIndex: 0
+  m_SynchronizeParameters: []
+  m_SynchronizeLayers: []
 --- !u!1 &5813422063232856550
 GameObject:
   m_ObjectHideFlags: 0

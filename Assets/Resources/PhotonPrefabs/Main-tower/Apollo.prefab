@@ -16,9 +16,9 @@ GameObject:
   - component: {fileID: 8709819860946908995}
   - component: {fileID: 5676863642827212694}
   - component: {fileID: -6794777300290921534}
-  - component: {fileID: -6449055268528731210}
-  - component: {fileID: -6683433662154368517}
-  - component: {fileID: 2153729071303658571}
+  - component: {fileID: 7847133905151650106}
+  - component: {fileID: -9159243458718122096}
+  - component: {fileID: -8289559098020753837}
   m_Layer: 11
   m_Name: Apollo
   m_TagString: red
@@ -117,7 +117,7 @@ MonoBehaviour:
     amount: 60
   levels:
   - visualization: {fileID: 6822871495253970992}
-    fireRate: 1
+    fireRate: 0.5
     damage: 15
     MaxHealth: 500
     CurHealth: 0
@@ -216,7 +216,7 @@ MonoBehaviour:
   towerData: {fileID: 0}
   Arrow: {fileID: 6473821596328009027, guid: de44a6e73832e76459a136026ca60079, type: 3}
   ArrowSpeed: 50
---- !u!114 &-6449055268528731210
+--- !u!114 &7847133905151650106
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -235,12 +235,11 @@ MonoBehaviour:
   OwnershipTransfer: 0
   observableSearch: 2
   ObservedComponents:
-  - {fileID: -6683433662154368517}
-  - {fileID: 2153729071303658571}
+  - {fileID: -9159243458718122096}
   sceneViewId: 0
   InstantiationId: 0
   isRuntimeInstantiated: 0
---- !u!114 &-6683433662154368517
+--- !u!114 &-9159243458718122096
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -256,7 +255,7 @@ MonoBehaviour:
   m_SynchronizeRotation: 1
   m_SynchronizeScale: 1
   m_UseLocal: 1
---- !u!114 &2153729071303658571
+--- !u!114 &-8289559098020753837
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -270,22 +269,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ShowLayerWeightsInspector: 1
   ShowParameterInspector: 1
-  m_SynchronizeParameters:
-  - Type: 4
-    SynchronizeType: 2
-    Name: BlueAttack
-  - Type: 4
-    SynchronizeType: 2
-    Name: RedAttack
-  - Type: 4
-    SynchronizeType: 2
-    Name: BlueIdle
-  - Type: 4
-    SynchronizeType: 2
-    Name: RedIdle
-  m_SynchronizeLayers:
-  - SynchronizeType: 2
-    LayerIndex: 0
+  m_SynchronizeParameters: []
+  m_SynchronizeLayers: []
 --- !u!1001 &2924336139300625687
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -386,7 +371,7 @@ PrefabInstance:
     - target: {fileID: 2361779459162523089, guid: 0779dc39aee0348448b72518fece233b,
         type: 3}
       propertyPath: m_Radius
-      value: 8
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 3335244245303661303, guid: 0779dc39aee0348448b72518fece233b,
         type: 3}
@@ -572,11 +557,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: HealthBar
-      objectReference: {fileID: 0}
-    - target: {fileID: 2836021407083763868, guid: 677a5437033343a4cb499601d72c41de,
-        type: 3}
-      propertyPath: m_PresetInfoIsWorld
-      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2836021408057283444, guid: 677a5437033343a4cb499601d72c41de,
         type: 3}

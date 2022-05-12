@@ -311,9 +311,9 @@ GameObject:
   - component: {fileID: 6171561511237712527}
   - component: {fileID: 1201061227223450830}
   - component: {fileID: 8982951932885710248}
-  - component: {fileID: -2824786109320372409}
-  - component: {fileID: 4443803926038211177}
-  - component: {fileID: 7272775908706701218}
+  - component: {fileID: -4282616828624110696}
+  - component: {fileID: 4998748843572979041}
+  - component: {fileID: -4946136431508551000}
   m_Layer: 9
   m_Name: Soldier
   m_TagString: red
@@ -460,17 +460,17 @@ MonoBehaviour:
   walkDir_Y: 0
   setTime: 0.5
   currentState: 0
-  speed: 1.5
-  MaxHealth: 100
+  speed: 2
+  MaxHealth: 50
   attackRate: 1
-  attackDamage: 30
+  attackDamage: 10
   attackRange: 1.22
   detectRange: 5
   CostArray:
   - resourceType: {fileID: 11400000, guid: 4fe8e97de7a2fe741bf0d486530fc885, type: 2}
-    amount: 15
+    amount: 10
   - resourceType: {fileID: 11400000, guid: 7ccda71571f75c8488f798db5f05b22a, type: 2}
-    amount: 15
+    amount: 10
   - resourceType: {fileID: 11400000, guid: bc734ecf5539a2f44a3703d03b6d384e, type: 2}
     amount: 10
   enemy: {fileID: 0}
@@ -502,7 +502,7 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.7812637, y: 0.8390024}
   m_EdgeRadius: 0
---- !u!114 &-2824786109320372409
+--- !u!114 &-4282616828624110696
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -521,12 +521,11 @@ MonoBehaviour:
   OwnershipTransfer: 0
   observableSearch: 2
   ObservedComponents:
-  - {fileID: 4443803926038211177}
-  - {fileID: 7272775908706701218}
+  - {fileID: 4998748843572979041}
   sceneViewId: 0
   InstantiationId: 0
   isRuntimeInstantiated: 0
---- !u!114 &4443803926038211177
+--- !u!114 &4998748843572979041
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -542,7 +541,7 @@ MonoBehaviour:
   m_SynchronizeRotation: 1
   m_SynchronizeScale: 1
   m_UseLocal: 1
---- !u!114 &7272775908706701218
+--- !u!114 &-4946136431508551000
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -556,28 +555,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ShowLayerWeightsInspector: 1
   ShowParameterInspector: 1
-  m_SynchronizeParameters:
-  - Type: 1
-    SynchronizeType: 2
-    Name: moveX
-  - Type: 1
-    SynchronizeType: 2
-    Name: moveY
-  - Type: 1
-    SynchronizeType: 2
-    Name: attackSpeed
-  - Type: 4
-    SynchronizeType: 2
-    Name: attacking
-  - Type: 4
-    SynchronizeType: 2
-    Name: moving
-  - Type: 4
-    SynchronizeType: 2
-    Name: pigeon
-  m_SynchronizeLayers:
-  - SynchronizeType: 2
-    LayerIndex: 0
+  m_SynchronizeParameters: []
+  m_SynchronizeLayers: []
 --- !u!1001 &5629583353994475055
 PrefabInstance:
   m_ObjectHideFlags: 0
