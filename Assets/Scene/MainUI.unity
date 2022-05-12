@@ -6602,11 +6602,18 @@ MonoBehaviour:
   - {fileID: 21300000, guid: 2032e855e804af74d8fb9f00d8257677, type: 3}
   - {fileID: 21300000, guid: d91e85f191e3bd845aff6297f2ce035c, type: 3}
   - {fileID: 21300000, guid: b9e289a0dd8ebfd4f8ca8fef359b7ba4, type: 3}
+  - {fileID: 21300000, guid: 8d4e5231b3717ed4d8d734fbd6d2178d, type: 3}
+  - {fileID: 21300000, guid: 9aa417dbe944e7f42a07d8ed89e2c130, type: 3}
+  - {fileID: 21300000, guid: 63664716fc1bf8242aaceb6c9ca4936b, type: 3}
+  - {fileID: 21300000, guid: 38e12baf7876baf40a63f35dba27decf, type: 3}
+  - {fileID: 21300000, guid: cba682fddaf665441bcf8397c66eef8e, type: 3}
+  - {fileID: 21300000, guid: 1614272f841d28c4ab2417eb03d6107d, type: 3}
   BlueCastle: {fileID: 4430006006634354294, guid: 1d72796d476bf134eb4b04ebb9608451,
     type: 3}
   RedCastle: {fileID: 8961850176589369621, guid: 4b8afc096df32454d988c9220a000752,
     type: 3}
   Teaching: {fileID: 0}
+  WinTeam: 
 --- !u!4 &1739546517
 Transform:
   m_ObjectHideFlags: 0
