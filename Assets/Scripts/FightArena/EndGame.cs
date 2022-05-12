@@ -13,6 +13,7 @@ public class EndGame : MonoBehaviour
     GameObject PW;
     [SerializeField] TMP_Text Time;
     int countdown = 5;
+    public string WinTeam;
     void Start()
     {
         PV = GetComponent<PhotonView>();
@@ -32,6 +33,14 @@ public class EndGame : MonoBehaviour
     {
         if (countdown <= 0)
         {
+            if(transform.Find("red").gameObject.activeSelf)
+            {
+                WinTeam = "red";
+            }
+            else
+            {
+                WinTeam = "blue";
+            }
             GameObject.Find("RoomManager").GetComponent<RoomManager>().StartCoroutine("Black_fadein");
         }
         else

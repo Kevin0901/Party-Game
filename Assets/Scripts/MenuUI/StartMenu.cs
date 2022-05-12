@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using Photon.Pun;
+using Firebase;
+using Firebase.Database;
 #if UNITY_EDITOR
 using UnityEditor;
 #endif
@@ -13,12 +15,14 @@ public class StartMenu : MonoBehaviour
     private Animator MainAnimator;
     private CanvasGroup CanvasGroup;
     float waitTime = 0;
+    DatabaseReference reference;
     void Start()
     {
         inMainMenu = false;
         MainAnimator = this.GetComponent<Animator>();
         CanvasGroup = this.GetComponent<CanvasGroup>();
         StartCoroutine(fadein());
+        reference = FirebaseDatabase.DefaultInstance.RootReference;  //定義資料庫連接
     }
     void Update()
     {
@@ -47,6 +51,27 @@ public class StartMenu : MonoBehaviour
         yield return new WaitForSeconds(0.5f);
         if (PlayerPrefs.HasKey("username") && PlayerPrefs.HasKey("password"))
         {
+            // bool isEntered = false;
+            // StartCoroutine(GetOnlinePlayer((DataSnapshot Onlinelist) =>  //從資料庫抓取所有線上玩家
+            // {
+            //     foreach (var p in Onlinelist.Children)  //逐筆檢視
+            //     {
+            //         if(PhotonNetwork.NickName.Equals(p.Key.ToString()))
+            //         {
+            //             isEntered = true;
+            //         }
+            //     }
+
+            //     if(isEntered)
+            //     {
+            //         Debug.Log("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA");
+            //     }
+            //     else
+            //     {
+            //         reference.Child("Account_Online").Child(PlayerPrefs.GetString("username")).SetValueAsync(true);
+            //     }
+            // }));   
+
             GameObject.Find("GameMenu").GetComponent<GameMenu>().inGameMenu = true;
         }
         else
@@ -54,6 +79,17 @@ public class StartMenu : MonoBehaviour
             GameObject.Find("LoginMenu").GetComponent<Login>().inLoginMenu = true;
         }
 
+    }
+
+    IEnumerator GetOnlinePlayer(System.Action<DataSnapshot> onCallbacks) //從資料庫讀取所有玩家 Account
+    {
+        var userData = reference.Child("Account_Online").GetValueAsync();
+        yield return new WaitUntil(predicate: () => userData.IsCompleted);
+        if (userData != null)
+        {
+            DataSnapshot snapshot = userData.Result;
+            onCallbacks.Invoke(snapshot);
+        }
     }
 
     IEnumerator Connected()
@@ -73,7 +109,7 @@ public class StartMenu : MonoBehaviour
             }
             yield return new WaitForSeconds(0.1f);
             waitTime += 0.1f;
-            if(waitTime > 10f && !LM.transform.Find("Reload").gameObject.activeSelf)
+            if (waitTime > 10f && !LM.transform.Find("Reload").gameObject.activeSelf)
             {
                 LM.transform.Find("Reload").gameObject.SetActive(true);
                 LM.GetComponent<CanvasGroup>().blocksRaycasts = true;

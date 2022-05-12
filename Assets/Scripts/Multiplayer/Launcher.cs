@@ -54,12 +54,12 @@ public class Launcher : MonoBehaviourPunCallbacks
         {
             PhotonNetwork.LeaveRoom();
         }
-        if (PhotonNetwork.IsConnected)
+        if (!PhotonNetwork.IsConnected)
         {
-            PhotonNetwork.Disconnect();
+            Debug.Log("Connecting to Master");
+            // PhotonNetwork.AuthValues = new AuthenticationValues("123456789");
+            PhotonNetwork.ConnectUsingSettings();  //開啟連線
         }
-        Debug.Log("Connecting to Master");
-        PhotonNetwork.ConnectUsingSettings();  //開啟連線
     }
 
     public override void OnConnectedToMaster()  //連線成功
@@ -90,7 +90,7 @@ public class Launcher : MonoBehaviourPunCallbacks
         {
             return;
         }
-        PhotonNetwork.CreateRoom(roomNameInputField.text,new RoomOptions { CleanupCacheOnLeave = false });  //創建房間
+        PhotonNetwork.CreateRoom(roomNameInputField.text, new RoomOptions { CleanupCacheOnLeave = false });  //創建房間
         // MenuManger.Instance.OpenMenu("loading");  //打開 LoadingMenu UI
     }
 
@@ -193,11 +193,11 @@ public class Launcher : MonoBehaviourPunCallbacks
                 {
                     if (item.ChildrenCount == 0)  //只有 Order 的 A，B，C，D 進入以下程式碼
                     {
-                        Debug.Log(item.Value.ToString());
+                        // Debug.Log(item.Value.ToString());
                         if (!item.Value.ToString().Equals("Empty"))  //如果不是空的，就把該玩家名字加入 PName[]
                         {
                             PName[cnt] = item.Value.ToString();
-                            Debug.Log(PName[cnt]);
+                            // Debug.Log(PName[cnt]);
                             cnt++;
                         }
                         else
@@ -432,5 +432,10 @@ public class Launcher : MonoBehaviourPunCallbacks
                 StartCoroutine(AddNewPlayerUI(newPlayer));
             }
         }));
+    }
+
+    public override void OnDisconnected(DisconnectCause cause)
+    {
+        // reference.Child("Account_Online").Child(PlayerPrefs.GetString("username")).SetValueAsync(null);
     }
 }

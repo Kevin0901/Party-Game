@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using Firebase;
+using Firebase.Database;
 #if UNITY_EDITOR
 using UnityEditor;
 #endif
@@ -10,9 +12,11 @@ public class SettingMenu : MonoBehaviour
     [SerializeField] private AudioSource audios;
     [SerializeField] private Slider soundSlider;
     private float volume;
+    DatabaseReference reference;
     // Start is called before the first frame update
     void Start()
     {
+        reference = FirebaseDatabase.DefaultInstance.RootReference;  //定義資料庫連接
         if (audios != null)
         {
             volume = audios.volume;
@@ -80,6 +84,7 @@ public class SettingMenu : MonoBehaviour
             PlayerPrefs.DeleteKey("password");
             transform.Find("Settings").gameObject.SetActive(false);
             StartCoroutine(fadeout());
+            // reference.Child("Account_Online").Child(PlayerPrefs.GetString("username")).SetValueAsync(null);
         }
     }
     private IEnumerator fadeout() //淡出畫面       

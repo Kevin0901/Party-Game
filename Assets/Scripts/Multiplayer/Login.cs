@@ -192,6 +192,7 @@ public class Login : MonoBehaviour
                 PlayerPrefs.SetString("password", LoginPassword.text);
                 LoginPassword.text = "";
                 StartCoroutine(fadeout());
+                // reference.Child("Account_Online").Child(PlayerPrefs.GetString("username")).SetValueAsync(true);
                 GameObject.Find("GameMenu").GetComponent<GameMenu>().inGameMenu = true;
                 // MenuManger.Instance.OpenMenu("title");
             }
