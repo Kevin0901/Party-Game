@@ -457,17 +457,17 @@ MonoBehaviour:
   walkDir_Y: 0
   setTime: 0.5
   currentState: 0
-  speed: 1.5
-  MaxHealth: 100
+  speed: 2
+  MaxHealth: 50
   attackRate: 1
-  attackDamage: 30
+  attackDamage: 10
   attackRange: 1.22
   detectRange: 5
   CostArray:
   - resourceType: {fileID: 11400000, guid: 4fe8e97de7a2fe741bf0d486530fc885, type: 2}
-    amount: 15
+    amount: 10
   - resourceType: {fileID: 11400000, guid: 7ccda71571f75c8488f798db5f05b22a, type: 2}
-    amount: 15
+    amount: 10
   - resourceType: {fileID: 11400000, guid: bc734ecf5539a2f44a3703d03b6d384e, type: 2}
     amount: 10
   enemy: {fileID: 0}
