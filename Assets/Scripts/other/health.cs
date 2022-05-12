@@ -70,7 +70,7 @@ public class health : MonoBehaviour
         }
         if (curH <= 0 && parentSet.layer != 10 && parentSet.layer != 14)
         {
-            reference.Child("GameRoom").Child(PhotonNetwork.CurrentRoom.Name).Child("Health").Child(PV.ViewID.ToString()).SetValueAsync(null);
+            reference.Child("GameRoom").Child(PhotonNetwork.CurrentRoom.Name).Child("Health").Child(PV.ViewID.ToString()).SetValueAsync(0);
             Destroy(parentSet);
         }
         bar.value = curH;

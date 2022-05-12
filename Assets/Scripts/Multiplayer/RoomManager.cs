@@ -32,7 +32,7 @@ public class RoomManager : MonoBehaviourPunCallbacks
     [SerializeField] GameObject BlueCastle, RedCastle;
     [SerializeField] GameObject Teaching;
     DatabaseReference reference;
-    public string WinTeam ="";
+    public string WinTeam = "";
     void Awake()
     {
         EnteredGame = false;
@@ -230,16 +230,43 @@ public class RoomManager : MonoBehaviourPunCallbacks
         {
             if (SceneManager.GetActiveScene().name.Equals("MainScene"))
             {
-                PhotonNetwork.LoadLevel(2);
+                if (0 <= Game_num && Game_num <= 8)
+                {
+                    PhotonNetwork.LoadLevel(2);
+                }
+                else
+                {
+                    switch (Game_num)
+                    {
+                        case 9:  //大洪水
+
+                            break;
+                        case 10:  //大地震
+
+                            break;
+                        case 11:  //潘朵拉盒子
+
+                            break;
+                        case 12:  //金毛羊
+
+                            break;
+                        case 13:  //特洛伊戰爭
+
+                            break;
+                        case 14:  //黑帝斯
+
+                            break;
+                    }
+                }
             }
             else if (SceneManager.GetActiveScene().name.Equals("FightScene"))
             {
                 WinTeam = GameObject.Find("EndGameUI").GetComponent<EndGame>().WinTeam;
-                if(WinTeam != null)
+                if (WinTeam != null)
                 {
                     PhotonNetwork.LoadLevel(1);
                 }
-                
+
             }
         }
     }
@@ -297,17 +324,20 @@ public class RoomManager : MonoBehaviourPunCallbacks
                     Destroy(GameObject.Find("PAPA"));
                     PAPA.SetActive(true);
                     ResourceTypeListSO resourceTypeList = Resources.Load<ResourceTypeListSO>(typeof(ResourceTypeListSO).Name);
-                    if(WinTeam == "Red"){
-                        ResourceManager.Instance.RedAddResource(resourceTypeList.list[0],200);
-                        ResourceManager.Instance.RedAddResource(resourceTypeList.list[1],200);
-                        ResourceManager.Instance.RedAddResource(resourceTypeList.list[2],200);
-                    }else if(WinTeam == "Blue"){
-                        ResourceManager.Instance.BlueAddResource(resourceTypeList.list[0],200);
-                        ResourceManager.Instance.BlueAddResource(resourceTypeList.list[1],200);
-                        ResourceManager.Instance.BlueAddResource(resourceTypeList.list[2],200);
+                    if (WinTeam == "Red")
+                    {
+                        ResourceManager.Instance.RedAddResource(resourceTypeList.list[0], 200);
+                        ResourceManager.Instance.RedAddResource(resourceTypeList.list[1], 200);
+                        ResourceManager.Instance.RedAddResource(resourceTypeList.list[2], 200);
                     }
-                    
-                    
+                    else if (WinTeam == "Blue")
+                    {
+                        ResourceManager.Instance.BlueAddResource(resourceTypeList.list[0], 200);
+                        ResourceManager.Instance.BlueAddResource(resourceTypeList.list[1], 200);
+                        ResourceManager.Instance.BlueAddResource(resourceTypeList.list[2], 200);
+                    }
+
+
                 }
 
             }
