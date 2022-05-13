@@ -31,6 +31,7 @@ public class ResourceManager : MonoBehaviour
 
     private void Awake()
     {
+        PV = GetComponent<PhotonView>();
         Instance = this;
         RedresourceAmountDictionary = new Dictionary<ResourceTypeSo, int>();
         BlueresourceAmountDictionary = new Dictionary<ResourceTypeSo, int>();
