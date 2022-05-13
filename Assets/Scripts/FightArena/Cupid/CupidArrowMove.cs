@@ -1,10 +1,10 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using Photon.Pun;
 public class CupidArrowMove : MonoBehaviour
 {
-    [HideInInspector]public float speed;
+    [HideInInspector] public float speed;
     public Vector3 pos;
     [HideInInspector] public GameObject Cupid_parent;
     void Update()
@@ -34,9 +34,12 @@ public class CupidArrowMove : MonoBehaviour
                 r = Random.Range(0, FightManager.Instance.plist.Count);
             }
             //給玩家設定
-            curPlayer.love_index = FightManager.Instance.plist[r].GetComponent<arenaPlayer>().p_index;
-            curPlayer.titleColor.color = new Color32(255, 0, 255, 255);
-            curPlayer.currentState = ArenaState.love;
+            if (other.gameObject.GetComponent<PhotonView>().IsMine)
+            {
+                curPlayer.love_index = FightManager.Instance.plist[r].GetComponent<arenaPlayer>().p_index;
+                curPlayer.titleColor.color = new Color32(255, 0, 255, 255);
+                curPlayer.currentState = ArenaState.love;
+            }
             //回去物件池
             Cupid_parent.GetComponent<CupidEvent>().BackToPool(this.gameObject);
         }

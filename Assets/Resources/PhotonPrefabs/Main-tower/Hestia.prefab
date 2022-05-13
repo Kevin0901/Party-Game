@@ -233,6 +233,7 @@ MonoBehaviour:
   observableSearch: 2
   ObservedComponents:
   - {fileID: 5073010708699121944}
+  - {fileID: -3807494819640957175}
   sceneViewId: 0
   InstantiationId: 0
   isRuntimeInstantiated: 0
@@ -266,8 +267,22 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ShowLayerWeightsInspector: 1
   ShowParameterInspector: 1
-  m_SynchronizeParameters: []
-  m_SynchronizeLayers: []
+  m_SynchronizeParameters:
+  - Type: 4
+    SynchronizeType: 2
+    Name: RedAttack
+  - Type: 4
+    SynchronizeType: 2
+    Name: BlueAttack
+  - Type: 4
+    SynchronizeType: 2
+    Name: RedIdle
+  - Type: 4
+    SynchronizeType: 2
+    Name: BlueIdle
+  m_SynchronizeLayers:
+  - SynchronizeType: 2
+    LayerIndex: 0
 --- !u!1 &5813422063232856550
 GameObject:
   m_ObjectHideFlags: 0

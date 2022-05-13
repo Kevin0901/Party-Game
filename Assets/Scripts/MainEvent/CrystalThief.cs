@@ -1,7 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using Photon.Pun;
+using System.IO;
 public class CrystalThief : MonoBehaviour
 {
 
@@ -12,13 +13,15 @@ public class CrystalThief : MonoBehaviour
     private int curh, bfhurth;
     private int havespeedupyet = 0;
     private Animator animator;
+    PhotonView PV;
 
     private void Start()
     {
+        PV = GetComponent<PhotonView>();
         curh = this.GetComponentInChildren<health>().curH;
         bfhurth = curh;
         animator = this.gameObject.GetComponent<Animator>();
-        GameObject road = GameObject.Find("Road").gameObject;
+        GameObject road = GameObject.Find("PAPA").transform.Find("Road").gameObject;
         waypoints = new GameObject[road.transform.childCount];
         for (int i = 0; i < road.transform.childCount; i++)
         {
@@ -28,6 +31,10 @@ public class CrystalThief : MonoBehaviour
 
     private void Update()
     {
+        if(!PV.IsMine)
+        {
+            return;
+        }
         curh = this.GetComponentInChildren<health>().curH;
         Vector3 endPosition = waypoints[curwaypoint].transform.position;
         Vector2 direction = endPosition - transform.position;
@@ -48,7 +55,8 @@ public class CrystalThief : MonoBehaviour
 
         if (bfhurth != curh)
         {
-            Instantiate(genres[Random.Range(0, 4)], transform.position, genres[Random.Range(0, 4)].transform.rotation);
+            // Instantiate(genres[Random.Range(0, 4)], transform.position, genres[Random.Range(0, 4)].transform.rotation);
+            PhotonNetwork.Instantiate(Path.Combine("PhotonPrefabs", "MainEvent/Item/"+genres[Random.Range(0, 4)].name),transform.position, this.transform.rotation);
             if (havespeedupyet == 0)
             {
                 havespeedupyet = 1;

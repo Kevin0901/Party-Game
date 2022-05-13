@@ -1,7 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using Photon.Pun;
 public class PickCrystal : MonoBehaviour
 {
     private PlayerMovement player;
@@ -23,11 +23,11 @@ public class PickCrystal : MonoBehaviour
                 if (player.tag == "red")
                 {
                     ResourceManager.Instance.RedAddResource(resourceTypeList.list[i], 3);
-                    Destroy(other.gameObject);
+                    PhotonNetwork.Destroy(other.gameObject);
                 }else if (player.tag == "blue")
                 {
                     ResourceManager.Instance.BlueAddResource(resourceTypeList.list[i], 3);
-                    Destroy(other.gameObject);
+                    PhotonNetwork.Destroy(other.gameObject);
                 } 
             } 
         }

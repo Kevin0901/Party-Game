@@ -235,6 +235,7 @@ MonoBehaviour:
   observableSearch: 2
   ObservedComponents:
   - {fileID: -4636744041208669549}
+  - {fileID: 8158147069679296396}
   sceneViewId: 0
   InstantiationId: 0
   isRuntimeInstantiated: 0
@@ -268,8 +269,22 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ShowLayerWeightsInspector: 1
   ShowParameterInspector: 1
-  m_SynchronizeParameters: []
-  m_SynchronizeLayers: []
+  m_SynchronizeParameters:
+  - Type: 4
+    SynchronizeType: 2
+    Name: RedAttack
+  - Type: 4
+    SynchronizeType: 2
+    Name: BlueAttack
+  - Type: 4
+    SynchronizeType: 2
+    Name: RedIdle
+  - Type: 4
+    SynchronizeType: 2
+    Name: BlueIdle
+  m_SynchronizeLayers:
+  - SynchronizeType: 2
+    LayerIndex: 0
 --- !u!1001 &3360512871981981748
 PrefabInstance:
   m_ObjectHideFlags: 0

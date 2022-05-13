@@ -1,7 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using Photon.Pun;
 
 
 public class GoldenSheep : MonoBehaviour
@@ -19,13 +19,19 @@ public class GoldenSheep : MonoBehaviour
     private Vector3 targetpos; //目的點
     private List<Vector3> playerposlist = new List<Vector3>(); //玩家位置
     private GameObject bonusUI;
+    PhotonView PV;
 
     private void Start()
     {
+        PV = GetComponent<PhotonView>();
         animator = this.gameObject.GetComponent<Animator>();
     }
     private void Update()
     {
+        if (!PV.IsMine)
+        {
+            return;
+        }
 
         if (nowtstatic == false)
         {
@@ -108,7 +114,8 @@ public class GoldenSheep : MonoBehaviour
 
     private void OnTriggerStay2D(Collider2D other)
     {
-        if (other.gameObject.layer == 10 && Input.GetKey(KeyCode.E) && nowtstatic == true)
+        //&& Input.GetKey(KeyCode.E)
+        if (other.gameObject.layer == 10 && nowtstatic == true)
         {
             nowtstatic = false;
             player = other.gameObject;

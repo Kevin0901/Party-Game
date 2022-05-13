@@ -172,7 +172,7 @@ public class RoomManager : MonoBehaviourPunCallbacks
                 hash.Add("GameNum", Game_num);
                 PhotonNetwork.LocalPlayer.SetCustomProperties(hash);
             }
-            StartCoroutine(startEvent(30));
+            StartCoroutine(startEvent(10));
         }
         if (SceneManager.GetActiveScene().name.Equals("MainScene"))
         {
@@ -239,22 +239,23 @@ public class RoomManager : MonoBehaviourPunCallbacks
                     switch (Game_num)
                     {
                         case 9:  //大洪水
-
+                            Vector3 tsupos = new Vector3(-75f, 1f, 0.0f);
+                            PhotonNetwork.Instantiate(Path.Combine("PhotonPrefabs", "MainEvent/Tsunami"), tsupos, this.transform.rotation);
                             break;
                         case 10:  //大地震
-
+                            PhotonNetwork.Instantiate(Path.Combine("PhotonPrefabs", "MainEvent/Earthquake"), new Vector3(0, 0, 0), this.transform.rotation);
                             break;
                         case 11:  //潘朵拉盒子
-
+                            PhotonNetwork.Instantiate(Path.Combine("PhotonPrefabs", "MainEvent/PandoraBox"), new Vector3(-20, 0, 0), this.transform.rotation);
                             break;
                         case 12:  //金毛羊
-
+                            PhotonNetwork.Instantiate(Path.Combine("PhotonPrefabs", "MainEvent/GoldenSheep"), new Vector3(-20, 0, 0), this.transform.rotation);
                             break;
                         case 13:  //特洛伊戰爭
-
+                            PhotonNetwork.Instantiate(Path.Combine("PhotonPrefabs", "MainEvent/GoldenApple"), new Vector3(-20, 0, 0), this.transform.rotation);
                             break;
                         case 14:  //黑帝斯
-
+                            PhotonNetwork.Instantiate(Path.Combine("PhotonPrefabs", "MainEvent/CrystalThief"), new Vector3(-20, 0, 0), this.transform.rotation);
                             break;
                     }
                 }

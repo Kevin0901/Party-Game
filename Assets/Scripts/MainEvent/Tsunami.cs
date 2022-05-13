@@ -1,7 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using Photon.Pun;
 public class Tsunami : MonoBehaviour
 {
     public float wavespeed;
@@ -25,7 +25,10 @@ public class Tsunami : MonoBehaviour
         {
             health eheal = other.GetComponentInChildren<health>();
             eheal.Hurt((int)damage);
-            other.transform.position += new Vector3(wavespeed / 2, 0, 0) * Time.deltaTime;
+            if(other.gameObject.GetComponent<PhotonView>().IsMine)
+            {
+                other.transform.position += new Vector3(wavespeed / 2, 0, 0) * Time.deltaTime;
+            }
         }
 
         if (other.gameObject.layer == 11)
