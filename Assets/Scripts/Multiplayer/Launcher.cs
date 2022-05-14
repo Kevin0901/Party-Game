@@ -244,6 +244,20 @@ public class Launcher : MonoBehaviourPunCallbacks
                     }
                 }
             }
+            for (int i = 0; i < PName.Length; i++)
+            {
+                if (PName[i].Equals("Empty"))
+                {
+                    GameObject PlayerUI = PlayerMenus[i];  // 取得玩家 UI
+                    TeamSelect t = PlayerUI.gameObject.GetComponent<TeamSelect>();
+                    t.blue = false;
+                    t.red = false;
+                    for (int j = 0; j < PlayerUI.transform.childCount; j++)  //關閉所有子物件
+                    {
+                        this.gameObject.transform.GetChild(j).gameObject.SetActive(false);
+                    }
+                }
+            }
             StartCoroutine(OneSec_CatchDataBase());
         }));
     }
