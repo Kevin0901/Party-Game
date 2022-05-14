@@ -115,17 +115,17 @@ public class Launcher : MonoBehaviourPunCallbacks
         AddPlayer(players);  //在資料庫創建並紀錄 玩家基本資料
 
         //假如沒人退出過房間，就依玩家進入順序給入相對應的玩家代號到資料庫
-        if (players[players.Length - 1].ActorNumber == players.Length)
+        if (PhotonNetwork.LocalPlayer.ActorNumber == players.Length)
         {
-            if (players[players.Length - 1].ActorNumber == 2)
+            if (PhotonNetwork.LocalPlayer.ActorNumber == 2)
             {
                 reference.Child("GameRoom").Child(PhotonNetwork.CurrentRoom.Name).Child("Order").Child("B").SetValueAsync(PlayerName);  //P2
             }
-            else if (players[players.Length - 1].ActorNumber == 3)
+            else if (PhotonNetwork.LocalPlayer.ActorNumber == 3)
             {
                 reference.Child("GameRoom").Child(PhotonNetwork.CurrentRoom.Name).Child("Order").Child("C").SetValueAsync(PlayerName);  //P3
             }
-            else if (players[players.Length - 1].ActorNumber == 4)
+            else if (PhotonNetwork.LocalPlayer.ActorNumber == 4)
             {
                 reference.Child("GameRoom").Child(PhotonNetwork.CurrentRoom.Name).Child("Order").Child("D").SetValueAsync(PlayerName);  //P4
             }
@@ -167,7 +167,7 @@ public class Launcher : MonoBehaviourPunCallbacks
     void AddPlayer(Player[] players)
     {
         //在資料庫創建並紀錄 玩家基本資料
-        User NewUser = new User("red", players[players.Length - 1].ActorNumber.ToString());
+        User NewUser = new User("red", PhotonNetwork.LocalPlayer.ActorNumber.ToString());
         string Json = JsonUtility.ToJson(NewUser);
         reference.Child("GameRoom").Child(PhotonNetwork.CurrentRoom.Name).Child("PlayerList").Child(PlayerName).SetRawJsonValueAsync(Json);
     }
@@ -181,7 +181,6 @@ public class Launcher : MonoBehaviourPunCallbacks
     public void SetPlayerUI()
     {
         Player[] players = PhotonNetwork.PlayerList;  //取得已加入房間的玩家陣列
-
         StartCoroutine(GetRoomInfo((DataSnapshot info) =>  //從資料庫抓取此房間內的所有資料
         {
             string[] PName = new string[4];  //臨時存放玩家的陣列 (照 P1、P2...順序)
@@ -193,17 +192,17 @@ public class Launcher : MonoBehaviourPunCallbacks
                 {
                     if (item.ChildrenCount == 0)  //只有 Order 的 A，B，C，D 進入以下程式碼
                     {
-                        // Debug.Log(item.Value.ToString());
-                        if (!item.Value.ToString().Equals("Empty"))  //如果不是空的，就把該玩家名字加入 PName[]
-                        {
-                            PName[cnt] = item.Value.ToString();
-                            // Debug.Log(PName[cnt]);
-                            cnt++;
-                        }
-                        else
-                        {
-                            continue;  //空的就直接 continue
-                        }
+                        // // Debug.Log(item.Value.ToString());
+                        // if (!item.Value.ToString().Equals("Empty"))  //如果不是空的，就把該玩家名字加入 PName[]
+                        // {
+                        PName[cnt] = item.Value.ToString();
+                        // Debug.Log(PName[cnt]);
+                        cnt++;
+                        // }
+                        // else
+                        // {
+                        //     continue;  //空的就直接 continue
+                        // }
                     }
                     else  //進到 PlayList 的 [PlayerName]
                     {
