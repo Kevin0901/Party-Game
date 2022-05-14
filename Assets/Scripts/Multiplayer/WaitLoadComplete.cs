@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Photon.Pun;
+using UnityEngine.SceneManagement;
 public class WaitLoadComplete : MonoBehaviour
 {
     PhotonView PV;
@@ -9,6 +10,13 @@ public class WaitLoadComplete : MonoBehaviour
     void Start()
     {
         PV = this.GetComponent<PhotonView>();
-        transform.SetParent(GameObject.Find("LoadSceneCompletePool").transform);
+        if(SceneManager.GetActiveScene().name.Equals("MainScene"))
+        {
+            transform.SetParent(GameObject.Find("LoadSceneCompletePool").transform);
+        }
+        else if(SceneManager.GetActiveScene().name.Equals("FightScene"))
+        {
+            transform.SetParent(GameObject.Find("LoadFightSceneCompletePool").transform);
+        }
     }
 }
