@@ -141,7 +141,10 @@ public class FightManager : MonoBehaviour
             }
             else
             {
-                a.GetComponent<PhotonView>().TransferOwnership(PhotonNetwork.PlayerList[i]);
+                if (PhotonNetwork.PlayerList[i] != null)
+                {
+                    a.GetComponent<PhotonView>().TransferOwnership(PhotonNetwork.PlayerList[i]);
+                }
             }
             // plist.Add(a);
             // a.GetComponent<arenaPlayer>().p_index = plist.Count - 1;

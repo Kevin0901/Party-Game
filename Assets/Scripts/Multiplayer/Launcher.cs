@@ -195,9 +195,11 @@ public class Launcher : MonoBehaviourPunCallbacks
                         // // Debug.Log(item.Value.ToString());
                         // if (!item.Value.ToString().Equals("Empty"))  //如果不是空的，就把該玩家名字加入 PName[]
                         // {
-                        PName[cnt] = item.Value.ToString();
-                        // Debug.Log(PName[cnt]);
-                        cnt++;
+                        if (cnt < 4)
+                        {
+                            PName[cnt] = item.Value.ToString();
+                            cnt++;
+                        }
                         // }
                         // else
                         // {
