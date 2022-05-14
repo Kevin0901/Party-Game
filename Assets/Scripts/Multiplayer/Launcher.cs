@@ -254,7 +254,7 @@ public class Launcher : MonoBehaviourPunCallbacks
                     t.red = false;
                     for (int j = 0; j < PlayerUI.transform.childCount; j++)  //關閉所有子物件
                     {
-                        this.gameObject.transform.GetChild(j).gameObject.SetActive(false);
+                        PlayerUI.transform.GetChild(j).gameObject.SetActive(false);
                     }
                 }
             }
