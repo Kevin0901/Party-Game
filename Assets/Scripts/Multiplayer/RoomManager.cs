@@ -33,6 +33,7 @@ public class RoomManager : MonoBehaviourPunCallbacks
     [SerializeField] GameObject Teaching;
     DatabaseReference reference;
     public string WinTeam = "";
+    GameObject WaitPool;
     void Awake()
     {
         EnteredGame = false;
@@ -223,7 +224,10 @@ public class RoomManager : MonoBehaviourPunCallbacks
     }
     IEnumerator Black_fadein() //變成黑色
     {
-        Black.GetComponentInChildren<Animator>().SetTrigger("fadein");
+        if (0 <= Game_num && Game_num <= 8)
+        {
+            Black.GetComponentInChildren<Animator>().SetTrigger("fadein");
+        }
         yield return new WaitForSeconds(1f);
         EventPicture.gameObject.transform.parent.gameObject.SetActive(false);
         if (PV.IsMine)
@@ -232,6 +236,7 @@ public class RoomManager : MonoBehaviourPunCallbacks
             {
                 if (0 <= Game_num && Game_num <= 8)
                 {
+                    StopCoroutine(TimeCount());
                     PhotonNetwork.LoadLevel(2);
                 }
                 else
@@ -296,6 +301,62 @@ public class RoomManager : MonoBehaviourPunCallbacks
     {
         if (scene.buildIndex == 1) //如果在遊戲場景
         {
+            WaitPool = GameObject.Find("LoadSceneCompletePool");
+            PhotonNetwork.Instantiate(Path.Combine("PhotonPrefabs", "LoadComplete"), Vector3.zero, Quaternion.identity);
+            StartCoroutine(Wait_OtherPlayer_LoadMainScene());
+        }
+        else if (scene.buildIndex == 2)
+        {
+            Cursor.visible = true;
+            WaitPool = GameObject.Find("LoadFightSceneCompletePool");
+            PhotonNetwork.Instantiate(Path.Combine("PhotonPrefabs", "LoadComplete"), Vector3.zero, Quaternion.identity);
+            PAPA.SetActive(false);
+            StartCoroutine(Wait_OtherPlayer_LoadFightScene());
+        }
+    }
+
+    [PunRPC]  //廣播的方法前面都需要加這個開頭
+    void RPC_SetArryList(string[] PN, string[] PT)  //設定 PlayerNames[] 跟 PlayerTeam[]
+    {
+        if (PV.IsMine)  //如果是房主的 RoomManager，直接 Skip
+        {
+            PhotonNetwork.Instantiate(Path.Combine("PhotonPrefabs", "PlayerManager"), Vector3.zero, Quaternion.identity);
+            return;
+        }
+        PlayerNames = PN;
+        PlayerTeam = PT;
+        //每個玩家實例化自己的 PlayerManager
+        GameObject Manager = PhotonNetwork.Instantiate(Path.Combine("PhotonPrefabs", "PlayerManager"), Vector3.zero, Quaternion.identity);
+    }
+
+    IEnumerator Wait_OtherPlayer_LoadFightScene()
+    {
+        if (WaitPool.transform.childCount == (PhotonNetwork.PlayerList.Length + 1))
+        {
+            WaitPool.transform.Find("Canvas").gameObject.SetActive(false);
+            Black_fadeout();
+            if (PV.IsMine)
+            {
+                for (int i = 0; i < PhotonNetwork.PlayerList.Length; i++)
+                {
+                    PhotonNetwork.RemoveRPCs(PhotonNetwork.PlayerList[i]);
+                }
+                GameObject RM = PhotonNetwork.Instantiate(Path.Combine("PhotonPrefabs", "arena/FightManager"), Vector3.zero, Quaternion.identity);
+
+            }
+        }
+        else
+        {
+            yield return new WaitForSeconds(0.5f);
+            StartCoroutine(Wait_OtherPlayer_LoadFightScene());
+        }
+    }
+
+    IEnumerator Wait_OtherPlayer_LoadMainScene()
+    {
+        if (WaitPool.transform.childCount == (PhotonNetwork.PlayerList.Length + 1))
+        {
+            WaitPool.transform.Find("Canvas").gameObject.SetActive(false);
             Cursor.visible = false;
             if (!EnteredGame)
             {
@@ -337,42 +398,14 @@ public class RoomManager : MonoBehaviourPunCallbacks
                         ResourceManager.Instance.BlueAddResource(resourceTypeList.list[1], 200);
                         ResourceManager.Instance.BlueAddResource(resourceTypeList.list[2], 200);
                     }
-
-
                 }
-
             }
         }
-        else if (scene.buildIndex == 2)
+        else
         {
-            Cursor.visible = true;
-            StopCoroutine(TimeCount());
-            Black_fadeout();
-            PAPA.SetActive(false);
-            if (PV.IsMine)
-            {
-                for (int i = 0; i < PhotonNetwork.PlayerList.Length; i++)
-                {
-                    PhotonNetwork.RemoveRPCs(PhotonNetwork.PlayerList[i]);
-                }
-                GameObject RM = PhotonNetwork.Instantiate(Path.Combine("PhotonPrefabs", "arena/FightManager"), Vector3.zero, Quaternion.identity);
-
-            }
+            yield return new WaitForSeconds(0.5f);
+            StartCoroutine(Wait_OtherPlayer_LoadMainScene());
         }
-    }
-
-    [PunRPC]  //廣播的方法前面都需要加這個開頭
-    void RPC_SetArryList(string[] PN, string[] PT)  //設定 PlayerNames[] 跟 PlayerTeam[]
-    {
-        if (PV.IsMine)  //如果是房主的 RoomManager，直接 Skip
-        {
-            PhotonNetwork.Instantiate(Path.Combine("PhotonPrefabs", "PlayerManager"), Vector3.zero, Quaternion.identity);
-            return;
-        }
-        PlayerNames = PN;
-        PlayerTeam = PT;
-        //每個玩家實例化自己的 PlayerManager
-        GameObject Manager = PhotonNetwork.Instantiate(Path.Combine("PhotonPrefabs", "PlayerManager"), Vector3.zero, Quaternion.identity);
     }
 
     public void Back_To_Main()

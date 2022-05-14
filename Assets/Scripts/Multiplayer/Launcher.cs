@@ -371,7 +371,7 @@ public class Launcher : MonoBehaviourPunCallbacks
     }
     public override void OnPlayerEnteredRoom(Player newPlayer)  //當新玩家進入房間
     {
-        StartCoroutine(AddNewPlayerUI(newPlayer));
+        // StartCoroutine(AddNewPlayerUI(newPlayer));
     }
 
     public IEnumerator AddNewPlayerUI(Player newPlayer)  //新增新玩家的 UI

@@ -36,6 +36,7 @@ public class SettingMenu : MonoBehaviour
             }
             else
             {
+                SetBtnColor();
                 transform.Find("Settings").gameObject.SetActive(true);
             }
         }
@@ -49,13 +50,17 @@ public class SettingMenu : MonoBehaviour
         // {
         //      transform.Find("Settings").Find("LoginOut").gameObject.SetActive(true);
         // }
+    }
+
+    void SetBtnColor()
+    {
         if (!GameObject.Find("ChoosePlayer").GetComponent<CanvasGroup>().blocksRaycasts)
         {
-            transform.Find("Settings").Find("LoginOut").GetComponent<Image>().color = new Color(1,1,1,1);
+            transform.Find("Settings").Find("LoginOut").GetComponent<Image>().color = new Color(1, 1, 1, 1);
         }
         else
         {
-            transform.Find("Settings").Find("LoginOut").GetComponent<Image>().color = new Color(0.3f,0.3f,0.3f,1);
+            transform.Find("Settings").Find("LoginOut").GetComponent<Image>().color = new Color(0.3f, 0.3f, 0.3f, 1);
         }
     }
 
