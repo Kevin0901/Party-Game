@@ -147,6 +147,7 @@ public class PlayerMovement : MonoBehaviour
             transform.Find("left hitbox").gameObject.SetActive(false);
             // this.transform.SetParent(GameObject.Find("PAPA").transform);
             Invoke("spawn", 2);
+            transform.parent.Find("DeadScreen").gameObject.SetActive(true);
             this.gameObject.SetActive(false);
         }
         if (!PV.IsMine)
@@ -181,6 +182,7 @@ public class PlayerMovement : MonoBehaviour
         Scene scene = SceneManager.GetActiveScene();
         if (scene.name == "MainScene")
         {
+            transform.parent.Find("DeadScreen").gameObject.SetActive(false);
             this.gameObject.SetActive(true);
             // this.transform.SetParent(null);
         }

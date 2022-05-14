@@ -20,7 +20,7 @@ public class RoomManager : MonoBehaviourPunCallbacks
     [Header("玩家隊伍陣列")]
     public string[] PlayerTeam;
     PhotonView PV;
-    public int Game_num;
+    public int Game_num = 0;
     public int TotalTime, ReadyTime = 5, EventTime;
     private int nextEvent;
     bool EnteredGame;
@@ -162,16 +162,17 @@ public class RoomManager : MonoBehaviourPunCallbacks
         {
             if (PV.IsMine)
             {
-                Game_num = UnityEngine.Random.Range(0, EventSprite.Length);
-                // if (Game_num == 7)
-                // {
-                //     Game_num--;
-                // }
+                // Game_num = UnityEngine.Random.Range(0, EventSprite.Length);
+                if (Game_num == 15)
+                {
+                    Game_num = 0;
+                }
                 EventPicture.sprite = EventSprite[Game_num];
                 EventPicture.gameObject.transform.parent.gameObject.SetActive(true);
                 Hashtable hash = new Hashtable();
                 hash.Add("GameNum", Game_num);
                 PhotonNetwork.LocalPlayer.SetCustomProperties(hash);
+                Game_num++;
             }
             StartCoroutine(startEvent(10));
         }

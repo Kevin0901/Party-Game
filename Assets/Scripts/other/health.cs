@@ -111,7 +111,7 @@ public class health : MonoBehaviour
 
     IEnumerator Load_Health_From_Database()
     {
-        yield return new WaitForSeconds(1f);
+        yield return new WaitForSeconds(0.3f);
         StartCoroutine(GetHealthInfo((DataSnapshot info) =>  //從資料庫抓取此房間內的所有資料
         {
             foreach (var health in info.Children)
