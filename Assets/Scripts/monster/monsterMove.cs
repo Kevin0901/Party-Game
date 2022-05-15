@@ -48,9 +48,9 @@ public class monsterMove : MonoBehaviour
     {
         PV = GetComponent<PhotonView>();  //定義PhotonView
         this.gameObject.tag = PhotonView.Find((int)PV.InstantiationData[0]).tag;
-        setTime = 0.5f;
         health = this.GetComponentInChildren<health>();
         animator = this.gameObject.GetComponent<Animator>();
+        animator.enabled = false;
         spriteRenderer = this.GetComponent<SpriteRenderer>();
         health.maxH = MaxHealth;
     }
@@ -76,6 +76,7 @@ public class monsterMove : MonoBehaviour
         t = this.GetComponent<Team>();
         animator.SetFloat("attackSpeed", 1 / attackRate);
         nextAttack = 0;
+        setTime = 0.5f;
         mask = 1 << 9 | 1 << 10 | 1 << 11;
         angle = 35;
         if (PV.IsMine)
@@ -97,6 +98,7 @@ public class monsterMove : MonoBehaviour
     private IEnumerator waitIdle(float t)
     {
         yield return new WaitForSeconds(t);
+        animator.enabled = true;
         animator.SetFloat("moveY", walkDir_Y); //預設動畫方向
         currentState = MonsterState.walk;
     }
