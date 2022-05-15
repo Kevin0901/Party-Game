@@ -460,7 +460,7 @@ MonoBehaviour:
   attackRate: 1
   attackDamage: 10
   attackRange: 1.83
-  detectRange: 3
+  detectRange: 4
   CostArray:
   - resourceType: {fileID: 11400000, guid: 4fe8e97de7a2fe741bf0d486530fc885, type: 2}
     amount: 10

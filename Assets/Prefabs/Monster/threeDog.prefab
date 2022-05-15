@@ -158,15 +158,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   animator: {fileID: 0}
-  walkDir_Y: 0
-  setTime: 0.5
   currentState: 0
   speed: 2
   MaxHealth: 120
   attackRate: 1
   attackDamage: 50
   attackRange: 5.7
-  detectRange: 6.5
+  detectRange: 7
   CostArray:
   - resourceType: {fileID: 11400000, guid: 4fe8e97de7a2fe741bf0d486530fc885, type: 2}
     amount: 50
