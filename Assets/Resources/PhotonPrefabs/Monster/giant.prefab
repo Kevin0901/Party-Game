@@ -88,9 +88,9 @@ GameObject:
   - component: {fileID: 310186246938401172}
   - component: {fileID: 310186246938401171}
   - component: {fileID: 8597009924719465003}
-  - component: {fileID: -4347616919440511225}
-  - component: {fileID: 8268696849476771270}
-  - component: {fileID: -3540627860525172933}
+  - component: {fileID: 4735183255970625772}
+  - component: {fileID: 7470681155650391253}
+  - component: {fileID: 469867996370829160}
   m_Layer: 9
   m_Name: giant
   m_TagString: red
@@ -107,7 +107,7 @@ Transform:
   m_GameObject: {fileID: 310186246938401164}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 3, y: 3, z: 1}
   m_Children:
   - {fileID: 1319384548965316769}
   - {fileID: 5247294153289285407}
@@ -241,8 +241,8 @@ MonoBehaviour:
   MaxHealth: 350
   attackRate: 0.3
   attackDamage: 40
-  attackRange: 1.5
-  detectRange: 5
+  attackRange: 4.5
+  detectRange: 7
   CostArray:
   - resourceType: {fileID: 11400000, guid: 4fe8e97de7a2fe741bf0d486530fc885, type: 2}
     amount: 25
@@ -279,7 +279,7 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.8110301, y: 0.976495}
   m_EdgeRadius: 0
---- !u!114 &-4347616919440511225
+--- !u!114 &4735183255970625772
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -298,12 +298,12 @@ MonoBehaviour:
   OwnershipTransfer: 0
   observableSearch: 2
   ObservedComponents:
-  - {fileID: 8268696849476771270}
-  - {fileID: -3540627860525172933}
+  - {fileID: 7470681155650391253}
+  - {fileID: 469867996370829160}
   sceneViewId: 0
   InstantiationId: 0
   isRuntimeInstantiated: 0
---- !u!114 &8268696849476771270
+--- !u!114 &7470681155650391253
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -319,7 +319,7 @@ MonoBehaviour:
   m_SynchronizeRotation: 1
   m_SynchronizeScale: 1
   m_UseLocal: 1
---- !u!114 &-3540627860525172933
+--- !u!114 &469867996370829160
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}

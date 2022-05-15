@@ -319,9 +319,9 @@ GameObject:
   - component: {fileID: 5090142021535760874}
   - component: {fileID: 5090142021535760873}
   - component: {fileID: 9099964079005442442}
-  - component: {fileID: 4498391466583223045}
-  - component: {fileID: -4945778464137522451}
-  - component: {fileID: -3517350507634588862}
+  - component: {fileID: 6543623863975949524}
+  - component: {fileID: 2634954260006051856}
+  - component: {fileID: 4157734031436188999}
   m_Layer: 9
   m_Name: fireBird
   m_TagString: red
@@ -338,7 +338,7 @@ Transform:
   m_GameObject: {fileID: 5090142021535760850}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 1.3, y: 1.3, z: 1}
   m_Children:
   - {fileID: 2871113893850648168}
   - {fileID: 7446629597620238660}
@@ -468,12 +468,12 @@ MonoBehaviour:
   walkDir_Y: 0
   setTime: 0.5
   currentState: 0
-  speed: 4
-  MaxHealth: 80
+  speed: 4.25
+  MaxHealth: 60
   attackRate: 2
   attackDamage: 20
-  attackRange: 2.3
-  detectRange: 5
+  attackRange: 3
+  detectRange: 4
   CostArray:
   - resourceType: {fileID: 11400000, guid: 4fe8e97de7a2fe741bf0d486530fc885, type: 2}
     amount: 20
@@ -500,7 +500,7 @@ CapsuleCollider2D:
   m_Offset: {x: -0.029552937, y: -0.3324238}
   m_Size: {x: 0.6501181, y: 1.2410915}
   m_Direction: 0
---- !u!114 &4498391466583223045
+--- !u!114 &6543623863975949524
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -519,12 +519,12 @@ MonoBehaviour:
   OwnershipTransfer: 0
   observableSearch: 2
   ObservedComponents:
-  - {fileID: -4945778464137522451}
-  - {fileID: -3517350507634588862}
+  - {fileID: 2634954260006051856}
+  - {fileID: 4157734031436188999}
   sceneViewId: 0
   InstantiationId: 0
   isRuntimeInstantiated: 0
---- !u!114 &-4945778464137522451
+--- !u!114 &2634954260006051856
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -540,7 +540,7 @@ MonoBehaviour:
   m_SynchronizeRotation: 1
   m_SynchronizeScale: 1
   m_UseLocal: 1
---- !u!114 &-3517350507634588862
+--- !u!114 &4157734031436188999
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}

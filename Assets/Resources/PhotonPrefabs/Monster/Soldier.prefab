@@ -311,9 +311,9 @@ GameObject:
   - component: {fileID: 6171561511237712527}
   - component: {fileID: 1201061227223450830}
   - component: {fileID: 8982951932885710248}
-  - component: {fileID: -4282616828624110696}
-  - component: {fileID: 4998748843572979041}
-  - component: {fileID: -4946136431508551000}
+  - component: {fileID: 2451842358974536733}
+  - component: {fileID: 5576525739124320640}
+  - component: {fileID: 3088825426871508149}
   m_Layer: 9
   m_Name: Soldier
   m_TagString: red
@@ -330,7 +330,7 @@ Transform:
   m_GameObject: {fileID: 8384147193368007409}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 1.5, y: 1.5, z: 1}
   m_Children:
   - {fileID: 7600913207421267629}
   - {fileID: 1971132215670020076}
@@ -460,12 +460,12 @@ MonoBehaviour:
   walkDir_Y: 0
   setTime: 0.5
   currentState: 0
-  speed: 2
+  speed: 2.25
   MaxHealth: 50
   attackRate: 1
   attackDamage: 10
-  attackRange: 1.22
-  detectRange: 5
+  attackRange: 1.83
+  detectRange: 3
   CostArray:
   - resourceType: {fileID: 11400000, guid: 4fe8e97de7a2fe741bf0d486530fc885, type: 2}
     amount: 10
@@ -502,7 +502,7 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.7812637, y: 0.8390024}
   m_EdgeRadius: 0
---- !u!114 &-4282616828624110696
+--- !u!114 &2451842358974536733
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -521,12 +521,12 @@ MonoBehaviour:
   OwnershipTransfer: 0
   observableSearch: 2
   ObservedComponents:
-  - {fileID: 4998748843572979041}
-  - {fileID: -4946136431508551000}
+  - {fileID: 5576525739124320640}
+  - {fileID: 3088825426871508149}
   sceneViewId: 0
   InstantiationId: 0
   isRuntimeInstantiated: 0
---- !u!114 &4998748843572979041
+--- !u!114 &5576525739124320640
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -542,7 +542,7 @@ MonoBehaviour:
   m_SynchronizeRotation: 1
   m_SynchronizeScale: 1
   m_UseLocal: 1
---- !u!114 &-4946136431508551000
+--- !u!114 &3088825426871508149
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}

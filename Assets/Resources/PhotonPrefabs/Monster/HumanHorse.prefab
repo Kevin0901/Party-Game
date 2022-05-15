@@ -324,9 +324,9 @@ GameObject:
   - component: {fileID: 4049690505836470628}
   - component: {fileID: 4049690505836470651}
   - component: {fileID: 820677115634710890}
-  - component: {fileID: -9144007679727017926}
-  - component: {fileID: 7149937155162681374}
-  - component: {fileID: 1435721804580209989}
+  - component: {fileID: 1839426972033019961}
+  - component: {fileID: 444621399775315134}
+  - component: {fileID: 4876943704654563440}
   m_Layer: 9
   m_Name: HumanHorse
   m_TagString: red
@@ -343,7 +343,7 @@ Transform:
   m_GameObject: {fileID: 4049690505836470652}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 1.8, y: 1.8, z: 1}
   m_Children:
   - {fileID: 2509049222164351849}
   - {fileID: 5308312959438749211}
@@ -473,12 +473,12 @@ MonoBehaviour:
   walkDir_Y: 0
   setTime: 0.5
   currentState: 0
-  speed: 2.25
+  speed: 3
   MaxHealth: 140
   attackRate: 1
   attackDamage: 35
-  attackRange: 1.85
-  detectRange: 5
+  attackRange: 3.33
+  detectRange: 5.5
   CostArray:
   - resourceType: {fileID: 11400000, guid: 4fe8e97de7a2fe741bf0d486530fc885, type: 2}
     amount: 40
@@ -515,7 +515,7 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.834242, y: 1.132299}
   m_EdgeRadius: 0
---- !u!114 &-9144007679727017926
+--- !u!114 &1839426972033019961
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -534,12 +534,12 @@ MonoBehaviour:
   OwnershipTransfer: 0
   observableSearch: 2
   ObservedComponents:
-  - {fileID: 7149937155162681374}
-  - {fileID: 1435721804580209989}
+  - {fileID: 444621399775315134}
+  - {fileID: 4876943704654563440}
   sceneViewId: 0
   InstantiationId: 0
   isRuntimeInstantiated: 0
---- !u!114 &7149937155162681374
+--- !u!114 &444621399775315134
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -555,7 +555,7 @@ MonoBehaviour:
   m_SynchronizeRotation: 1
   m_SynchronizeScale: 1
   m_UseLocal: 1
---- !u!114 &1435721804580209989
+--- !u!114 &4876943704654563440
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}

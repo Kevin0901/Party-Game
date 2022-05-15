@@ -15,9 +15,9 @@ GameObject:
   - component: {fileID: 1309625769643247217}
   - component: {fileID: 1309625769643247216}
   - component: {fileID: 779332800098261836}
-  - component: {fileID: 4063867572178153673}
-  - component: {fileID: -6056187794612025571}
-  - component: {fileID: 5103259208043734409}
+  - component: {fileID: 7262404261979383353}
+  - component: {fileID: 2981318765313493965}
+  - component: {fileID: 2768548786336432436}
   m_Layer: 9
   m_Name: threeDog
   m_TagString: red
@@ -34,7 +34,7 @@ Transform:
   m_GameObject: {fileID: 1309625769643247225}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 2, y: 2, z: 1}
   m_Children:
   - {fileID: 7185472039441559513}
   - {fileID: 7244617345254588206}
@@ -164,12 +164,12 @@ MonoBehaviour:
   walkDir_Y: 0
   setTime: 0.5
   currentState: 0
-  speed: 2.5
+  speed: 2
   MaxHealth: 120
   attackRate: 1
   attackDamage: 50
-  attackRange: 2.85
-  detectRange: 5
+  attackRange: 5.7
+  detectRange: 6.5
   CostArray:
   - resourceType: {fileID: 11400000, guid: 4fe8e97de7a2fe741bf0d486530fc885, type: 2}
     amount: 50
@@ -206,7 +206,7 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1.1483514, y: 1.094832}
   m_EdgeRadius: 0
---- !u!114 &4063867572178153673
+--- !u!114 &7262404261979383353
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -225,12 +225,12 @@ MonoBehaviour:
   OwnershipTransfer: 0
   observableSearch: 2
   ObservedComponents:
-  - {fileID: -6056187794612025571}
-  - {fileID: 5103259208043734409}
+  - {fileID: 2981318765313493965}
+  - {fileID: 2768548786336432436}
   sceneViewId: 0
   InstantiationId: 0
   isRuntimeInstantiated: 0
---- !u!114 &-6056187794612025571
+--- !u!114 &2981318765313493965
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -246,7 +246,7 @@ MonoBehaviour:
   m_SynchronizeRotation: 1
   m_SynchronizeScale: 1
   m_UseLocal: 1
---- !u!114 &5103259208043734409
+--- !u!114 &2768548786336432436
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
