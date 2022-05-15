@@ -16,9 +16,8 @@ public class monsterMove : MonoBehaviour
 {
     [HideInInspector] public static int redsort, bluesort;
     [HideInInspector] public Animator animator;//動畫
-    [Header("初始數值")]
-    [SerializeField] private float walkDir_Y;
-    [SerializeField] private float setTime;
+    private float walkDir_Y;
+    private float setTime;
     [Header("怪物數值")]
     public MonsterState currentState;
     public float speed;
@@ -49,12 +48,14 @@ public class monsterMove : MonoBehaviour
     {
         PV = GetComponent<PhotonView>();  //定義PhotonView
         this.gameObject.tag = PhotonView.Find((int)PV.InstantiationData[0]).tag;
-
+        setTime = 0.5f;
         health = this.GetComponentInChildren<health>();
         animator = this.gameObject.GetComponent<Animator>();
         spriteRenderer = this.GetComponent<SpriteRenderer>();
         health.maxH = MaxHealth;
-
+    }
+    void Start()
+    {
         if (this.gameObject.tag == "red") //如果是紅隊
         {
             redsort++;
@@ -71,14 +72,10 @@ public class monsterMove : MonoBehaviour
             spriteRenderer.sortingOrder = bluesort;
             walkDir_Y = -1f;
         }
-    }
-    void Start()
-    {
         this.transform.SetParent(GameObject.Find("PAPA").transform);
         t = this.GetComponent<Team>();
         animator.SetFloat("attackSpeed", 1 / attackRate);
         nextAttack = 0;
-        attackRange *= this.gameObject.transform.localScale.x;
         mask = 1 << 9 | 1 << 10 | 1 << 11;
         angle = 35;
         if (PV.IsMine)
