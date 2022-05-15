@@ -40,7 +40,7 @@ public class SwordEvent : MonoBehaviour
         if (PV.IsMine)
         {
             StartCoroutine(randomSword(waitToSword));
-            StartCoroutine(changeBG());
+            // StartCoroutine(changeBG());
         }
 
     }

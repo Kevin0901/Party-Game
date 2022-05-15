@@ -1,7 +1,8 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using Photon.Pun;
+using System.IO;
 public class sword : MonoBehaviour
 {
     private GameObject lastplayer; //上一個玩家
@@ -24,6 +25,9 @@ public class sword : MonoBehaviour
             other.gameObject.transform.Find("sword").gameObject.SetActive(true);
             other.gameObject.transform.Find("sword").gameObject.GetComponent<sword>().StartCoroutine("Savelastplayer", player.gameObject);
             player.StartCoroutine("changeColorTitle_Sword");
+
+            PhotonNetwork.Instantiate(Path.Combine("PhotonPrefabs", "Sword/SwordChange"),
+            Vector3.zero, this.transform.rotation, 0, new object[] { this.GetComponentInParent<PhotonView>().ViewID, other.gameObject.GetComponent<PhotonView>().ViewID });
             this.gameObject.SetActive(false);
         }
     }

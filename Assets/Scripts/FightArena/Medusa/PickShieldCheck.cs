@@ -2,19 +2,19 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Photon.Pun;
-public class PlayerDisable : MonoBehaviour
+public class PickShieldCheck : MonoBehaviour
 {
     PhotonView PV;
     GameObject Find_Parent_Player;
     // Start is called before the first frame update
     void Start()
     {
-        PV = GetComponent<PhotonView>();  //定義PhotonView
+        PV = this.GetComponent<PhotonView>();
         if (PhotonView.Find((int)PV.InstantiationData[0]).gameObject != null)
         {
             Find_Parent_Player = PhotonView.Find((int)PV.InstantiationData[0]).gameObject;
-            this.gameObject.transform.SetParent(Find_Parent_Player.transform);
-            this.transform.parent.gameObject.SetActive(false);
+            Find_Parent_Player.transform.Find("shield").gameObject.SetActive(true);
         }
+        PhotonNetwork.Destroy(this.gameObject);
     }
 }
