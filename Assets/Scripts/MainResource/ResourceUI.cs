@@ -11,6 +11,8 @@ public class ResourceUI : MonoBehaviour
     public string Playertag;
     private ResourceTypeListSO resourceTypeList;
     private Dictionary<ResourceTypeSo, Transform> resourceTypeTransformDictionary;
+    public float timer;
+    private float timerMax = 1f;
 
     private void Awake()
     {
@@ -43,6 +45,16 @@ public class ResourceUI : MonoBehaviour
     {
         ResourceManager.Instance.OnResourceAmountChanged += ResourceManager_OnResourceAmountChanged;
         UpdateResourceAmount();
+    }
+
+    private void Update()
+    {
+        timer -= Time.deltaTime;
+        if (timer <= 1f)
+        {
+            timer += timerMax;
+            UpdateResourceAmount();
+        }
     }
 
     private void ResourceManager_OnResourceAmountChanged(object sender, System.EventArgs e)
