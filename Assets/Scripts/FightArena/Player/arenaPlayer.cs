@@ -6,6 +6,7 @@ using Photon.Realtime;
 using System.IO;
 using Firebase.Database;
 using System;
+using System.Globalization;
 public enum ArenaState
 {
     idle,
@@ -322,8 +323,12 @@ public class arenaPlayer : MonoBehaviour
             {
                 if (health.Key.Equals(PV.ViewID.ToString()))
                 {
-                    curH = (int)Int64.Parse(health.Value.ToString());
+                    curH = float.Parse(health.Value.ToString(), CultureInfo.InvariantCulture.NumberFormat);
                     lifeUI.hurt(curH);
+                    if (curH <= 0)
+                    {
+                        this.gameObject.SetActive(false);
+                    }
                 }
             }
             StartCoroutine(Load_Health_From_Database());
@@ -370,7 +375,13 @@ public class arenaPlayer : MonoBehaviour
     private void OnDisable()
     {
         if (!this.gameObject.activeSelf)
+        {
+            if (PV.IsMine)
+            {
+                PhotonNetwork.Instantiate(Path.Combine("PhotonPrefabs", "arena/PlayerDisable"), Vector3.zero, this.transform.rotation, 0, new object[] { PV.ViewID });
+            }
             FightManager.Instance.plist.Remove(this.gameObject);
+        }
     }
     //改變Title顏色
     public IEnumerator changeColorTitle_Sword()
