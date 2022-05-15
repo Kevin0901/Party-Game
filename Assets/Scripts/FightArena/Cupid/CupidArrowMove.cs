@@ -34,12 +34,11 @@ public class CupidArrowMove : MonoBehaviour
                 r = Random.Range(0, FightManager.Instance.plist.Count);
             }
             //給玩家設定
-            if (other.gameObject.GetComponent<PhotonView>().IsMine)
-            {
-                curPlayer.love_index = FightManager.Instance.plist[r].GetComponent<arenaPlayer>().p_index;
-                curPlayer.titleColor.color = new Color32(255, 0, 255, 255);
-                curPlayer.currentState = ArenaState.love;
-            }
+
+            curPlayer.love_index = FightManager.Instance.plist[r].GetComponent<arenaPlayer>().p_index;
+            curPlayer.titleColor.color = new Color32(255, 0, 255, 255);
+            curPlayer.currentState = ArenaState.love;
+
             //回去物件池
             Cupid_parent.GetComponent<CupidEvent>().BackToPool(this.gameObject);
         }

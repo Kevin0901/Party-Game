@@ -91,10 +91,10 @@ public class arenaPlayer : MonoBehaviour
     //玩家狀態更新
     void FixedUpdate()
     {
-        if (!PV.IsMine)
-        {
-            return;
-        }
+        // if (!PV.IsMine)
+        // {
+        //     return;
+        // }
         if (currentState == ArenaState.love)
         {
             Lover();
@@ -102,7 +102,7 @@ public class arenaPlayer : MonoBehaviour
         else if (currentState == ArenaState.fastMode)
         {
             Move();
-            if (movement != Vector2.zero)
+            if (movement != Vector2.zero && PV.IsMine)
             {
                 mrigibody.AddForce(movement * turboSpeed, ForceMode2D.Impulse);
             }
@@ -136,6 +136,10 @@ public class arenaPlayer : MonoBehaviour
     //移動玩家
     private void Move()
     {
+        if (!PV.IsMine)
+        {
+            return;
+        }
         movement = Vector2.zero;
         movement.x = Input.GetAxis("Horizontal");
         movement.y = Input.GetAxis("Vertical");
@@ -149,7 +153,7 @@ public class arenaPlayer : MonoBehaviour
         GameObject s = null;
         if (PV.IsMine)
         {
-            mAnimator.SetBool("change",true);
+            mAnimator.SetBool("change", true);
         }
         yield return new WaitForSeconds(1f);
         mAnimator.GetComponent<arenaPlayer>().currentState = ArenaState.ares;
@@ -165,7 +169,7 @@ public class arenaPlayer : MonoBehaviour
         // mAnimator.GetComponent<Animator>().SetTrigger("change");
         if (PV.IsMine)
         {
-            mAnimator.SetBool("change",false);
+            mAnimator.SetBool("change", false);
             PhotonNetwork.Destroy(s);
         }
     }
@@ -180,8 +184,11 @@ public class arenaPlayer : MonoBehaviour
                 love_index = love_index - 1;
             }
         }
-        Vector3 pos = FightManager.Instance.plist[love_index].transform.position;
-        mrigibody.AddForce((pos - this.transform.position).normalized * speed * 0.66f, ForceMode2D.Force);
+        if (PV.IsMine)
+        {
+            Vector3 pos = FightManager.Instance.plist[love_index].transform.position;
+            mrigibody.AddForce((pos - this.transform.position).normalized * speed * 0.66f, ForceMode2D.Force);
+        }
         loveTime -= Time.deltaTime;
         if (loveTime < 0)
         {
