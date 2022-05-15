@@ -380,6 +380,10 @@ public class RoomManager : MonoBehaviourPunCallbacks
             }
             else
             {
+                if(PV.IsMine)
+                {
+                    reference.Child("GameRoom").Child(PhotonNetwork.CurrentRoom.Name).Child("Arena").Child("Health").SetValueAsync(null);
+                }
                 Black_fadeout();
                 StartCoroutine(TimeCount());
                 if (GameObject.Find("PAPA") != null)

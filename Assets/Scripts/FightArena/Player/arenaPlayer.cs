@@ -4,6 +4,8 @@ using UnityEngine;
 using Photon.Pun;
 using Photon.Realtime;
 using System.IO;
+using Firebase.Database;
+using System;
 public enum ArenaState
 {
     idle,
@@ -51,14 +53,17 @@ public class arenaPlayer : MonoBehaviour
     private heart lifeUI;
     private Vector2 movement;
     PhotonView PV;
+    DatabaseReference reference;
     void Start()
     {
         PV = GetComponent<PhotonView>();
+        reference = FirebaseDatabase.DefaultInstance.RootReference;  //定義資料庫連接
         mrigibody = this.GetComponent<Rigidbody2D>();
         mAnimator = this.GetComponent<Animator>();
         nextlove = loveTime;
         nextfire = 0;
         curH = 3f;
+        reference.Child("GameRoom").Child(PhotonNetwork.CurrentRoom.Name).Child("Arena").Child("Health").Child(PV.ViewID.ToString()).SetValueAsync(curH);
         isCenter = false;
 
         FightManager FM = FightManager.Instance;
@@ -66,6 +71,8 @@ public class arenaPlayer : MonoBehaviour
         p_index = FM.plist.Count - 1;
         red = FM.redOrBlue[p_index];
         setUI();
+
+        StartCoroutine(Load_Health_From_Database());
     }
     //偵測按鍵輸入
     private void Update()
@@ -296,32 +303,63 @@ public class arenaPlayer : MonoBehaviour
         }
         curH -= damege;
         lifeUI.hurt(curH);
-        Debug.Log(curH);
-        PV.RPC("RPC_ArenaPlayer_Hurt", RpcTarget.All, damege, PV.Owner.NickName);
+        reference.Child("GameRoom").Child(PhotonNetwork.CurrentRoom.Name).Child("Arena").Child("Health").Child(PV.ViewID.ToString()).SetValueAsync(curH);
+        // Debug.Log(curH);
+        // PV.RPC("RPC_ArenaPlayer_Hurt", RpcTarget.All, damege, PV.Owner.NickName);
         if (curH <= 0)
         {
             this.gameObject.SetActive(false);
         }
         mAnimator.SetTrigger("hurt");
     }
-    [PunRPC]
-    void RPC_ArenaPlayer_Hurt(float dam, string who)
+
+    IEnumerator Load_Health_From_Database()
     {
-        if (PV.IsMine)
+        yield return new WaitForSeconds(0.3f);
+        StartCoroutine(GetHealthInfo((DataSnapshot info) =>  //從資料庫抓取此房間內的所有資料
         {
-            return;
-        }
-        if (PV.Owner.NickName.Equals(who))
-        {
-            curH -= dam;
-            lifeUI.hurt(curH);
-            if (curH <= 0)
+            foreach (var health in info.Children)
             {
-                this.gameObject.SetActive(false);
+                if (health.Key.Equals(PV.ViewID.ToString()))
+                {
+                    curH = (int)Int64.Parse(health.Value.ToString());
+                    lifeUI.hurt(curH);
+                }
             }
-            mAnimator.SetTrigger("hurt");
+            StartCoroutine(Load_Health_From_Database());
+        }));
+    }
+
+    IEnumerator GetHealthInfo(System.Action<DataSnapshot> onCallbacks)  //從資料庫抓取此房間的所有資料
+    {
+        var userData = reference.Child("GameRoom").Child(PhotonNetwork.CurrentRoom.Name).Child("Arena").Child("Health").GetValueAsync();
+
+        yield return new WaitUntil(predicate: () => userData.IsCompleted);
+
+        if (userData != null)
+        {
+            DataSnapshot snapshot = userData.Result;
+            onCallbacks.Invoke(snapshot);
         }
     }
+    // [PunRPC]
+    // void RPC_ArenaPlayer_Hurt(float dam, string who)
+    // {
+    //     if (PV.IsMine)
+    //     {
+    //         return;
+    //     }
+    //     if (PV.Owner.NickName.Equals(who))
+    //     {
+    //         curH -= dam;
+    //         lifeUI.hurt(curH);
+    //         if (curH <= 0)
+    //         {
+    //             this.gameObject.SetActive(false);
+    //         }
+    //         mAnimator.SetTrigger("hurt");
+    //     }
+    // }
     public void setUI()
     {
         this.transform.Find("NumTitle").GetChild(p_index).gameObject.SetActive(true);
