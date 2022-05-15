@@ -5,6 +5,8 @@ using UnityEngine.UI;
 using Photon.Pun;
 using Photon.Realtime;
 using System.IO;
+using Firebase.Database;
+using System;
 public class HermesEvent : MonoBehaviour
 {
     //生成點 x=55 , y=33
@@ -16,9 +18,11 @@ public class HermesEvent : MonoBehaviour
     [SerializeField] GameObject UIBackGround;
     PhotonView PV;
     bool isEnd = false;
+    DatabaseReference reference;
     void Start()
     {
         PV = GetComponent<PhotonView>();
+        reference = FirebaseDatabase.DefaultInstance.RootReference;  //定義資料庫連接
         if (!PhotonNetwork.IsMasterClient)
         {
             StartButton.SetActive(false);
@@ -38,10 +42,13 @@ public class HermesEvent : MonoBehaviour
         }
         if (PV.IsMine)
         {
-            StartCoroutine(spawnCow(Random.Range(Normal_mix, Normal_max)));
-            StartCoroutine(spawnGoldCow(Random.Range(Gold_mix, Gold_max)));
+            StartCoroutine(spawnCow(UnityEngine.Random.Range(Normal_mix, Normal_max)));
+            StartCoroutine(spawnGoldCow(UnityEngine.Random.Range(Gold_mix, Gold_max)));
+            reference.Child("GameRoom").Child(PhotonNetwork.CurrentRoom.Name).Child("Arena").Child("HermesScore").Child("red").SetValueAsync(0);
+            reference.Child("GameRoom").Child(PhotonNetwork.CurrentRoom.Name).Child("Arena").Child("HermesScore").Child("blue").SetValueAsync(0);
         }
         StartCoroutine(timeCount());
+        StartCoroutine(Get_Score_From_Database());
     }
     private void Update()
     {
@@ -52,6 +59,42 @@ public class HermesEvent : MonoBehaviour
             isEnd = true;
         }
     }
+
+    IEnumerator Get_Score_From_Database()
+    {
+        yield return new WaitForSeconds(0.1f);
+        StartCoroutine(GetScoreInfo((DataSnapshot info) =>  //從資料庫抓取此房間內的所有資料
+        {
+            foreach (var Team in info.Children)
+            {
+                if(Team.Key.Equals("red"))
+                {
+                    redScore = (int)Int64.Parse(Team.Value.ToString());
+                    this.transform.Find("GameUI").Find("red").GetComponent<Text>().text = "Score:" + redScore.ToString();
+                }
+                else if(Team.Key.Equals("blue"))
+                {
+                    blueScore = (int)Int64.Parse(Team.Value.ToString());
+                    this.transform.Find("GameUI").Find("blue").GetComponent<Text>().text = "Score:" + blueScore.ToString();
+                }
+            }
+            StartCoroutine(Get_Score_From_Database());
+        }));
+    }
+
+    IEnumerator GetScoreInfo(System.Action<DataSnapshot> onCallbacks)  //從資料庫抓取此房間的所有資料
+    {
+        var userData = reference.Child("GameRoom").Child(PhotonNetwork.CurrentRoom.Name).Child("Arena").Child("HermesScore").GetValueAsync();
+
+        yield return new WaitUntil(predicate: () => userData.IsCompleted);
+
+        if (userData != null)
+        {
+            DataSnapshot snapshot = userData.Result;
+            onCallbacks.Invoke(snapshot);
+        }
+    }
+
     IEnumerator endGame()
     {
         for (int i = 0; i < FightManager.Instance.plist.Count; i++)
@@ -79,22 +122,22 @@ public class HermesEvent : MonoBehaviour
     private IEnumerator spawnCow(float time)
     {
         yield return new WaitForSeconds(time);
-        float x = Random.Range(-55f, 55f);
-        float y = Random.Range(-33f, 33f);
+        float x = UnityEngine.Random.Range(-55f, 55f);
+        float y = UnityEngine.Random.Range(-33f, 33f);
         GameObject a = PhotonNetwork.Instantiate(Path.Combine("PhotonPrefabs", "arena/Hermes/cow"), new Vector3(x, y, 0), this.transform.rotation, 0, new object[] { PV.ViewID });
         a.transform.parent = this.transform;
         // a.GetComponent<pickcow>().cowScore = 1;
-        StartCoroutine(spawnCow(Random.Range(Normal_mix, Normal_max)));
+        StartCoroutine(spawnCow(UnityEngine.Random.Range(Normal_mix, Normal_max)));
     }
     private IEnumerator spawnGoldCow(float time)
     {
         yield return new WaitForSeconds(time);
-        float x = Random.Range(-55f, 55f);
-        float y = Random.Range(-33f, 33f);
+        float x = UnityEngine.Random.Range(-55f, 55f);
+        float y = UnityEngine.Random.Range(-33f, 33f);
         GameObject a = PhotonNetwork.Instantiate(Path.Combine("PhotonPrefabs", "arena/Hermes/goldcow"), new Vector3(x, y, 0), this.transform.rotation, 0, new object[] { PV.ViewID });
         a.transform.parent = this.transform;
         // a.GetComponent<pickcow>().cowScore = 3;
-        StartCoroutine(spawnGoldCow(Random.Range(Gold_mix, Gold_max)));
+        StartCoroutine(spawnGoldCow(UnityEngine.Random.Range(Gold_mix, Gold_max)));
     }
     public void R_ScoreADD(int point)
     {
