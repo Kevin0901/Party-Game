@@ -391,13 +391,13 @@ public class RoomManager : MonoBehaviourPunCallbacks
                     Destroy(GameObject.Find("PAPA"));
                     PAPA.SetActive(true);
                     ResourceTypeListSO resourceTypeList = Resources.Load<ResourceTypeListSO>(typeof(ResourceTypeListSO).Name);
-                    if (WinTeam == "Red")
+                    if (WinTeam == "red")
                     {
                         ResourceManager.Instance.RedAddResource(resourceTypeList.list[0], 200);
                         ResourceManager.Instance.RedAddResource(resourceTypeList.list[1], 200);
                         ResourceManager.Instance.RedAddResource(resourceTypeList.list[2], 200);
                     }
-                    else if (WinTeam == "Blue")
+                    else if (WinTeam == "blue")
                     {
                         ResourceManager.Instance.BlueAddResource(resourceTypeList.list[0], 200);
                         ResourceManager.Instance.BlueAddResource(resourceTypeList.list[1], 200);
