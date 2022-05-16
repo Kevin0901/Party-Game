@@ -1,7 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using Photon.Pun;
+// using Photon.Pun;
 public class ArrowBehavior : MonoBehaviour
 {
     public float speed;
@@ -11,11 +11,11 @@ public class ArrowBehavior : MonoBehaviour
     public Vector3 targetPosition;
     private Vector2 line;
     private float rotate;
-    PhotonView PV;
+    // PhotonView PV;
     void Awake()
     {
-        PV = GetComponent<PhotonView>();
-        GameObject tower = PhotonView.Find((int)PV.InstantiationData[0]).gameObject;
+        // PV = GetComponent<PhotonView>();
+        // GameObject tower = PhotonView.Find((int)PV.InstantiationData[0]).gameObject;
         // damage = tower.GetComponent<ArrowShoot>().towerData.CurrentLevel.damage;
         // this.gameObject.tag = tower.tag;
     }
@@ -25,10 +25,10 @@ public class ArrowBehavior : MonoBehaviour
 
     void Update()
     {
-        if (!PV.IsMine)
-        {
-            return;
-        }
+        // if (!PV.IsMine)
+        // {
+        //     return;
+        // }
         if (target == null)
         {
             Destroy(this.gameObject);
