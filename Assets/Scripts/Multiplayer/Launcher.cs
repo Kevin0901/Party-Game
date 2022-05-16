@@ -227,7 +227,7 @@ public class Launcher : MonoBehaviourPunCallbacks
                                     if (players[j].NickName.Equals(PName[i]) && !isStart)
                                     {
                                         PlayerUI.GetComponent<PlayerListItem>().SetUp(players[j]);  //設定玩家名稱 UI
-                                        if(!PlayerUI.GetComponent<PhotonView>().Owner.NickName.Equals(players[j]))
+                                        if(!PlayerUI.GetComponent<PhotonView>().Controller.NickName.Equals(players[j]))
                                         {
                                             PlayerUI.GetComponent<PhotonView>().TransferOwnership(players[j]);  //設定 PhotonView Owner (表示只有 XXX 有此 UI 的擁有權)
                                         }
