@@ -14,14 +14,11 @@ public class StoneShoot : MonoBehaviour
     private Team t;
     private float firstshoot = 0;
     private bool issave;
-    PhotonView PV;
 
     // Use this for initialization
     void Start()
     {
         this.transform.SetParent(GameObject.Find("PAPA").transform);
-        PV = GetComponent<PhotonView>();  //定義PhotonView
-        this.gameObject.tag = PhotonView.Find((int)PV.InstantiationData[0]).tag;
         t = GetComponent<Team>();
         t.SetEnemy();
         animator = GetComponent<Animator>();

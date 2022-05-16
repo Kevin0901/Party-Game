@@ -8,12 +8,10 @@ public class SupportShoot : MonoBehaviour
     private Animator animator;
     private Team t;
     // Use this for initialization
-    PhotonView PV;
+
     void Start()
     {
         this.transform.SetParent(GameObject.Find("PAPA").transform);
-        PV = GetComponent<PhotonView>();  //定義PhotonView
-        this.gameObject.tag = PhotonView.Find((int)PV.InstantiationData[0]).tag;
         TowerInRange = new List<GameObject>();
         animator = GetComponent<Animator>();
         t = GetComponent<Team>();

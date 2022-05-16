@@ -17,8 +17,6 @@ public class WaveShoot : MonoBehaviour
 
     private void Awake()
     {
-        PV = GetComponent<PhotonView>();  //定義PhotonView
-        this.gameObject.tag = PhotonView.Find((int)PV.InstantiationData[0]).tag;
         t = GetComponent<Team>();
         t.SetEnemy();
         GameObject boxCollider2DUp = this.transform.Find("detectUp").gameObject;

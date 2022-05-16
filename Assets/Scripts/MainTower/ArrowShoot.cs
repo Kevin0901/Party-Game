@@ -1,8 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using Photon.Pun;
-using System.IO;
+
 public class ArrowShoot : MonoBehaviour
 {
     [SerializeField] private List<GameObject> enemiesInRange;
@@ -15,11 +14,8 @@ public class ArrowShoot : MonoBehaviour
     [SerializeField] private GameObject Arrow;
     [SerializeField] private float ArrowSpeed;
     private bool issave;
-    PhotonView PV;
     private void Awake()
     {
-        PV = GetComponent<PhotonView>();  //定義PhotonView
-        this.gameObject.tag = PhotonView.Find((int)PV.InstantiationData[0]).tag;
         t = this.GetComponent<Team>();
         t.SetEnemy();
     }

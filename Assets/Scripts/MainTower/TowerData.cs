@@ -1,7 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using Photon.Pun;
 
 [System.Serializable]
 public class TowerLevel
@@ -24,13 +24,15 @@ public class TowerData : MonoBehaviour
     public List<TowerLevel> levels;
     private TowerLevel currentLevel;
     private Animator animator;
+    PhotonView PV;
     private void Awake()
     {
+        PV = GetComponent<PhotonView>();  //定義PhotonView
+        this.gameObject.tag = PhotonView.Find((int)PV.InstantiationData[0]).tag;
         spriteRenderer = this.gameObject.GetComponent<SpriteRenderer>();
         animator = this.gameObject.GetComponent<Animator>();
         SetAnimeIdle();
         health = this.GetComponentInChildren<health>();
-
     }
     public void SetAnimeIdle()
     {
@@ -44,6 +46,10 @@ public class TowerData : MonoBehaviour
             animator.SetBool("BlueIdle", true);
             spriteRenderer.sprite = down;
         }
+    }
+    
+    private void Start() {
+        SetAnimeIdle();
     }
     public TowerLevel CurrentLevel
     {
