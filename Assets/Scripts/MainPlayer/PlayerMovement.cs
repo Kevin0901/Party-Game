@@ -147,7 +147,10 @@ public class PlayerMovement : MonoBehaviour
             transform.Find("left hitbox").gameObject.SetActive(false);
             // this.transform.SetParent(GameObject.Find("PAPA").transform);
             Invoke("spawn", 2);
-            transform.parent.Find("DeadScreen").gameObject.SetActive(true);
+            if (PV.IsMine)
+            {
+                transform.parent.Find("DeadScreen").gameObject.SetActive(true);
+            }
             this.gameObject.SetActive(false);
         }
         if (!PV.IsMine)

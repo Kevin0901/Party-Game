@@ -117,8 +117,8 @@ MonoBehaviour:
     amount: 60
   levels:
   - visualization: {fileID: 6822871495253970992}
-    fireRate: 0.5
-    damage: 15
+    fireRate: 1.5
+    damage: 10
     MaxHealth: 500
     CurHealth: 0
 --- !u!114 &5305367701835937697
