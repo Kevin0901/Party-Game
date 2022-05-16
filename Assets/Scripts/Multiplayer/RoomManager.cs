@@ -246,7 +246,7 @@ public class RoomManager : MonoBehaviourPunCallbacks
                     {
                         case 9:  //大洪水
                             Vector3 tsupos = new Vector3(-75f, 1f, 0.0f);
-                            PhotonNetwork.Instantiate(Path.Combine("PhotonPrefabs", "MainEvent/Tsunami"), tsupos, this.transform.rotation);
+                            PhotonNetwork.Instantiate(Path.Combine("PhotonPrefabs", "MainEvent/Tsunami"), tsupos, Quaternion.Euler(0f, 0f, -90f));
                             break;
                         case 10:  //大地震
                             PhotonNetwork.Instantiate(Path.Combine("PhotonPrefabs", "MainEvent/Earthquake"), new Vector3(0, 0, 0), this.transform.rotation);
@@ -380,7 +380,7 @@ public class RoomManager : MonoBehaviourPunCallbacks
             }
             else
             {
-                if(PV.IsMine)
+                if (PV.IsMine)
                 {
                     reference.Child("GameRoom").Child(PhotonNetwork.CurrentRoom.Name).Child("Arena").Child("Health").SetValueAsync(null);
                 }
