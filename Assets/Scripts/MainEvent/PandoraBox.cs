@@ -12,8 +12,8 @@ public class PandoraBox : MonoBehaviour
             if (other.gameObject.GetComponent<PhotonView>().IsMine)
             {
                 other.gameObject.GetComponent<Effect>().StartCoroutine("RandGiveEffect");
-                PhotonNetwork.Destroy(this.gameObject);
             }
+            Destroy(this.gameObject);
         }
     }
 }

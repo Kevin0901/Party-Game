@@ -18,9 +18,6 @@ public class MultiSwordChange : MonoBehaviour
             firstPlayer.transform.Find("sword").gameObject.GetComponent<sword>().StartCoroutine("Savelastplayer", firstPlayer);
             firstPlayer.GetComponent<arenaPlayer>().StartCoroutine("changeColorTitle_Sword");
         }
-        if(PV.IsMine)
-        {
-            PhotonNetwork.Destroy(this.gameObject);
-        }
+        Destroy(this.gameObject);
     }
 }
