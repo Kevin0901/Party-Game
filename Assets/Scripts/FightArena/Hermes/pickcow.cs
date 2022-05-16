@@ -19,12 +19,12 @@ public class pickcow : MonoBehaviour
     {
         if (other.gameObject.layer == 10)
         {
-            if (other.GetComponent<PhotonView>().IsMine)
+            if (other.GetComponent<arenaPlayer>().red)
             {
-                if (other.GetComponent<arenaPlayer>().red)
+                // this.transform.parent.GetComponent<HermesEvent>().R_ScoreADD(cowScore);
+                StartCoroutine(GetScoreInfo((DataSnapshot info) =>  //從資料庫抓取此房間內的所有資料
                 {
-                    // this.transform.parent.GetComponent<HermesEvent>().R_ScoreADD(cowScore);
-                    StartCoroutine(GetScoreInfo((DataSnapshot info) =>  //從資料庫抓取此房間內的所有資料
+                    if (PV.IsMine)
                     {
                         foreach (var Team in info.Children)
                         {
@@ -34,16 +34,16 @@ public class pickcow : MonoBehaviour
                                 reference.Child("GameRoom").Child(PhotonNetwork.CurrentRoom.Name).Child("Arena").Child("HermesScore").Child("red").SetValueAsync(NewScore);
                             }
                         }
-                        if (PV.IsMine)
-                        {
-                            PhotonNetwork.Destroy(this.gameObject);
-                        }
-                    }));
-                }
-                else
+                        PhotonNetwork.Destroy(this.gameObject);
+                    }
+                }));
+            }
+            else
+            {
+                // this.transform.parent.GetComponent<HermesEvent>().B_ScoreADD(cowScore);
+                StartCoroutine(GetScoreInfo((DataSnapshot info) =>  //從資料庫抓取此房間內的所有資料
                 {
-                    // this.transform.parent.GetComponent<HermesEvent>().B_ScoreADD(cowScore);
-                    StartCoroutine(GetScoreInfo((DataSnapshot info) =>  //從資料庫抓取此房間內的所有資料
+                    if (PV.IsMine)
                     {
                         foreach (var Team in info.Children)
                         {
@@ -53,12 +53,9 @@ public class pickcow : MonoBehaviour
                                 reference.Child("GameRoom").Child(PhotonNetwork.CurrentRoom.Name).Child("Arena").Child("HermesScore").Child("blue").SetValueAsync(NewScore);
                             }
                         }
-                        if (PV.IsMine)
-                        {
-                            PhotonNetwork.Destroy(this.gameObject);
-                        }
-                    }));
-                }
+                        PhotonNetwork.Destroy(this.gameObject);
+                    }
+                }));
             }
         }
     }
