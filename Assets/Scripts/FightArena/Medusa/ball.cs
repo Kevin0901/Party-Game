@@ -20,17 +20,17 @@ public class ball : MonoBehaviour
     //旋轉跟刪除物件
     void FixedUpdate()
     {
-        if(PV.IsMine)
+        if (PV.IsMine)
         {
             this.transform.Rotate(0, 0, 3f);
-        }
-        if (FightManager.Instance.plist.Count <= 1)
-        {
-            Destroy(this.gameObject);
-        }
-        else if (Vector3.Distance(Vector3.zero, this.transform.position) > 42)
-        {
-            Destroy(this.gameObject);
+            if (FightManager.Instance.plist.Count <= 1)
+            {
+                PhotonNetwork.Destroy(this.gameObject);
+            }
+            else if (Vector3.Distance(Vector3.zero, this.transform.position) > 42)
+            {
+                PhotonNetwork.Destroy(this.gameObject);
+            }
         }
     }
     //球的移動方向

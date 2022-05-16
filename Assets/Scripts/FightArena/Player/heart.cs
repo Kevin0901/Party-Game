@@ -12,6 +12,11 @@ public class heart : MonoBehaviour
     {
         switch (hp)
         {
+            case 3f:
+                this.transform.GetChild(0).Find("heart-1").GetComponent<Image>().sprite = sprites[0];
+                this.transform.GetChild(0).Find("heart-2").GetComponent<Image>().sprite = sprites[0];
+                this.transform.GetChild(0).Find("heart-3").GetComponent<Image>().sprite = sprites[0];
+                break;
             case 2.5f:
                 this.transform.GetChild(0).Find("heart-3").GetComponent<Image>().sprite = sprites[1];
                 break;

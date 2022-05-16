@@ -32,7 +32,10 @@ public class pickcow : MonoBehaviour
                             reference.Child("GameRoom").Child(PhotonNetwork.CurrentRoom.Name).Child("Arena").Child("HermesScore").Child("red").SetValueAsync(NewScore);
                         }
                     }
-                    PhotonNetwork.Destroy(this.gameObject);
+                    if(PV.IsMine)
+                    {
+                        PhotonNetwork.Destroy(this.gameObject);
+                    }
                 }));
             }
             else
@@ -48,7 +51,10 @@ public class pickcow : MonoBehaviour
                             reference.Child("GameRoom").Child(PhotonNetwork.CurrentRoom.Name).Child("Arena").Child("HermesScore").Child("blue").SetValueAsync(NewScore);
                         }
                     }
-                    PhotonNetwork.Destroy(this.gameObject);
+                    if(PV.IsMine)
+                    {
+                        PhotonNetwork.Destroy(this.gameObject);
+                    }
                 }));
             }
         }

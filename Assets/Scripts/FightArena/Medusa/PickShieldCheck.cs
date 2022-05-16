@@ -10,7 +10,7 @@ public class PickShieldCheck : MonoBehaviour
     void Start()
     {
         PV = this.GetComponent<PhotonView>();
-        if (PhotonView.Find((int)PV.InstantiationData[0]).gameObject != null)
+        if (PhotonView.Find((int)PV.InstantiationData[0]) != null)
         {
             Find_Parent_Player = PhotonView.Find((int)PV.InstantiationData[0]).gameObject;
             Find_Parent_Player.transform.Find("shield").gameObject.SetActive(true);
