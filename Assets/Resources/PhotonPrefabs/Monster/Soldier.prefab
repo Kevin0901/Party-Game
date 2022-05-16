@@ -313,7 +313,7 @@ GameObject:
   - component: {fileID: 8982951932885710248}
   - component: {fileID: 2451842358974536733}
   - component: {fileID: 5576525739124320640}
-  - component: {fileID: 3088825426871508149}
+  - component: {fileID: 812450736775171485}
   m_Layer: 9
   m_Name: Soldier
   m_TagString: red
@@ -520,7 +520,7 @@ MonoBehaviour:
   observableSearch: 2
   ObservedComponents:
   - {fileID: 5576525739124320640}
-  - {fileID: 3088825426871508149}
+  - {fileID: 812450736775171485}
   sceneViewId: 0
   InstantiationId: 0
   isRuntimeInstantiated: 0
@@ -540,7 +540,7 @@ MonoBehaviour:
   m_SynchronizeRotation: 1
   m_SynchronizeScale: 1
   m_UseLocal: 1
---- !u!114 &3088825426871508149
+--- !u!114 &812450736775171485
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
