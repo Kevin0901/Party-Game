@@ -20,14 +20,24 @@ public class GoldenSheep : MonoBehaviour
     private List<Vector3> playerposlist = new List<Vector3>(); //玩家位置
     private GameObject bonusUI;
     PhotonView PV;
-
+    public float timer;
+    private float timerMax = 210f;
     private void Start()
     {
         PV = GetComponent<PhotonView>();
         animator = this.gameObject.GetComponent<Animator>();
+        timer = timerMax;
     }
     private void Update()
     {
+        timer -= Time.deltaTime;
+        if (timer <= 1f)
+        {
+            bonusUI = player.transform.parent.Find("EffectUI").GetChild(0).Find("ResourceUp").gameObject;
+            bonusUI.SetActive(false);
+            ResourceManager.Instance.Brestimes = 1;
+            ResourceManager.Instance.Rrestimes = 1;
+        }
         if (!PV.IsMine)
         {
             return;

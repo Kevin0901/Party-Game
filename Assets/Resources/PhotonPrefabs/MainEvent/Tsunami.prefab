@@ -167,6 +167,7 @@ MonoBehaviour:
   observableSearch: 2
   ObservedComponents:
   - {fileID: 2573834882288821082}
+  - {fileID: -3912174694903189768}
   sceneViewId: 0
   InstantiationId: 0
   isRuntimeInstantiated: 0
@@ -201,4 +202,6 @@ MonoBehaviour:
   ShowLayerWeightsInspector: 1
   ShowParameterInspector: 1
   m_SynchronizeParameters: []
-  m_SynchronizeLayers: []
+  m_SynchronizeLayers:
+  - SynchronizeType: 0
+    LayerIndex: 0
