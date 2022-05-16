@@ -90,7 +90,7 @@ public class Launcher : MonoBehaviourPunCallbacks
         {
             return;
         }
-        PhotonNetwork.CreateRoom(roomNameInputField.text, new RoomOptions { CleanupCacheOnLeave = false });  //創建房間
+        PhotonNetwork.CreateRoom(roomNameInputField.text, new RoomOptions { CleanupCacheOnLeave = false, IsVisible = true });  //創建房間
         // MenuManger.Instance.OpenMenu("loading");  //打開 LoadingMenu UI
     }
 

@@ -40,7 +40,7 @@ public class PlayerListItem : MonoBehaviourPunCallbacks
         CleanPlayerUI();
         if (PV.IsMine)
         {
-            if (Launcher.Instance.Room.PlayerCount == 1)  //如果只剩自己 1 人
+            if (PhotonNetwork.PlayerList.Length == 1)  //如果只剩自己 1 人
             {
                 CleanAllDB();  //清除此房間的資料庫內容
             }
