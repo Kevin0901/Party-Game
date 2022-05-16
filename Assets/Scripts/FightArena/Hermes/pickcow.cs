@@ -21,11 +21,13 @@ public class pickcow : MonoBehaviour
         {
             if (other.GetComponent<arenaPlayer>().red)
             {
+                Debug.Log("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA");
                 // this.transform.parent.GetComponent<HermesEvent>().R_ScoreADD(cowScore);
                 StartCoroutine(GetScoreInfo((DataSnapshot info) =>  //從資料庫抓取此房間內的所有資料
                 {
                     if (PV.IsMine)
                     {
+                        Debug.Log("BBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBB");
                         foreach (var Team in info.Children)
                         {
                             if (Team.Key.Equals("red"))
@@ -34,8 +36,8 @@ public class pickcow : MonoBehaviour
                                 reference.Child("GameRoom").Child(PhotonNetwork.CurrentRoom.Name).Child("Arena").Child("HermesScore").Child("red").SetValueAsync(NewScore);
                             }
                         }
-                        PhotonNetwork.Destroy(this.gameObject);
                     }
+                    Destroy(this.gameObject);
                 }));
             }
             else
@@ -53,8 +55,8 @@ public class pickcow : MonoBehaviour
                                 reference.Child("GameRoom").Child(PhotonNetwork.CurrentRoom.Name).Child("Arena").Child("HermesScore").Child("blue").SetValueAsync(NewScore);
                             }
                         }
-                        PhotonNetwork.Destroy(this.gameObject);
                     }
+                    Destroy(this.gameObject);
                 }));
             }
         }
