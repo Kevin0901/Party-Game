@@ -27,7 +27,7 @@ public class strike : MonoBehaviour
         if (_event != null && !_event.isEnd && Input.GetKeyDown(KeyCode.Space) && PV.IsMine)
         {
             cnt++;
-            this.transform.localPosition += new Vector3(0, -move_dis, 0);
+            this.transform.localPosition += new Vector3(0, move_dis, 0);
             if (cnt >= max)
             {
                 lightSword.enabled = true;

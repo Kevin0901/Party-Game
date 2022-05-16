@@ -8,14 +8,14 @@ public class speedDown : MonoBehaviour
     {
         if (other.gameObject.layer == 10)
         {
-            other.GetComponent<arenaPlayer>().turboSpeed /= 4f;
+            other.GetComponent<arenaPlayer>().turboSpeed /= 5.5f;
         }
     }
     private void OnTriggerExit2D(Collider2D other)
     {
         if (other.gameObject.layer == 10)
         {
-            other.GetComponent<arenaPlayer>().turboSpeed *= 4f;
+            other.GetComponent<arenaPlayer>().turboSpeed *= 5.5f;
         }
     }
 }

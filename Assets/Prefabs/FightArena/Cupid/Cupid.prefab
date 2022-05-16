@@ -119,8 +119,8 @@ CapsuleCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.029400354, y: -0.016075132}
-  m_Size: {x: 2.256996, y: 1.7638041}
+  m_Offset: {x: 0.029400289, y: -0.5264027}
+  m_Size: {x: 2.4878738, y: 2.191287}
   m_Direction: 1
 --- !u!114 &7261282391864592178
 MonoBehaviour:
@@ -137,3 +137,5 @@ MonoBehaviour:
   arrow: {fileID: 3666557185527591331, guid: 8e8453c9748937a438a915e04499de89, type: 3}
   UI: {fileID: 0}
   Cupid_Speed: 5
+  StartButton: {fileID: 0}
+  UIBackGround: {fileID: 0}
