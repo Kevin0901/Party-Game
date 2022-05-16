@@ -369,24 +369,31 @@ public class Launcher : MonoBehaviourPunCallbacks
 
     public override void OnRoomListUpdate(List<RoomInfo> roomList)  //房間列表更新
     {
-        // foreach (Transform trans in roomListContent)
-        // {
-        //     Destroy(trans.gameObject);
-        // }
         for (int i = 0; i < roomList.Count; i++)
         {
+            bool isInst = false;
             if (roomList[i].RemovedFromList)
             {
                 for (int j = 0; j < roomListContent.transform.childCount; j++)
                 {
-                    if(roomListContent.transform.GetChild(j).GetComponent<RoomListItem>().info.Name.Equals(roomList[i].Name))
+                    if (roomListContent.transform.GetChild(j).GetComponent<RoomListItem>().info.Name.Equals(roomList[i].Name))
                     {
                         Destroy(roomListContent.transform.GetChild(j).gameObject);
                     }
                 }
                 continue;
             }
-            Instantiate(roomListItemPrefab, roomListContent).GetComponent<RoomListItem>().SetUp(roomList[i]);
+            foreach (Transform trans in roomListContent)
+            {
+                if(trans.GetComponent<RoomListItem>().info.Name.Equals(roomList[i].Name))
+                {
+                    isInst = true;
+                }
+            }
+            if(!isInst)
+            {
+                Instantiate(roomListItemPrefab, roomListContent).GetComponent<RoomListItem>().SetUp(roomList[i]);
+            }
         }
     }
     public override void OnPlayerEnteredRoom(Player newPlayer)  //當新玩家進入房間
