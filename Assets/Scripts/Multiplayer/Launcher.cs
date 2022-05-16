@@ -174,7 +174,7 @@ public class Launcher : MonoBehaviourPunCallbacks
 
     IEnumerator OneSec_CatchDataBase()
     {
-        yield return new WaitForSeconds(1);
+        yield return new WaitForSeconds(0.1f);
         SetPlayerUI();
     }
 
@@ -369,10 +369,10 @@ public class Launcher : MonoBehaviourPunCallbacks
 
     public override void OnRoomListUpdate(List<RoomInfo> roomList)  //房間列表更新
     {
-        foreach (Transform trans in roomListContent)
-        {
-            Destroy(trans.gameObject);
-        }
+        // foreach (Transform trans in roomListContent)
+        // {
+        //     Destroy(trans.gameObject);
+        // }
         for (int i = 0; i < roomList.Count; i++)
         {
             if (roomList[i].RemovedFromList)
@@ -387,6 +387,10 @@ public class Launcher : MonoBehaviourPunCallbacks
     public override void OnPlayerEnteredRoom(Player newPlayer)  //當新玩家進入房間
     {
         // StartCoroutine(AddNewPlayerUI(newPlayer));
+        for (int i = 0; i < PhotonNetwork.PlayerList.Length; i++)
+        {
+            PhotonNetwork.RemoveRPCs(PhotonNetwork.PlayerList[i]);
+        }
     }
 
     public IEnumerator AddNewPlayerUI(Player newPlayer)  //新增新玩家的 UI
