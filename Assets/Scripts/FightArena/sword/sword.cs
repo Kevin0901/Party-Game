@@ -26,7 +26,7 @@ public class sword : MonoBehaviour
             other.gameObject.transform.Find("sword").gameObject.GetComponent<sword>().StartCoroutine("Savelastplayer", player.gameObject);
             player.StartCoroutine("changeColorTitle_Sword");
 
-            PhotonNetwork.Instantiate(Path.Combine("PhotonPrefabs", "Sword/SwordChange"),
+            PhotonNetwork.Instantiate(Path.Combine("PhotonPrefabs", "arena/Sword/SwordChange"),
             Vector3.zero, this.transform.rotation, 0, new object[] { this.GetComponentInParent<PhotonView>().ViewID, other.gameObject.GetComponent<PhotonView>().ViewID });
             this.gameObject.SetActive(false);
         }
