@@ -17,45 +17,48 @@ public class pickcow : MonoBehaviour
     }
     private void OnTriggerStay2D(Collider2D other)
     {
-        if (other.gameObject.layer == 10 && other.GetComponent<PhotonView>().IsMine)
+        if (other.gameObject.layer == 10)
         {
-            if (other.GetComponent<arenaPlayer>().red)
+            if (other.GetComponent<PhotonView>().IsMine)
             {
-                // this.transform.parent.GetComponent<HermesEvent>().R_ScoreADD(cowScore);
-                StartCoroutine(GetScoreInfo((DataSnapshot info) =>  //從資料庫抓取此房間內的所有資料
+                if (other.GetComponent<arenaPlayer>().red)
                 {
-                    foreach (var Team in info.Children)
+                    // this.transform.parent.GetComponent<HermesEvent>().R_ScoreADD(cowScore);
+                    StartCoroutine(GetScoreInfo((DataSnapshot info) =>  //從資料庫抓取此房間內的所有資料
                     {
-                        if(Team.Key.Equals("red"))
+                        foreach (var Team in info.Children)
                         {
-                            int NewScore = (int)Int64.Parse(Team.Value.ToString()) + cowScore;
-                            reference.Child("GameRoom").Child(PhotonNetwork.CurrentRoom.Name).Child("Arena").Child("HermesScore").Child("red").SetValueAsync(NewScore);
+                            if (Team.Key.Equals("red"))
+                            {
+                                int NewScore = (int)Int64.Parse(Team.Value.ToString()) + cowScore;
+                                reference.Child("GameRoom").Child(PhotonNetwork.CurrentRoom.Name).Child("Arena").Child("HermesScore").Child("red").SetValueAsync(NewScore);
+                            }
                         }
-                    }
-                    if(PV.IsMine)
-                    {
-                        PhotonNetwork.Destroy(this.gameObject);
-                    }
-                }));
-            }
-            else
-            {
-                // this.transform.parent.GetComponent<HermesEvent>().B_ScoreADD(cowScore);
-                StartCoroutine(GetScoreInfo((DataSnapshot info) =>  //從資料庫抓取此房間內的所有資料
+                        if (PV.IsMine)
+                        {
+                            PhotonNetwork.Destroy(this.gameObject);
+                        }
+                    }));
+                }
+                else
                 {
-                    foreach (var Team in info.Children)
+                    // this.transform.parent.GetComponent<HermesEvent>().B_ScoreADD(cowScore);
+                    StartCoroutine(GetScoreInfo((DataSnapshot info) =>  //從資料庫抓取此房間內的所有資料
                     {
-                        if(Team.Key.Equals("blue"))
+                        foreach (var Team in info.Children)
                         {
-                            int NewScore = (int)Int64.Parse(Team.Value.ToString()) + cowScore;
-                            reference.Child("GameRoom").Child(PhotonNetwork.CurrentRoom.Name).Child("Arena").Child("HermesScore").Child("blue").SetValueAsync(NewScore);
+                            if (Team.Key.Equals("blue"))
+                            {
+                                int NewScore = (int)Int64.Parse(Team.Value.ToString()) + cowScore;
+                                reference.Child("GameRoom").Child(PhotonNetwork.CurrentRoom.Name).Child("Arena").Child("HermesScore").Child("blue").SetValueAsync(NewScore);
+                            }
                         }
-                    }
-                    if(PV.IsMine)
-                    {
-                        PhotonNetwork.Destroy(this.gameObject);
-                    }
-                }));
+                        if (PV.IsMine)
+                        {
+                            PhotonNetwork.Destroy(this.gameObject);
+                        }
+                    }));
+                }
             }
         }
     }

@@ -161,8 +161,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   animator: {fileID: 0}
-  walkDir_Y: 0
-  setTime: 0.5
   currentState: 0
   speed: 2
   MaxHealth: 120
