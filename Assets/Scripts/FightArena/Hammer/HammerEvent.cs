@@ -96,6 +96,10 @@ public class HammerEvent : MonoBehaviour
         isEnd = true;
         UI.SetActive(true);
         GameObject winner = PhotonView.Find(winnerID).gameObject;
+        if(UI.transform.Find("red").gameObject.activeSelf || UI.transform.Find("blue").gameObject.activeSelf || UI.transform.Find("draw").gameObject.activeSelf)
+        {
+            return;
+        }
         if (winner.GetComponent<arenaPlayer>().red)
         {
             UI.transform.Find("red").gameObject.SetActive(true);
