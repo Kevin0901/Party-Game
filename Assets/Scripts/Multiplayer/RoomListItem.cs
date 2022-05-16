@@ -4,7 +4,7 @@ using UnityEngine;
 using Photon.Realtime;
 using Photon.Pun;
 using TMPro;
-public class RoomListItem : MonoBehaviourPunCallbacks
+public class RoomListItem : MonoBehaviour
 {
     [SerializeField] TMP_Text text;
     public RoomInfo info;
@@ -22,12 +22,5 @@ public class RoomListItem : MonoBehaviourPunCallbacks
         GameObject.Find("RoomMenu").transform.Find("RoomList").gameObject.SetActive(false);
         GameObject.Find("RoomMenu").GetComponent<RoomMenu>().StartCoroutine("fadeout","ChoosePlayer");
         GameObject.Find("ChoosePlayer").GetComponent<ChoosePlayer>().inChoosePlayer = true;
-    }
-    public override void OnRoomListUpdate(List<RoomInfo> roomList)  //房間列表更新
-    {
-        if(text.text.Equals(roomList[0].Name))
-        {
-            Destroy(this.gameObject);
-        }
     }
 }

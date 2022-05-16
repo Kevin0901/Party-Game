@@ -376,9 +376,14 @@ public class Launcher : MonoBehaviourPunCallbacks
         for (int i = 0; i < roomList.Count; i++)
         {
             if (roomList[i].RemovedFromList)
-                continue;
-            if (roomList[i].PlayerCount >= 4)
             {
+                for (int j = 0; j < roomListContent.transform.childCount; j++)
+                {
+                    if(roomListContent.transform.GetChild(j).GetComponent<RoomListItem>().info.Name.Equals(roomList[i].Name))
+                    {
+                        Destroy(roomListContent.transform.GetChild(j).gameObject);
+                    }
+                }
                 continue;
             }
             Instantiate(roomListItemPrefab, roomListContent).GetComponent<RoomListItem>().SetUp(roomList[i]);
