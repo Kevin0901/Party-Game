@@ -10,7 +10,7 @@ using UnityEditor;
 public class Login : MonoBehaviour
 {
     [Header("動畫")]
-    [SerializeField] GameObject Anime;
+    [SerializeField] GameObject LoginAni;
     [Header("登入方塊")]
     [SerializeField] GameObject LoginBlock;
     [Header("註冊方塊")]
@@ -45,9 +45,11 @@ public class Login : MonoBehaviour
     public bool inLoginMenu;
     private CanvasGroup CanvasGroup;
     DatabaseReference reference;
+    private Animator animator;
     int loginCnt, registerCnt;
     void Start()
     {
+        animator = this.GetComponent<Animator>();
         inLoginMenu = false;
         CanvasGroup = this.GetComponent<CanvasGroup>();
         reference = FirebaseDatabase.DefaultInstance.RootReference;  //定義資料庫連接
@@ -98,8 +100,7 @@ public class Login : MonoBehaviour
     private void fadein() //淡入畫面
     {
         CanvasGroup.blocksRaycasts = true;
-        CanvasGroup.alpha = 1;
-        Anime.SetActive(true);
+        animator.SetTrigger("fade");
         StartCoroutine(Anime_IE());
         loginCnt = 0;
         registerCnt = 0;
@@ -108,18 +109,22 @@ public class Login : MonoBehaviour
     private IEnumerator fadeout() //淡出畫面
     {
         CanvasGroup.blocksRaycasts = false;
-        yield return new WaitForSeconds(0.5f);
-        CanvasGroup.alpha = 0;
+        animator.SetTrigger("fade");
         LoginBlock.SetActive(false);
         RegisterBlock.SetActive(false);
         transform.Find("Quit").gameObject.SetActive(false);
-
+        GameObject.Find("LoadingCircle").transform.GetChild(0).gameObject.SetActive(true);
+        GameObject.Find("music").SetActive(false);
+        yield return new WaitForSeconds(2.5f);
+        GameObject.Find("LoadingCircle").transform.GetChild(0).gameObject.SetActive(false);
+        yield return new WaitForSeconds(0.3f);
         SceneManager.LoadScene(1);
     }
     IEnumerator Anime_IE()
     {
-        yield return new WaitForSeconds(1.2f);
-        Anime.SetActive(false);
+        LoginAni.SetActive(true);
+        yield return new WaitForSeconds(0.7f);
+        LoginAni.SetActive(false);
         Open_Login();
     }
     public void Open_Login()
@@ -232,6 +237,9 @@ public class Login : MonoBehaviour
             {
                 reference.Child("Account").Child(RegisterName.text).SetValueAsync(RegisterPassword.text);
                 RegisterComplete.SetActive(true);
+                PlayerPrefs.SetString("username", RegisterName.text);
+                PlayerPrefs.SetString("password", RegisterPassword.text);
+                Open_Login();
             }
 
         }));

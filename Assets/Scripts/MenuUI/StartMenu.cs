@@ -11,14 +11,12 @@ using UnityEditor;
 
 public class StartMenu : MonoBehaviour
 {
-    public bool inMainMenu;
     private Animator MainAnimator;
     private CanvasGroup CanvasGroup;
     float waitTime = 0;
     DatabaseReference reference;
     void Start()
     {
-        inMainMenu = false;
         MainAnimator = this.GetComponent<Animator>();
         CanvasGroup = this.GetComponent<CanvasGroup>();
         StartCoroutine(fadein());
@@ -30,10 +28,6 @@ public class StartMenu : MonoBehaviour
     }
     void Update()
     {
-        if (inMainMenu) //判斷是否切換畫面
-        {
-            StartCoroutine(fadein());
-        }
         if (Input.GetKeyDown(KeyCode.Space) && CanvasGroup.blocksRaycasts)
         {
             StartCoroutine(fadeout());
@@ -41,9 +35,7 @@ public class StartMenu : MonoBehaviour
     }
     private IEnumerator fadein() //淡入畫面
     {
-
         MainAnimator.SetTrigger("fade");
-        inMainMenu = false;
         yield return new WaitForSeconds(0.5f);
         CanvasGroup.blocksRaycasts = true;
     }
@@ -51,31 +43,22 @@ public class StartMenu : MonoBehaviour
     {
         CanvasGroup.blocksRaycasts = false;
         MainAnimator.SetTrigger("fade");
-        GameObject.Find("TranPageAnimation").GetComponent<Animator>().SetTrigger("change");
-        yield return new WaitForSeconds(0.5f);
         if (PlayerPrefs.HasKey("username") && PlayerPrefs.HasKey("password"))
         {
+            GameObject.Find("LoadingCircle").transform.GetChild(0).gameObject.SetActive(true);
+            GameObject.Find("music").SetActive(false);
+            yield return new WaitForSeconds(2.5f);
+            GameObject.Find("LoadingCircle").transform.GetChild(0).gameObject.SetActive(false);
+            yield return new WaitForSeconds(0.3f);
             SceneManager.LoadScene(1);
         }
         else
         {
+            GameObject.Find("TranPageAnimation").GetComponent<Animator>().SetTrigger("change");
+            yield return new WaitForSeconds(0.5f);
             GameObject.Find("LoginMenu").GetComponent<Login>().inLoginMenu = true;
         }
 
-    }
-    private IEnumerator GoMainUI()
-    {
-        CanvasGroup.blocksRaycasts = false;
-        MainAnimator.SetTrigger("fade");
-        yield return new WaitForSeconds(0.5f);
-        if (PlayerPrefs.HasKey("username") && PlayerPrefs.HasKey("password"))
-        {
-            SceneManager.LoadScene(1);
-        }
-        else
-        {
-            GameObject.Find("LoginMenu").GetComponent<Login>().inLoginMenu = true;
-        }
     }
     // IEnumerator Connected()
     // {
@@ -107,7 +90,7 @@ public class StartMenu : MonoBehaviour
     {
         if (CanvasGroup.blocksRaycasts)
         {
-            StartCoroutine(GoMainUI());
+            StartCoroutine(fadeout());
         }
     }
 

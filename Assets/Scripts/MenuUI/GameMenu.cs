@@ -52,7 +52,7 @@ public class GameMenu : MonoBehaviour
     public void back()//點擊事件
     {
         CanvasGroup.blocksRaycasts = false;
-        GameObject.Find("StartMenu").GetComponent<StartMenu>().inMainMenu = true;
+        // GameObject.Find("StartMenu").GetComponent<StartMenu>().inMainMenu = true;
     }
     public void Setting()//點擊事件
     {
