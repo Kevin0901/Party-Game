@@ -583,15 +583,14 @@ public class PlayerMovement : MonoBehaviour
             this.transform.position = RedspawnPoint;
             spriteRenderer.sortingOrder = spriteNum;
             dir = 1f;
-            Debug.Log("red ");
         }
         else if ((this.gameObject.tag == "blue"))
         {
             this.transform.position = BluespawnPoint;
             spriteRenderer.sortingOrder = spriteNum;
             dir = -1f;
-            Debug.Log("blue ");
         }
+        animator.SetFloat("idleY", dir);
         // GameObject mouse = Instantiate(v, v.transform.position, v.transform.rotation);
         if (int.Parse(joynum) == 0)
         {
