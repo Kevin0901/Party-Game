@@ -519,6 +519,7 @@ public class PlayerMovement : MonoBehaviour
     {
         currentState = PlayerState.attack;
         animator.SetBool("attacking", true);
+        animator.SetBool("moving", false);
         yield return null;
         animator.SetBool("attacking", false);
         yield return new WaitForSeconds(1 / attackRate);
@@ -556,7 +557,6 @@ public class PlayerMovement : MonoBehaviour
         change = Vector3.zero;
         change.x = Mathf.RoundToInt(Input.GetAxisRaw("Xplayer" + joynum));
         change.y = Mathf.RoundToInt(Input.GetAxisRaw("Yplayer" + joynum));
-        Debug.Log(change);
         if (change != Vector3.zero)
         {
             mrigibody.MovePosition(transform.position + change.normalized * speed * Time.deltaTime);
