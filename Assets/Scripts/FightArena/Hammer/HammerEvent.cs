@@ -57,7 +57,7 @@ public class HammerEvent : MonoBehaviour
     [PunRPC]
     public void RPC_SetHammer(int HamID, int iswho)
     {
-        StartCoroutine(Set_Hammer(HamID,iswho));
+        StartCoroutine(Set_Hammer(HamID, iswho));
     }
     IEnumerator Set_Hammer(int HamID, int iswho)
     {
@@ -88,15 +88,16 @@ public class HammerEvent : MonoBehaviour
     {
         isEnd = true;
         yield return new WaitForSeconds(1f);
-        PV.RPC("RPC_End", RpcTarget.All, winner.GetComponent<PhotonView>().ViewID);
+        // PV.RPC("RPC_End", RpcTarget.All, winner.GetComponent<PhotonView>().ViewID);
+        PhotonNetwork.Instantiate(Path.Combine("PhotonPrefabs", "arena/Hammer/HammerWinner"),
+                Vector3.zero, this.transform.rotation, 0, new object[] { winner.GetComponent<PhotonView>().ViewID });
     }
-    [PunRPC]
-    public void RPC_End(int winnerID)
+    public void End(int winnerID)
     {
         isEnd = true;
         UI.SetActive(true);
         GameObject winner = PhotonView.Find(winnerID).gameObject;
-        if(UI.transform.Find("red").gameObject.activeSelf || UI.transform.Find("blue").gameObject.activeSelf || UI.transform.Find("draw").gameObject.activeSelf)
+        if (UI.transform.Find("red").gameObject.activeSelf || UI.transform.Find("blue").gameObject.activeSelf || UI.transform.Find("draw").gameObject.activeSelf)
         {
             return;
         }
