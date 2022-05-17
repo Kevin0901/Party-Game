@@ -87,7 +87,7 @@ public class UIState : MonoBehaviour
 
                 }
 
-                if (Input.GetKeyDown(KeyCode.Z))
+                if (Input.GetKeyDown(KeyCode.E))
                 {
                     if (b == 1)
                     {
@@ -117,7 +117,7 @@ public class UIState : MonoBehaviour
                         }
                     }
                 }
-                else if (Input.GetKeyDown(KeyCode.C))
+                else if (Input.GetKeyDown(KeyCode.Q))
                 {
                     if (b == 1)
                     {
