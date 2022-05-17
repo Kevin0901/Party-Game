@@ -238,7 +238,7 @@ public class RoomManager : MonoBehaviourPunCallbacks
                 if (0 <= Game_num && Game_num <= 8)
                 {
                     StopCoroutine(TimeCount());
-                    PhotonNetwork.LoadLevel(2);
+                    PhotonNetwork.LoadLevel(3);
                 }
                 else
                 {
@@ -271,7 +271,7 @@ public class RoomManager : MonoBehaviourPunCallbacks
                 WinTeam = GameObject.Find("EndGameUI").GetComponent<EndGame>().WinTeam;
                 if (WinTeam != null)
                 {
-                    PhotonNetwork.LoadLevel(1);
+                    PhotonNetwork.LoadLevel(2);
                 }
 
             }
