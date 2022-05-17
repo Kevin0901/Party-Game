@@ -629,7 +629,8 @@ PrefabInstance:
       propertyPath: m_TagString
       value: territory
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 1453858577549326522, guid: 68b2ebc4964119541987510949854859, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 68b2ebc4964119541987510949854859, type: 3}
 --- !u!1 &382949415
 GameObject:
@@ -1034,7 +1035,8 @@ PrefabInstance:
       propertyPath: m_TagString
       value: territory
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 1453858577549326522, guid: 68b2ebc4964119541987510949854859, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 68b2ebc4964119541987510949854859, type: 3}
 --- !u!1 &825504520
 GameObject:
