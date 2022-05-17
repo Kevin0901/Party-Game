@@ -18,21 +18,29 @@ public class heart : MonoBehaviour
                 this.transform.GetChild(0).Find("heart-3").GetComponent<Image>().sprite = sprites[0];
                 break;
             case 2.5f:
+                this.transform.GetChild(0).Find("heart-1").GetComponent<Image>().sprite = sprites[0];
+                this.transform.GetChild(0).Find("heart-2").GetComponent<Image>().sprite = sprites[0];
                 this.transform.GetChild(0).Find("heart-3").GetComponent<Image>().sprite = sprites[1];
                 break;
             case 2f:
+                this.transform.GetChild(0).Find("heart-1").GetComponent<Image>().sprite = sprites[0];
+                this.transform.GetChild(0).Find("heart-2").GetComponent<Image>().sprite = sprites[0];
                 this.transform.GetChild(0).Find("heart-3").GetComponent<Image>().sprite = sprites[2];
                 break;
             case 1.5f:
-                this.transform.GetChild(0).Find("heart-3").GetComponent<Image>().sprite = sprites[2];
+                this.transform.GetChild(0).Find("heart-1").GetComponent<Image>().sprite = sprites[0];
                 this.transform.GetChild(0).Find("heart-2").GetComponent<Image>().sprite = sprites[1];
+                this.transform.GetChild(0).Find("heart-3").GetComponent<Image>().sprite = sprites[2];
                 break;
             case 1f:
+                this.transform.GetChild(0).Find("heart-1").GetComponent<Image>().sprite = sprites[0];
                 this.transform.GetChild(0).Find("heart-2").GetComponent<Image>().sprite = sprites[2];
+                this.transform.GetChild(0).Find("heart-3").GetComponent<Image>().sprite = sprites[2];
                 break;
             case 0.5f:
-                this.transform.GetChild(0).Find("heart-2").GetComponent<Image>().sprite = sprites[2];
                 this.transform.GetChild(0).Find("heart-1").GetComponent<Image>().sprite = sprites[1];
+                this.transform.GetChild(0).Find("heart-2").GetComponent<Image>().sprite = sprites[2];
+                this.transform.GetChild(0).Find("heart-3").GetComponent<Image>().sprite = sprites[2];
                 break;
             case 0:
                 this.transform.GetChild(0).Find("heart-1").GetComponent<Image>().sprite = sprites[2];
