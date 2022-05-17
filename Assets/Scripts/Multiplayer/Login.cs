@@ -1,11 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using Photon.Pun;
 using TMPro;
-using Photon.Realtime;
-using Firebase;
 using Firebase.Database;
+using UnityEngine.SceneManagement;
 #if UNITY_EDITOR
 using UnityEditor;
 #endif
@@ -56,7 +54,7 @@ public class Login : MonoBehaviour
         if (PlayerPrefs.HasKey("username"))  //如果 PlayerPrefs 裡面有玩家資料，直接預先填入
         {
             LoginName.text = PlayerPrefs.GetString("username");
-            PhotonNetwork.NickName = PlayerPrefs.GetString("username");
+            // PhotonNetwork.NickName = PlayerPrefs.GetString("username");
         }
     }
     void Update()
@@ -110,12 +108,13 @@ public class Login : MonoBehaviour
     private IEnumerator fadeout() //淡出畫面
     {
         CanvasGroup.blocksRaycasts = false;
-        GameObject.Find("TranPageAnimation").GetComponent<Animator>().SetTrigger("change");
         yield return new WaitForSeconds(0.5f);
         CanvasGroup.alpha = 0;
         LoginBlock.SetActive(false);
         RegisterBlock.SetActive(false);
         transform.Find("Quit").gameObject.SetActive(false);
+
+        SceneManager.LoadScene(1);
     }
     IEnumerator Anime_IE()
     {
@@ -184,8 +183,8 @@ public class Login : MonoBehaviour
 
             if (isRegister && isRightPass)  //如果都正確
             {
-                Launcher.Instance.isLogin = true;
-                PhotonNetwork.NickName = LoginName.text;
+                // Launcher.Instance.isLogin = true;
+                // PhotonNetwork.NickName = LoginName.text;
                 //UserName.SetText(PhotonNetwork.NickName);
 
                 PlayerPrefs.SetString("username", LoginName.text);
@@ -193,7 +192,7 @@ public class Login : MonoBehaviour
                 LoginPassword.text = "";
                 StartCoroutine(fadeout());
                 // reference.Child("Account_Online").Child(PlayerPrefs.GetString("username")).SetValueAsync(true);
-                GameObject.Find("GameMenu").GetComponent<GameMenu>().inGameMenu = true;
+                // GameObject.Find("GameMenu").GetComponent<GameMenu>().inGameMenu = true;
                 // MenuManger.Instance.OpenMenu("title");
             }
             else if (!isRegister)  //尚未註冊

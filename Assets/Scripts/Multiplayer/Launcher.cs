@@ -81,6 +81,7 @@ public class Launcher : MonoBehaviourPunCallbacks
         }
 
         Debug.Log("Joined Lobby");
+        PhotonNetwork.NickName = PlayerPrefs.GetString("username");
         RoomManager.gameObject.SetActive(true);
     }
 

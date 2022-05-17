@@ -23,6 +23,10 @@ public class StartMenu : MonoBehaviour
         CanvasGroup = this.GetComponent<CanvasGroup>();
         StartCoroutine(fadein());
         reference = FirebaseDatabase.DefaultInstance.RootReference;  //定義資料庫連接
+        if (PlayerPrefs.HasKey("username") && PlayerPrefs.HasKey("password"))
+        {
+            transform.Find("LogoutButton").gameObject.SetActive(true);
+        }
     }
     void Update()
     {
@@ -32,7 +36,7 @@ public class StartMenu : MonoBehaviour
         }
         if (Input.GetKeyDown(KeyCode.Space) && CanvasGroup.blocksRaycasts)
         {
-            StartCoroutine(Connected());
+            StartCoroutine(fadeout());
         }
     }
     private IEnumerator fadein() //淡入畫面
@@ -51,28 +55,7 @@ public class StartMenu : MonoBehaviour
         yield return new WaitForSeconds(0.5f);
         if (PlayerPrefs.HasKey("username") && PlayerPrefs.HasKey("password"))
         {
-            // bool isEntered = false;
-            // StartCoroutine(GetOnlinePlayer((DataSnapshot Onlinelist) =>  //從資料庫抓取所有線上玩家
-            // {
-            //     foreach (var p in Onlinelist.Children)  //逐筆檢視
-            //     {
-            //         if(PhotonNetwork.NickName.Equals(p.Key.ToString()))
-            //         {
-            //             isEntered = true;
-            //         }
-            //     }
-
-            //     if(isEntered)
-            //     {
-            //         Debug.Log("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA");
-            //     }
-            //     else
-            //     {
-            //         reference.Child("Account_Online").Child(PlayerPrefs.GetString("username")).SetValueAsync(true);
-            //     }
-            // }));   
-
-            GameObject.Find("GameMenu").GetComponent<GameMenu>().inGameMenu = true;
+            SceneManager.LoadScene(1);
         }
         else
         {
@@ -80,54 +63,58 @@ public class StartMenu : MonoBehaviour
         }
 
     }
-
-    IEnumerator GetOnlinePlayer(System.Action<DataSnapshot> onCallbacks) //從資料庫讀取所有玩家 Account
+    private IEnumerator GoMainUI()
     {
-        var userData = reference.Child("Account_Online").GetValueAsync();
-        yield return new WaitUntil(predicate: () => userData.IsCompleted);
-        if (userData != null)
+        CanvasGroup.blocksRaycasts = false;
+        MainAnimator.SetTrigger("fade");
+        yield return new WaitForSeconds(0.5f);
+        if (PlayerPrefs.HasKey("username") && PlayerPrefs.HasKey("password"))
         {
-            DataSnapshot snapshot = userData.Result;
-            onCallbacks.Invoke(snapshot);
-        }
-    }
-
-    IEnumerator Connected()
-    {
-        GameObject LM = GameObject.Find("LoadingMenu");
-        if (PhotonNetwork.IsConnected)
-        {
-            LM.GetComponent<CanvasGroup>().alpha = 0;
-            LM.GetComponent<CanvasGroup>().blocksRaycasts = false;
-            StartCoroutine(fadeout());
+            SceneManager.LoadScene(1);
         }
         else
         {
-            if (LM.GetComponent<CanvasGroup>().alpha == 0)
-            {
-                LM.GetComponent<CanvasGroup>().alpha = 1;
-            }
-            yield return new WaitForSeconds(0.1f);
-            waitTime += 0.1f;
-            if (waitTime > 10f && !LM.transform.Find("Reload").gameObject.activeSelf)
-            {
-                LM.transform.Find("Reload").gameObject.SetActive(true);
-                LM.GetComponent<CanvasGroup>().blocksRaycasts = true;
-            }
-            //PhotonNetwork.ConnectUsingSettings();  //開啟連線
-            StartCoroutine(Connected());
+            GameObject.Find("LoginMenu").GetComponent<Login>().inLoginMenu = true;
         }
     }
-    public void Reload()
-    {
-        SceneManager.LoadScene(0);
-    }
+    // IEnumerator Connected()
+    // {
+    //     GameObject LM = GameObject.Find("LoadingMenu");
+    //     if (PhotonNetwork.IsConnected)
+    //     {
+    //         LM.GetComponent<CanvasGroup>().alpha = 0;
+    //         LM.GetComponent<CanvasGroup>().blocksRaycasts = false;
+    //         StartCoroutine(fadeout());
+    //     }
+    //     else
+    //     {
+    //         if (LM.GetComponent<CanvasGroup>().alpha == 0)
+    //         {
+    //             LM.GetComponent<CanvasGroup>().alpha = 1;
+    //         }
+    //         yield return new WaitForSeconds(0.1f);
+    //         waitTime += 0.1f;
+    //         if (waitTime > 10f && !LM.transform.Find("Reload").gameObject.activeSelf)
+    //         {
+    //             LM.transform.Find("Reload").gameObject.SetActive(true);
+    //             LM.GetComponent<CanvasGroup>().blocksRaycasts = true;
+    //         }
+    //         //PhotonNetwork.ConnectUsingSettings();  //開啟連線
+    //         StartCoroutine(Connected());
+    //     }
+    // }
     public void PlayGame() //如果點擊畫面
     {
         if (CanvasGroup.blocksRaycasts)
         {
-            StartCoroutine(Connected());
+            StartCoroutine(GoMainUI());
         }
+    }
+
+    public void LogOut()
+    {
+        PlayerPrefs.DeleteKey("password");
+        StartCoroutine(fadeout());
     }
     public void QuitGame() //如果按離開按鈕
     {

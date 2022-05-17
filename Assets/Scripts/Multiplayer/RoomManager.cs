@@ -300,13 +300,13 @@ public class RoomManager : MonoBehaviourPunCallbacks
 
     void OnSceneLoaded(Scene scene, LoadSceneMode loadSceneMode)
     {
-        if (scene.buildIndex == 1) //如果在遊戲場景
+        if (SceneManager.GetActiveScene().name.Equals("MainScene")) //如果在遊戲場景
         {
             WaitPool = GameObject.Find("LoadSceneCompletePool");
             PhotonNetwork.Instantiate(Path.Combine("PhotonPrefabs", "LoadComplete"), Vector3.zero, Quaternion.identity);
             StartCoroutine(Wait_OtherPlayer_LoadMainScene());
         }
-        else if (scene.buildIndex == 2)
+        else if (SceneManager.GetActiveScene().name.Equals("FightScene"))
         {
             Cursor.visible = true;
             WaitPool = GameObject.Find("LoadFightSceneCompletePool");
@@ -418,6 +418,6 @@ public class RoomManager : MonoBehaviourPunCallbacks
         Destroy(PAPA);
         PhotonNetwork.LeaveRoom();
         PhotonNetwork.Disconnect();
-        SceneManager.LoadScene(0);
+        SceneManager.LoadScene("MainUI");
     }
 }
