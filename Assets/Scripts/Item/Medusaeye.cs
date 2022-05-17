@@ -20,7 +20,6 @@ public class Medusaeye : MonoBehaviour
     }
     private void OnTriggerEnter2D(Collider2D other)
     {
-        enemy = this.GetComponent<item_MoveMovementGamepad>().team;
         if (other.CompareTag(enemy))
         {
             enemyinlist.Add(other.gameObject);

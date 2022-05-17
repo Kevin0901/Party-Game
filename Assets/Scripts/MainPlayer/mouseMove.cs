@@ -4,7 +4,6 @@ using UnityEngine;
 using UnityEngine.UI;
 public class mouseMove : MonoBehaviour
 {
-    // Start is called before the first frame update
     private RectTransform t;
     public int totalplayer;
     private float h, w;
@@ -17,8 +16,6 @@ public class mouseMove : MonoBehaviour
         h = this.GetComponent<RectTransform>().rect.height;
         Cursor.visible = false;
     }
-
-    // Update is called once per frame
     void Update()
     {
         Vector2 movePos;

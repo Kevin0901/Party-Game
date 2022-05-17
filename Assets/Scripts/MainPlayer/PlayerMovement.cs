@@ -233,7 +233,6 @@ public class PlayerMovement : MonoBehaviour
                             {
                                 GameObject throwI = Instantiate(canthrowitem[i], transform.position, canthrowitem[i].transform.rotation);
                                 throwI.transform.SetParent(this.transform);
-                                throwI.AddComponent<item_MoveMovementGamepad>();
                                 nextfire = Time.time + fireRate;
                                 switch (i)
                                 {
@@ -259,7 +258,6 @@ public class PlayerMovement : MonoBehaviour
                             {
                                 GameObject throwI = Instantiate(canthrowitem[i], transform.position, canthrowitem[i].transform.rotation);
                                 throwI.transform.SetParent(this.transform);
-                                throwI.AddComponent<item_MoveMovementGamepad>();
                                 nextfire = Time.time + fireRate;
                                 switch (i)
                                 {
