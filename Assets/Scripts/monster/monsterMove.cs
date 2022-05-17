@@ -74,12 +74,19 @@ public class monsterMove : MonoBehaviour
         }
         this.transform.SetParent(GameObject.Find("PAPA").transform);
         t = this.GetComponent<Team>();
-        animator.SetFloat("attackSpeed", 1 / attackRate);
+        animator.SetFloat("attackSpeed", attackRate);
         nextAttack = 0;
         setTime = 0.5f;
         mask = 1 << 9 | 1 << 10 | 1 << 11;
         angle = 35;
         StartCoroutine(waitIdle(setTime));
+    }
+    private void OnDisable()
+    {
+        if (this.gameObject.activeSelf)
+        {
+            animator.Rebind();
+        }
     }
     void Update()
     {
@@ -106,6 +113,7 @@ public class monsterMove : MonoBehaviour
         Gizmos.color = Color.red;
         Gizmos.DrawWireSphere(transform.position, attackRange);
     }
+
     void detectEnemy()
     {
         if (currentState != MonsterState.idle)

@@ -93,7 +93,7 @@ GameObject:
   - component: {fileID: 5122136405848307995}
   m_Layer: 9
   m_Name: giant
-  m_TagString: red
+  m_TagString: Untagged
   m_Icon: {fileID: 7148428337604731935, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
