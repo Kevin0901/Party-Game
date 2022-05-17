@@ -64,11 +64,12 @@ public class RunEvent : MonoBehaviour
     {
         for (int i = 0; i < FightManager.Instance.plist.Count; i++)
         {
-            if(FightManager.Instance.plist[i].GetComponent<PhotonView>().IsMine)
+            if (FightManager.Instance.plist[i].GetComponent<PhotonView>().IsMine)
             {
                 FightManager.Instance.plist[i].GetComponentInChildren<typeMove>().enabled = false;
             }
         }
+        this.transform.Find("gameover").gameObject.SetActive(true);
         yield return new WaitForSeconds(3f);
         UI.SetActive(true);
         if (winner.GetComponent<arenaPlayer>().red)
