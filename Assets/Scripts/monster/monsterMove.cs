@@ -258,9 +258,13 @@ public class monsterMove : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D other)
     {
-        if (enemy == null && (other.gameObject.layer == 14 || other.gameObject.layer == 11 || other.gameObject.layer == 9))
+        if (enemy == null && other.gameObject.layer == 14)
         {
             enemy = other.gameObject;
+            currentState = MonsterState.attack;
+        }
+        else if (enemy == other.gameObject && (other.gameObject.layer == 11 || other.gameObject.layer == 9))
+        {
             currentState = MonsterState.attack;
         }
     }

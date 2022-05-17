@@ -123,6 +123,7 @@ public class PlayerMovement : MonoBehaviour
     }
     private void OnDisable()
     {
+        animator.Rebind();
         // if (deadscreen != null)
         // {
         //     deadscreen.SetActive(true);
