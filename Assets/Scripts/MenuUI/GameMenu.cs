@@ -9,9 +9,9 @@ public class GameMenu : MonoBehaviour
     private CanvasGroup CanvasGroup;
     void Start()
     {
-        inGameMenu = false;
         GameAnimator = this.GetComponent<Animator>();
         CanvasGroup = this.GetComponent<CanvasGroup>();
+        StartCoroutine(sceneFadein());
     }
     void Update()
     {
@@ -20,11 +20,19 @@ public class GameMenu : MonoBehaviour
             fadein();
         }
     }
+    private IEnumerator sceneFadein() //淡入畫面
+    {
+        GameAnimator.SetTrigger("fade");
+        inGameMenu = false;
+        yield return new WaitForSeconds(0.5f);
+        GameAnimator.enabled = false;
+        CanvasGroup.blocksRaycasts = true;
+    }
     private void fadein() //淡入畫面
     {
-        CanvasGroup.blocksRaycasts = true;
         CanvasGroup.alpha = 1;
         inGameMenu = false;
+        CanvasGroup.blocksRaycasts = true;
     }
     private IEnumerator fadeout() //淡出畫面
     {
