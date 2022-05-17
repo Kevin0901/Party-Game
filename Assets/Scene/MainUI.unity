@@ -3433,6 +3433,16 @@ PrefabInstance:
       propertyPath: m_Name
       value: GameMenu
       objectReference: {fileID: 0}
+    - target: {fileID: 735440971677989949, guid: ae030c0ad19ffb747a420d4597db1583,
+        type: 3}
+      propertyPath: m_Alpha
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 735440971677989949, guid: ae030c0ad19ffb747a420d4597db1583,
+        type: 3}
+      propertyPath: m_BlocksRaycasts
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 735440971677989951, guid: ae030c0ad19ffb747a420d4597db1583,
         type: 3}
       propertyPath: m_Pivot.x
@@ -3763,6 +3773,11 @@ PrefabInstance:
     - target: {fileID: 8302095369213339507, guid: e72c3346a91979446a759ed1ae3b91d4,
         type: 3}
       propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8302095369213339507, guid: e72c3346a91979446a759ed1ae3b91d4,
+        type: 3}
+      propertyPath: m_AnchorMin.x
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []

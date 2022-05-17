@@ -7,8 +7,6 @@ public class SupportShoot : MonoBehaviour
     public List<GameObject> TowerInRange;
     private Animator animator;
     private Team t;
-    // Use this for initialization
-
     void Start()
     {
         this.transform.SetParent(GameObject.Find("PAPA").transform);
@@ -25,7 +23,6 @@ public class SupportShoot : MonoBehaviour
         yield return new WaitForSeconds(0.2f);
         animator.SetBool("BlueAttack", false);
         Shoot(target.gameObject);
-
     }
 
     private IEnumerator RedAttackCold(Collider2D target)

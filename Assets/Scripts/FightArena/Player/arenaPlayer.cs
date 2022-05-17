@@ -254,7 +254,7 @@ public class arenaPlayer : MonoBehaviour
             isPress = false;
             float damage;
             GameObject a = PhotonNetwork.Instantiate(Path.Combine("PhotonPrefabs", "arena/Zeus/lightShoot"), transform.position,
-            lighting.transform.rotation * this.transform.rotation);
+            lighting.transform.rotation * this.transform.rotation, 0, new object[] { PV.ViewID });
             if (powerTime < maxPowerTime)
             {
                 a.transform.localScale += new Vector3(a.transform.localScale.x * powerTime, 0, 0);

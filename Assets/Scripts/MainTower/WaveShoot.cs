@@ -13,8 +13,6 @@ public class WaveShoot : MonoBehaviour
     private int firstshoot = 0;
     private Animator animator;
     private bool issave;
-    PhotonView PV;
-
     private void Awake()
     {
         t = GetComponent<Team>();
@@ -46,11 +44,9 @@ public class WaveShoot : MonoBehaviour
     void Update()
     {
         GameObject target = null;
-        // 1
         float minimalEnemyDistance = float.MaxValue;
         foreach (GameObject enemy in enemiesInRange)
         {
-
             float distanceToGoal = Vector3.Distance(transform.position, enemy.transform.position);
             if (distanceToGoal < minimalEnemyDistance)
             {
@@ -58,7 +54,6 @@ public class WaveShoot : MonoBehaviour
                 minimalEnemyDistance = distanceToGoal;
             }
         }
-        // 2
         if (target != null)
         {
             if (firstshoot == 0)
