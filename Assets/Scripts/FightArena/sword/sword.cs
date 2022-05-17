@@ -11,6 +11,7 @@ public class sword : MonoBehaviour
     [HideInInspector] public float waitTime;
     private float nexthurt;
     private int num;
+    bool Wait_One_Sec_done = false;
     void Awake()
     {
         player = this.GetComponentInParent<arenaPlayer>();
@@ -20,20 +21,22 @@ public class sword : MonoBehaviour
     //如果劍碰到玩家的話，判斷不是自己 & 不是上一個傳的對象
     private void OnTriggerStay2D(Collider2D other)
     {
-        if (other.gameObject.layer == 10 && (other.gameObject != player.gameObject) && (lastplayer != other.gameObject))
+        if (other.gameObject.layer == 10 && (other.gameObject != player.gameObject) && (lastplayer != other.gameObject) && Wait_One_Sec_done)
         {
             other.gameObject.transform.Find("sword").gameObject.SetActive(true);
             other.gameObject.transform.Find("sword").gameObject.GetComponent<sword>().StartCoroutine("Savelastplayer", player.gameObject);
             player.StartCoroutine("changeColorTitle_Sword");
 
             PhotonNetwork.Instantiate(Path.Combine("PhotonPrefabs", "arena/Sword/SwordChange"),
-            Vector3.zero, this.transform.rotation, 0, new object[] {other.gameObject.GetComponent<PhotonView>().ViewID });
+            Vector3.zero, this.transform.rotation, 0, new object[] { other.gameObject.GetComponent<PhotonView>().ViewID });
             this.gameObject.SetActive(false);
         }
     }
     //如果劍開啟
     private void OnEnable()
     {
+        Wait_One_Sec_done = false;
+        StartCoroutine(One_Sec());
         player.speed *= 1.5f;
         //改變Title顏色
         player.titleColor.color = new Color32(255, 28, 28, 255);
@@ -59,5 +62,11 @@ public class sword : MonoBehaviour
         lastplayer = p;
         yield return new WaitForSeconds(waitTime);
         lastplayer = null;
+    }
+
+    IEnumerator One_Sec()
+    {
+        yield return new WaitForSeconds(1f);
+        Wait_One_Sec_done = true;
     }
 }
