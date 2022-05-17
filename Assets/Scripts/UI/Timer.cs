@@ -8,7 +8,7 @@ using TMPro;
 public class Timer : MonoBehaviour
 {
     private GameControl t;
-    public Text currenttimeText;
+    public TextMeshProUGUI currenttimeText;
     [SerializeField] float Time;
     // Start is called before the first frame update
     void Start()

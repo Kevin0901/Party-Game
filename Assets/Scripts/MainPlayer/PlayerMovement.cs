@@ -114,9 +114,8 @@ public class PlayerMovement : MonoBehaviour
         // {
         //     deadscreen.SetActive(false);
         // }
-        animator.enabled = true;
-        animator.SetFloat("attackSpeed", 1 / attackRate);
-        animator.SetFloat("moveY", dir);
+        animator.SetFloat("attackSpeed", attackRate);
+        animator.SetFloat("idleY", dir);
         currentState = PlayerState.walk;
         this.GetComponent<SpriteRenderer>().color = new Color32(255, 255, 255, 255);
         speed = orginspeed;

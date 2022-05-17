@@ -1333,6 +1333,12 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 440
       objectReference: {fileID: 0}
+    - target: {fileID: 4420635028550166230, guid: 11ec2067073999847b198d960d00f60c,
+        type: 3}
+      propertyPath: m_GlobalFontAsset
+      value: 
+      objectReference: {fileID: 11400000, guid: 6e13c33871cbe934589e1a24d3916b95,
+        type: 2}
     - target: {fileID: 4420635028571882161, guid: 11ec2067073999847b198d960d00f60c,
         type: 3}
       propertyPath: m_AnchoredPosition.y
@@ -1342,6 +1348,17 @@ PrefabInstance:
         type: 3}
       propertyPath: m_IsActive
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4420635028591772636, guid: 11ec2067073999847b198d960d00f60c,
+        type: 3}
+      propertyPath: m_fontAsset
+      value: 
+      objectReference: {fileID: 11400000, guid: 6e13c33871cbe934589e1a24d3916b95,
+        type: 2}
+    - target: {fileID: 4420635028591772636, guid: 11ec2067073999847b198d960d00f60c,
+        type: 3}
+      propertyPath: m_hasFontAssetChanged
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4420635029003881042, guid: 11ec2067073999847b198d960d00f60c,
         type: 3}
@@ -1478,6 +1495,17 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 4420635029834613707, guid: 11ec2067073999847b198d960d00f60c,
+        type: 3}
+      propertyPath: m_fontAsset
+      value: 
+      objectReference: {fileID: 11400000, guid: 6e13c33871cbe934589e1a24d3916b95,
+        type: 2}
+    - target: {fileID: 4420635029834613707, guid: 11ec2067073999847b198d960d00f60c,
+        type: 3}
+      propertyPath: m_hasFontAssetChanged
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4420635029871433292, guid: 11ec2067073999847b198d960d00f60c,
         type: 3}
       propertyPath: m_Name
@@ -1498,6 +1526,12 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4420635030254689924, guid: 11ec2067073999847b198d960d00f60c,
+        type: 3}
+      propertyPath: m_GlobalFontAsset
+      value: 
+      objectReference: {fileID: 11400000, guid: 6e13c33871cbe934589e1a24d3916b95,
+        type: 2}
     - target: {fileID: 4420635030398217036, guid: 11ec2067073999847b198d960d00f60c,
         type: 3}
       propertyPath: m_IsActive

@@ -228,7 +228,7 @@ public class Launcher : MonoBehaviourPunCallbacks
                                     if (players[j].NickName.Equals(PName[i]) && !isStart)
                                     {
                                         PlayerUI.GetComponent<PlayerListItem>().SetUp(players[j]);  //設定玩家名稱 UI
-                                        if(!PlayerUI.GetComponent<PhotonView>().Controller.NickName.Equals(players[j]))
+                                        if (!PlayerUI.GetComponent<PhotonView>().Controller.NickName.Equals(players[j]))
                                         {
                                             PlayerUI.GetComponent<PhotonView>().TransferOwnership(players[j]);  //設定 PhotonView Owner (表示只有 XXX 有此 UI 的擁有權)
                                         }
@@ -346,9 +346,9 @@ public class Launcher : MonoBehaviourPunCallbacks
     {
         GameObject.Find("ChoosePlayer").GetComponent<CanvasGroup>().blocksRaycasts = false;
         GameObject.Find("TranPageAnimation").GetComponent<Animator>().SetTrigger("change");
-        yield return new WaitForSeconds(0.5f);
+        yield return new WaitForSeconds(0.55f);
         GameObject.Find("ChoosePlayer").GetComponent<CanvasGroup>().alpha = 0;
-        yield return new WaitForSeconds(0.5f);
+        GameObject.Find("music").SetActive(false);
         if (PV.IsMine)
         {
             PhotonNetwork.LoadLevel(2);
@@ -389,12 +389,12 @@ public class Launcher : MonoBehaviourPunCallbacks
             }
             foreach (Transform trans in roomListContent)
             {
-                if(trans.GetComponent<RoomListItem>().info.Name.Equals(roomList[i].Name))
+                if (trans.GetComponent<RoomListItem>().info.Name.Equals(roomList[i].Name))
                 {
                     isInst = true;
                 }
             }
-            if(!isInst)
+            if (!isInst)
             {
                 Instantiate(roomListItemPrefab, roomListContent).GetComponent<RoomListItem>().SetUp(roomList[i]);
             }
