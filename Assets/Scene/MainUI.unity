@@ -3574,7 +3574,7 @@ MonoBehaviour:
   Game_num: 0
   TotalTime: 0
   ReadyTime: 5
-  EventTime: 20
+  EventTime: 180
   Count: {fileID: 485002820}
   EventPicture: {fileID: 2062829505}
   EventSprite:
