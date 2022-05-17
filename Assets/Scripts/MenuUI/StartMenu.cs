@@ -49,7 +49,7 @@ public class StartMenu : MonoBehaviour
             GameObject.Find("music").SetActive(false);
             yield return new WaitForSeconds(2.5f);
             GameObject.Find("LoadingCircle").transform.GetChild(0).gameObject.SetActive(false);
-            yield return new WaitForSeconds(0.1f);
+            yield return null;
             SceneManager.LoadScene(1);
         }
         else
