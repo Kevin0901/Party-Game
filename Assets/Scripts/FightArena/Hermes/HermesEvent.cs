@@ -102,7 +102,7 @@ public class HermesEvent : MonoBehaviour
             FightManager.Instance.plist[i].GetComponent<arenaPlayer>().currentState = ArenaState.idle;
         }
         this.transform.Find("GameUI").Find("end").GetComponent<Text>().text =
-        "遊戲結束\n" + blueScore.ToString() + "  :  " + redScore.ToString();
+        "Game Over\n" + blueScore.ToString() + "  :  " + redScore.ToString();
         yield return new WaitForSeconds(3f);
         UI.SetActive(true);
         if (redScore > blueScore)
@@ -139,16 +139,16 @@ public class HermesEvent : MonoBehaviour
         // a.GetComponent<pickcow>().cowScore = 3;
         StartCoroutine(spawnGoldCow(UnityEngine.Random.Range(Gold_mix, Gold_max)));
     }
-    public void R_ScoreADD(int point)
-    {
-        redScore += point;
-        this.transform.Find("GameUI").Find("red").GetComponent<Text>().text = "Score:" + redScore.ToString();
-    }
-    public void B_ScoreADD(int point)
-    {
-        blueScore += point;
-        this.transform.Find("GameUI").Find("blue").GetComponent<Text>().text = "Score:" + blueScore.ToString();
-    }
+    // public void R_ScoreADD(int point)
+    // {
+    //     redScore += point;
+    //     this.transform.Find("GameUI").Find("red").GetComponent<Text>().text = "Score:" + redScore.ToString();
+    // }
+    // public void B_ScoreADD(int point)
+    // {
+    //     blueScore += point;
+    //     this.transform.Find("GameUI").Find("blue").GetComponent<Text>().text = "Score:" + blueScore.ToString();
+    // }
     public IEnumerator timeCount()
     {
         yield return new WaitForSeconds(1f);
