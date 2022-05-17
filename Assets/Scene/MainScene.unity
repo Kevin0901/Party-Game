@@ -1936,24 +1936,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6c5235609451e5e40babb7b6142b8d59, type: 3}
---- !u!1 &1750786681 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 3894020396863356541, guid: 6eff662ecd440384184965cb98ad24e7,
-    type: 3}
-  m_PrefabInstance: {fileID: 1940648345}
-  m_PrefabAsset: {fileID: 0}
---- !u!225 &1750786682
-CanvasGroup:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1750786681}
-  m_Enabled: 1
-  m_Alpha: 0
-  m_Interactable: 1
-  m_BlocksRaycasts: 0
-  m_IgnoreParentGroups: 1
 --- !u!4 &1778406194 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 2493688648149832426, guid: 483d77fb7faa9b2449e7502224d6d81e,
