@@ -33680,7 +33680,17 @@ CompositeCollider2D:
   m_GeometryType: 0
   m_GenerationType: 0
   m_EdgeRadius: 0
-  m_ColliderPaths: []
+  m_ColliderPaths:
+  - m_Collider: {fileID: 988460420}
+    m_ColliderPaths:
+    - - X: 707999707
+        Y: -376249376
+      - X: 707999707
+        Y: 378888384
+      - X: -708000000
+        Y: 378888091
+      - X: -707999707
+        Y: -376249376
   m_CompositePaths:
     m_Paths:
     - - {x: 70.79994, y: -37.62494}
@@ -44283,7 +44293,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &1799371854
 Transform:
   m_ObjectHideFlags: 0
@@ -55262,7 +55272,7 @@ MonoBehaviour:
   UI: {fileID: 832589408}
   theLight: {fileID: 5098201980595327359, guid: fbbc40b279f9b8a40bcdfc9ac1379d8b,
     type: 3}
-  spawnTime: 1.5
+  spawnTime: 1.75
   StartButton: {fileID: 1444056165}
   UIBackGround: {fileID: 1247284307}
 --- !u!114 &1274259150265348531

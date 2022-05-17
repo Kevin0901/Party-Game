@@ -37,9 +37,11 @@ public class EndGame : MonoBehaviour
             {
                 WinTeam = "red";
             }
-            else
+            else if(transform.Find("blue").gameObject.activeSelf)
             {
                 WinTeam = "blue";
+            }else{
+                WinTeam = "NO";
             }
             GameObject.Find("RoomManager").GetComponent<RoomManager>().StartCoroutine("Black_fadein");
         }
