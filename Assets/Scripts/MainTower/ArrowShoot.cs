@@ -81,34 +81,41 @@ public class ArrowShoot : MonoBehaviour
 
     }
 
-    void OnTriggerStay2D(Collider2D other)
-    {
+    void OnTriggerEnter2D(Collider2D other){
         t = GetComponent<Team>();
         if (other.CompareTag(t.Enemyteam) && other.gameObject.layer != 11)
         {
-            if (enemiesInRange.Count == 0)
-            {
-                enemiesInRange.Add(other.gameObject);
-            }
-            else
-            {
-                for (int i = 0; i < enemiesInRange.Count; i++)
-                {
-                    if (enemiesInRange[i].name == other.gameObject.name)
-                    {
-                        issave = true;
-                        break;
-                    }
-                }
-                if (!issave)
-                {
-                    enemiesInRange.Add(other.gameObject);
-                    issave = false;
-                }
-            }
+            enemiesInRange.Add(other.gameObject);
         }
-
     }
+
+    // void OnTriggerStay2D(Collider2D other)
+    // {
+    //     t = GetComponent<Team>();
+    //     if (other.CompareTag(t.Enemyteam) && other.gameObject.layer != 11)
+    //     {
+    //         if (enemiesInRange.Count == 0)
+    //         {
+    //             enemiesInRange.Add(other.gameObject);
+    //         }
+    //         else
+    //         {
+    //             for (int i = 0; i < enemiesInRange.Count; i++)
+    //             {
+    //                 if (enemiesInRange[i].name == other.gameObject.name)
+    //                 {
+    //                     issave = true;
+    //                     break;
+    //                 }
+    //             }
+    //             if (!issave)
+    //             {
+    //                 enemiesInRange.Add(other.gameObject);
+    //                 issave = false;
+    //             }
+    //         }
+    //     }
+    // }
 
     void OnTriggerExit2D(Collider2D other)
     {
@@ -129,8 +136,6 @@ public class ArrowShoot : MonoBehaviour
             targetPosition.z = Arrow.transform.position.z;
 
             GameObject arrowbh = (GameObject)Instantiate(Arrow);
-            // GameObject arrowbh = PhotonNetwork.Instantiate(Path.Combine("PhotonPrefabs", "Main-tower/Towerchild/apolloArrow"),
-            // this.transform.position,this.transform.rotation, 0, new object[] { PV.ViewID });
 
             arrowbh.transform.position = startPosition;
             ArrowBehavior arrowComp = arrowbh.GetComponent<ArrowBehavior>();

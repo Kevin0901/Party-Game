@@ -1857,7 +1857,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d946633efb9d1cb4cb4ae458d808512d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Anime: {fileID: 1728800239}
+  LoginAni: {fileID: 0}
   LoginBlock: {fileID: 2113054}
   RegisterBlock: {fileID: 1389562279}
   LoginName: {fileID: 1145764601}
@@ -6027,6 +6027,16 @@ PrefabInstance:
       propertyPath: m_Name
       value: GameMenu
       objectReference: {fileID: 0}
+    - target: {fileID: 735440971677989949, guid: ae030c0ad19ffb747a420d4597db1583,
+        type: 3}
+      propertyPath: m_Alpha
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 735440971677989949, guid: ae030c0ad19ffb747a420d4597db1583,
+        type: 3}
+      propertyPath: m_BlocksRaycasts
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 735440971677989951, guid: ae030c0ad19ffb747a420d4597db1583,
         type: 3}
       propertyPath: m_Pivot.x
@@ -6688,6 +6698,11 @@ PrefabInstance:
     - target: {fileID: 8302095369213339507, guid: e72c3346a91979446a759ed1ae3b91d4,
         type: 3}
       propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8302095369213339507, guid: e72c3346a91979446a759ed1ae3b91d4,
+        type: 3}
+      propertyPath: m_AnchorMin.x
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []

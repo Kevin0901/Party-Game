@@ -28,7 +28,6 @@ public class Wave : MonoBehaviour
         {
             int cnt = 0;
             health eheal = other.GetComponentInChildren<health>();
-
             foreach (GameObject n in enemylist)
             {
                 if (other.gameObject != null && n != null)
@@ -41,7 +40,6 @@ public class Wave : MonoBehaviour
                 }
 
             }
-
             if (cnt == 0)
             {
                 eheal.Hurt((int)damage);
