@@ -15,7 +15,7 @@ public class pickcow : MonoBehaviour
         reference = FirebaseDatabase.DefaultInstance.RootReference;  //定義資料庫連接
         this.transform.parent = PhotonView.Find((int)PV.InstantiationData[0]).transform;
     }
-    private void OnTriggerStay2D(Collider2D other)
+    private void OnTriggerEnter2D(Collider2D other)
     {
         if (other.gameObject.layer == 10)
         {

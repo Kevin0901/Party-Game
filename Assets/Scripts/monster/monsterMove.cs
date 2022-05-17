@@ -79,10 +79,7 @@ public class monsterMove : MonoBehaviour
         setTime = 0.5f;
         mask = 1 << 9 | 1 << 10 | 1 << 11;
         angle = 35;
-        if (PV.IsMine)
-        {
-            StartCoroutine(waitIdle(setTime));
-        }
+        StartCoroutine(waitIdle(setTime));
     }
     void Update()
     {
