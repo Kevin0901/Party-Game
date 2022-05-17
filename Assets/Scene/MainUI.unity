@@ -1537,7 +1537,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 872805899}
         m_TargetAssemblyTypeName: Launcher, Assembly-CSharp
         m_MethodName: CreateRoom
         m_Mode: 1
