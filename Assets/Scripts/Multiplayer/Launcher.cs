@@ -351,7 +351,7 @@ public class Launcher : MonoBehaviourPunCallbacks
         yield return new WaitForSeconds(0.5f);
         if (PV.IsMine)
         {
-            PhotonNetwork.LoadLevel(1);
+            PhotonNetwork.LoadLevel(2);
         }
     }
 
