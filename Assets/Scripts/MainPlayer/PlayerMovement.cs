@@ -19,7 +19,7 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private PlayerState currentState;
     public float speed;
     [SerializeField] private int MaxHealth, CurHealth;
-    [SerializeField] private float dir;
+    private float dir;
     public int attackDamage;
     [SerializeField] private float attackRate; //攻擊間隔
     [SerializeField] private float fireRate;
@@ -521,7 +521,7 @@ public class PlayerMovement : MonoBehaviour
         animator.SetBool("attacking", true);
         yield return null;
         animator.SetBool("attacking", false);
-        yield return new WaitForSeconds(attackRate);
+        yield return new WaitForSeconds(1 / attackRate);
         currentState = PlayerState.walk;
     }
     public GameObject getplayersign()
@@ -583,12 +583,14 @@ public class PlayerMovement : MonoBehaviour
             this.transform.position = RedspawnPoint;
             spriteRenderer.sortingOrder = spriteNum;
             dir = 1f;
+            Debug.Log("red ");
         }
         else if ((this.gameObject.tag == "blue"))
         {
             this.transform.position = BluespawnPoint;
             spriteRenderer.sortingOrder = spriteNum;
             dir = -1f;
+            Debug.Log("blue ");
         }
         // GameObject mouse = Instantiate(v, v.transform.position, v.transform.rotation);
         if (int.Parse(joynum) == 0)
