@@ -556,6 +556,7 @@ public class PlayerMovement : MonoBehaviour
         change = Vector3.zero;
         change.x = Mathf.RoundToInt(Input.GetAxisRaw("Xplayer" + joynum));
         change.y = Mathf.RoundToInt(Input.GetAxisRaw("Yplayer" + joynum));
+        Debug.Log(change);
         if (change != Vector3.zero)
         {
             mrigibody.MovePosition(transform.position + change.normalized * speed * Time.deltaTime);
