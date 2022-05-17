@@ -396,12 +396,14 @@ public class RoomManager : MonoBehaviourPunCallbacks
                         ResourceManager.Instance.RedAddResource(resourceTypeList.list[0], 200);
                         ResourceManager.Instance.RedAddResource(resourceTypeList.list[1], 200);
                         ResourceManager.Instance.RedAddResource(resourceTypeList.list[2], 200);
+                        WinTeam=null;
                     }
                     else if (WinTeam == "blue")
                     {
                         ResourceManager.Instance.BlueAddResource(resourceTypeList.list[0], 200);
                         ResourceManager.Instance.BlueAddResource(resourceTypeList.list[1], 200);
                         ResourceManager.Instance.BlueAddResource(resourceTypeList.list[2], 200);
+                        WinTeam=null;
                     }
                 }
             }

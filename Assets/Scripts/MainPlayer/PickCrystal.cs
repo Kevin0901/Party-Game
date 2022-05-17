@@ -18,7 +18,7 @@ public class PickCrystal : MonoBehaviour
         ResourceTypeListSO resourceTypeList = Resources.Load<ResourceTypeListSO>(typeof(ResourceTypeListSO).Name);
         if (other.CompareTag("pick") && Input.GetButtonDown("pick" + player.joynum))
         {
-            for(int i =0 ;i<resourceTypeList.list.Count ; i++){
+            for(int i =0 ;i<resourceTypeList.list.Count-1 ; i++){
                 if(other.gameObject.name+" (ResourceTypeSo)" == resourceTypeList.list[i].name)
                 if (player.tag == "red")
                 {
