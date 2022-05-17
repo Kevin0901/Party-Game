@@ -192,7 +192,7 @@ public class PlayerMovement : MonoBehaviour
     }
     void PlayerMove()
     {
-        if (Input.GetButton("attack" + joynum) && currentState != PlayerState.attack) //如果按下攻擊鍵且玩家不在攻擊動作
+        if (Input.GetKey(KeyCode.Space) && currentState != PlayerState.attack) //如果按下攻擊鍵且玩家不在攻擊動作
         {
             // if (this.gameObject.activeSelf)
             // {
