@@ -12,24 +12,31 @@ public class sword : MonoBehaviour
     private float nexthurt;
     private int num;
     bool Wait_One_Sec_done = false;
+    PhotonView PV;
     void Awake()
     {
         player = this.GetComponentInParent<arenaPlayer>();
         num = player.p_index;
     }
-
+    private void Start()
+    {
+        PV = this.GetComponentInParent<PhotonView>();
+    }
     //如果劍碰到玩家的話，判斷不是自己 & 不是上一個傳的對象
     private void OnTriggerStay2D(Collider2D other)
     {
         if (other.gameObject.layer == 10 && (other.gameObject != player.gameObject) && (lastplayer != other.gameObject) && Wait_One_Sec_done)
         {
-            other.gameObject.transform.Find("sword").gameObject.SetActive(true);
-            other.gameObject.transform.Find("sword").gameObject.GetComponent<sword>().StartCoroutine("Savelastplayer", player.gameObject);
-            player.StartCoroutine("changeColorTitle_Sword");
+            if (PV.IsMine)
+            {
+                other.gameObject.transform.Find("sword").gameObject.SetActive(true);
+                other.gameObject.transform.Find("sword").gameObject.GetComponent<sword>().StartCoroutine("Savelastplayer", player.gameObject);
+                player.StartCoroutine("changeColorTitle_Sword");
 
-            PhotonNetwork.Instantiate(Path.Combine("PhotonPrefabs", "arena/Sword/SwordChange"),
-            Vector3.zero, this.transform.rotation, 0, new object[] { other.gameObject.GetComponent<PhotonView>().ViewID });
-            this.gameObject.SetActive(false);
+                PhotonNetwork.Instantiate(Path.Combine("PhotonPrefabs", "arena/Sword/SwordChange"),
+                Vector3.zero, this.transform.rotation, 0, new object[] { PV.ViewID, other.gameObject.GetComponent<PhotonView>().ViewID });
+                this.gameObject.SetActive(false);
+            }
         }
     }
     //如果劍開啟

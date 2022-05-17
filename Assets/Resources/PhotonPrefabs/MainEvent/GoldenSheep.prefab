@@ -140,6 +140,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   bonusteam: 
   speed: 3
+  timer: 0
 --- !u!95 &514314777
 Animator:
   serializedVersion: 3

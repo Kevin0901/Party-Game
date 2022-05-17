@@ -4,7 +4,8 @@ using UnityEngine;
 using Photon.Pun;
 public class ball : MonoBehaviour
 {
-    [HideInInspector] public float speed, damage;
+    [HideInInspector] public float speed;
+    public float damage;
     private Rigidbody2D rb;
     private float cnt; //速度計數器
     PhotonView PV;
