@@ -109,13 +109,13 @@ public class PlayerMovement : MonoBehaviour
     }
     private void OnEnable()
     {
+        animator.SetFloat("attackSpeed", attackRate);
+        animator.SetFloat("idleY", dir);
         StartCoroutine(WudiSet(2.5f));
         // if (deadscreen != null)
         // {
         //     deadscreen.SetActive(false);
         // }
-        animator.SetFloat("attackSpeed", attackRate);
-        animator.SetFloat("idleY", dir);
         currentState = PlayerState.walk;
         this.GetComponent<SpriteRenderer>().color = new Color32(255, 255, 255, 255);
         speed = orginspeed;
