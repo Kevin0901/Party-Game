@@ -180,29 +180,23 @@ public class ResourceManager : MonoBehaviour
 
     public void RedSpendResources(ResourceAmount[] resourceAmountsArray)
     {
-        StartCoroutine(GetTeamResourceData((DataSnapshot Redinfo) =>
-        {
             foreach (ResourceAmount resourceAmount in resourceAmountsArray)
             {
-                int RedresValue = Convert.ToInt32(Redinfo.Child(resourceAmount.resourceType.ToString()).Value) - resourceAmount.amount;
+                int RedresValue = Convert.ToInt32(reference.Child("GameRoom").Child(roomname).Child("RedResource").Child(resourceAmount.ToString()).GetValueAsync());
                 RedresourceAmountDictionary[resourceAmount.resourceType] = RedresValue;
                 reference.Child("GameRoom").Child(roomname).Child("RedResource").Child(resourceAmount.resourceType.ToString()).SetValueAsync(RedresValue);
             }
             OnResourceAmountChanged?.Invoke(this, EventArgs.Empty);
-        }, (DataSnapshot Blueinfo) => { }));
     }
     public void BlueSpendResources(ResourceAmount[] resourceAmountsArray)
     {
-        StartCoroutine(GetTeamResourceData((DataSnapshot Redinfo) => { }, (DataSnapshot Blueinfo) =>
-       {
            foreach (ResourceAmount resourceAmount in resourceAmountsArray)
            {
-               int BlueresValue = Convert.ToInt32(Blueinfo.Child(resourceAmount.resourceType.ToString()).Value) - resourceAmount.amount;
+               int BlueresValue = Convert.ToInt32(reference.Child("GameRoom").Child(roomname).Child("BlueResource").Child(resourceAmount.ToString()).GetValueAsync());
                BlueresourceAmountDictionary[resourceAmount.resourceType] = BlueresValue;
                reference.Child("GameRoom").Child(roomname).Child("BlueResource").Child(resourceAmount.resourceType.ToString()).SetValueAsync(BlueresValue);
            }
            OnResourceAmountChanged?.Invoke(this, EventArgs.Empty);
-       }));
     }
 
     public IEnumerator GetTeamResourceData(System.Action<DataSnapshot> RedonCallbacks, System.Action<DataSnapshot> BlueonCallbacks)  //從資料庫抓取
