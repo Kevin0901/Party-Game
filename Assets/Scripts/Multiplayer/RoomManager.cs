@@ -164,7 +164,7 @@ public class RoomManager : MonoBehaviourPunCallbacks
             {
                 Game_num++;
                 // Game_num = UnityEngine.Random.Range(0, EventSprite.Length);
-                if (Game_num == 15)
+                if (Game_num == 9)
                 {
                     Game_num = 0;
                 }
