@@ -180,29 +180,24 @@ public class ResourceManager : MonoBehaviour
 
     public void RedSpendResources(ResourceAmount[] resourceAmountsArray)
     {
-        StartCoroutine(GetTeamResourceData((DataSnapshot Redinfo) =>
-        {
             for (int i = 0; i < resourceAmountsArray.Length - 1; i++)
             {
-                int RedresValue = Convert.ToInt32(Redinfo.Child(resourceAmountsArray[i].resourceType.ToString()).Value) - resourceAmountsArray[i].amount;
+                int RedresValue = RedresourceAmountDictionary[resourceAmountsArray[i].resourceType] - resourceAmountsArray[i].amount;
                 reference.Child("GameRoom").Child(roomname).Child("RedResource").Child(resourceAmountsArray[i].resourceType.ToString()).SetValueAsync(RedresValue);
                 RedresourceAmountDictionary[resourceAmountsArray[i].resourceType] = RedresValue;
             }
             OnResourceAmountChanged?.Invoke(this, EventArgs.Empty);
-        }, (DataSnapshot Blueinfo) => { }));
     }
     public void BlueSpendResources(ResourceAmount[] resourceAmountsArray)
     {
-        StartCoroutine(GetTeamResourceData((DataSnapshot Redinfo) => { }, (DataSnapshot Blueinfo) =>
-       {
            for (int i = 0; i < resourceAmountsArray.Length - 1; i++)
            {
-               int BlueresValue = Convert.ToInt32(Blueinfo.Child(resourceAmountsArray[i].resourceType.ToString()).Value) - resourceAmountsArray[i].amount;
+               int BlueresValue = BlueresourceAmountDictionary[resourceAmountsArray[i].resourceType]  - resourceAmountsArray[i].amount;
                reference.Child("GameRoom").Child(roomname).Child("BlueResource").Child(resourceAmountsArray[i].resourceType.ToString()).SetValueAsync(BlueresValue);
                BlueresourceAmountDictionary[resourceAmountsArray[i].resourceType] = BlueresValue;
            }
            OnResourceAmountChanged?.Invoke(this, EventArgs.Empty);
-       }));
+    
     }
 
     public IEnumerator GetTeamResourceData(System.Action<DataSnapshot> RedonCallbacks, System.Action<DataSnapshot> BlueonCallbacks)  //從資料庫抓取
