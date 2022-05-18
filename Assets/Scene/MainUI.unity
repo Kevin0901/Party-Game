@@ -3571,7 +3571,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   PlayerNames: []
   PlayerTeam: []
-  Game_num: 0
+  Game_num: -1
   TotalTime: 0
   ReadyTime: 5
   EventTime: 180
