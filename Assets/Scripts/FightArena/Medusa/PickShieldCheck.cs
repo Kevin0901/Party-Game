@@ -14,7 +14,9 @@ public class PickShieldCheck : MonoBehaviour
         {
             Find_Parent_Player = PhotonView.Find((int)PV.InstantiationData[0]).gameObject;
             Find_Parent_Player.transform.Find("shield").gameObject.SetActive(true);
+            Destroy(PhotonView.Find((int)PV.InstantiationData[1]).gameObject);
         }
+        
         Destroy(this.gameObject);
     }
 }
