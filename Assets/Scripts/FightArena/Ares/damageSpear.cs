@@ -8,7 +8,7 @@ public class damageSpear : MonoBehaviour
     {
         if (other.gameObject.layer == 10)
         {
-            other.gameObject.GetComponent<arenaPlayer>().hurt(1.5f);
+            other.gameObject.GetComponent<arenaPlayer>().hurt(1f);
         }
     }
 }
