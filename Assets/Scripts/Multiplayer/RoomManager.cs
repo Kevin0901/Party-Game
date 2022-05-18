@@ -284,6 +284,7 @@ public class RoomManager : MonoBehaviourPunCallbacks
                         Hashtable hash = new Hashtable();
                         hash.Add("GameNum", Game_num);
                         PhotonNetwork.LocalPlayer.SetCustomProperties(hash);
+                        PhotonNetwork.LoadLevel(3);
                     }
                 }
 
@@ -297,10 +298,6 @@ public class RoomManager : MonoBehaviourPunCallbacks
             Game_num = (int)changedProps["GameNum"];
             // EventPicture.sprite = EventSprite[Game_num];
             // EventPicture.gameObject.transform.parent.gameObject.SetActive(true);
-        }
-        else
-        {
-            PhotonNetwork.LoadLevel(3);
         }
     }
     public override void OnEnable()
