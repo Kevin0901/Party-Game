@@ -19,6 +19,10 @@ public class strike : MonoBehaviour
     }
     void Update()
     {
+        if(this.transform.position.y >= all_dis)
+        {
+            lightSword.enabled = true;
+        }
         if (_event != null && !SetPos)
         {
             this.transform.parent.position += new Vector3(0, -20, 0);
