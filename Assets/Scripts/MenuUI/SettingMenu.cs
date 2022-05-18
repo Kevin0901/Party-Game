@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using Firebase;
 using Firebase.Database;
+using UnityEngine.SceneManagement;
 #if UNITY_EDITOR
 using UnityEditor;
 #endif
@@ -96,6 +97,7 @@ public class SettingMenu : MonoBehaviour
     {
         GameObject.Find("TranPageAnimation").GetComponent<Animator>().SetTrigger("change");
         yield return new WaitForSeconds(0.5f);
-        GameObject.Find("LoginMenu").GetComponent<Login>().inLoginMenu = true;
+        SceneManager.LoadScene(0);
+        // GameObject.Find("LoginMenu").GetComponent<Login>().inLoginMenu = true;
     }
 }
