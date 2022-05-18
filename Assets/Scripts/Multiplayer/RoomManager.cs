@@ -329,11 +329,17 @@ public class RoomManager : MonoBehaviourPunCallbacks
         }
         else if (SceneManager.GetActiveScene().name.Equals("Test"))
         {
-            // if(PV.IsMine)
-            // {
-                PhotonNetwork.LoadLevel(3);
-            // }
+            if(PV.IsMine)
+            {
+                StartCoroutine(wait_Two_Sec());
+            }
         }
+    }
+
+    IEnumerator wait_Two_Sec()
+    {
+        yield return new WaitForSeconds(2f);
+        PhotonNetwork.LoadLevel(3);
     }
 
     [PunRPC]  //廣播的方法前面都需要加這個開頭
