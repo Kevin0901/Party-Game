@@ -328,7 +328,7 @@ public class RoomManager : MonoBehaviourPunCallbacks
             Cursor.visible = true;
             WaitPool = GameObject.Find("LoadFightSceneCompletePool");
             PhotonNetwork.Instantiate(Path.Combine("PhotonPrefabs", "LoadComplete"), Vector3.zero, Quaternion.identity);
-            PAPA.SetActive(false);
+            // PAPA.SetActive(false);
             StartCoroutine(Wait_OtherPlayer_LoadFightScene());
         }
     }
