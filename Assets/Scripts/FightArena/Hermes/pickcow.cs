@@ -4,6 +4,7 @@ using UnityEngine;
 using Photon.Pun;
 using Firebase.Database;
 using System;
+using UnityEngine.UI;
 public class pickcow : MonoBehaviour
 {
     public int cowScore;
@@ -34,10 +35,13 @@ public class pickcow : MonoBehaviour
                             {
                                 int NewScore = (int)Int64.Parse(Team.Value.ToString()) + cowScore;
                                 reference.Child("GameRoom").Child(PhotonNetwork.CurrentRoom.Name).Child("Arena").Child("HermesScore").Child("red").SetValueAsync(NewScore);
+                                this.gameObject.GetComponent<BoxCollider2D>().enabled = false;
+                                this.gameObject.GetComponent<SpriteRenderer>().color = new Color32(255,255,255,0);
                             }
                         }
                     }
-                    Destroy(this.gameObject);
+                    StartCoroutine(WaitOneSec());
+                    // Destroy(this.gameObject);
                 }));
             }
             else
@@ -56,10 +60,17 @@ public class pickcow : MonoBehaviour
                             }
                         }
                     }
-                    Destroy(this.gameObject);
+                    StartCoroutine(WaitOneSec());
+                    // Destroy(this.gameObject);
                 }));
             }
         }
+    }
+
+    IEnumerator WaitOneSec()
+    {
+        yield return new WaitForSeconds(2f);
+        Destroy(this.gameObject);
     }
 
     IEnumerator GetScoreInfo(System.Action<DataSnapshot> onCallbacks)  //從資料庫抓取此房間的所有資料
