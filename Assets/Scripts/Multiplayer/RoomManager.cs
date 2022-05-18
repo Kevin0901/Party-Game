@@ -287,7 +287,7 @@ public class RoomManager : MonoBehaviourPunCallbacks
         }
         if (PV.IsMine)
         {
-            PhotonNetwork.LoadLevel(3);
+            PhotonNetwork.LoadLevel(4);
         }
     }
     public override void OnPlayerPropertiesUpdate(Player targetPlayer, Hashtable changedProps)
@@ -326,6 +326,13 @@ public class RoomManager : MonoBehaviourPunCallbacks
             PhotonNetwork.Instantiate(Path.Combine("PhotonPrefabs", "LoadComplete"), Vector3.zero, Quaternion.identity);
             // PAPA.SetActive(false);
             StartCoroutine(Wait_OtherPlayer_LoadFightScene());
+        }
+        else if (SceneManager.GetActiveScene().name.Equals("Test"))
+        {
+            if(PV.IsMine)
+            {
+                PhotonNetwork.LoadLevel(3);
+            }
         }
     }
 
