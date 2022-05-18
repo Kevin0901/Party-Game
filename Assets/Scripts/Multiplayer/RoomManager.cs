@@ -271,7 +271,20 @@ public class RoomManager : MonoBehaviourPunCallbacks
                 WinTeam = GameObject.Find("EndGameUI").GetComponent<EndGame>().WinTeam;
                 if (WinTeam != null)
                 {
-                    PhotonNetwork.LoadLevel(2);
+                    if (PV.IsMine)
+                    {
+                        Game_num++;
+                        // Game_num = UnityEngine.Random.Range(0, EventSprite.Length);
+                        if (Game_num == 9)
+                        {
+                            Game_num = 0;
+                        }
+                        // EventPicture.sprite = EventSprite[Game_num];
+                        // EventPicture.gameObject.transform.parent.gameObject.SetActive(true);
+                        Hashtable hash = new Hashtable();
+                        hash.Add("GameNum", Game_num);
+                        PhotonNetwork.LocalPlayer.SetCustomProperties(hash);
+                    }
                 }
 
             }
@@ -282,8 +295,12 @@ public class RoomManager : MonoBehaviourPunCallbacks
         if (!PV.IsMine)
         {
             Game_num = (int)changedProps["GameNum"];
-            EventPicture.sprite = EventSprite[Game_num];
-            EventPicture.gameObject.transform.parent.gameObject.SetActive(true);
+            // EventPicture.sprite = EventSprite[Game_num];
+            // EventPicture.gameObject.transform.parent.gameObject.SetActive(true);
+        }
+        else
+        {
+            PhotonNetwork.LoadLevel("FightScene");
         }
     }
     public override void OnEnable()
@@ -396,14 +413,14 @@ public class RoomManager : MonoBehaviourPunCallbacks
                         ResourceManager.Instance.RedAddResource(resourceTypeList.list[0], 200);
                         ResourceManager.Instance.RedAddResource(resourceTypeList.list[1], 200);
                         ResourceManager.Instance.RedAddResource(resourceTypeList.list[2], 200);
-                        WinTeam=null;
+                        WinTeam = null;
                     }
                     else if (WinTeam == "blue")
                     {
                         ResourceManager.Instance.BlueAddResource(resourceTypeList.list[0], 200);
                         ResourceManager.Instance.BlueAddResource(resourceTypeList.list[1], 200);
                         ResourceManager.Instance.BlueAddResource(resourceTypeList.list[2], 200);
-                        WinTeam=null;
+                        WinTeam = null;
                     }
                 }
             }
