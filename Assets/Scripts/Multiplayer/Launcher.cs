@@ -332,9 +332,6 @@ public class Launcher : MonoBehaviourPunCallbacks
             Room.IsVisible = false;
             reference.Child("GameRoom").Child(PhotonNetwork.CurrentRoom.Name).Child("Time").Child("TotalTime").SetValueAsync(0);
             PV.RPC("RPC_fadeout", RpcTarget.All);
-            Hashtable hash = new Hashtable();
-            hash.Add("GameNum", 0);
-            PhotonNetwork.LocalPlayer.SetCustomProperties(hash);
         }
         else
         {
@@ -353,18 +350,12 @@ public class Launcher : MonoBehaviourPunCallbacks
         yield return new WaitForSeconds(0.55f);
         GameObject.Find("ChoosePlayer").GetComponent<CanvasGroup>().alpha = 0;
         GameObject.Find("music").SetActive(false);
+        GameObject.Find("RoomManager").GetComponent<RoomManager>().Game_num = 0;
         if (PV.IsMine)
         {
-            PhotonNetwork.LoadLevel("FightScene");
+            PhotonNetwork.LoadLevel(3);
         }
     }
-
-    public override void OnPlayerPropertiesUpdate(Player targetPlayer, Hashtable changedProps)
-    {
-
-        GameObject.Find("RoomManager").GetComponent<RoomManager>().Game_num = (int)changedProps["GameNum"];
-    }
-
     public void LeaveRoom()  //離開房間 (按鈕觸發)
     {
         PhotonNetwork.LeaveRoom();

@@ -300,7 +300,7 @@ public class RoomManager : MonoBehaviourPunCallbacks
         }
         else
         {
-            PhotonNetwork.LoadLevel("FightScene");
+            PhotonNetwork.LoadLevel(3);
         }
     }
     public override void OnEnable()
