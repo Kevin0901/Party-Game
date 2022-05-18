@@ -35,13 +35,12 @@ public class pickcow : MonoBehaviour
                             {
                                 int NewScore = (int)Int64.Parse(Team.Value.ToString()) + cowScore;
                                 reference.Child("GameRoom").Child(PhotonNetwork.CurrentRoom.Name).Child("Arena").Child("HermesScore").Child("red").SetValueAsync(NewScore);
-                                this.gameObject.GetComponent<BoxCollider2D>().enabled = false;
-                                this.gameObject.GetComponent<SpriteRenderer>().color = new Color32(255,255,255,0);
+                                // this.gameObject.GetComponent<BoxCollider2D>().enabled = false;
+                                // this.gameObject.GetComponent<SpriteRenderer>().color = new Color32(255,255,255,0);
                             }
                         }
                     }
-                    StartCoroutine(WaitOneSec());
-                    // Destroy(this.gameObject);
+                    Destroy(this.gameObject);
                 }));
             }
             else
@@ -60,8 +59,7 @@ public class pickcow : MonoBehaviour
                             }
                         }
                     }
-                    StartCoroutine(WaitOneSec());
-                    // Destroy(this.gameObject);
+                    Destroy(this.gameObject);
                 }));
             }
         }
