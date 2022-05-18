@@ -22,7 +22,7 @@ public class shootflash : MonoBehaviour
         if (other.gameObject.layer == 10 && other.gameObject != shooter)
         {
             other.GetComponent<arenaPlayer>().hurt(damege);
-            shooter.transform.Find("NumTitle").GetChild(shooter.GetComponent<arenaPlayer>().p_index).GetComponent<SpriteRenderer>().color = Color.white;;
+            PhotonView.Find((int)PV.InstantiationData[0]).gameObject.transform.Find("NumTitle").GetChild(shooter.GetComponent<arenaPlayer>().p_index).GetComponent<SpriteRenderer>().color = Color.white;;
         }
     }
 }
