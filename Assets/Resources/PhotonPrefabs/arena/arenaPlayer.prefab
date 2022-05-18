@@ -244,7 +244,7 @@ MonoBehaviour:
   love_index: 0
   lighting: {fileID: 2572263306716138460, guid: a5da32123a0cc3445add59367c944c59,
     type: 3}
-  maxPowerTime: 2.5
+  maxPowerTime: 2
   isPress: 0
   turboSpeed: 9
   fistpower: 150

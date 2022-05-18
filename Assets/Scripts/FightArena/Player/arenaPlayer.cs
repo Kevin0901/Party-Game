@@ -277,6 +277,7 @@ public class arenaPlayer : MonoBehaviour
         else if (Input.GetKeyDown(KeyCode.Space))
         {
             mrigibody.AddForce(movement * speed * 0.85f, ForceMode2D.Impulse);
+            titleColor.color = Color.white;
             currentState = ArenaState.walk;
         }
     }
