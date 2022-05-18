@@ -269,8 +269,8 @@ public class RoomManager : MonoBehaviourPunCallbacks
             else if (SceneManager.GetActiveScene().name.Equals("FightScene"))
             {
                 WinTeam = GameObject.Find("EndGameUI").GetComponent<EndGame>().WinTeam;
-                if (WinTeam != null)
-                {
+                // if (WinTeam != null)
+                // {
                     if (PV.IsMine)
                     {
                         Game_num++;
@@ -286,7 +286,7 @@ public class RoomManager : MonoBehaviourPunCallbacks
                         PhotonNetwork.LocalPlayer.SetCustomProperties(hash);
                         PhotonNetwork.LoadLevel(3);
                     }
-                }
+                // }
 
             }
         }
