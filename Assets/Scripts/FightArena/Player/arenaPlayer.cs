@@ -165,14 +165,14 @@ public class arenaPlayer : MonoBehaviour
         }
         yield return new WaitForSeconds(1f);
         mAnimator.GetComponent<arenaPlayer>().currentState = ArenaState.ares;
-        speed *= 0.8f;
+        speed *= 0.9f;
         if (PV.IsMine)
         {
             s = PhotonNetwork.Instantiate(Path.Combine("PhotonPrefabs", "arena/Ares/rotateSpear"), this.transform.position, Quaternion.Euler(0, 0, 90));
             s.GetComponent<spear>().player = this.gameObject;
         }
         yield return new WaitForSeconds(time);
-        speed /= 0.8f;
+        speed /= 0.9f;
         mAnimator.GetComponent<arenaPlayer>().currentState = ArenaState.walk;
         // mAnimator.GetComponent<Animator>().SetTrigger("change");
         if (PV.IsMine)

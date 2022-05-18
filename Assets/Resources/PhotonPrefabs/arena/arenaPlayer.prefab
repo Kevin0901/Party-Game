@@ -231,7 +231,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   currentState: 0
-  speed: 135
+  speed: 140
   red: 1
   p_index: 0
   spawnPos: {x: 0, y: 0, z: 0}
@@ -248,7 +248,7 @@ MonoBehaviour:
   isPress: 0
   turboSpeed: 9
   fistpower: 150
-  spear: {fileID: 2037616527455417162, guid: 723aa1847ff0af04688c20c9a6fee444, type: 3}
+  spear: {fileID: 2037616527455417162, guid: 990445844224a6a498851c301bcd719d, type: 3}
   titleColor: {fileID: 0}
 --- !u!114 &1976892295301908940
 MonoBehaviour:
