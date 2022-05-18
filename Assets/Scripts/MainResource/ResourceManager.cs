@@ -185,8 +185,8 @@ public class ResourceManager : MonoBehaviour
             foreach (ResourceAmount resourceAmount in resourceAmountsArray)
             {
                 int RedresValue = Convert.ToInt32(Redinfo.Child(resourceAmount.resourceType.ToString()).Value) - resourceAmount.amount;
-                reference.Child("GameRoom").Child(roomname).Child("RedResource").Child(resourceAmount.resourceType.ToString()).SetValueAsync(RedresValue);
                 RedresourceAmountDictionary[resourceAmount.resourceType] = RedresValue;
+                reference.Child("GameRoom").Child(roomname).Child("RedResource").Child(resourceAmount.resourceType.ToString()).SetValueAsync(RedresValue);
             }
             OnResourceAmountChanged?.Invoke(this, EventArgs.Empty);
         }, (DataSnapshot Blueinfo) => { }));
@@ -198,8 +198,8 @@ public class ResourceManager : MonoBehaviour
            foreach (ResourceAmount resourceAmount in resourceAmountsArray)
            {
                int BlueresValue = Convert.ToInt32(Blueinfo.Child(resourceAmount.resourceType.ToString()).Value) - resourceAmount.amount;
-               reference.Child("GameRoom").Child(roomname).Child("BlueResource").Child(resourceAmount.resourceType.ToString()).SetValueAsync(BlueresValue);
                BlueresourceAmountDictionary[resourceAmount.resourceType] = BlueresValue;
+               reference.Child("GameRoom").Child(roomname).Child("BlueResource").Child(resourceAmount.resourceType.ToString()).SetValueAsync(BlueresValue);
            }
            OnResourceAmountChanged?.Invoke(this, EventArgs.Empty);
        }));
