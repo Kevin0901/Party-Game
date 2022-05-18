@@ -329,10 +329,10 @@ public class RoomManager : MonoBehaviourPunCallbacks
         }
         else if (SceneManager.GetActiveScene().name.Equals("Test"))
         {
-            if(PV.IsMine)
-            {
+            // if(PV.IsMine)
+            // {
                 PhotonNetwork.LoadLevel(3);
-            }
+            // }
         }
     }
 
