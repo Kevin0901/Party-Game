@@ -182,24 +182,26 @@ public class ResourceManager : MonoBehaviour
     {
         StartCoroutine(GetTeamResourceData((DataSnapshot Redinfo) =>
         {
-            foreach (ResourceAmount resourceAmount in resourceAmountsArray)
+            for (int i = 0; i < resourceAmountsArray.Length - 1; i++)
             {
-                int RedresValue = Convert.ToInt32(Redinfo.Child(resourceAmount.resourceType.ToString()).Value) - resourceAmount.amount;
-                reference.Child("GameRoom").Child(roomname).Child("RedResource").Child(resourceAmount.resourceType.ToString()).SetValueAsync(RedresValue);
-                RedresourceAmountDictionary[resourceAmount.resourceType] = RedresValue;
+                int RedresValue = Convert.ToInt32(Redinfo.Child(resourceAmountsArray[i].resourceType.ToString()).Value) - resourceAmountsArray[i].amount;
+                reference.Child("GameRoom").Child(roomname).Child("RedResource").Child(resourceAmountsArray[i].resourceType.ToString()).SetValueAsync(RedresValue);
+                RedresourceAmountDictionary[resourceAmountsArray[i].resourceType] = RedresValue;
             }
+            OnResourceAmountChanged?.Invoke(this, EventArgs.Empty);
         }, (DataSnapshot Blueinfo) => { }));
     }
     public void BlueSpendResources(ResourceAmount[] resourceAmountsArray)
     {
         StartCoroutine(GetTeamResourceData((DataSnapshot Redinfo) => { }, (DataSnapshot Blueinfo) =>
        {
-           foreach (ResourceAmount resourceAmount in resourceAmountsArray)
+           for (int i = 0; i < resourceAmountsArray.Length - 1; i++)
            {
-               int BlueresValue = Convert.ToInt32(Blueinfo.Child(resourceAmount.resourceType.ToString()).Value) - resourceAmount.amount;
-               reference.Child("GameRoom").Child(roomname).Child("BlueResource").Child(resourceAmount.resourceType.ToString()).SetValueAsync(BlueresValue);
-               BlueresourceAmountDictionary[resourceAmount.resourceType] = BlueresValue;
+               int BlueresValue = Convert.ToInt32(Blueinfo.Child(resourceAmountsArray[i].resourceType.ToString()).Value) - resourceAmountsArray[i].amount;
+               reference.Child("GameRoom").Child(roomname).Child("BlueResource").Child(resourceAmountsArray[i].resourceType.ToString()).SetValueAsync(BlueresValue);
+               BlueresourceAmountDictionary[resourceAmountsArray[i].resourceType] = BlueresValue;
            }
+           OnResourceAmountChanged?.Invoke(this, EventArgs.Empty);
        }));
     }
 
