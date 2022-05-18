@@ -271,20 +271,23 @@ public class RoomManager : MonoBehaviourPunCallbacks
                 WinTeam = GameObject.Find("EndGameUI").GetComponent<EndGame>().WinTeam;
                 // if (WinTeam != null)
                 // {
-                    // PhotonNetwork.LoadLevel(2);
+                // PhotonNetwork.LoadLevel(2);
                 // }
-                Game_num++;
-                if (Game_num == 9)
-                {
-                    Game_num = 0;
-                }
-                if (PV.IsMine)
-                {
-                    PhotonNetwork.LoadLevel(3);
-                }
-                
-
+                PV.RPC("RPC_Test", RpcTarget.All);
             }
+        }
+    }
+    [PunRPC]
+    public void RPC_Test()
+    {
+        Game_num++;
+        if (Game_num == 9)
+        {
+            Game_num = 0;
+        }
+        if (PV.IsMine)
+        {
+            PhotonNetwork.LoadLevel(3);
         }
     }
     public override void OnPlayerPropertiesUpdate(Player targetPlayer, Hashtable changedProps)
