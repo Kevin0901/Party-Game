@@ -41,8 +41,10 @@ public class SunMoonArrowMove : MonoBehaviour
             if(!PV.IsMine)
             {
                 other.GetComponent<Rigidbody2D>().AddForce(dir.normalized * power, ForceMode2D.Impulse);
+            }else if(PV.IsMine)
+            {
+                PhotonNetwork.Destroy(this.gameObject);
             }
-            Destroy(this.gameObject);
         }
     }
     //離開背景
@@ -50,7 +52,10 @@ public class SunMoonArrowMove : MonoBehaviour
     {
         if (other.CompareTag("background"))
         {
-            Destroy(this.gameObject);
+            if(PV.IsMine)
+            {
+                PhotonNetwork.Destroy(this.gameObject);
+            }
         }
     }
     //射擊方向
