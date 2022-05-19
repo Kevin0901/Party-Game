@@ -347,7 +347,7 @@ public class Launcher : MonoBehaviourPunCallbacks
         yield return new WaitForSeconds(0.55f);
         GameObject.Find("ChoosePlayer").GetComponent<CanvasGroup>().alpha = 0;
         GameObject.Find("music").SetActive(false);
-        GameObject.Find("RoomManager").GetComponent<RoomManager>().Game_num = 8;
+        GameObject.Find("RoomManager").GetComponent<RoomManager>().Game_num = 5;
         if (PV.IsMine)
         {
             PhotonNetwork.LoadLevel(3);
