@@ -6,7 +6,7 @@ public class spear : MonoBehaviour
 {
     private Animator mAnimator;
     public GameObject player;
-    public bool isAttack;
+    // public bool isAttack;
     PhotonView PV;
     private void Start()
     {
@@ -26,7 +26,7 @@ public class spear : MonoBehaviour
     {
         if (Input.GetMouseButtonDown(0))
         {
-            isAttack = true;
+            // isAttack = true;
             mAnimator.SetTrigger("rotate");
         }
     }
