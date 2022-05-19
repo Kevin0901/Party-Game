@@ -284,6 +284,9 @@ public class RoomManager : MonoBehaviourPunCallbacks
         if (Game_num == 9)
         {
             Game_num = 0;
+        }else if(Game_num == 5)
+        {
+            Game_num = 6;
         }
         if (PV.IsMine)
         {
